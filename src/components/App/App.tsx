@@ -3,10 +3,10 @@ import { Provider } from 'react-redux';
 
 import { store } from 'store';
 
-import { ReduxExample } from 'pages/ReduxExample';
+import { Page } from 'components/Page';
 
 export const App = () => (
   <Provider store={store}>
-    <ReduxExample />
+    <Page />
   </Provider>
 );

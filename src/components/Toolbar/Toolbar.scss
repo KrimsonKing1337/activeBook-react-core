@@ -1,0 +1,27 @@
+.wrapper {
+  width: 100%;
+  padding: 0 20px;
+}
+
+.toolbar {
+  z-index: 10;
+
+  display: flex;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 500px;
+  height: 48px;
+  margin-top: 20px;
+
+  color: #a3a3a3;
+  font-size: 16px;
+
+  background: transparent;
+}
+
+.fontBig {
+  margin-left: 10px;
+}

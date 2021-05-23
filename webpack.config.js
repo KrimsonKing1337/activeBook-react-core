@@ -36,7 +36,7 @@ module.exports = (env = {}, argv) => {
     devtool: !isProd ? 'eval-source-map' : false,
     devServer: {
       contentBase: path.join(__dirname, 'dist'),
-      port: 3000,
+      port: 3001, // todo
       historyApiFallback: true,
       hot: true,
       liveReload: false,
@@ -83,7 +83,6 @@ module.exports = (env = {}, argv) => {
             {
               loader: 'css-loader',
               options: {
-                localsConvention: 'camelCase',
                 modules: {
                   localIdentName: '[name]__[local]__[hash:base64:5]',
                 },
@@ -92,8 +91,12 @@ module.exports = (env = {}, argv) => {
             {
               loader: 'postcss-loader',
               options: {
-                ident: 'postcss',
-                plugins: () => [require('autoprefixer')()],
+                postcssOptions: {
+                  ident: 'postcss',
+                  plugins: [
+                    require('autoprefixer')
+                  ],
+                }
               },
             },
             { loader: 'sass-loader' },

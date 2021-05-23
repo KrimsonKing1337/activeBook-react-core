@@ -8,6 +8,12 @@ module.exports = {
     'stylelint-declaration-block-no-ignored-properties',
   ],
   rules: {
+    'selector-pseudo-class-no-unknown': [
+      true,
+      {
+        'ignorePseudoClasses': ['global']
+      }
+    ],
     'declaration-empty-line-before': null,
     'at-rule-no-unknown': null,
     'scss/at-rule-no-unknown': true,

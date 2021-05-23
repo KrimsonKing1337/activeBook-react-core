@@ -1,0 +1,19 @@
+.item {
+  position: relative;
+
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  height: 24px;
+  margin-left: auto;
+
+  cursor: pointer;
+
+  &:nth-child(1) {
+    margin-left: 0;
+  }
+
+  svg {
+    fill: currentColor;
+  }
+}

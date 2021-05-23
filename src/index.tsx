@@ -1,6 +1,9 @@
 import React from 'react';
 import { render } from 'react-dom';
 
+import 'modern-css-reset/dist/reset.min.css';
+import 'styles/reset.scss';
+
 import { App } from 'components/App';
 
 function initApp() {
@@ -13,8 +16,6 @@ if (module.hot) {
 }
 
 if ((window as any).cordova) {
-
-
   document.addEventListener('deviceready', () => {
     initApp();
   }, false);

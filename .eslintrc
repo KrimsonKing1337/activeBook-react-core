@@ -34,11 +34,16 @@
             {
               "module-source-path": "full",
               "grouped-imports": true,
-              "import-sources-order": "lowercase-first",
+              "import-sources-order": "any",
               "groups": [
                 {
                   "match": "^react",
                   "order": 1
+                },
+                {
+                  "name": "Assets",
+                  "match": "^assets/",
+                  "order": 10
                 },
                 {
                   "name": "Components",
@@ -61,11 +66,6 @@
                   "order": 50
                 },
                 {
-                  "name": "Assets",
-                  "match": "^assets/",
-                  "order": 60
-                },
-                {
                   "name": "Utils",
                   "match": "^utils/",
                   "order": 70
@@ -74,6 +74,11 @@
                   "name": "Parent directory",
                   "match": "^[.][.]",
                   "order": 80
+                },
+                {
+                  "name": "Styles",
+                  "match": "^.+(scss|css)",
+                  "order": 100
                 },
                 {
                   "name": "Current directory",
