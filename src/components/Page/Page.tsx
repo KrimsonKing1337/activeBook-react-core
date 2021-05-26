@@ -21,6 +21,9 @@ export const Page = () => {
 
           <div className={styles.text}>
             <Page1 />
+            <Page1 />
+            <Page1 />
+            <Page1 />
           </div>
         </div>
 

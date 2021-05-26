@@ -1,0 +1,30 @@
+@mixin scrollbar() {
+  border-color: #111;
+
+  transition: border-color 0.75s linear;
+
+  // firefox only
+  scrollbar-color: #111;
+  scrollbar-width: 7px;
+
+  // IE only
+  scrollbar-face-color: #111;
+
+  &::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-color: inherit;
+    border-right-width: calc(100vw + 100vh);
+    border-right-style: inset;
+    border-radius: 7px;
+  }
+
+  &:hover {
+    scrollbar-color: #6c6e71;
+    scrollbar-face-color: #6c6e71;
+
+    border-color: #6c6e71;
+  }
+}

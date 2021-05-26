@@ -1,10 +1,10 @@
 import React from 'react';
 import { render } from 'react-dom';
 
+import { App } from 'components/App';
+
 import 'modern-css-reset/dist/reset.min.css';
 import 'styles/reset.scss';
-
-import { App } from 'components/App';
 
 function initApp() {
   render(<App />, document.getElementById('root'));
