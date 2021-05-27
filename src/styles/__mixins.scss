@@ -28,3 +28,48 @@
     border-color: #6c6e71;
   }
 }
+
+// todo: не оптимально
+@mixin transition-default() {
+  transition: all ease 0.3s 0s;
+}
+
+@mixin transition-fade-default() {
+  transition: opacity ease 0.3s 0s;
+}
+
+@mixin hover-default() {
+  transition: opacity ease 0.3s 0s;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.65;
+  }
+}
+
+@mixin modal-content-icon() {
+  color: #fff;
+
+  opacity: 0.5;
+
+  transition: opacity ease 0.3s 0s;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+}
+
+@mixin hover-disable() {
+  &:hover {
+    opacity: 1;
+  }
+}
+
+@mixin text-shadow-default() {
+  text-shadow: 1px 1px 30px rgba(0, 0, 0, 0.75);
+}
+
+@mixin text-shadow-dark() {
+  text-shadow: 1px 1px 30px rgba(255, 255, 255, 0.75);
+}
