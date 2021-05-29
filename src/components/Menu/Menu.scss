@@ -1,0 +1,40 @@
+@import '~styles/__mixins.scss';
+
+.menu {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  z-index: 15;
+
+  width: 100%;
+  max-width: 500px;
+  height: 100%;
+  padding: 40px 20px;
+  overflow: auto;
+
+  color: #a3a3a3;
+
+  background-color: #111;
+  transform: translateZ(0);
+
+  transition: top ease 0.3s 0s;
+
+  will-change: top;
+
+  &.isOpen {
+    top: 0;
+  }
+
+  @include scrollbar();
+
+  @media screen and (max-width: 500px) {
+    height: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.title {
+  font-family: RobotoBold, Arial, Helvetica, sans-serif;
+  font-size: 42px;
+}

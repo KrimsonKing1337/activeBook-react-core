@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Toolbar } from 'components/Toolbar';
+import { Menu } from 'components/Menu';
 
 import { Page1 } from 'pages/pagesOfBook/Page1';
 
@@ -28,6 +29,8 @@ export const Page = () => {
         </div>
 
         <Toolbar />
+
+        <Menu />
       </div>
     </div>
   );
