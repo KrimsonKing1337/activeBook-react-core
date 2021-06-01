@@ -1,6 +1,8 @@
 @import '~styles/__mixins.scss';
 
 .menu {
+  $transition: top ease 0.15s 0s;
+
   position: absolute;
   top: -100%;
   left: 0;
@@ -17,24 +19,17 @@
   background-color: #111;
   transform: translateZ(0);
 
-  transition: top ease 0.3s 0s;
-
   will-change: top;
 
   &.isOpen {
     top: 0;
   }
 
-  @include scrollbar();
+  @include scrollbar($transition);
 
   @media screen and (max-width: 500px) {
     height: 100%;
     margin-top: 0;
     margin-bottom: 0;
   }
-}
-
-.title {
-  font-family: RobotoBold, Arial, Helvetica, sans-serif;
-  font-size: 42px;
 }

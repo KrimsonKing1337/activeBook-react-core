@@ -1,7 +1,9 @@
-@mixin scrollbar() {
+@mixin scrollbar($transitionAdd: '') {
+  $transition: border-color 0.75s linear;
+
   border-color: #111;
 
-  transition: border-color 0.75s linear;
+  transition: $transition;
 
   // firefox only
   scrollbar-color: #111;
@@ -26,6 +28,10 @@
     scrollbar-face-color: #6c6e71;
 
     border-color: #6c6e71;
+  }
+
+  @if $transitionAdd != '' {
+    $transition: #{$transitionAdd}, $transition;
   }
 }
 

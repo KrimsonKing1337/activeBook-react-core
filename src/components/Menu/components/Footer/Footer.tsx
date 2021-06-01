@@ -1,6 +1,8 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
 import classNames from 'classnames';
+import { setMenuActiveState } from 'store/main/actionsTypes';
 
 import styles from './Footer.scss';
 
@@ -12,15 +14,25 @@ function getClassNames(className: string) {
 }
 
 export const Footer = () => {
+  const dispatch = useDispatch();
+
+  const tableOfContentsButtonClickHandler = () => {
+    dispatch(setMenuActiveState('tableOfContents'));
+  }
+
+  const closeButtonClickHandler = () => {
+    dispatch(setMenuActiveState(null));
+  }
+
   return (
     <div className={styles.footer}>
-      <div className={getClassNames(styles.isTableOfContents)}>
+      <button className={getClassNames(styles.isTableOfContents)} onClick={tableOfContentsButtonClickHandler}>
         Оглавление
-      </div>
+      </button>
 
-      <div className={getClassNames(styles.isClose)}>
+      <button className={getClassNames(styles.isClose)} onClick={closeButtonClickHandler}>
         Закрыть
-      </div>
+      </button>
     </div>
   );
 };

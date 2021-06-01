@@ -1,0 +1,60 @@
+@import '~styles/__mixins.scss';
+
+// todo: вынести повторяющеся с menu части
+
+.tableOfContents {
+  $transition: top ease 0.15s 0s;
+
+  position: absolute;
+  top: -100%;
+  left: 0;
+  z-index: 15;
+
+  width: 100%;
+  max-width: 500px;
+  height: calc(100% - 15px);
+  margin-top: 5px;
+  margin-bottom: 10px;
+  padding: 40px 20px;
+
+  color: #a3a3a3;
+
+  background: #111;
+
+  will-change: top;
+
+  &.isOpen {
+    top: 0;
+  }
+
+  @include scrollbar($transition);
+
+  @media screen and (max-width: 500px) {
+    height: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.itemsWrapper {
+  margin-top: 31px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 240px;
+  height: 45px;
+  margin: 90px auto 24px;
+
+  color: #fff;
+  font-family: RobotoLight, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+
+  background: #828282;
+  border-radius: 25px;
+  cursor: pointer;
+
+  @include hover-default;
+}
