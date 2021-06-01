@@ -94,7 +94,7 @@ export const TableOfContents = () => {
       <Header label={'Оглавление'} />
 
       <div className={styles.itemsWrapper}>
-        {items.map((itemCur) => <Item {...itemCur} />)}
+        {items.map((itemCur, index) => <Item key={index} {...itemCur} />)}
       </div>
 
       <button className={styles.button} onClick={closeButtonClickHandler}>

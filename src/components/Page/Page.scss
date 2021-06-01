@@ -56,7 +56,6 @@
 .title {
   padding-bottom: 7px;
 
-  font-family: RobotoRegular, Arial, Helvetica, sans-serif;
   font-size: 1.5em; //24px;
   line-height: 1.2;
 }
@@ -64,8 +63,9 @@
 .subtitle {
   padding-bottom: 16px;
 
-  font-family: RobotoLight, Arial, Helvetica, sans-serif;
   font-size: 0.75em; //12px;
+
+  font-weight: 100;
   font-style: italic;
 }
 
@@ -73,7 +73,6 @@
   p {
     padding-top: 16px;
 
-    font-family: RobotoRegular, Arial, Helvetica, sans-serif;
     font-size: 0.875em; //14px;
     line-height: 1.2;
 

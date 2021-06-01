@@ -23,8 +23,8 @@
 
   &.isMinus,
   &.isPlus {
-    font-family: RobotoBold, Arial, Helvetica, sans-serif;
     font-size: 22px;
+    font-weight: bold;
 
     cursor: pointer;
 
@@ -33,7 +33,7 @@
 
   &.isValue {
     color: #a3a3a3;
-    font-family: RobotoLight, Arial, Helvetica, sans-serif;
     font-size: 14px;
+    font-weight: 100;
   }
 }

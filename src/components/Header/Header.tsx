@@ -8,8 +8,10 @@ export type HeaderPropsType = {
 
 export const Header = ({ label }: HeaderPropsType) => {
   return (
-    <div className={styles.header}>
-      { label }
-    </div>
+    <>
+      <div className={styles.header}>
+        { label }
+      </div>
+    </>
   );
 };
