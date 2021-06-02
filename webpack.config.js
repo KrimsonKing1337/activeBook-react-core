@@ -8,7 +8,7 @@ const path = require('path');
 
 module.exports = (env = {}, argv) => {
   const webpackMode = argv.mode;
-  const { analyze } = env;
+  const { analyze, mobile } = env;
   const isProd = webpackMode === 'production';
 
   const plugins = [
@@ -22,7 +22,8 @@ module.exports = (env = {}, argv) => {
       },
     }),
     new HtmlWebpackPlugin({
-      template: './public/index.html',
+      template: './public/index.ejs',
+      isMobile: !!mobile,
     }),
   ];
 
