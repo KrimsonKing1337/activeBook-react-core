@@ -38,3 +38,11 @@ jspm_packages/
 
 # build folders
 dist
+
+# book data
+sources/
+*.mp3
+*.ogg
+*.mp4
+*.webm
+*.gif

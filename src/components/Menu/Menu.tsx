@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 
 import classNames from 'classnames';
 import { mainSelectors } from 'store/main/reducer';
+// import { effectsSelectors } from 'store/effects/reducer';
 
 import { Header } from 'components/Header';
 
@@ -18,11 +19,13 @@ import styles from './Menu.scss';
 
 export const Menu = () => {
   const menuActiveState = useSelector(mainSelectors.menuActiveState);
+  // const backgroundVideoIsActive = useSelector(effectsSelectors.backgroundVideoIsActive);
   const menuIsOpen = menuActiveState === 'menu';
 
   const menuClassNames = classNames({
     [styles.menu]: true,
-    [styles.isOpen]: menuIsOpen
+    [styles.isOpen]: menuIsOpen,
+    // [styles.isBackgroundObjectActive]: backgroundVideoIsActive,
   });
 
   return (

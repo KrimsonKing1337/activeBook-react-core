@@ -14,6 +14,10 @@
   overflow: hidden;
 
   background: #111;
+
+  &.inverseColorIsActive {
+    filter: invert(1);
+  }
 }
 
 .mainContent {

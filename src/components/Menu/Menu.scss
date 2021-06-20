@@ -25,6 +25,10 @@
     top: 0;
   }
 
+  &.isBackgroundObjectActive {
+    background: transparent;
+  }
+
   @include scrollbar($transition);
 
   @media screen and (max-width: 500px) {
