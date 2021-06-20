@@ -10,7 +10,7 @@ import { Volume } from './components/Volume';
 import { Themes } from './components/Themes';
 import { Vibration } from './components/Vibration';
 import { Flashlight } from './components/FlashLight';
-import { Invert } from './components/Invert';
+import { InverseColor } from './components/InverseColor';
 import { LineHeight } from './components/LineHeight';
 import { Footer } from './components/Footer';
 
@@ -37,7 +37,7 @@ export const Menu = () => {
 
       <Flashlight />
 
-      <Invert />
+      <InverseColor />
 
       <LineHeight />
 

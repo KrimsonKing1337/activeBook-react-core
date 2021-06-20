@@ -6,7 +6,6 @@
 
     font-size: 100%;
 
-    background: inherit;
     border: 0;
     outline: 0;
     -webkit-text-size-adjust: none;
@@ -63,4 +62,17 @@
     outline: none;
     box-shadow: none;
   }
+}
+
+:root {
+  --scrollbar-width: 0;
+  --text-shadow-color: red;
+  --text-shadow-animation: blink;
+  --text-shadow-animation-speed: 1000ms;
+  --background-animation: blink;
+  --background-animation-speed: 1000ms;
+  --main-content-height: 0;
+  --side-scroll-text-animation-speed: 60000ms;
+  --animate-css-duration: 150ms;
+  --modal-content-object-fit: contain;
 }

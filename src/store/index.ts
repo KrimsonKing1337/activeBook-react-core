@@ -5,6 +5,7 @@ import createSagaMiddleware from 'redux-saga';
 import { incrementReducer, watchIncrementActions } from './increment';
 import { mainReducer } from './main';
 import { configReducer } from './config';
+import { effectsReducer } from './effects';
 
 const sagaMiddleware = createSagaMiddleware();
 const compose = composeWithDevTools(applyMiddleware(sagaMiddleware));
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   increment: incrementReducer,
   main: mainReducer,
   config: configReducer,
+  effects: effectsReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

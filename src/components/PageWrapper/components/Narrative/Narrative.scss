@@ -1,0 +1,45 @@
+@import "~styles/__mixins";
+
+.narrative {
+  position: relative;
+
+  width: 100%;
+  height: calc(100% - 68px);
+  padding: 20px;
+  overflow: auto;
+
+  color: #a3a3a3;
+  font-size: 100%;
+  hyphens: auto;
+
+  @include scrollbar();
+}
+
+.title {
+  padding-bottom: 7px;
+
+  font-size: 1.5em; //24px;
+  line-height: 1.2;
+}
+
+.subtitle {
+  padding-bottom: 16px;
+
+  font-size: 0.75em; //12px;
+
+  font-weight: 100;
+  font-style: italic;
+}
+
+.text {
+  p {
+    padding-top: 16px;
+
+    font-size: 0.875em; //14px;
+    line-height: 1.2;
+
+    &:nth-of-type(1) {
+      padding-top: 0;
+    }
+  }
+}

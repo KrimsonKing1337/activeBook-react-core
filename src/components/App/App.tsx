@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 
 import { store } from 'store';
 
-import { Page } from 'components/Page';
+import { EffectExamples } from 'pages/EffectExamples';
 
 import { addTouchSupportForCssHover } from 'utils/touch/addTouchSupportForCssHover';
 
@@ -14,7 +14,7 @@ export const App = () => {
 
   return (
     <Provider store={store}>
-      <Page />
+      <EffectExamples />
     </Provider>
   );
 };

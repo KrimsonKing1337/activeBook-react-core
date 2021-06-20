@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { mainSelectors } from 'store/main/reducer';
 import classNames from 'classnames';
+import { mainSelectors } from 'store/main/reducer';
 import { setMenuActiveState } from 'store/main/actionsTypes';
 
 import { Header } from 'components/Header';
