@@ -6,10 +6,13 @@ import { store } from 'store';
 import { EffectExamples } from 'pages/EffectExamples';
 
 import { addTouchSupportForCssHover } from 'utils/touch/addTouchSupportForCssHover';
+import { setCssVariable } from 'utils/setCssVariable';
 
 export const App = () => {
   useEffect(() => {
     addTouchSupportForCssHover();
+
+    setCssVariable('--main-content-height', `${window.innerHeight}px`);
   }, []);
 
   return (

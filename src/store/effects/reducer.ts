@@ -10,6 +10,11 @@ export function effectsReducer(state = initialState, action: EffectsActionsTypes
       ...state,
       sideShadowIsActive: action.payload
     };
+  case 'SET_SIDE_TEXT_ACTIVE_STATE':
+    return {
+      ...state,
+      sideTextIsActive: action.payload
+    }
   default:
     return state;
   }
@@ -17,4 +22,5 @@ export function effectsReducer(state = initialState, action: EffectsActionsTypes
 
 export const effectsSelectors = {
   sideShadowIsActive: (state: RootState) => state.effects.sideShadowIsActive,
+  sideTextIsActive: (state: RootState) => state.effects.sideTextIsActive,
 };
