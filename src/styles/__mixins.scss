@@ -1,16 +1,13 @@
 @mixin scrollbar($transitionAdd: '') {
   $transition: border-color 0.75s linear;
 
-  border-color: #111;
+  border-color: var(--bg);
 
   transition: $transition;
 
   // firefox only
-  scrollbar-color: #111;
+  scrollbar-color: var(--bg);
   scrollbar-width: 7px;
-
-  // IE only
-  scrollbar-face-color: #111;
 
   &::-webkit-scrollbar {
     width: 7px;
@@ -24,10 +21,10 @@
   }
 
   &:hover {
-    scrollbar-color: #6c6e71;
-    scrollbar-face-color: #6c6e71;
+    scrollbar-color: #989a9c;
+    scrollbar-face-color: #989a9c;
 
-    border-color: #6c6e71;
+    border-color: #989a9c;
   }
 
   @if $transitionAdd != '' {

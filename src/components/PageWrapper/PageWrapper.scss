@@ -13,7 +13,7 @@
   padding-bottom: 10px;
   overflow: hidden;
 
-  background: #111;
+  background: var(--bg);
 
   &.inverseColorIsActive {
     filter: invert(1);
@@ -34,7 +34,7 @@
   min-height: 100%;
   overflow: hidden;
 
-  background: #111;
+  background: var(--bg);
   box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.75);
 
   @media screen and (max-width: 500px) {

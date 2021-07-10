@@ -30,7 +30,7 @@
 
   &.isTableOfContents,
   &.isCredits {
-    background: #a3a3a3;
+    background: var(--main);
   }
 
   &.isClose {

@@ -24,7 +24,7 @@
 
   font-size: 15px;
 
-  background: #828282;
+  background: var(--main);
   border-radius: 20px;
 
   &.isHide {
@@ -39,9 +39,9 @@
   height: 21px;
   margin-left: 1px;
 
-  color: #fff;
+  color: var(--secondary);
 
-  background: #111;
+  background: var(--bg);
   border-radius: 20px;
 
   &.hasError {
