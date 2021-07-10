@@ -42,12 +42,12 @@ export const EffectExamples = () => {
 
   return (
     <PageWrapper title={'Эффекты'} subtitle={'Здесь можно посмотреть все возможные эффекты'}>
+      {/* Многострочный текст-рыба для проверки эффектов и изменений в настройках: */}
       <div>
-        sdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdf
-        <br />
-        sdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdf
-        <br />
-        sdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdf
+        Значимость этих проблем настолько очевидна, что постоянный количественный рост и сфера нашей активности
+        позволяет оценить значение существенных финансовых и административных условий.
+        С другой стороны начало повседневной работы по формированию позиции требуют определения и уточнения
+        существенных финансовых и административных условий.
       </div>
 
       <div className={'EffectsWrapper'}>

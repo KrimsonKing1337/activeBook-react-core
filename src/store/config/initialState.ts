@@ -15,5 +15,5 @@ export const initialState: ConfigState = {
   flashlight: true,
   inverseColor: true,
   fontSize: 100,
-  lineHeight: 150,
+  lineHeight: 100,
 };
