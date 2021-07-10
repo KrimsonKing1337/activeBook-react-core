@@ -7,7 +7,7 @@ export const actionsTypes = {
   SET_FLASHLIGHT: 'SET_FLASHLIGHT',
   SET_INVERSE_COLOR: 'SET_INVERSE_COLOR',
   SET_FONT_SIZE: 'SET_FONT_SIZE',
-  SET_LINE_SPACE: 'SET_LINE_SPACE',
+  SET_LINE_HEIGHT: 'SET_LINE_HEIGHT',
 } as const;
 
 export type VolumePayload = {
@@ -87,9 +87,16 @@ export function setFontSize(value: SetFontSize['payload']): SetFontSize {
   }
 }
 
-export type SetLineSpace = {
-  type: typeof actionsTypes.SET_LINE_SPACE;
-  payload: ConfigState['lineSpace'];
+export type SetLineHeight = {
+  type: typeof actionsTypes.SET_LINE_HEIGHT;
+  payload: ConfigState['lineHeight'];
+}
+
+export function setLineHeight(value: SetLineHeight['payload']): SetLineHeight {
+  return {
+    type: actionsTypes.SET_LINE_HEIGHT,
+    payload: value,
+  }
 }
 
 export type ConfigActionsTypes = SetVolume
@@ -98,4 +105,4 @@ export type ConfigActionsTypes = SetVolume
   | SetFlashlight
   | SetInverseColor
   | SetFontSize
-  | SetLineSpace;
+  | SetLineHeight;

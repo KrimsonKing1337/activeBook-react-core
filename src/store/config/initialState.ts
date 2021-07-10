@@ -22,7 +22,7 @@ export interface ConfigState {
   flashlight: boolean;
   inverseColor: boolean;
   fontSize: number;
-  lineSpace: number;
+  lineHeight: number;
 }
 
 export const initialState: ConfigState = {
@@ -36,5 +36,5 @@ export const initialState: ConfigState = {
   flashlight: true,
   inverseColor: true,
   fontSize: 100,
-  lineSpace: 100,
+  lineHeight: 150,
 };

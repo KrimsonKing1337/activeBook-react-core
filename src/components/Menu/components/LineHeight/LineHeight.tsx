@@ -1,6 +1,11 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import classNames from 'classnames';
+import { configSelectors } from 'store/config/reducer';
+import { setLineHeight } from 'store/config/actionsTypes';
+
+import { getNewValueForNarrativeTextStyle } from 'utils/getNewValueForNarrativeTextStyle';
 
 import { Label } from '../Label';
 
@@ -14,20 +19,43 @@ function getClassNames(className: string) {
 }
 
 export const LineHeight = () => {
+  const dispatch = useDispatch();
+  const lineHeight = useSelector(configSelectors.lineHeight);
+
+  const dispatchSetLineHeight = (isMoreAction: boolean) => {
+    const lineHeightNewValue = getNewValueForNarrativeTextStyle(lineHeight, isMoreAction);
+
+    if (lineHeightNewValue === lineHeight) {
+      return;
+    }
+
+    dispatch(setLineHeight(lineHeightNewValue));
+  }
+
+  const minusClickHandler = () => {
+    dispatchSetLineHeight(false);
+  }
+
+  const plusClickHandler = () => {
+    dispatchSetLineHeight(true);
+  }
+
+  const currentValueLabel = `${lineHeight}%`;
+
   return (
     <div className={styles.lineHeight}>
       <Label label={'Межстрочный интервал'} />
 
       <div className={styles.itemsWrapper}>
-        <div className={getClassNames(styles.isMinus)}>
+        <div className={getClassNames(styles.isMinus)} onClick={minusClickHandler}>
           -
         </div>
 
         <div className={getClassNames(styles.isValue)}>
-          100%
+          { currentValueLabel }
         </div>
 
-        <div className={getClassNames(styles.isPlus)}>
+        <div className={getClassNames(styles.isPlus)} onClick={plusClickHandler}>
           +
         </div>
       </div>

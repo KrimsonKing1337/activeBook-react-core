@@ -41,10 +41,10 @@ export function configReducer(state = initialState, action: ConfigActionsTypes):
       ...state,
       fontSize: action.payload
     }
-  case 'SET_LINE_SPACE':
+  case 'SET_LINE_HEIGHT':
     return {
       ...state,
-      lineSpace: action.payload
+      lineHeight: action.payload
     }
   default:
     return state;
@@ -58,5 +58,5 @@ export const configSelectors = {
   flashlight: (state: RootState) => state.config.flashlight,
   inverseColor: (state: RootState) => state.config.inverseColor,
   fontSize: (state: RootState) => state.config.fontSize,
-  lineSpace: (state: RootState) => state.config.lineSpace,
+  lineHeight: (state: RootState) => state.config.lineHeight,
 };
