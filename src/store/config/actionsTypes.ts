@@ -1,7 +1,6 @@
-import { ConfigState, VolumeKeys } from './initialState';
+import { ConfigState } from './initialState';
 
 export const actionsTypes = {
-  SET_VOLUME: 'SET_VOLUME',
   SET_THEME: 'SET_THEME',
   SET_VIBRATION: 'SET_VIBRATION',
   SET_FLASHLIGHT: 'SET_FLASHLIGHT',
@@ -9,23 +8,6 @@ export const actionsTypes = {
   SET_FONT_SIZE: 'SET_FONT_SIZE',
   SET_LINE_HEIGHT: 'SET_LINE_HEIGHT',
 } as const;
-
-export type VolumePayload = {
-  type: VolumeKeys,
-  value: number;
-};
-
-export type SetVolume = {
-  type: typeof actionsTypes.SET_VOLUME;
-  payload: VolumePayload;
-};
-
-export function setVolume(value: SetVolume['payload']): SetVolume {
-  return {
-    type: actionsTypes.SET_VOLUME,
-    payload: value,
-  };
-}
 
 export type SetTheme = {
   type: typeof actionsTypes.SET_THEME;
@@ -99,8 +81,7 @@ export function setLineHeight(value: SetLineHeight['payload']): SetLineHeight {
   }
 }
 
-export type ConfigActionsTypes = SetVolume
-  | SetTheme
+export type ConfigActionsTypes = SetTheme
   | SetVibration
   | SetFlashlight
   | SetInverseColor

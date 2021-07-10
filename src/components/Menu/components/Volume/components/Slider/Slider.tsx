@@ -3,13 +3,25 @@ import ReactSlider from 'react-slider'
 
 import styles from './Slider.scss';
 
-export const Slider = () => {
+type SliderProps = {
+  value: number;
+  onChange?: (value: number) => void;
+};
+
+export const Slider = ({ onChange, value }: SliderProps) => {
+  const changeHandler = (value: number) => {
+    if (onChange) {
+      onChange(value);
+    }
+  };
+
   return (
     <ReactSlider
-      defaultValue={100}
+      value={value}
       className={styles.slider}
       thumbClassName={styles.thumb}
       trackClassName={styles.track}
+      onAfterChange={changeHandler}
     />
   )
 };

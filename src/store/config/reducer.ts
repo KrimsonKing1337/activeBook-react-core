@@ -5,17 +5,6 @@ import { ConfigState, initialState } from './initialState';
 
 export function configReducer(state = initialState, action: ConfigActionsTypes): ConfigState {
   switch (action.type) {
-  case 'SET_VOLUME': {
-    const { volume } = state;
-
-    return {
-      ...state,
-      volume: {
-        ...volume,
-        [action.payload.type]: action.payload.value
-      }
-    }
-  }
   case 'SET_THEME':
     return {
       ...state,
@@ -52,7 +41,6 @@ export function configReducer(state = initialState, action: ConfigActionsTypes):
 }
 
 export const configSelectors = {
-  volume: (state: RootState) => state.config.volume,
   theme: (state: RootState) => state.config.theme,
   vibration: (state: RootState) => state.config.vibration,
   flashlight: (state: RootState) => state.config.flashlight,
