@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { Howl } from 'howler';
 import {
   setBackgroundImgActiveState,
   setBackgroundVideoActiveState,
@@ -15,6 +16,22 @@ import { Toggle } from 'components/Menu/components/Toggle';
 
 export const EffectExamples = () => {
   const dispatch = useDispatch();
+  const [singleSound, setSingleSound] = useState<Howl>();
+  const [loopSound, setLoopSound] = useState<Howl>();
+
+  useEffect(() => {
+    const singleSound = new Howl({
+      src: ['assets/audios/single.mp3'],
+    });
+
+    const loopSound = new Howl({
+      src: ['assets/audios/loop.mp3'],
+      loop: true,
+    });
+
+    setSingleSound(singleSound);
+    setLoopSound(loopSound);
+  }, []);
 
   const buttonForSideShadowClickHandler = (value: boolean) => {
     dispatch(setMenuActiveState(value));
@@ -38,6 +55,18 @@ export const EffectExamples = () => {
 
   const buttonForDotsClickHandler = (value: boolean) => {
     dispatch(setDotsActiveState(value));
+  }
+
+  const buttonForSingleSoundClickHandler = () => {
+    singleSound?.play();
+
+    singleSound?.once('end', () => {
+      // todo: переключать кнопку в дефолтное состояние
+    });
+  }
+
+  const buttonForLoopSoundClickHandler = (value: boolean) => {
+    value ? loopSound?.play() : loopSound?.stop();
   }
 
   return (
@@ -91,6 +120,20 @@ export const EffectExamples = () => {
           isActiveDefault={false}
           onClickOn={() => buttonForDotsClickHandler(true)}
           onClickOff={() => buttonForDotsClickHandler(false)}
+        />
+
+        <Toggle
+          label={'Одиночный звук'}
+          isActiveDefault={false}
+          onClickOn={() => buttonForSingleSoundClickHandler()}
+          onClickOff={() => buttonForSingleSoundClickHandler()}
+        />
+
+        <Toggle
+          label={'Лупованый звук'}
+          isActiveDefault={false}
+          onClickOn={() => buttonForLoopSoundClickHandler(true)}
+          onClickOff={() => buttonForLoopSoundClickHandler(false)}
         />
       </div>
     </PageWrapper>
