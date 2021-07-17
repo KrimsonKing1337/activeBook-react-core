@@ -1,6 +1,10 @@
 @mixin scrollbar($transitionAdd: '') {
   $transition: border-color 0.75s linear;
 
+  @if $transitionAdd != '' {
+    $transition: #{$transitionAdd}, $transition;
+  }
+
   border-color: var(--bg);
 
   transition: $transition;
@@ -25,10 +29,6 @@
     scrollbar-face-color: #989a9c;
 
     border-color: #989a9c;
-  }
-
-  @if $transitionAdd != '' {
-    $transition: #{$transitionAdd}, $transition;
   }
 }
 
