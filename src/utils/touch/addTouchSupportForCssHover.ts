@@ -29,6 +29,10 @@ export function addTouchSupportForCssHover() {
   const elementsWithHover = getAllElementsWithPseudoClass(':hover');
 
   elementsWithHover.forEach((elementCur) => {
+    if (!elementCur) {
+      return;
+    }
+
     const addClassListHover = () => elementCur.classList.add('hover');
     const removeClassListHover = () => elementCur.classList.remove('hover');
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setMenuActiveState } from 'store/main/actionsTypes';
+import { setBookmarkIsOpen, setMenuActiveState } from 'store/main/actionsTypes';
 import { setFontSize } from 'store/config/actionsTypes';
 import { configSelectors } from 'store/config/reducer';
 
@@ -31,6 +31,10 @@ export const Toolbar = () => {
     dispatch(setFontSize(fontSizeNewValue));
   }
 
+  const bookmarkClickHandler = () => {
+    dispatch(setBookmarkIsOpen(true));
+  };
+
   const etcIconClickHandler = () => {
     dispatch(setMenuActiveState('menu'));
   }
@@ -46,7 +50,7 @@ export const Toolbar = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.toolbar}>
-        <Item>
+        <Item onClick={bookmarkClickHandler}>
           <BookmarkIcon />
         </Item>
 

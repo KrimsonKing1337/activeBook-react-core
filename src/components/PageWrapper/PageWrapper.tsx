@@ -7,6 +7,7 @@ import { effectsSelectors } from 'store/effects/reducer';
 import { Toolbar } from 'components/Toolbar';
 import { Menu } from 'components/Menu';
 import { TableOfContents } from 'components/TableOfContents';
+import { Bookmarks } from 'components/Bookmarks';
 import { SideEffects } from 'components/SideEffects';
 import { BackgroundEffects } from 'components/BackgroundEffects';
 
@@ -44,6 +45,8 @@ export const PageWrapper = ({ title, subtitle, children }: PageWrapperProps) => 
         <Menu />
 
         <TableOfContents />
+
+        <Bookmarks />
       </div>
     </div>
   );
