@@ -1,10 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import classNames from 'classnames';
 import { mainSelectors } from 'store/main/reducer';
-// import { effectsSelectors } from 'store/effects/reducer';
 
+import { Overflow } from 'components/Overflow';
 import { Header } from 'components/Header';
 
 import { Volume } from './components/Volume';
@@ -15,21 +14,13 @@ import { InverseColor } from './components/InverseColor';
 import { LineHeight } from './components/LineHeight';
 import { Footer } from './components/Footer';
 
-import styles from './Menu.scss';
-
 export const Menu = () => {
   const menuActiveState = useSelector(mainSelectors.menuActiveState);
   // const backgroundVideoIsActive = useSelector(effectsSelectors.backgroundVideoIsActive);
-  const menuIsOpen = menuActiveState === 'menu';
-
-  const menuClassNames = classNames({
-    [styles.menu]: true,
-    [styles.isOpen]: menuIsOpen,
-    // [styles.isBackgroundObjectActive]: backgroundVideoIsActive,
-  });
+  const isOpen = menuActiveState === 'menu';
 
   return (
-    <div className={menuClassNames}>
+    <Overflow isOpen={isOpen}>
       <Header label={'Настройки'} />
 
       <Volume />
@@ -45,6 +36,6 @@ export const Menu = () => {
       <LineHeight />
 
       <Footer />
-    </div>
+    </Overflow>
   );
 };

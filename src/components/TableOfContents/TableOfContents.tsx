@@ -1,11 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import classNames from 'classnames';
 import { mainSelectors } from 'store/main/reducer';
 import { setMenuActiveState } from 'store/main/actionsTypes';
 
 import { Header } from 'components/Header';
+import { Overflow } from 'components/Overflow';
 
 import { Item, ItemPropsType } from './Item';
 
@@ -78,19 +78,14 @@ export const TableOfContents = () => {
   const dispatch = useDispatch();
 
   const menuActiveState = useSelector(mainSelectors.menuActiveState);
-  const tableOfContentsIsOpen = menuActiveState === 'tableOfContents';
+  const isOpen = menuActiveState === 'tableOfContents';
 
   const closeButtonClickHandler = () => {
     dispatch(setMenuActiveState(null));
   }
 
-  const tableOfContentsClassNames = classNames({
-    [styles.tableOfContents]: true,
-    [styles.isOpen]: tableOfContentsIsOpen
-  });
-
   return (
-    <div className={tableOfContentsClassNames}>
+    <Overflow isOpen={isOpen}>
       <Header label={'Оглавление'} />
 
       <div className={styles.itemsWrapper}>
@@ -100,6 +95,6 @@ export const TableOfContents = () => {
       <button className={styles.button} onClick={closeButtonClickHandler}>
         Закрыть
       </button>
-    </div>
+    </Overflow>
   );
 };
