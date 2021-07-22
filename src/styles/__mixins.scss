@@ -1,16 +1,12 @@
 @mixin scrollbar($transitionAdd: '') {
   $transition: border-color 0.75s linear;
 
-  @if $transitionAdd != '' {
-    $transition: #{$transitionAdd}, $transition;
-  }
-
-  border-color: var(--bg);
+  border-color: transparent;
 
   transition: $transition;
 
   // firefox only
-  scrollbar-color: var(--bg);
+  scrollbar-color: transparent;
   scrollbar-width: 7px;
 
   &::-webkit-scrollbar {
@@ -25,16 +21,19 @@
   }
 
   &:hover {
-    scrollbar-color: #989a9c;
-    scrollbar-face-color: #989a9c;
+    scrollbar-color: var(--main);
+    scrollbar-face-color: var(--main);
 
-    border-color: #989a9c;
+    border-color: var(--main);
+  }
+
+  @if $transitionAdd != '' {
+    $transition: #{$transitionAdd}, $transition;
   }
 }
 
-// todo: не оптимально
-@mixin transition-default() {
-  transition: all ease 0.3s 0s;
+@mixin transition-default($value: 'all') {
+  transition: #{$value} ease 0.3s 0s;
 }
 
 @mixin transition-fade-default() {

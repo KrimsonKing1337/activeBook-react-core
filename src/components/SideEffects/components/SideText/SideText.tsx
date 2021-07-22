@@ -2,13 +2,16 @@ import React from 'react';
 
 import styles from './SideText.scss';
 
-// todo: проверять через TS, чтобы в children было 2 элемента
 export type SideTextPropsType = {
   children: React.ReactNode
 };
 
 export const SideText = ({ children }: SideTextPropsType) => {
   const childrenAsArray = React.Children.toArray(children);
+
+  if (childrenAsArray.length !== 2) {
+    throw new Error('There are must be two children in props!');
+  }
 
   return (
     <div className={styles.sideTextScrollWrapper}>
@@ -29,4 +32,4 @@ export const SideText = ({ children }: SideTextPropsType) => {
       </div>
     </div>
   );
-}
+};

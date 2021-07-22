@@ -26,7 +26,7 @@
     }
 
     100% {
-      transform: translateX(calc(-100% - var(--main-content-height)));
+      transform: translateX(calc(-100% - 100vh));
     }
   }
 }
@@ -37,7 +37,7 @@
 }
 
 .sideTextScrollRight {
-  $defaultState: translateX(calc(100% + var(--main-content-height)));
+  $defaultState: translateX(calc(100% + 100vh));
 
   position: absolute;
   top: 0;

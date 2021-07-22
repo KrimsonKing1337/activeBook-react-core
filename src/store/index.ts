@@ -4,7 +4,7 @@ import createSagaMiddleware from 'redux-saga';
 
 import { incrementReducer, watchIncrementActions } from './increment';
 import { mainReducer } from './main';
-import { configReducer } from './config';
+import { configReducer, watchConfigActions } from './config';
 import { volumeReducer } from './volume';
 import { effectsReducer } from './effects';
 
@@ -24,3 +24,4 @@ export type RootState = ReturnType<typeof rootReducer>;
 export const store = createStore(rootReducer, compose);
 
 sagaMiddleware.run(watchIncrementActions);
+sagaMiddleware.run(watchConfigActions);

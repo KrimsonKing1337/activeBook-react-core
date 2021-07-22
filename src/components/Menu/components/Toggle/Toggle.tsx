@@ -11,27 +11,32 @@ type Func = () => void;
 export type TogglePropsType = {
   label: string;
   isActiveDefault?: boolean;
+  isActive?: boolean | undefined;
   onClickOn: Func;
   onClickOff: Func;
 };
 
-export const Toggle = ({ label, isActiveDefault = true, onClickOn, onClickOff }: TogglePropsType) => {
-  const [isActive, setIsActive] = useState(isActiveDefault);
+export const Toggle = ({ label, isActiveDefault = true, isActive, onClickOn, onClickOff }: TogglePropsType) => {
+  const [uncontrolledIsActive, setUncontrolledIsActive] = useState(isActiveDefault);
 
   const buttonClickHandler = (cb: Func) => {
-    setIsActive(!isActive);
+    if (isActive === undefined) {
+      setUncontrolledIsActive(!uncontrolledIsActive);
+    }
 
     cb();
-  }
+  };
+
+  const trueIsActive = isActive === undefined ? uncontrolledIsActive : isActive;
 
   const itemOnClassNames = classNames({
     [styles.item]: true,
-    [styles.isActive]: isActive,
+    [styles.isActive]: trueIsActive,
   });
 
   const itemOffClassNames = classNames({
     [styles.item]: true,
-    [styles.isActive]: !isActive,
+    [styles.isActive]: !trueIsActive,
   });
 
   return (

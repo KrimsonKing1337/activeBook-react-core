@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { Howl } from 'howler';
+
 import {
   setBackgroundImgActiveState,
   setBackgroundVideoActiveState,
@@ -10,23 +11,17 @@ import {
   setMenuActiveState,
   setSideTextActiveState
 } from 'store/effects/actionsTypes';
-import { setAll as setAllVolume } from 'store/volume/actionsTypes';
-import { setAll as setAllConfig } from 'store/config/actionsTypes';
-import { volumeSelectors } from 'store/volume/reducer';
-import { configSelectors } from 'store/config/reducer';
 
 import { PageWrapper } from 'components/PageWrapper';
 import { Toggle } from 'components/Menu/components/Toggle';
 
-import { setThemeCss } from 'utils/setThemeCss';
 
 export const EffectExamples = () => {
   const dispatch = useDispatch();
-  const config = useSelector(configSelectors.all);
-  const volume = useSelector(volumeSelectors.all);
 
   const [singleSound, setSingleSound] = useState<Howl>();
   const [loopSound, setLoopSound] = useState<Howl>();
+  const [buttonForSingleSoundIsActive, setButtonForSingleSoundIsActive] = useState(false);
 
   useEffect(() => {
     const singleSound = new Howl({
@@ -42,73 +37,49 @@ export const EffectExamples = () => {
     setLoopSound(loopSound);
   }, []);
 
-  // todo: создать доп обёртку после App, туда это вынести
-  useEffect(() => {
-    const configAsJson = localStorage.getItem('config');
-    const volumeAsJson = localStorage.getItem('volume');
-
-    if (!configAsJson || !volumeAsJson) {
-      return;
-    }
-
-    const config = JSON.parse(configAsJson);
-    const volume = JSON.parse(volumeAsJson);
-
-    dispatch(setAllConfig(config));
-    dispatch(setAllVolume(volume));
-
-    setThemeCss(config.theme); // todo: вынести в saga
-  }, []);
-
-  useEffect(() => {
-    const listener = () => {
-      const configAsJson = JSON.stringify(config);
-      const volumeAsJson = JSON.stringify(volume);
-
-      localStorage.setItem('config', configAsJson);
-      localStorage.setItem('volume', volumeAsJson);
-    };
-
-    window.addEventListener('beforeunload', listener);
-
-    return () => window.removeEventListener('beforeunload', listener);
-  }, [config, volume]);
-
   const buttonForSideShadowClickHandler = (value: boolean) => {
     dispatch(setMenuActiveState(value));
-  }
+  };
 
   const buttonForSideTextClickHandler = (value: boolean) => {
     dispatch(setSideTextActiveState(value));
-  }
+  };
 
   const buttonForBackgroundVideoClickHandler = (value: boolean) => {
     dispatch(setBackgroundVideoActiveState(value));
-  }
+  };
 
   const buttonForBackgroundImgClickHandler = (value: boolean) => {
     dispatch(setBackgroundImgActiveState(value));
-  }
+  };
 
   const buttonForInverseColorClickHandler = (value: boolean) => {
     dispatch(setInverseColorActiveState(value));
-  }
+  };
 
   const buttonForDotsClickHandler = (value: boolean) => {
     dispatch(setDotsActiveState(value));
-  }
+  };
 
-  const buttonForSingleSoundClickHandler = () => {
+  const buttonForSingleSoundClickHandler = (value: boolean) => {
+    if (!value) {
+      singleSound?.stop();
+      setButtonForSingleSoundIsActive(false);
+
+      return;
+    }
+
     singleSound?.play();
+    setButtonForSingleSoundIsActive(true);
 
     singleSound?.once('end', () => {
-      // todo: переключать кнопку в дефолтное состояние
+      setButtonForSingleSoundIsActive(false);
     });
-  }
+  };
 
   const buttonForLoopSoundClickHandler = (value: boolean) => {
     value ? loopSound?.play() : loopSound?.stop();
-  }
+  };
 
   return (
     <PageWrapper title={'Эффекты'} subtitle={'Здесь можно посмотреть все возможные эффекты'}>
@@ -166,8 +137,9 @@ export const EffectExamples = () => {
         <Toggle
           label={'Одиночный звук'}
           isActiveDefault={false}
-          onClickOn={() => buttonForSingleSoundClickHandler()}
-          onClickOff={() => buttonForSingleSoundClickHandler()}
+          isActive={buttonForSingleSoundIsActive}
+          onClickOn={() => buttonForSingleSoundClickHandler(true)}
+          onClickOff={() => buttonForSingleSoundClickHandler(false)}
         />
 
         <Toggle
