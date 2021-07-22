@@ -26,7 +26,7 @@ export const SideShadow = () => {
       if (sideShadowElement) {
         sideShadowElement.removeEventListener('animationiteration', changeTextShadowColor);
       }
-    }
+    };
   }, []);
 
   return (

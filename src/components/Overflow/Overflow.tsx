@@ -20,4 +20,4 @@ export const Overflow = ({ children, isOpen }: OverflowProps) => {
       {children}
     </div>
   );
-}
+};

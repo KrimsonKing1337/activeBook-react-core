@@ -33,4 +33,4 @@ export const Narrative = ({ title, subtitle, children }: PageWrapperProps) => {
       </div>
     </div>
   );
-}
+};

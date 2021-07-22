@@ -14,27 +14,27 @@ export function effectsReducer(state = initialState, action: EffectsActionsTypes
     return {
       ...state,
       sideTextIsActive: action.payload
-    }
+    };
   case 'SET_BACKGROUND_VIDEO_ACTIVE_STATE':
     return {
       ...state,
       backgroundVideoIsActive: action.payload
-    }
+    };
   case 'SET_BACKGROUND_IMG_ACTIVE_STATE':
     return {
       ...state,
       backgroundImgIsActive: action.payload
-    }
+    };
   case 'SET_INVERSE_COLOR_ACTIVE_STATE':
     return {
       ...state,
       inverseColorIsActive: action.payload
-    }
+    };
   case 'SET_DOTS_ACTIVE_STATE':
     return {
       ...state,
       dotsIsActive: action.payload
-    }
+    };
   default:
     return state;
   }

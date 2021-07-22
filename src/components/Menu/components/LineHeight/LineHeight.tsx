@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import classNames from 'classnames';
+
 import { configSelectors } from 'store/config/reducer';
 import { setLineHeight } from 'store/config/actionsTypes';
 
@@ -30,15 +31,15 @@ export const LineHeight = () => {
     }
 
     dispatch(setLineHeight(lineHeightNewValue));
-  }
+  };
 
   const minusClickHandler = () => {
     dispatchSetLineHeight(false);
-  }
+  };
 
   const plusClickHandler = () => {
     dispatchSetLineHeight(true);
-  }
+  };
 
   const currentValueLabel = `${lineHeight}%`;
 

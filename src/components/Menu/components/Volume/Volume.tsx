@@ -18,15 +18,15 @@ export const Volume = () => {
 
   const commonChangeHandler = (value: number) => {
     dispatch(setCommon(value));
-  }
+  };
 
   const bgChangeHandler = (value: number) => {
     dispatch(setBg(value));
-  }
+  };
 
   const otherChangeHandler = (value: number) => {
     dispatch(setOther(value));
-  }
+  };
 
   return (
     <div className={styles.volume}>
@@ -49,4 +49,4 @@ export const Volume = () => {
       </div>
     </div>
   );
-}
+};

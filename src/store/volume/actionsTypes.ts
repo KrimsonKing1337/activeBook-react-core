@@ -16,7 +16,7 @@ export function setAll(value: SetAll['payload']): SetAll {
   return {
     type: actionsTypes.SET_ALL,
     payload: value,
-  }
+  };
 }
 
 export type SetCommon = {

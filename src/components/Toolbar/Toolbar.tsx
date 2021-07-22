@@ -29,7 +29,7 @@ export const Toolbar = () => {
     }
 
     dispatch(setFontSize(fontSizeNewValue));
-  }
+  };
 
   const bookmarkClickHandler = () => {
     dispatch(setBookmarkIsOpen(true));
@@ -37,15 +37,15 @@ export const Toolbar = () => {
 
   const etcIconClickHandler = () => {
     dispatch(setMenuActiveState('menu'));
-  }
+  };
 
   const fontSmallClickHandler = () => {
     dispatchSetFontSize(false);
-  }
+  };
 
   const fontBigClickHandler = () => {
     dispatchSetFontSize(true);
-  }
+  };
 
   return (
     <div className={styles.wrapper}>

@@ -11,4 +11,4 @@ export const Dots = () => {
       <div className={styles.dot} />
     </div>
   );
-}
+};

@@ -11,32 +11,32 @@ export function configReducer(state = initialState, action: ConfigActionsTypes):
     return {
       ...state,
       theme: action.payload
-    }
+    };
   case 'SET_VIBRATION':
     return {
       ...state,
       vibration: action.payload
-    }
+    };
   case 'SET_FLASHLIGHT':
     return {
       ...state,
       flashlight: action.payload
-    }
+    };
   case 'SET_INVERSE_COLOR':
     return {
       ...state,
       inverseColor: action.payload
-    }
+    };
   case 'SET_FONT_SIZE':
     return {
       ...state,
       fontSize: action.payload
-    }
+    };
   case 'SET_LINE_HEIGHT':
     return {
       ...state,
       lineHeight: action.payload
-    }
+    };
   default:
     return state;
   }

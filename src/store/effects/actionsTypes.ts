@@ -30,7 +30,7 @@ export function setSideTextActiveState(value: SetSideTextActiveState['payload'])
   return {
     type: actionsTypes.SET_SIDE_TEXT_ACTIVE_STATE,
     payload: value,
-  }
+  };
 }
 
 export type SetBackgroundVideoActiveState = {
@@ -42,7 +42,7 @@ export function setBackgroundVideoActiveState(value: SetBackgroundVideoActiveSta
   return {
     type: actionsTypes.SET_BACKGROUND_VIDEO_ACTIVE_STATE,
     payload: value,
-  }
+  };
 }
 
 export type SetBackgroundImgActiveState = {
@@ -54,7 +54,7 @@ export function setBackgroundImgActiveState(value: SetBackgroundVideoActiveState
   return {
     type: actionsTypes.SET_BACKGROUND_IMG_ACTIVE_STATE,
     payload: value,
-  }
+  };
 }
 
 export type SetInverseColorActiveState = {
@@ -66,7 +66,7 @@ export function setInverseColorActiveState(value: SetInverseColorActiveState['pa
   return {
     type: actionsTypes.SET_INVERSE_COLOR_ACTIVE_STATE,
     payload: value,
-  }
+  };
 }
 
 export type SetDotsActiveState = {
@@ -78,7 +78,7 @@ export function setDotsActiveState(value: SetDotsActiveState['payload']): SetDot
   return {
     type: actionsTypes.SET_DOTS_ACTIVE_STATE,
     payload: value,
-  }
+  };
 }
 
 export type EffectsActionsTypes = SetSideShadowActiveState

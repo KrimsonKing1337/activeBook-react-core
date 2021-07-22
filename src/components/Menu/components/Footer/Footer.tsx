@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import classNames from 'classnames';
+
 import { setMenuActiveState } from 'store/main/actionsTypes';
 
 import styles from './Footer.scss';
@@ -18,11 +19,11 @@ export const Footer = () => {
 
   const tableOfContentsButtonClickHandler = () => {
     dispatch(setMenuActiveState('tableOfContents'));
-  }
+  };
 
   const closeButtonClickHandler = () => {
     dispatch(setMenuActiveState(null));
-  }
+  };
 
   return (
     <div className={styles.footer}>

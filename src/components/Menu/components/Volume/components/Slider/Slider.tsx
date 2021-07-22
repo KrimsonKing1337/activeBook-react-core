@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactSlider from 'react-slider'
+import ReactSlider from 'react-slider';
 
 import styles from './Slider.scss';
 
@@ -23,5 +23,5 @@ export const Slider = ({ onChange, value }: SliderProps) => {
       trackClassName={styles.track}
       onAfterChange={changeHandler}
     />
-  )
+  );
 };

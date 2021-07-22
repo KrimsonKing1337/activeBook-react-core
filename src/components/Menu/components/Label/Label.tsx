@@ -12,4 +12,4 @@ export const Label = ({ label }: LabelPropsType) => {
       { label }
     </div>
   );
-}
+};

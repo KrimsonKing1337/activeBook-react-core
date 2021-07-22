@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import classNames from 'classnames';
+
 import { effectsSelectors } from 'store/effects/reducer';
 
 import { Toolbar } from 'components/Toolbar';

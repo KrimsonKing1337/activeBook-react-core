@@ -10,5 +10,5 @@ export const Button = (props: ButtonPropType) => {
     <button type="button" {...props}>
       Push me
     </button>
-  )
+  );
 };

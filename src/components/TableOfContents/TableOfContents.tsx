@@ -82,7 +82,7 @@ export const TableOfContents = () => {
 
   const closeButtonClickHandler = () => {
     dispatch(setMenuActiveState(null));
-  }
+  };
 
   return (
     <Overflow isOpen={isOpen}>

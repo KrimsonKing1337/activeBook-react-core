@@ -1,9 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import classNames from 'classnames';
+
 import { mainSelectors } from 'store/main/reducer';
 import { setBookmarkIsOpen } from 'store/main/actionsTypes';
-import classNames from 'classnames';
 
 import { Header } from 'components/Header';
 import { Overflow } from 'components/Overflow';
@@ -60,7 +61,7 @@ export const Bookmarks = () => {
 
   const closeButtonClickHandler = () => {
     dispatch(setBookmarkIsOpen(false));
-  }
+  };
 
   return (
     <Overflow isOpen={isOpen}>

@@ -14,7 +14,7 @@ export function mainReducer(state = initialState, action: MainActionsTypes): Mai
     return {
       ...state,
       bookmarksIsOpen: action.payload
-    }
+    };
   default:
     return state;
   }

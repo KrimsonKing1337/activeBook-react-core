@@ -19,7 +19,7 @@ export function setAll(value: SetAll['payload']): SetAll {
   return {
     type: actionsTypes.SET_ALL_CONFIG,
     payload: value,
-  }
+  };
 }
 
 export type SetTheme = {
@@ -31,7 +31,7 @@ export function setTheme(value: SetTheme['payload']): SetTheme {
   return {
     type: actionsTypes.SET_THEME,
     payload: value,
-  }
+  };
 }
 
 export type SetVibration = {
@@ -43,7 +43,7 @@ export function setVibration(value: SetVibration['payload']): SetVibration {
   return {
     type: actionsTypes.SET_VIBRATION,
     payload: value,
-  }
+  };
 }
 
 export type SetFlashlight = {
@@ -55,7 +55,7 @@ export function setFlashlight(value: SetFlashlight['payload']): SetFlashlight {
   return {
     type: actionsTypes.SET_FLASHLIGHT,
     payload: value,
-  }
+  };
 }
 
 export type SetInverseColor = {
@@ -67,7 +67,7 @@ export function setInverseColor(value: SetInverseColor['payload']): SetInverseCo
   return {
     type: actionsTypes.SET_INVERSE_COLOR,
     payload: value,
-  }
+  };
 }
 
 export type SetFontSize = {
@@ -79,7 +79,7 @@ export function setFontSize(value: SetFontSize['payload']): SetFontSize {
   return {
     type: actionsTypes.SET_FONT_SIZE,
     payload: value,
-  }
+  };
 }
 
 export type SetLineHeight = {
@@ -91,7 +91,7 @@ export function setLineHeight(value: SetLineHeight['payload']): SetLineHeight {
   return {
     type: actionsTypes.SET_LINE_HEIGHT,
     payload: value,
-  }
+  };
 }
 
 export type ConfigActionsTypes = SetAll
