@@ -1,6 +1,7 @@
 import { ConfigState } from './initialState';
 
 export const actionsTypes = {
+  SET_ALL_CONFIG: 'SET_ALL_CONFIG',
   SET_THEME: 'SET_THEME',
   SET_VIBRATION: 'SET_VIBRATION',
   SET_FLASHLIGHT: 'SET_FLASHLIGHT',
@@ -8,6 +9,18 @@ export const actionsTypes = {
   SET_FONT_SIZE: 'SET_FONT_SIZE',
   SET_LINE_HEIGHT: 'SET_LINE_HEIGHT',
 } as const;
+
+export type SetAll = {
+  type: typeof actionsTypes.SET_ALL_CONFIG;
+  payload: ConfigState;
+};
+
+export function setAll(value: SetAll['payload']): SetAll {
+  return {
+    type: actionsTypes.SET_ALL_CONFIG,
+    payload: value,
+  }
+}
 
 export type SetTheme = {
   type: typeof actionsTypes.SET_THEME;
@@ -81,7 +94,8 @@ export function setLineHeight(value: SetLineHeight['payload']): SetLineHeight {
   }
 }
 
-export type ConfigActionsTypes = SetTheme
+export type ConfigActionsTypes = SetAll
+  | SetTheme
   | SetVibration
   | SetFlashlight
   | SetInverseColor

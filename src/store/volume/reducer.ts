@@ -5,6 +5,9 @@ import { initialState, VolumeState } from './initialState';
 
 export function volumeReducer(state = initialState, action: VolumeActionsTypes): VolumeState {
   switch (action.type) {
+  case 'SET_ALL': {
+    return action.payload;
+  }
   case 'SET_COMMON': {
     return {
       ...state,
@@ -29,6 +32,7 @@ export function volumeReducer(state = initialState, action: VolumeActionsTypes):
 }
 
 export const volumeSelectors = {
+  all: (state: RootState) => state.volume,
   common: (state: RootState) => state.volume.common,
   bg: (state: RootState) => state.volume.bg,
   other: (state: RootState) => state.volume.other,

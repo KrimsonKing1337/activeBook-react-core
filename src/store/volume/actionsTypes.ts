@@ -1,10 +1,23 @@
 import { VolumeState } from './initialState';
 
 export const actionsTypes = {
+  SET_ALL: 'SET_ALL',
   SET_COMMON: 'SET_COMMON',
   SET_BG: 'SET_BG',
   SET_OTHER: 'SET_OTHER',
 } as const;
+
+export type SetAll = {
+  type: typeof actionsTypes.SET_ALL;
+  payload: VolumeState;
+};
+
+export function setAll(value: SetAll['payload']): SetAll {
+  return {
+    type: actionsTypes.SET_ALL,
+    payload: value,
+  }
+}
 
 export type SetCommon = {
   type: typeof actionsTypes.SET_COMMON;
@@ -42,4 +55,4 @@ export function setOther(value: SetOther['payload']): SetOther {
   };
 }
 
-export type VolumeActionsTypes = SetCommon | SetBg | SetOther;
+export type VolumeActionsTypes = SetAll | SetCommon | SetBg | SetOther;
