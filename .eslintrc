@@ -15,6 +15,7 @@
     }
   },
   "rules": {
+    "eol-last": ["error", "always"],
     "comma-dangle": ["error", "only-multiline"],
     "semi": ["error", "always"],
     "indent": ["error", 2],

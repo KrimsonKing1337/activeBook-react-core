@@ -11,10 +11,10 @@ import {
   setMenuActiveState,
   setSideTextActiveState
 } from 'store/effects/actionsTypes';
+import { setIsLoading } from 'store/main/actionsTypes';
 
 import { PageWrapper } from 'components/PageWrapper';
 import { Toggle } from 'components/Menu/components/Toggle';
-
 
 export const EffectExamples = () => {
   const dispatch = useDispatch();
@@ -22,6 +22,7 @@ export const EffectExamples = () => {
   const [singleSound, setSingleSound] = useState<Howl>();
   const [loopSound, setLoopSound] = useState<Howl>();
   const [buttonForSingleSoundIsActive, setButtonForSingleSoundIsActive] = useState(false);
+  const [buttonForLoadingStateIsActive, setButtonForLoadingStateIsActive] = useState(false);
 
   useEffect(() => {
     const singleSound = new Howl({
@@ -79,6 +80,18 @@ export const EffectExamples = () => {
 
   const buttonForLoopSoundClickHandler = (value: boolean) => {
     value ? loopSound?.play() : loopSound?.stop();
+  };
+
+  const buttonForLoadingStateClickHandler = (value: boolean) => {
+    dispatch(setIsLoading(value));
+    setButtonForLoadingStateIsActive(value);
+
+    setTimeout(() => {
+      document.addEventListener('click', () => {
+        dispatch(setIsLoading(false));
+        setButtonForLoadingStateIsActive(false);
+      }, { once: true });
+    }, 0);
   };
 
   return (
@@ -147,6 +160,14 @@ export const EffectExamples = () => {
           isActiveDefault={false}
           onClickOn={() => buttonForLoopSoundClickHandler(true)}
           onClickOff={() => buttonForLoopSoundClickHandler(false)}
+        />
+
+        <Toggle
+          label={'Состояние загрузки (для отмены - клик в любое место)'}
+          isActiveDefault={false}
+          isActive={buttonForLoadingStateIsActive}
+          onClickOn={() => buttonForLoadingStateClickHandler(true)}
+          onClickOff={() => buttonForLoadingStateClickHandler(false)}
         />
       </div>
     </PageWrapper>

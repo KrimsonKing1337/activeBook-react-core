@@ -37,6 +37,14 @@
   background: var(--bg);
   box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.75);
 
+  &.isLoading {
+    height: calc(100vh - 5px - 10px); // padding-top + padding-bottom from .pageWrapper
+
+    > * {
+      display: none;
+    }
+  }
+
   @media screen and (max-width: 500px) {
     box-shadow: none;
   }

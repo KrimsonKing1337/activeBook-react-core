@@ -3,6 +3,7 @@ import { MenuActiveState } from './initialState';
 export const actionsTypes = {
   SET_MENU_ACTIVE_STATE: 'SET_MENU_ACTIVE_STATE',
   SET_BOOKMARKS_IS_OPEN: 'SET_BOOKMARKS_IS_OPEN',
+  SET_IS_LOADING: 'SET_IS_LOADING',
 } as const;
 
 export type SetMenuIsOpenAction = {
@@ -29,4 +30,16 @@ export function setBookmarkIsOpen(value: SetBookmarksIsOpenAction['payload']): S
   };
 }
 
-export type MainActionsTypes = SetMenuIsOpenAction | SetBookmarksIsOpenAction;
+export type SetIsLoadingAction = {
+  type: typeof actionsTypes.SET_IS_LOADING;
+  payload: boolean;
+};
+
+export function setIsLoading(value: SetIsLoadingAction['payload']): SetIsLoadingAction {
+  return {
+    type: actionsTypes.SET_IS_LOADING,
+    payload: value,
+  };
+}
+
+export type MainActionsTypes = SetMenuIsOpenAction | SetBookmarksIsOpenAction | SetIsLoadingAction;

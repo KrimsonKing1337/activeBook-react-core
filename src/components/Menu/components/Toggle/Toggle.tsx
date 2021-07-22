@@ -19,9 +19,11 @@ export type TogglePropsType = {
 export const Toggle = ({ label, isActiveDefault = true, isActive, onClickOn, onClickOff }: TogglePropsType) => {
   const [uncontrolledIsActive, setUncontrolledIsActive] = useState(isActiveDefault);
 
-  const buttonClickHandler = (cb: Func) => {
+  const buttonClickHandler = (value: boolean, cb: Func) => {
     if (isActive === undefined) {
-      setUncontrolledIsActive(!uncontrolledIsActive);
+      if (value !== uncontrolledIsActive) {
+        setUncontrolledIsActive(!uncontrolledIsActive);
+      }
     }
 
     cb();
@@ -44,11 +46,11 @@ export const Toggle = ({ label, isActiveDefault = true, isActive, onClickOn, onC
       <Label label={label} />
 
       <div className={styles.itemsWrapper}>
-        <div className={itemOnClassNames} onClick={() => buttonClickHandler(onClickOn)}>
+        <div className={itemOnClassNames} onClick={() => buttonClickHandler(true, onClickOn)}>
           Вкл
         </div>
 
-        <div className={itemOffClassNames} onClick={() => buttonClickHandler(onClickOff)}>
+        <div className={itemOffClassNames} onClick={() => buttonClickHandler(false, onClickOff)}>
           Выкл
         </div>
       </div>

@@ -7,7 +7,7 @@ export function setThemeCss(theme: Theme) {
     dark: {
       main: '#a3a3a3',
       secondary: '#828282',
-      hover: '#9c9c9c',
+      hover: '#7a7a7a',
       bg: '#111'
     },
     orange: {

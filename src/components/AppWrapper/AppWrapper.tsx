@@ -1,17 +1,23 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import classNames from 'classnames';
+
 import { setAll as setAllVolume } from 'store/volume/actionsTypes';
 import { setAll as setAllConfig } from 'store/config/actionsTypes';
 import { volumeSelectors } from 'store/volume/reducer';
 import { configSelectors } from 'store/config/reducer';
+import { mainSelectors } from 'store/main/reducer';
 
 import { EffectExamples } from 'pages/EffectExamples';
+
+import styles from './AppWrapper.scss';
 
 export const AppWrapper = () => {
   const dispatch = useDispatch();
   const config = useSelector(configSelectors.all);
   const volume = useSelector(volumeSelectors.all);
+  const isLoading = useSelector(mainSelectors.isLoading);
 
   useEffect(() => {
     const configAsJson = localStorage.getItem('config');
@@ -42,5 +48,14 @@ export const AppWrapper = () => {
     return () => window.removeEventListener('beforeunload', listener);
   }, [config, volume]);
 
-  return <EffectExamples />;
+  const appWrapperClassNames = classNames({
+    [styles.appWrapper]: true,
+    [styles.isLoading]: isLoading,
+  });
+
+  return (
+    <div className={appWrapperClassNames}>
+      <EffectExamples />
+    </div>
+  );
 };
