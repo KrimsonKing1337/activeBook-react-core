@@ -4,10 +4,12 @@ export interface MainState {
   menuActiveState: MenuActiveState;
   bookmarksIsOpen: boolean;
   isLoading: boolean;
+  modalIsOpen: boolean;
 }
 
 export const initialState: MainState = {
   menuActiveState: null,
   bookmarksIsOpen: false,
   isLoading: false,
+  modalIsOpen: false,
 };

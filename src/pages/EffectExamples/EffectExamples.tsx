@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Howl } from 'howler';
 
@@ -9,20 +9,23 @@ import {
   setDotsActiveState,
   setInverseColorActiveState,
   setMenuActiveState,
-  setSideTextActiveState
+  setSideTextActiveState,
 } from 'store/effects/actionsTypes';
-import { setIsLoading } from 'store/main/actionsTypes';
+import { setIsLoading, setModalIsOpen } from 'store/main/actionsTypes';
+import { mainSelectors } from 'store/main/reducer';
 
 import { PageWrapper } from 'components/PageWrapper';
 import { Toggle } from 'components/Menu/components/Toggle';
 
 export const EffectExamples = () => {
   const dispatch = useDispatch();
+  const modalIsOpen = useSelector(mainSelectors.modalIsOpen);
 
   const [singleSound, setSingleSound] = useState<Howl>();
   const [loopSound, setLoopSound] = useState<Howl>();
   const [buttonForSingleSoundIsActive, setButtonForSingleSoundIsActive] = useState(false);
   const [buttonForLoadingStateIsActive, setButtonForLoadingStateIsActive] = useState(false);
+  const [buttonForModalWithImgIsActive, setButtonForModalWithImgIsActive] = useState(false);
 
   useEffect(() => {
     const singleSound = new Howl({
@@ -37,6 +40,12 @@ export const EffectExamples = () => {
     setSingleSound(singleSound);
     setLoopSound(loopSound);
   }, []);
+
+  useEffect(() => {
+    if (!modalIsOpen) {
+      setButtonForModalWithImgIsActive(false);
+    }
+  }, [modalIsOpen]);
 
   const buttonForSideShadowClickHandler = (value: boolean) => {
     dispatch(setMenuActiveState(value));
@@ -92,6 +101,15 @@ export const EffectExamples = () => {
         setButtonForLoadingStateIsActive(false);
       }, { once: true });
     }, 0);
+  };
+
+  const buttonForModalWithImgClickHandler = (value: boolean) => {
+    if (!value) {
+      return;
+    }
+
+    dispatch(setModalIsOpen(value));
+    setButtonForModalWithImgIsActive(true);
   };
 
   return (
@@ -168,6 +186,14 @@ export const EffectExamples = () => {
           isActive={buttonForLoadingStateIsActive}
           onClickOn={() => buttonForLoadingStateClickHandler(true)}
           onClickOff={() => buttonForLoadingStateClickHandler(false)}
+        />
+
+        <Toggle
+          label={'Модалка с изображением'}
+          isActiveDefault={false}
+          isActive={buttonForModalWithImgIsActive}
+          onClickOn={() => buttonForModalWithImgClickHandler(true)}
+          onClickOff={() => buttonForModalWithImgClickHandler(false)}
         />
       </div>
     </PageWrapper>

@@ -8,17 +8,22 @@ export function mainReducer(state = initialState, action: MainActionsTypes): Mai
   case 'SET_MENU_ACTIVE_STATE':
     return {
       ...state,
-      menuActiveState: action.payload
+      menuActiveState: action.payload,
     };
   case 'SET_BOOKMARKS_IS_OPEN':
     return {
       ...state,
-      bookmarksIsOpen: action.payload
+      bookmarksIsOpen: action.payload,
     };
   case 'SET_IS_LOADING':
     return {
       ...state,
-      isLoading: action.payload
+      isLoading: action.payload,
+    };
+  case 'SET_MODAL_IS_OPEN':
+    return {
+      ...state,
+      modalIsOpen: action.payload,
     };
   default:
     return state;
@@ -29,4 +34,5 @@ export const mainSelectors = {
   menuActiveState: (state: RootState) => state.main.menuActiveState,
   bookmarksIsOpen: (state: RootState) => state.main.bookmarksIsOpen,
   isLoading: (state: RootState) => state.main.isLoading,
+  modalIsOpen: (state: RootState) => state.main.modalIsOpen,
 };
