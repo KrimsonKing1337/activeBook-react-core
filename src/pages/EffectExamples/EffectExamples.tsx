@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { Howl } from 'howler';
 
@@ -11,21 +11,32 @@ import {
   setMenuActiveState,
   setSideTextActiveState,
 } from 'store/effects/actionsTypes';
-import { setIsLoading, setModalIsOpen } from 'store/main/actionsTypes';
-import { mainSelectors } from 'store/main/reducer';
+import { setIsLoading } from 'store/main/actionsTypes';
 
 import { PageWrapper } from 'components/PageWrapper';
 import { Toggle } from 'components/Menu/components/Toggle';
+import { Modal } from 'components/Modal';
 
 export const EffectExamples = () => {
   const dispatch = useDispatch();
-  const modalIsOpen = useSelector(mainSelectors.modalIsOpen);
 
   const [singleSound, setSingleSound] = useState<Howl>();
   const [loopSound, setLoopSound] = useState<Howl>();
+
   const [buttonForSingleSoundIsActive, setButtonForSingleSoundIsActive] = useState(false);
   const [buttonForLoadingStateIsActive, setButtonForLoadingStateIsActive] = useState(false);
+
+  const [modalWithImgIsActive, setModalWithImgIsActive] = useState(false);
   const [buttonForModalWithImgIsActive, setButtonForModalWithImgIsActive] = useState(false);
+
+  const [modalWithVideoIsActive, setModalWithVideoIsActive] = useState(false);
+  const [buttonForModalWithVideoIsActive, setButtonForModalWithVideoIsActive] = useState(false);
+
+  const [modalWithTextIsActive, setModalWithTextIsActive] = useState(false);
+  const [buttonForModalWithTextIsActive, setButtonForModalWithTextIsActive] = useState(false);
+
+  const [modalWithAnyIsActive, setModalWithAnyIsActive] = useState(false);
+  const [buttonForModalWithAnyIsActive, setButtonForModalWithAnyIsActive] = useState(false);
 
   useEffect(() => {
     const singleSound = new Howl({
@@ -40,12 +51,6 @@ export const EffectExamples = () => {
     setSingleSound(singleSound);
     setLoopSound(loopSound);
   }, []);
-
-  useEffect(() => {
-    if (!modalIsOpen) {
-      setButtonForModalWithImgIsActive(false);
-    }
-  }, [modalIsOpen]);
 
   const buttonForSideShadowClickHandler = (value: boolean) => {
     dispatch(setMenuActiveState(value));
@@ -103,13 +108,60 @@ export const EffectExamples = () => {
     }, 0);
   };
 
+  const modalWithImgIsActiveOnClose = () => {
+    setModalWithImgIsActive(false);
+    setButtonForModalWithImgIsActive(false);
+  };
+
   const buttonForModalWithImgClickHandler = (value: boolean) => {
     if (!value) {
       return;
     }
 
-    dispatch(setModalIsOpen(value));
     setButtonForModalWithImgIsActive(true);
+    setModalWithImgIsActive(true);
+  };
+
+  const modalWithVideoIsActiveOnClose = () => {
+    setModalWithVideoIsActive(false);
+    setButtonForModalWithVideoIsActive(false);
+  };
+
+  const buttonForModalWithVideoClickHandler = (value: boolean) => {
+    if (!value) {
+      return;
+    }
+
+    setButtonForModalWithVideoIsActive(true);
+    setModalWithVideoIsActive(true);
+  };
+
+  const modalWithTextIsActiveOnClose = () => {
+    setModalWithTextIsActive(false);
+    setButtonForModalWithTextIsActive(false);
+  };
+
+  const buttonForModalWithTextClickHandler = (value: boolean) => {
+    if (!value) {
+      return;
+    }
+
+    setModalWithTextIsActive(true);
+    setButtonForModalWithTextIsActive(true);
+  };
+
+  const modalWithAnyIsActiveOnClose = () => {
+    setModalWithAnyIsActive(false);
+    setButtonForModalWithAnyIsActive(false);
+  };
+
+  const buttonForModalWithAnyClickHandler = (value: boolean) => {
+    if (!value) {
+      return;
+    }
+
+    setModalWithAnyIsActive(true);
+    setButtonForModalWithAnyIsActive(true);
   };
 
   return (
@@ -188,12 +240,85 @@ export const EffectExamples = () => {
           onClickOff={() => buttonForLoadingStateClickHandler(false)}
         />
 
+        <Modal onClose={modalWithImgIsActiveOnClose} isOpen={modalWithImgIsActive}>
+          <img src="/assets/img/cinemagraph.gif" alt="" />
+        </Modal>
+
         <Toggle
           label={'Модалка с изображением'}
           isActiveDefault={false}
           isActive={buttonForModalWithImgIsActive}
           onClickOn={() => buttonForModalWithImgClickHandler(true)}
           onClickOff={() => buttonForModalWithImgClickHandler(false)}
+        />
+
+        <Modal onClose={modalWithVideoIsActiveOnClose} isOpen={modalWithVideoIsActive}>
+          { /* todo: видео плеер */}
+          <video src="/assets/videos/TV_static-2.mp4" loop autoPlay muted />
+        </Modal>
+
+        <Toggle
+          label={'Модалка с видео'}
+          isActiveDefault={false}
+          isActive={buttonForModalWithVideoIsActive}
+          onClickOn={() => buttonForModalWithVideoClickHandler(true)}
+          onClickOff={() => buttonForModalWithVideoClickHandler(false)}
+        />
+
+        <Modal onClose={modalWithTextIsActiveOnClose} isOpen={modalWithTextIsActive} isMediaMode={false}>
+          <div>
+            Товарищи! начало повседневной работы по формированию позиции играет важную роль в формировании систем
+            массового участия. С другой стороны дальнейшее развитие различных форм деятельности играет важную роль в
+            формировании модели развития. С другой стороны новая модель организационной деятельности представляет собой
+            интересный эксперимент проверки соответствующий условий активизации. Не следует, однако забывать, что начало
+            повседневной работы по формированию позиции играет важную роль в формировании новых предложений.
+
+            Не следует, однако забывать, что постоянный количественный рост и сфера нашей активности позволяет выполнять
+            важные задания по разработке дальнейших направлений развития. Таким образом постоянный количественный рост и
+            сфера нашей активности способствует подготовки и реализации существенных финансовых и административных
+            условий. Задача организации, в особенности же новая модель организационной деятельности влечет за собой
+            процесс внедрения и модернизации дальнейших направлений развития. Идейные соображения высшего порядка, а
+            также постоянный количественный рост и сфера нашей активности позволяет выполнять важные задания по
+            разработке форм развития.
+          </div>
+        </Modal>
+
+        <Toggle
+          label={'Модалка с текстом'}
+          isActiveDefault={false}
+          isActive={buttonForModalWithTextIsActive}
+          onClickOn={() => buttonForModalWithTextClickHandler(true)}
+          onClickOff={() => buttonForModalWithTextClickHandler(false)}
+        />
+
+        <Modal onClose={modalWithAnyIsActiveOnClose} isOpen={modalWithAnyIsActive} isMediaMode={false}>
+          <div>
+            <img src="/assets/img/cinemagraph.gif" alt="" />
+
+            Товарищи! начало повседневной работы по формированию позиции играет важную роль в формировании систем
+            массового участия. С другой стороны дальнейшее развитие различных форм деятельности играет важную роль в
+            формировании модели развития. С другой стороны новая модель организационной деятельности представляет собой
+            интересный эксперимент проверки соответствующий условий активизации. Не следует, однако забывать, что начало
+            повседневной работы по формированию позиции играет важную роль в формировании новых предложений.
+
+            <video src="/assets/videos/TV_static-2.mp4" loop autoPlay muted />
+
+            Не следует, однако забывать, что постоянный количественный рост и сфера нашей активности позволяет выполнять
+            важные задания по разработке дальнейших направлений развития. Таким образом постоянный количественный рост и
+            сфера нашей активности способствует подготовки и реализации существенных финансовых и административных
+            условий. Задача организации, в особенности же новая модель организационной деятельности влечет за собой
+            процесс внедрения и модернизации дальнейших направлений развития. Идейные соображения высшего порядка, а
+            также постоянный количественный рост и сфера нашей активности позволяет выполнять важные задания по
+            разработке форм развития.
+          </div>
+        </Modal>
+
+        <Toggle
+          label={'Модалка с разным контентом'}
+          isActiveDefault={false}
+          isActive={buttonForModalWithAnyIsActive}
+          onClickOn={() => buttonForModalWithAnyClickHandler(true)}
+          onClickOff={() => buttonForModalWithAnyClickHandler(false)}
         />
       </div>
     </PageWrapper>

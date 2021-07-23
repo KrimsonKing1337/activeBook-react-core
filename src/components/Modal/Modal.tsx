@@ -1,60 +1,89 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCompress, faCrop, faExpand, faTimes } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
 
-import { mainSelectors } from 'store/main/reducer';
-import { setModalIsOpen } from 'store/main/actionsTypes';
-
 import styles from './Modal.scss';
 
-export const Modal = () => {
-  const dispatch = useDispatch();
-  const isOpen = useSelector(mainSelectors.modalIsOpen);
+export type ModalProps = {
+  children: React.ReactNode;
+  isOpen: boolean;
+  isMediaMode?: boolean;
+  onClose: () => void;
+};
 
-  const close = () => {
-    dispatch(setModalIsOpen(false));
-  };
+export const Modal = ({ children, onClose, isOpen, isMediaMode = true }: ModalProps) => {
+  const [isFullScreen, setIsFullScreen] = useState(false);
+  const [isCrop, setIsCrop] = useState(true);
 
-  const closeIconClickHandler = () => {
-    close();
-  };
+  const close = () => onClose();
 
-  const overflowClickHandler = () => {
-    close();
-  };
+  const closeIconClickHandler = () => close();
+  const overflowClickHandler = () => close();
 
   const overflowClassNames = classNames({
     [styles.overflow]: true,
     [styles.isOpen]: isOpen,
   });
 
+  const modalClassNames = classNames({
+    [styles.modal]: true,
+    [styles.isFullScreen]: isFullScreen,
+    [styles.isMediaMode]: isMediaMode,
+  });
+
+  const toolbarClassNames = classNames({
+    [styles.toolbar]: true,
+    [styles.isMediaMode]: isMediaMode,
+  });
+
+  const iconExpandClassNames = classNames({
+    [styles.iconExpand]: true,
+    [styles.isFullScreen]: isFullScreen,
+    [styles.isMediaMode]: isMediaMode,
+  });
+
+  const iconCompressClassNames = classNames({
+    [styles.iconCompress]: true,
+    [styles.isFullScreen]: isFullScreen,
+  });
+
+  const iconCropClassNames = classNames({
+    [styles.iconCrop]: true,
+    [styles.isFullScreen]: isFullScreen,
+  });
+
+  const contentClassNames = classNames({
+    [styles.content]: true,
+    [styles.isFullScreen]: isFullScreen,
+    [styles.isCrop]: isCrop,
+  });
+
   return (
     <div className={overflowClassNames} onClick={overflowClickHandler}>
-      <div className={styles.modal}>
+      <div className={modalClassNames}>
         <div className={styles.wrapper} onClick={(e) => e.stopPropagation()}>
-          <div className={styles.toolbar}>
+          <div className={toolbarClassNames}>
             <div className={styles.iconClose} onClick={closeIconClickHandler}>
               <FontAwesomeIcon icon={faTimes} />
             </div>
 
-            <div className={styles.iconExpand}>
+            <div className={iconExpandClassNames} onClick={() => setIsFullScreen(true)}>
               <FontAwesomeIcon icon={faExpand} />
             </div>
 
-            <div className={styles.iconCompress}>
+            <div className={iconCompressClassNames} onClick={() => setIsFullScreen(false)}>
               <FontAwesomeIcon icon={faCompress} />
             </div>
 
-            <div className={styles.iconCrop}>
+            <div className={iconCropClassNames} onClick={() => setIsCrop(!isCrop)}>
               <FontAwesomeIcon icon={faCrop} />
             </div>
           </div>
 
-          <div className={styles.content}>
-            <img src="/assets/img/cinemagraph.gif" alt="" />
+          <div className={contentClassNames}>
+            { children }
           </div>
         </div>
       </div>

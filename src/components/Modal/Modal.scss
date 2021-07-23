@@ -13,7 +13,7 @@
   height: 100vh;
   margin: auto;
 
-  background: rgba(#000, 0.3);
+  background: rgba(#000, 0.9);
 
   &.isOpen {
     display: block;
@@ -29,15 +29,22 @@
   z-index: 11;
 
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   width: 90%;
+  max-width: 500px;
   height: 90vh;
   margin: auto;
+  overflow: auto;
 
   &.isFullScreen {
     width: 100%;
     height: 100vh;
+  }
+
+  &.isMediaMode {
+    align-items: center;
+    max-width: none;
   }
 
   @include scrollbar();
@@ -68,6 +75,16 @@
   bottom: 5px;
   z-index: 1;
 
+  display: none;
+
+  &.isMediaMode {
+    display: block;
+
+    &.isFullScreen {
+      display: none;
+    }
+  }
+
   @include modal-content-icon;
 }
 
@@ -79,20 +96,45 @@
 
   display: none;
 
+  &.isFullScreen {
+    display: block;
+  }
+
   @include modal-content-icon;
 }
 
 .iconCrop {
   position: absolute;
-  top: 5px;
+  bottom: 5px;
   left: 8px;
   z-index: 1;
 
   display: none;
 
+  &.isFullScreen {
+    display: block;
+  }
+
   @include modal-content-icon;
 }
 
 .content {
-  display: block;
+  &.isFullScreen {
+    width: 100%;
+    height: 100vh;
+
+    > img,
+    > video {
+      width: inherit;
+      height: inherit;
+      object-fit: contain;
+    }
+  }
+
+  &.isCrop {
+    > img,
+    > video {
+      object-fit: cover;
+    }
+  }
 }

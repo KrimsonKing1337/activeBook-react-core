@@ -4,7 +4,6 @@ export const actionsTypes = {
   SET_MENU_ACTIVE_STATE: 'SET_MENU_ACTIVE_STATE',
   SET_BOOKMARKS_IS_OPEN: 'SET_BOOKMARKS_IS_OPEN',
   SET_IS_LOADING: 'SET_IS_LOADING',
-  SET_MODAL_IS_OPEN: 'SET_MODAL_IS_OPEN',
 } as const;
 
 export type SetMenuIsOpenAction = {
@@ -43,19 +42,4 @@ export function setIsLoading(value: SetIsLoadingAction['payload']): SetIsLoading
   };
 }
 
-export type SetModalIsOpenAction = {
-  type: typeof actionsTypes.SET_MODAL_IS_OPEN,
-  payload: boolean;
-};
-
-export function setModalIsOpen(value: SetModalIsOpenAction['payload']): SetModalIsOpenAction {
-  return {
-    type: actionsTypes.SET_MODAL_IS_OPEN,
-    payload: value,
-  };
-}
-
-export type MainActionsTypes = SetMenuIsOpenAction
-  | SetBookmarksIsOpenAction
-  | SetIsLoadingAction
-  | SetModalIsOpenAction;
+export type MainActionsTypes = SetMenuIsOpenAction | SetBookmarksIsOpenAction | SetIsLoadingAction;
