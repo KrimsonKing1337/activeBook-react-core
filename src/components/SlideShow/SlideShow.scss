@@ -1,0 +1,70 @@
+@import "~styles/__mixins.scss";
+
+.slideShow {
+  position: relative;
+
+  width: 100%;
+  overflow-x: hidden;
+
+  &:hover {
+    .left {
+      transform: translateX(15px);
+    }
+
+    .right {
+      transform: translateX(-15px);
+    }
+  }
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+
+  transform: translateX(var(--slide-show-transform-translate-x));
+
+  transition: transform ease 0.15s 0s;
+
+  will-change: transform;
+}
+
+.item {
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.left,
+.right {
+  $transition: transform ease 0.15s 0s;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin: auto;
+  padding: 15px;
+
+  color: #fff;
+
+  border: 1px #111 solid;
+  border-radius: 50%;
+  transform: translateX(calc(-100% - 15px));
+
+  will-change: opacity, transform;
+
+  @include hover-default($transition);
+}
+
+.right {
+  right: 0;
+  left: auto;
+
+  transform: translateX(calc(100% + 15px));
+}

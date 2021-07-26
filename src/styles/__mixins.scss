@@ -40,12 +40,18 @@
   transition: opacity ease 0.3s 0s;
 }
 
-@mixin hover-default() {
-  transition: opacity ease 0.3s 0s;
+@mixin hover-default($transitionAdd: '') {
+  $transition: opacity ease 0.3s 0s;
+
+  transition: $transition;
 
   &:hover {
     cursor: pointer;
     opacity: 0.65;
+  }
+
+  @if $transitionAdd != '' {
+    $transition: #{$transitionAdd}, $transition;
   }
 }
 

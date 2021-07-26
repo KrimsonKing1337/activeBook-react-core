@@ -17,6 +17,8 @@ import { PageWrapper } from 'components/PageWrapper';
 import { Toggle } from 'components/Menu/components/Toggle';
 import { Modal } from 'components/Modal';
 
+import { SlideShow } from '../../components/SlideShow';
+
 export const EffectExamples = () => {
   const dispatch = useDispatch();
 
@@ -37,6 +39,9 @@ export const EffectExamples = () => {
 
   const [modalWithAnyIsActive, setModalWithAnyIsActive] = useState(false);
   const [buttonForModalWithAnyIsActive, setButtonForModalWithAnyIsActive] = useState(false);
+
+  const [modalWithSlideShowIsActive, setModalWithSlideShowIsActive] = useState(false);
+  const [buttonForModalWithSlideShowIsActive, setButtonForModalWithSlideShowIsActive] = useState(false);
 
   useEffect(() => {
     const singleSound = new Howl({
@@ -162,6 +167,20 @@ export const EffectExamples = () => {
 
     setModalWithAnyIsActive(true);
     setButtonForModalWithAnyIsActive(true);
+  };
+
+  const modalWithSlideShowIsActiveOnClose = () => {
+    setModalWithSlideShowIsActive(false);
+    setButtonForModalWithSlideShowIsActive(false);
+  };
+
+  const buttonForModalWithSlideShowClickHandler = (value: boolean) => {
+    if (!value) {
+      return;
+    }
+
+    setModalWithSlideShowIsActive(true);
+    setButtonForModalWithSlideShowIsActive(true);
   };
 
   return (
@@ -319,6 +338,23 @@ export const EffectExamples = () => {
           isActive={buttonForModalWithAnyIsActive}
           onClickOn={() => buttonForModalWithAnyClickHandler(true)}
           onClickOff={() => buttonForModalWithAnyClickHandler(false)}
+        />
+
+        <Modal onClose={modalWithSlideShowIsActiveOnClose} isOpen={modalWithSlideShowIsActive} isMediaMode={false}>
+          <SlideShow>
+            <img src="/assets/img/1.jpg" alt="" />
+            <img src="/assets/img/2.jpg" alt="" />
+            <img src="/assets/img/3.jpg" alt="" />
+            <img src="/assets/img/4.jpg" alt="" />
+          </SlideShow>
+        </Modal>
+
+        <Toggle
+          label={'Модалка со слайдшоу'}
+          isActiveDefault={false}
+          isActive={buttonForModalWithSlideShowIsActive}
+          onClickOn={() => buttonForModalWithSlideShowClickHandler(true)}
+          onClickOff={() => buttonForModalWithSlideShowClickHandler(false)}
         />
       </div>
     </PageWrapper>

@@ -14,6 +14,7 @@ module.exports = {
         'ignorePseudoClasses': ['global']
       }
     ],
+    'no-descending-specificity': null,
     'declaration-empty-line-before': null,
     'at-rule-no-unknown': null,
     'scss/at-rule-no-unknown': true,
