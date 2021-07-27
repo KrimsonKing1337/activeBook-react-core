@@ -35,7 +35,7 @@ $halfAppWidth: $appWidth / 2;
   align-items: flex-start;
   justify-content: center;
   width: 90%;
-  max-width: 500px;
+  max-width: $appWidth;
   height: 90vh;
   margin: auto;
   overflow: auto;

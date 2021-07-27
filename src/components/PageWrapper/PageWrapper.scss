@@ -1,4 +1,5 @@
 @import "~styles/__mixins";
+@import "~styles/__variables.scss";
 
 .pageWrapper {
   position: relative;
@@ -29,7 +30,7 @@
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  max-width: 500px;
+  max-width: $appWidth;
   height: 100%;
   min-height: 100%;
   overflow: hidden;
@@ -45,7 +46,7 @@
     }
   }
 
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: $appWidth) {
     box-shadow: none;
   }
 }
