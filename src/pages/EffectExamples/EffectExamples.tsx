@@ -11,7 +11,7 @@ import {
   setMenuActiveState,
   setSideTextActiveState,
 } from 'store/effects/actions';
-import { setIsLoading } from 'store/main/actionsTypes';
+import { setIsLoading } from 'store/main/actions';
 
 import { PageWrapper } from 'components/PageWrapper';
 import { Toggle } from 'components/Menu/components/Toggle';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setBookmarkIsOpen, setMenuActiveState } from 'store/main/actionsTypes';
+import { setBookmarkIsOpen, setMenuActiveState } from 'store/main/actions';
 import { setFontSize } from 'store/config/actions';
 import { configSelectors } from 'store/config/reducer';
 

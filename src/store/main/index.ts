@@ -1,2 +1,2 @@
-export type { MainActionsTypes } from './actionsTypes';
+export type { MainActionsTypes } from './actions';
 export { mainReducer } from './reducer';

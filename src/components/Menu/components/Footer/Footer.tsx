@@ -3,14 +3,14 @@ import { useDispatch } from 'react-redux';
 
 import classNames from 'classnames';
 
-import { setMenuActiveState } from 'store/main/actionsTypes';
+import { setMenuActiveState } from 'store/main/actions';
 
 import styles from './Footer.scss';
 
 function getClassNames(className: string) {
   return classNames([
     styles.button,
-    className
+    className,
   ]);
 }
 

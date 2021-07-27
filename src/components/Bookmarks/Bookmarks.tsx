@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames';
 
 import { mainSelectors } from 'store/main/reducer';
-import { setBookmarkIsOpen } from 'store/main/actionsTypes';
+import { setBookmarkIsOpen } from 'store/main/actions';
 
 import { Header } from 'components/Header';
 import { Overflow } from 'components/Overflow';

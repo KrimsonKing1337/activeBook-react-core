@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { mainSelectors } from 'store/main/reducer';
-import { setMenuActiveState } from 'store/main/actionsTypes';
+import { setMenuActiveState } from 'store/main/actions';
 
 import { Header } from 'components/Header';
 import { Overflow } from 'components/Overflow';
