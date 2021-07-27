@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setFlashlight } from 'store/config/actionsTypes';
+import { setFlashlight } from 'store/config/actions';
 import { configSelectors } from 'store/config/reducer';
 
 import { Toggle } from '../Toggle';

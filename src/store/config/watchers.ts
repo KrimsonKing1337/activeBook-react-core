@@ -2,7 +2,7 @@ import { call, takeLatest } from 'redux-saga/effects';
 
 import { setThemeCss } from 'utils/setThemeCss';
 
-import { actionsTypes, SetAll, SetTheme } from './actionsTypes';
+import { actionsTypes, SetAll, SetTheme } from './actions';
 
 export function* watchConfigSetAll(action: SetAll) {
   const { payload } = action;

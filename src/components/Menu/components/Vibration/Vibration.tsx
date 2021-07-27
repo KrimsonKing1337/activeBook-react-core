@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setVibration } from 'store/config/actionsTypes';
+import { setVibration } from 'store/config/actions';
 import { configSelectors } from 'store/config/reducer';
 
 import { Toggle } from '../Toggle';

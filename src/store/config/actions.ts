@@ -94,7 +94,7 @@ export function setLineHeight(value: SetLineHeight['payload']): SetLineHeight {
   };
 }
 
-export type ConfigActionsTypes = SetAll
+export type ConfigActions = SetAll
   | SetTheme
   | SetVibration
   | SetFlashlight

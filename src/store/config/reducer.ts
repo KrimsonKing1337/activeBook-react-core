@@ -1,41 +1,41 @@
 import { RootState } from 'store';
 
-import { ConfigActionsTypes } from './actionsTypes';
+import { actionsTypes, ConfigActions } from './actions';
 import { ConfigState, initialState } from './initialState';
 
-export function configReducer(state = initialState, action: ConfigActionsTypes): ConfigState {
+export function configReducer(state = initialState, action: ConfigActions): ConfigState {
   switch (action.type) {
-  case 'SET_ALL_CONFIG':
+  case actionsTypes.SET_ALL_CONFIG:
     return action.payload;
-  case 'SET_THEME':
+  case actionsTypes.SET_THEME:
     return {
       ...state,
-      theme: action.payload
+      theme: action.payload,
     };
-  case 'SET_VIBRATION':
+  case actionsTypes.SET_VIBRATION:
     return {
       ...state,
-      vibration: action.payload
+      vibration: action.payload,
     };
-  case 'SET_FLASHLIGHT':
+  case actionsTypes.SET_FLASHLIGHT:
     return {
       ...state,
-      flashlight: action.payload
+      flashlight: action.payload,
     };
-  case 'SET_INVERSE_COLOR':
+  case actionsTypes.SET_INVERSE_COLOR:
     return {
       ...state,
-      inverseColor: action.payload
+      inverseColor: action.payload,
     };
-  case 'SET_FONT_SIZE':
+  case actionsTypes.SET_FONT_SIZE:
     return {
       ...state,
-      fontSize: action.payload
+      fontSize: action.payload,
     };
-  case 'SET_LINE_HEIGHT':
+  case actionsTypes.SET_LINE_HEIGHT:
     return {
       ...state,
-      lineHeight: action.payload
+      lineHeight: action.payload,
     };
   default:
     return state;

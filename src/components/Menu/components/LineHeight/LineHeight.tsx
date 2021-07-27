@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames';
 
 import { configSelectors } from 'store/config/reducer';
-import { setLineHeight } from 'store/config/actionsTypes';
+import { setLineHeight } from 'store/config/actions';
 
 import { getNewValueForNarrativeTextStyle } from 'utils/getNewValueForNarrativeTextStyle';
 
@@ -15,7 +15,7 @@ import styles from './LineHeight.scss';
 function getClassNames(className: string) {
   return classNames([
     styles.item,
-    className
+    className,
   ]);
 }
 

@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 import { configSelectors } from 'store/config/reducer';
-import { setTheme } from 'store/config/actionsTypes';
+import { setTheme } from 'store/config/actions';
 import { Theme } from 'store/config/initialState';
 
 import { Label } from '../Label';
@@ -31,7 +31,7 @@ function getClassNames(theme: Theme) {
 
   return classNames([
     styles.themesItem,
-    className
+    className,
   ]);
 }
 

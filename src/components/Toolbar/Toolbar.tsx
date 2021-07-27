@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { setBookmarkIsOpen, setMenuActiveState } from 'store/main/actionsTypes';
-import { setFontSize } from 'store/config/actionsTypes';
+import { setFontSize } from 'store/config/actions';
 import { configSelectors } from 'store/config/reducer';
 
 import BookmarkIcon from 'assets/img/toolbar/i-bookmark.svg';

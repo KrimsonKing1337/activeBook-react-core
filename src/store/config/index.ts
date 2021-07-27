@@ -1,3 +1,3 @@
-export type { ConfigActionsTypes } from './actionsTypes';
+export type { ConfigActions } from './actions';
 export { configReducer } from './reducer';
-export { watchConfigActions } from './sagas';
+export { watchConfigActions } from './watchers';

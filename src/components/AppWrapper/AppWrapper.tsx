@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames';
 
 import { setAll as setAllVolume } from 'store/volume/actionsTypes';
-import { setAll as setAllConfig } from 'store/config/actionsTypes';
+import { setAll as setAllConfig } from 'store/config/actions';
 import { volumeSelectors } from 'store/volume/reducer';
 import { configSelectors } from 'store/config/reducer';
 import { mainSelectors } from 'store/main/reducer';
