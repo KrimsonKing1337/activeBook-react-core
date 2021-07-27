@@ -5,11 +5,11 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './Item.scss';
 
-export type ItemPropsType = {
+export type ItemProps = {
   pageNumber: string;
 };
 
-export const Item = ({ pageNumber }: ItemPropsType) => {
+export const Item = ({ pageNumber }: ItemProps) => {
   return (
     <div className={styles.item}>
       <div className={styles.pageNumber}>

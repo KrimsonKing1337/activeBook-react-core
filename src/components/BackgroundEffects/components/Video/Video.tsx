@@ -1,11 +1,11 @@
 import React from 'react';
 
-type VideoPropsType = {
+type VideoProps = {
   className: string;
   src: string;
 };
 
-export const Video = ({ className, src }: VideoPropsType) => {
+export const Video = ({ className, src }: VideoProps) => {
   return (
     <div className={className}>
       <video autoPlay loop muted src={src} />

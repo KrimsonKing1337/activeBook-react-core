@@ -1,11 +1,11 @@
 import React from 'react';
 
-type ImgPropsType = {
+type ImgProps = {
   className: string;
   src: string;
 };
 
-export const Img = ({ className, src }: ImgPropsType) => {
+export const Img = ({ className, src }: ImgProps) => {
   return (
     <div className={className}>
       <img src={src} alt="" />

@@ -9,11 +9,11 @@ import { setBookmarkIsOpen } from 'store/main/actions';
 import { Header } from 'components/Header';
 import { Overflow } from 'components/Overflow';
 
-import { Item, ItemPropsType } from './Item';
+import { Item, ItemProps } from './Item';
 
 import styles from './Bookmarks.scss';
 
-const items: ItemPropsType[] = [
+const items: ItemProps[] = [
   {
     pageNumber: '1',
   },

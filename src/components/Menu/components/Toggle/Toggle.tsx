@@ -8,7 +8,7 @@ import styles from './Toggle.scss';
 
 type Func = () => void;
 
-export type TogglePropsType = {
+export type ToggleProps = {
   label: string;
   isActiveDefault?: boolean;
   isActive?: boolean | undefined;
@@ -16,7 +16,7 @@ export type TogglePropsType = {
   onClickOff: Func;
 };
 
-export const Toggle = ({ label, isActiveDefault = true, isActive, onClickOn, onClickOff }: TogglePropsType) => {
+export const Toggle = ({ label, isActiveDefault = true, isActive, onClickOn, onClickOff }: ToggleProps) => {
   const [uncontrolledIsActive, setUncontrolledIsActive] = useState(isActiveDefault);
 
   const buttonClickHandler = (value: boolean, cb: Func) => {

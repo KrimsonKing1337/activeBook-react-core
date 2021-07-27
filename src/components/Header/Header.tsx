@@ -2,11 +2,11 @@ import React from 'react';
 
 import styles from './Header.scss';
 
-export type HeaderPropsType = {
+export type HeaderProps = {
   label: string;
 };
 
-export const Header = ({ label }: HeaderPropsType) => {
+export const Header = ({ label }: HeaderProps) => {
   return (
     <>
       <div className={styles.header}>
