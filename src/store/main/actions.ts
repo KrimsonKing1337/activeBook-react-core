@@ -42,4 +42,4 @@ export function setIsLoading(value: SetIsLoadingAction['payload']): SetIsLoading
   };
 }
 
-export type MainActionsTypes = SetMenuIsOpenAction | SetBookmarksIsOpenAction | SetIsLoadingAction;
+export type MainActions = SetMenuIsOpenAction | SetBookmarksIsOpenAction | SetIsLoadingAction;

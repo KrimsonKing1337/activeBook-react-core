@@ -1,9 +1,9 @@
 import { RootState } from 'store';
 
-import { actionsTypes, MainActionsTypes } from './actions';
+import { actionsTypes, MainActions } from './actions';
 import { initialState, MainState } from './initialState';
 
-export function mainReducer(state = initialState, action: MainActionsTypes): MainState {
+export function mainReducer(state = initialState, action: MainActions): MainState {
   switch (action.type) {
   case actionsTypes.SET_MENU_ACTIVE_STATE:
     return {

@@ -55,4 +55,4 @@ export function setOther(value: SetOther['payload']): SetOther {
   };
 }
 
-export type VolumeActionsTypes = SetAll | SetCommon | SetBg | SetOther;
+export type VolumeActions = SetAll | SetCommon | SetBg | SetOther;

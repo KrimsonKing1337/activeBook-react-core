@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { volumeSelectors } from 'store/volume/reducer';
-import { setBg, setCommon, setOther } from 'store/volume/actionsTypes';
+import { setBg, setCommon, setOther } from 'store/volume/actions';
 
 import { Label } from '../Label';
 

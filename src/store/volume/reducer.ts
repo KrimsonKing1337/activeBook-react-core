@@ -1,29 +1,29 @@
 import { RootState } from 'store';
 
-import { VolumeActionsTypes } from './actionsTypes';
+import { actionsTypes, VolumeActions } from './actions';
 import { initialState, VolumeState } from './initialState';
 
-export function volumeReducer(state = initialState, action: VolumeActionsTypes): VolumeState {
+export function volumeReducer(state = initialState, action: VolumeActions): VolumeState {
   switch (action.type) {
-  case 'SET_ALL': {
+  case actionsTypes.SET_ALL: {
     return action.payload;
   }
-  case 'SET_COMMON': {
+  case actionsTypes.SET_COMMON: {
     return {
       ...state,
-      common: action.payload
+      common: action.payload,
     };
   }
-  case 'SET_BG': {
+  case actionsTypes.SET_BG: {
     return {
       ...state,
-      bg: action.payload
+      bg: action.payload,
     };
   }
-  case 'SET_OTHER': {
+  case actionsTypes.SET_OTHER: {
     return {
       ...state,
-      other: action.payload
+      other: action.payload,
     };
   }
   default:
