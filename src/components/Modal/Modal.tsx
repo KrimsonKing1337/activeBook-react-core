@@ -33,14 +33,14 @@ export const Modal = ({ children, onClose, isOpen, isMediaMode = true }: ModalPr
     [styles.isMediaMode]: isMediaMode,
   });
 
-  const toolbarClassNames = classNames({
-    [styles.toolbar]: true,
-    [styles.isMediaMode]: isMediaMode,
-  });
-
   const iconExpandClassNames = classNames({
     [styles.iconExpand]: true,
     [styles.isFullScreen]: isFullScreen,
+    [styles.isMediaMode]: isMediaMode,
+  });
+
+  const iconCloseClassNames = classNames({
+    [styles.iconClose]: true,
     [styles.isMediaMode]: isMediaMode,
   });
 
@@ -64,8 +64,8 @@ export const Modal = ({ children, onClose, isOpen, isMediaMode = true }: ModalPr
     <div className={overflowClassNames} onClick={overflowClickHandler}>
       <div className={modalClassNames}>
         <div className={styles.wrapper} onClick={(e) => e.stopPropagation()}>
-          <div className={toolbarClassNames}>
-            <div className={styles.iconClose} onClick={closeIconClickHandler}>
+          <div className={'modalToolbar'}>
+            <div className={iconCloseClassNames} onClick={closeIconClickHandler}>
               <FontAwesomeIcon icon={faTimes} />
             </div>
 

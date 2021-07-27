@@ -1,6 +1,7 @@
 @import "~styles/__mixins.scss";
+@import "~styles/__variables.scss";
 
-$halfAppWidth: 250px;
+$halfAppWidth: $appWidth / 2;
 
 .wrapper {
   overflow-x: hidden;
