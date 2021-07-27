@@ -10,7 +10,7 @@ import {
   setInverseColorActiveState,
   setMenuActiveState,
   setSideTextActiveState,
-} from 'store/effects/actionsTypes';
+} from 'store/effects/actions';
 import { setIsLoading } from 'store/main/actionsTypes';
 
 import { PageWrapper } from 'components/PageWrapper';

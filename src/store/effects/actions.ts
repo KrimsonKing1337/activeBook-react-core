@@ -81,7 +81,7 @@ export function setDotsActiveState(value: SetDotsActiveState['payload']): SetDot
   };
 }
 
-export type EffectsActionsTypes = SetSideShadowActiveState
+export type EffectsActions = SetSideShadowActiveState
   | SetSideTextActiveState
   | SetBackgroundVideoActiveState
   | SetBackgroundImgActiveState
