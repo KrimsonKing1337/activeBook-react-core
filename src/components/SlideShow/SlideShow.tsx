@@ -19,10 +19,15 @@ export const SlideShow = ({ children, isVisible = true }: SlideShowType) => {
   const [isOverflow, setIsOverflow] = useState(false);
   const wrapperElement = useRef<HTMLDivElement>(null);
 
+  // сбрасываем состояние, если слайд-шоу скрывается (например, модалку закрыли)
   useEffect(() => {
-    if (!isVisible) {
-      setCssVariable('--slide-show-transform-translate-x', '0%');
+    if (isVisible) {
+      return;
     }
+
+    setSlideIndex(0);
+    setIsOverflow(false);
+    setCssVariable('--slide-show-transform-translate-x', '0%');
   }, [isVisible]);
 
   useEffect(() => {
@@ -59,7 +64,7 @@ export const SlideShow = ({ children, isVisible = true }: SlideShowType) => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.toolbar}>
+      <div className={'SlideShowToolbar'}>
         <div className={styles.left} onClick={() => clickHandler(false)}>
           <FontAwesomeIcon icon={faArrowLeft} />
         </div>

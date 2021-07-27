@@ -1,13 +1,19 @@
 @import "~styles/__mixins.scss";
 
+$halfAppWidth: 250px;
+
 .wrapper {
+  overflow-x: hidden;
+  // todo: проверить, что в других целевых браузерах стрелочки тоже скрываются
+  transform: translateZ(0);
+
   &:hover {
     .left {
-      transform: translateX(15px);
+      transform: translateX(calc(-#{$halfAppWidth} + 100%)) translateY(-50%);
     }
 
     .right {
-      transform: translateX(-15px);
+      transform: translateX(calc(#{$halfAppWidth} - 100%)) translateY(-50%);
     }
   }
 }
@@ -20,11 +26,10 @@
   justify-content: flex-start;
 
   width: 100%;
-  height: 90vh; // todo: это только для модалки, сделать слайд шоу независимым от модалки
+  // todo: height: 90vh - это только для модалки, сделать слайд шоу независимым от модалки
+  height: 90vh;
   overflow-x: hidden;
   overflow-y: auto;
-
-  transform: translate3d(0, 0, 0);
 
   &.isOverflow {
     align-items: flex-start;
@@ -55,7 +60,11 @@
   }
 }
 
-.toolbar {
+// позиционируем элементы ровно посередине
+.left,
+.right {
+  $transition: transform ease 0.15s 0s;
+
   position: fixed;
   top: 50%;
   right: 0;
@@ -64,38 +73,29 @@
 
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  max-width: 500px;
-  margin: auto;
-  overflow: hidden;
-
-  transform: translateY(-50%);
-}
-
-.left,
-.right {
-  $transition: transform ease 0.15s 0s;
-
-  display: flex;
-  align-items: center;
   justify-content: center;
   width: 40px;
   height: 40px;
+  margin: auto;
   padding: 15px;
 
   color: #fff;
 
   border: 1px #111 solid;
   border-radius: 50%;
-  transform: translateX(calc(-100% - 15px));
 
   will-change: opacity, transform;
 
   @include hover-default($transition);
 }
 
-.right {
-  margin-left: auto;
+// двигаем элементы по горизонтали на 250px
+// 250px - это половина ширины контейнера приложения
 
-  transform: translateX(calc(100% + 15px));
+.left {
+  transform: translateX(calc(-#{$halfAppWidth} - 100%)) translateY(-50%);
+}
+
+.right {
+  transform: translateX(calc(#{$halfAppWidth} + 100%)) translateY(-50%);
 }
