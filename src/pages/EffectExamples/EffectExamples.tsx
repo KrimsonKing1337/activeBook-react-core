@@ -16,6 +16,7 @@ import { setIsLoading } from 'store/main/actions';
 import { PageWrapper } from 'components/PageWrapper';
 import { Toggle } from 'components/Menu/components/Toggle';
 import { Modal } from 'components/Modal';
+import { Spoiler } from 'components/Spoiler';
 
 import { SlideShow } from '../../components/SlideShow';
 import { ModalDialog } from '../../components/ModalDialog';
@@ -444,6 +445,13 @@ export const EffectExamples = () => {
           onClickOn={() => buttonForModalWithConfirmClickHandler(true)}
           onClickOff={() => buttonForModalWithConfirmClickHandler(false)}
         />
+
+        <Spoiler style={{ marginTop: '15px' }}>
+          Значимость этих проблем настолько очевидна, что постоянный количественный рост и сфера нашей активности
+          позволяет оценить значение существенных финансовых и административных условий.
+          С другой стороны начало повседневной работы по формированию позиции требуют определения и уточнения
+          существенных финансовых и административных условий.
+        </Spoiler>
       </div>
     </PageWrapper>
   );
