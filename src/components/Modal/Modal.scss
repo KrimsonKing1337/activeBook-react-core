@@ -34,9 +34,9 @@ $halfAppWidth: $appWidth / 2;
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  width: 90%;
+  width: $modalWidth;
   max-width: $appWidth;
-  height: 90vh;
+  height: $modalHeight;
   margin: auto;
   overflow: auto;
 

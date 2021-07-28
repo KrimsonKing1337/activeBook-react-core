@@ -6,29 +6,22 @@ import classNames from 'classnames';
 
 import styles from './Modal.scss';
 
-type Func = () => void;
-
-type ModalMode = 'media' | 'dialog' | null;
+type ModalMode = 'media' |  null;
 
 export type ModalProps = {
   children: React.ReactNode;
   isOpen: boolean;
   mode?: ModalMode;
-  onClose: Func;
-  onDialogOk?: Func;
-  onDialogCancel?: Func;
+  onClose: () => void;
 };
 
 export const Modal = ({
   children,
   onClose,
-  onDialogOk = () => {},
-  onDialogCancel = () => {},
   isOpen,
   mode = null,
 }: ModalProps) => {
   const isMediaMode = mode === 'media';
-  const isDialogMode = mode === 'dialog';
 
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [isCrop, setIsCrop] = useState(true);
@@ -37,9 +30,6 @@ export const Modal = ({
 
   const closeIconClickHandler = () => close();
   const overflowClickHandler = () => close();
-
-  const buttonOkClickHandler = () => onDialogOk();
-  const buttonCancelClickHandler = () => onDialogCancel();
 
   const overflowClassNames = classNames({
     [styles.overflow]: true,
@@ -104,18 +94,6 @@ export const Modal = ({
           <div className={contentClassNames}>
             { children }
           </div>
-
-          {isDialogMode && (
-            <div className={styles.confirm}>
-              <button type="button" onClick={buttonOkClickHandler}>
-                Ок
-              </button>
-
-              <button type="button" onClick={buttonCancelClickHandler}>
-                Отмена
-              </button>
-            </div>
-          )}
         </div>
       </div>
     </div>

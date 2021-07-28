@@ -18,6 +18,7 @@ import { Toggle } from 'components/Menu/components/Toggle';
 import { Modal } from 'components/Modal';
 
 import { SlideShow } from '../../components/SlideShow';
+import { ModalDialog } from '../../components/ModalDialog';
 
 export const EffectExamples = () => {
   const dispatch = useDispatch();
@@ -425,17 +426,16 @@ export const EffectExamples = () => {
           onClickOff={() => buttonForModalWithSlideShowWithAnyClickHandler(false)}
         />
 
-        <Modal
-          mode={'dialog'}
+        <ModalDialog
           onClose={modalWithConformIsActiveOnClose}
           isOpen={modalWithConfirmIsActive}
-          onDialogOk={modalWithConformIsActiveOnClose}
-          onDialogCancel={modalWithConformIsActiveOnClose}
+          onConfirm={modalWithConformIsActiveOnClose}
+          onCancel={modalWithConformIsActiveOnClose}
         >
           <div>
             Вы действительно хотите сделать действие?
           </div>
-        </Modal>
+        </ModalDialog>
 
         <Toggle
           label={'Модалка с диалогом'}

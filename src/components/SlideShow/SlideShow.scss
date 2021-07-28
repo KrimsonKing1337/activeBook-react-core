@@ -28,7 +28,7 @@ $halfAppWidth: $appWidth / 2;
 
   width: 100%;
   // todo: height: 90vh - это только для модалки, сделать слайд шоу независимым от модалки
-  height: 90vh;
+  height: $modalHeight;
   overflow-x: hidden;
   overflow-y: auto;
 
