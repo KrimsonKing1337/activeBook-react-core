@@ -53,6 +53,8 @@ export const EffectExamples = () => {
   const [modalWithConfirmIsActive, setModalWithConfirmIsActive] = useState(false);
   const [buttonForModalWithConfirmIsActive, setButtonForModalWithConfirmIsActive] = useState(false);
 
+  const [needToSetHeightForSpoilerWithSlider, setNeedToSetHeightForSpoilerWithSlider] = useState(false);
+
   useEffect(() => {
     const singleSound = new Howl({
       src: ['assets/audios/single.mp3'],
@@ -379,7 +381,7 @@ export const EffectExamples = () => {
         />
 
         <Modal onClose={modalWithSlideShowIsActiveOnClose} isOpen={modalWithSlideShowIsActive}>
-          <SlideShow isVisible={modalWithSlideShowIsActive}>
+          <SlideShow isVisible={modalWithSlideShowIsActive} mode={'modal'}>
             <img src="/assets/img/1.jpg" alt="" />
             <img src="/assets/img/2.jpg" alt="" />
             <img src="/assets/img/3.jpg" alt="" />
@@ -396,7 +398,7 @@ export const EffectExamples = () => {
         />
 
         <Modal onClose={modalWithSlideShowWithAnyIsActiveOnClose} isOpen={modalWithSlideShowWithAnyIsActive}>
-          <SlideShow isVisible={modalWithSlideShowWithAnyIsActive}>
+          <SlideShow isVisible={modalWithSlideShowWithAnyIsActive} mode={'modal'}>
             <img src="/assets/img/1.jpg" alt="" />
 
             <div>
@@ -456,6 +458,57 @@ export const EffectExamples = () => {
             позволяет оценить значение существенных финансовых и административных условий.
             С другой стороны начало повседневной работы по формированию позиции требуют определения и уточнения
             существенных финансовых и административных условий.
+          </Spoiler>
+        </div>
+
+        <div className={styles.item}>
+          <Label label={'Спойлер со слайдшоу'} />
+
+          <Spoiler
+            needToSetHeight={needToSetHeightForSpoilerWithSlider}
+            setNeedToSetHeightToFalse={() => setNeedToSetHeightForSpoilerWithSlider(false)}
+            style={{ marginTop: '10px' }}
+          >
+            <SlideShow isWithoutBorders={true} onSlideChange={() => setNeedToSetHeightForSpoilerWithSlider(true)}>
+              <img src="/assets/img/1.jpg" alt="" />
+              <img src="/assets/img/2.jpg" alt="" />
+              <img src="/assets/img/3.jpg" alt="" />
+              <img src="/assets/img/4.jpg" alt="" />
+            </SlideShow>
+          </Spoiler>
+        </div>
+
+        <div className={styles.item}>
+          <Label label={'Спойлер со слайдшоу со смешнным содержимым'} />
+
+          <Spoiler
+            needToSetHeight={needToSetHeightForSpoilerWithSlider}
+            setNeedToSetHeightToFalse={() => setNeedToSetHeightForSpoilerWithSlider(false)}
+            style={{ marginTop: '10px' }}
+          >
+            <SlideShow onSlideChange={() => setNeedToSetHeightForSpoilerWithSlider(true)}>
+              <img src="/assets/img/1.jpg" alt="" />
+
+              <div>
+                <img src="/assets/img/cinemagraph.gif" alt="" />
+
+                Товарищи! начало повседневной работы по формированию позиции играет важную роль в формировании систем
+                массового участия. С другой стороны дальнейшее развитие различных форм деятельности играет важную роль в
+                формировании модели развития. С другой стороны новая модель организационной деятельности представляет собой
+                интересный эксперимент проверки соответствующий условий активизации. Не следует, однако забывать, что начало
+                повседневной работы по формированию позиции играет важную роль в формировании новых предложений.
+
+                Не следует, однако забывать, что постоянный количественный рост и сфера нашей активности позволяет выполнять
+                важные задания по разработке дальнейших направлений развития. Таким образом постоянный количественный рост и
+                сфера нашей активности способствует подготовки и реализации существенных финансовых и административных
+                условий. Задача организации, в особенности же новая модель организационной деятельности влечет за собой
+                процесс внедрения и модернизации дальнейших направлений развития. Идейные соображения высшего порядка, а
+                также постоянный количественный рост и сфера нашей активности позволяет выполнять важные задания по
+                разработке форм развития.
+              </div>
+
+              <video src="/assets/videos/TV_static-2.mp4" loop autoPlay muted />
+            </SlideShow>
           </Spoiler>
         </div>
       </div>

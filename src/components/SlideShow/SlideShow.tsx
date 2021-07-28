@@ -8,16 +8,28 @@ import { setCssVariable } from 'utils/setCssVariable';
 
 import styles from './SlideShow.scss';
 
+type SlideShowMode = 'modal' | null;
+
 export type SlideShowType = {
   children: React.ReactNode;
   isVisible?: boolean;
+  isWithoutBorders?: boolean,
+  mode?: SlideShowMode;
+  onSlideChange?: () => void;
 }
 
-export const SlideShow = ({ children, isVisible = true }: SlideShowType) => {
+export const SlideShow = ({
+  children,
+  isVisible = true,
+  mode = null,
+  isWithoutBorders = false,
+  onSlideChange = () => {},
+}: SlideShowType) => {
   const childrenAsArray = React.Children.toArray(children);
   const [slideIndex, setSlideIndex] = useState(0);
   const [isOverflow, setIsOverflow] = useState(false);
-  const wrapperElement = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const isModalMode = mode === 'modal';
 
   // сбрасываем состояние, если слайд-шоу скрывается (например, модалку закрыли)
   useEffect(() => {
@@ -31,10 +43,10 @@ export const SlideShow = ({ children, isVisible = true }: SlideShowType) => {
   }, [isVisible]);
 
   useEffect(() => {
-    const wrapperEl = wrapperElement?.current;
+    const wrapperElement = wrapperRef?.current;
 
-    if (wrapperEl) {
-      const isOverflow = wrapperEl.offsetHeight > window.innerHeight;
+    if (wrapperElement) {
+      const isOverflow = wrapperElement.offsetHeight > window.innerHeight;
 
       setIsOverflow(isOverflow);
     }
@@ -55,27 +67,45 @@ export const SlideShow = ({ children, isVisible = true }: SlideShowType) => {
     const newValue = Math.abs(nextIndex * 100);
 
     setCssVariable('--slide-show-transform-translate-x', `-${newValue}%`);
+
+    onSlideChange();
   };
+
+  const wrapperClassNames = classNames({
+    [styles.wrapper]: true,
+    [styles.isWithoutBorders]: isWithoutBorders || isModalMode,
+  });
 
   const slideShowClassNames = classNames({
     [styles.slideShow]: true,
     [styles.isOverflow]: isOverflow,
+    [styles.isModalMode]: isModalMode,
+  });
+
+  const leftArrowClassNames = classNames({
+    [styles.left]: true,
+    [styles.isModalMode]: isModalMode,
+  });
+
+  const rightArrowClassNames = classNames({
+    [styles.right]: true,
+    [styles.isModalMode]: isModalMode,
   });
 
   return (
-    <div className={styles.wrapper}>
+    <div className={wrapperClassNames}>
       <div className={'SlideShowToolbar'}>
-        <div className={styles.left} onClick={() => clickHandler(false)}>
+        <div className={leftArrowClassNames} onClick={() => clickHandler(false)}>
           <FontAwesomeIcon icon={faArrowLeft} />
         </div>
 
-        <div className={styles.right} onClick={() => clickHandler(true)}>
+        <div className={rightArrowClassNames} onClick={() => clickHandler(true)}>
           <FontAwesomeIcon icon={faArrowRight} />
         </div>
       </div>
 
       <div className={slideShowClassNames}>
-        <div ref={wrapperElement} className={styles.itemsWrapper}>
+        <div ref={wrapperRef} className={styles.itemsWrapper}>
           {childrenAsArray.map((childCur, index) => {
             const itemClassNames = classNames({
               [styles.item]: true,
