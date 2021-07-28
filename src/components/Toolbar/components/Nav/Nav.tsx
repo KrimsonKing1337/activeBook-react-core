@@ -10,12 +10,12 @@ import { Item } from 'components/Toolbar/components/Item';
 import styles from './Nav.scss';
 
 export const Nav = () => {
-  const inputElement = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const [goToWithInputIsHide, setGoToWithInputIsHide] = useState(true);
   const [inputValue, setInputValue] = useState('');
 
   useEffect(() => {
-    inputElement.current?.focus();
+    inputRef.current?.focus();
   });
 
   function pageNumberClickHandler() {
@@ -36,12 +36,12 @@ export const Nav = () => {
 
   const goToWithArrowsClassNames = classNames({
     [styles.goToWithArrows]: true,
-    [styles.isHide]: !goToWithInputIsHide
+    [styles.isHide]: !goToWithInputIsHide,
   });
 
   const goToWithInputClassNames = classNames({
     [styles.goToWithInput]: true,
-    [styles.isHide]: goToWithInputIsHide
+    [styles.isHide]: goToWithInputIsHide,
   });
 
   /**
@@ -73,7 +73,7 @@ export const Nav = () => {
       <div className={goToWithInputClassNames}>
         <div className={styles.wrapperInput}>
           <input
-            ref={inputElement}
+            ref={inputRef}
             onChange={inputChangeHandler}
             onBlur={inputBlurHandler}
             className={styles.input}

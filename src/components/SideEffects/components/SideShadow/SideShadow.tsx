@@ -5,10 +5,10 @@ import { setCssVariable } from 'utils/setCssVariable';
 import styles from './SideShadow.scss';
 
 export const SideShadow = () => {
-  const sideShadow = useRef<HTMLDivElement>(null);
+  const sideShadowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const sideShadowElement = sideShadow.current;
+    const sideShadowElement = sideShadowRef.current;
 
     let shadowColor = 'red';
 
@@ -30,6 +30,6 @@ export const SideShadow = () => {
   }, []);
 
   return (
-    <div ref={sideShadow} className={styles.sideShadow} />
+    <div ref={sideShadowRef} className={styles.sideShadow} />
   );
 };
