@@ -73,7 +73,7 @@ $halfAppWidth: $appWidth / 2;
   display: flex;
   align-items: center;
 
-  transform: translateX(var(--slide-show-transform-translate-x));
+  transform: translateX(0%);
 
   transition: transform ease 0.15s 0s;
 

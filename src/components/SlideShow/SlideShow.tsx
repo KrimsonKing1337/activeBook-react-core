@@ -4,8 +4,6 @@ import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
-import { setCssVariable } from 'utils/setCssVariable';
-
 import styles from './SlideShow.scss';
 
 type SlideShowMode = 'modal' | null;
@@ -28,8 +26,18 @@ export const SlideShow = ({
   const childrenAsArray = React.Children.toArray(children);
   const [slideIndex, setSlideIndex] = useState(0);
   const [isOverflow, setIsOverflow] = useState(false);
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const itemsWrapperRef = useRef<HTMLDivElement>(null);
   const isModalMode = mode === 'modal';
+
+  const setSlideShowTransformTranslateX = (value: string) => {
+    const itemsWrapperElement = itemsWrapperRef?.current;
+
+    if (!itemsWrapperElement) {
+      return;
+    }
+
+    itemsWrapperElement.style.transform = `translateX(${value})`;
+  };
 
   // сбрасываем состояние, если слайд-шоу скрывается (например, модалку закрыли)
   useEffect(() => {
@@ -39,17 +47,19 @@ export const SlideShow = ({
 
     setSlideIndex(0);
     setIsOverflow(false);
-    setCssVariable('--slide-show-transform-translate-x', '0%');
+    setSlideShowTransformTranslateX('0%');
   }, [isVisible]);
 
   useEffect(() => {
-    const wrapperElement = wrapperRef?.current;
+    const itemsWrapperElement = itemsWrapperRef?.current;
 
-    if (wrapperElement) {
-      const isOverflow = wrapperElement.offsetHeight > window.innerHeight;
-
-      setIsOverflow(isOverflow);
+    if (!itemsWrapperElement) {
+      return;
     }
+
+    const isOverflow = itemsWrapperElement.offsetHeight > window.innerHeight;
+
+    setIsOverflow(isOverflow);
   }, [slideIndex]);
 
   const clickHandler = (isNext: boolean) => {
@@ -66,7 +76,7 @@ export const SlideShow = ({
 
     const newValue = Math.abs(nextIndex * 100);
 
-    setCssVariable('--slide-show-transform-translate-x', `-${newValue}%`);
+    setSlideShowTransformTranslateX(`-${newValue}%`);
 
     onSlideChange();
   };
@@ -105,7 +115,7 @@ export const SlideShow = ({
       </div>
 
       <div className={slideShowClassNames}>
-        <div ref={wrapperRef} className={styles.itemsWrapper}>
+        <div ref={itemsWrapperRef} className={styles.itemsWrapper}>
           {childrenAsArray.map((childCur, index) => {
             const itemClassNames = classNames({
               [styles.item]: true,
