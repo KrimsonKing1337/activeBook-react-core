@@ -6,10 +6,12 @@ import { store } from 'store';
 import { AppWrapper } from 'components/AppWrapper';
 
 import { addTouchSupportForCssHover } from 'utils/touch/addTouchSupportForCssHover';
+import { hideAddressBarInMobileDevices } from 'utils/hideAddressBarInMobileDevices';
 
 export const App = () => {
   useEffect(() => {
     addTouchSupportForCssHover();
+    hideAddressBarInMobileDevices();
   }, []);
 
   return (
