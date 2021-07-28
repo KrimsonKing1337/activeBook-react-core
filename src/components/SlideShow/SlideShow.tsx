@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useSwipeable } from 'react-swipeable';
 
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -26,6 +27,7 @@ export const SlideShow = ({
   const childrenAsArray = React.Children.toArray(children);
   const [slideIndex, setSlideIndex] = useState(0);
   const [isOverflow, setIsOverflow] = useState(false);
+  const [arrowsAreVisible, setArrowsAreVisible] = useState(true);
   const itemsWrapperRef = useRef<HTMLDivElement>(null);
   const isModalMode = mode === 'modal';
 
@@ -62,7 +64,7 @@ export const SlideShow = ({
     setIsOverflow(isOverflow);
   }, [slideIndex]);
 
-  const clickHandler = (isNext: boolean) => {
+  const changeSlide = (isNext: boolean) => {
     let nextIndex = isNext ? slideIndex + 1 : slideIndex - 1;
     const lastIndex = childrenAsArray.length - 1;
 
@@ -81,8 +83,25 @@ export const SlideShow = ({
     onSlideChange();
   };
 
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: () => changeSlide(true),
+    onSwipedRight: () => changeSlide(false),
+    delta: 100,
+  });
+
+  const wrapperClickHandler = () => {
+    setArrowsAreVisible(!arrowsAreVisible);
+  };
+
+  const arrowClickHandler = (e: React.MouseEvent, isNext: boolean) => {
+    e.stopPropagation();
+
+    changeSlide(isNext);
+  };
+
   const wrapperClassNames = classNames({
     [styles.wrapper]: true,
+    [styles.arrowsAreVisible]: arrowsAreVisible,
     [styles.isWithoutBorders]: isWithoutBorders || isModalMode,
   });
 
@@ -92,24 +111,14 @@ export const SlideShow = ({
     [styles.isModalMode]: isModalMode,
   });
 
-  const leftArrowClassNames = classNames({
-    [styles.left]: true,
-    [styles.isModalMode]: isModalMode,
-  });
-
-  const rightArrowClassNames = classNames({
-    [styles.right]: true,
-    [styles.isModalMode]: isModalMode,
-  });
-
   return (
-    <div className={wrapperClassNames}>
+    <div className={wrapperClassNames} onClick={wrapperClickHandler} {...swipeHandlers}>
       <div className={'SlideShowToolbar'}>
-        <div className={leftArrowClassNames} onClick={() => clickHandler(false)}>
+        <div className={styles.left} onClick={(e) => arrowClickHandler(e,false)}>
           <FontAwesomeIcon icon={faArrowLeft} />
         </div>
 
-        <div className={rightArrowClassNames} onClick={() => clickHandler(true)}>
+        <div className={styles.right} onClick={(e) => arrowClickHandler(e,true)}>
           <FontAwesomeIcon icon={faArrowRight} />
         </div>
       </div>

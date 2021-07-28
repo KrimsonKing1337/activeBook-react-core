@@ -1,18 +1,6 @@
 @import "~styles/__mixins.scss";
 @import "~styles/__variables.scss";
 
-$halfAppWidth: $appWidth / 2;
-
-@mixin arrowTransform($arrowDirection, $shiftValue) {
-  @if ($arrowDirection == 'left') {
-    transform: translateX(calc(-#{$halfAppWidth} + #{$shiftValue})) translateY(-50%);
-  }
-
-  @else if ($arrowDirection == 'right') {
-    transform: translateX(calc(#{$halfAppWidth} + #{$shiftValue})) translateY(-50%);
-  }
-}
-
 .wrapper {
   padding: 10px;
   overflow-x: hidden;
@@ -21,21 +9,13 @@ $halfAppWidth: $appWidth / 2;
   // todo: проверить, что в других целевых браузерах стрелочки тоже скрываются
   transform: translateZ(0);
 
-  &:hover {
+  &.arrowsAreVisible {
     .left {
-      &.isModalMode {
-        @include arrowTransform('left', '100%');
-      }
-
-      @include arrowTransform('left', '100% + 15px');
+      margin-left: 5%;
     }
 
     .right {
-      &.isModalMode {
-        @include arrowTransform('right', '-100%');
-      }
-
-      @include arrowTransform('right', '-100% - 15px');
+      margin-right: 5%;
     }
   }
 
@@ -94,7 +74,7 @@ $halfAppWidth: $appWidth / 2;
 // позиционируем элементы ровно посередине
 .left,
 .right {
-  $transition: transform ease 0.15s 0s;
+  $transition: margin ease 0.15s 0s;
 
   position: fixed;
   top: 50%;
@@ -114,19 +94,17 @@ $halfAppWidth: $appWidth / 2;
 
   border: 1px #111 solid;
   border-radius: 50%;
+  transform: translateY(-50%);
 
   will-change: opacity, transform;
 
   @include hover-default($transition);
 }
 
-// двигаем элементы по горизонтали на 250px
-// 250px - это половина ширины контейнера приложения
-
 .left {
-  @include arrowTransform('left', '-100%');
+  margin-left: -25%;
 }
 
 .right {
-  @include arrowTransform('right', '100%');
+  margin-right: -25%;
 }
