@@ -160,3 +160,17 @@ $halfAppWidth: $appWidth / 2;
     }
   }
 }
+
+.confirm {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  button {
+    margin-left: 15px;
+
+    &:nth-child(1) {
+      margin-left: 0;
+    }
+  }
+}

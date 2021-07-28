@@ -46,6 +46,9 @@ export const EffectExamples = () => {
   const [modalWithSlideShowWithAnyIsActive, setModalWithSlideShowWithAnyIsActive] = useState(false);
   const [buttonForModalWithSlideShowWithAnyIsActive, setButtonForModalWithSlideShowWithAnyIsActive] = useState(false);
 
+  const [modalWithConfirmIsActive, setModalWithConfirmIsActive] = useState(false);
+  const [buttonForModalWithConfirmIsActive, setButtonForModalWithConfirmIsActive] = useState(false);
+
   useEffect(() => {
     const singleSound = new Howl({
       src: ['assets/audios/single.mp3'],
@@ -200,6 +203,20 @@ export const EffectExamples = () => {
     setButtonForModalWithSlideShowWithAnyIsActive(true);
   };
 
+  const modalWithConformIsActiveOnClose = () => {
+    setModalWithConfirmIsActive(false);
+    setButtonForModalWithConfirmIsActive(false);
+  };
+
+  const buttonForModalWithConfirmClickHandler = (value: boolean) => {
+    if (!value) {
+      return;
+    }
+
+    setModalWithConfirmIsActive(true);
+    setButtonForModalWithConfirmIsActive(true);
+  };
+
   return (
     <PageWrapper title={'Эффекты'} subtitle={'Здесь можно посмотреть все возможные эффекты'}>
       {/* Многострочный текст-рыба для проверки эффектов и изменений в настройках: */}
@@ -276,7 +293,7 @@ export const EffectExamples = () => {
           onClickOff={() => buttonForLoadingStateClickHandler(false)}
         />
 
-        <Modal onClose={modalWithImgIsActiveOnClose} isOpen={modalWithImgIsActive}>
+        <Modal onClose={modalWithImgIsActiveOnClose} isOpen={modalWithImgIsActive} mode={'media'}>
           <img src="/assets/img/cinemagraph.gif" alt="" />
         </Modal>
 
@@ -288,7 +305,7 @@ export const EffectExamples = () => {
           onClickOff={() => buttonForModalWithImgClickHandler(false)}
         />
 
-        <Modal onClose={modalWithVideoIsActiveOnClose} isOpen={modalWithVideoIsActive}>
+        <Modal onClose={modalWithVideoIsActiveOnClose} isOpen={modalWithVideoIsActive} mode={'media'}>
           { /* todo: видео плеер */}
           <video src="/assets/videos/TV_static-2.mp4" loop autoPlay muted />
         </Modal>
@@ -301,7 +318,7 @@ export const EffectExamples = () => {
           onClickOff={() => buttonForModalWithVideoClickHandler(false)}
         />
 
-        <Modal onClose={modalWithTextIsActiveOnClose} isOpen={modalWithTextIsActive} isMediaMode={false}>
+        <Modal onClose={modalWithTextIsActiveOnClose} isOpen={modalWithTextIsActive}>
           <div>
             Товарищи! начало повседневной работы по формированию позиции играет важную роль в формировании систем
             массового участия. С другой стороны дальнейшее развитие различных форм деятельности играет важную роль в
@@ -327,7 +344,7 @@ export const EffectExamples = () => {
           onClickOff={() => buttonForModalWithTextClickHandler(false)}
         />
 
-        <Modal onClose={modalWithAnyIsActiveOnClose} isOpen={modalWithAnyIsActive} isMediaMode={false}>
+        <Modal onClose={modalWithAnyIsActiveOnClose} isOpen={modalWithAnyIsActive}>
           <div>
             <img src="/assets/img/cinemagraph.gif" alt="" />
 
@@ -357,7 +374,7 @@ export const EffectExamples = () => {
           onClickOff={() => buttonForModalWithAnyClickHandler(false)}
         />
 
-        <Modal onClose={modalWithSlideShowIsActiveOnClose} isOpen={modalWithSlideShowIsActive} isMediaMode={false}>
+        <Modal onClose={modalWithSlideShowIsActiveOnClose} isOpen={modalWithSlideShowIsActive}>
           <SlideShow isVisible={modalWithSlideShowIsActive}>
             <img src="/assets/img/1.jpg" alt="" />
             <img src="/assets/img/2.jpg" alt="" />
@@ -374,7 +391,7 @@ export const EffectExamples = () => {
           onClickOff={() => buttonForModalWithSlideShowClickHandler(false)}
         />
 
-        <Modal onClose={modalWithSlideShowWithAnyIsActiveOnClose} isOpen={modalWithSlideShowWithAnyIsActive} isMediaMode={false}>
+        <Modal onClose={modalWithSlideShowWithAnyIsActiveOnClose} isOpen={modalWithSlideShowWithAnyIsActive}>
           <SlideShow isVisible={modalWithSlideShowWithAnyIsActive}>
             <img src="/assets/img/1.jpg" alt="" />
 
@@ -406,6 +423,26 @@ export const EffectExamples = () => {
           isActive={buttonForModalWithSlideShowWithAnyIsActive}
           onClickOn={() => buttonForModalWithSlideShowWithAnyClickHandler(true)}
           onClickOff={() => buttonForModalWithSlideShowWithAnyClickHandler(false)}
+        />
+
+        <Modal
+          mode={'dialog'}
+          onClose={modalWithConformIsActiveOnClose}
+          isOpen={modalWithConfirmIsActive}
+          onDialogOk={modalWithConformIsActiveOnClose}
+          onDialogCancel={modalWithConformIsActiveOnClose}
+        >
+          <div>
+            Вы действительно хотите сделать действие?
+          </div>
+        </Modal>
+
+        <Toggle
+          label={'Модалка с диалогом'}
+          isActiveDefault={false}
+          isActive={buttonForModalWithConfirmIsActive}
+          onClickOn={() => buttonForModalWithConfirmClickHandler(true)}
+          onClickOff={() => buttonForModalWithConfirmClickHandler(false)}
         />
       </div>
     </PageWrapper>
