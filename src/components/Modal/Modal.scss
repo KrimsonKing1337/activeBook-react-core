@@ -99,6 +99,10 @@ $halfAppWidth: $appWidth / 2;
 
   display: none;
 
+  &.isHidden {
+    display: none !important;
+  }
+
   &.isMediaMode {
     display: block;
 

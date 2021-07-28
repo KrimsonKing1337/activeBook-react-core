@@ -12,6 +12,7 @@ export type ModalProps = {
   children: React.ReactNode;
   isOpen: boolean;
   mode?: ModalMode;
+  hideExpandButton?: boolean;
   onClose: () => void;
 };
 
@@ -20,6 +21,7 @@ export const Modal = ({
   onClose,
   isOpen,
   mode = null,
+  hideExpandButton = false,
 }: ModalProps) => {
   const isMediaMode = mode === 'media';
 
@@ -46,6 +48,7 @@ export const Modal = ({
     [styles.iconExpand]: true,
     [styles.isFullScreen]: isFullScreen,
     [styles.isMediaMode]: isMediaMode,
+    [styles.isHidden]: hideExpandButton,
   });
 
   const iconCloseClassNames = classNames({

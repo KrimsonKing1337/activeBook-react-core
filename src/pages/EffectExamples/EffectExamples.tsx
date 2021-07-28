@@ -311,9 +311,13 @@ export const EffectExamples = () => {
           onClickOff={() => buttonForModalWithImgClickHandler(false)}
         />
 
-        <Modal onClose={modalWithVideoIsActiveOnClose} isOpen={modalWithVideoIsActive} mode={'media'}>
-          { /* todo: видео плеер */}
-          <video src="/assets/videos/TV_static-2.mp4" loop autoPlay muted />
+        <Modal
+          onClose={modalWithVideoIsActiveOnClose}
+          isOpen={modalWithVideoIsActive}
+          mode={'media'}
+          hideExpandButton={true}
+        >
+          <video src="/assets/videos/TV_static-2.mp4" loop autoPlay muted controls />
         </Modal>
 
         <Toggle
