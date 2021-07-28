@@ -17,9 +17,11 @@ import { PageWrapper } from 'components/PageWrapper';
 import { Toggle } from 'components/Menu/components/Toggle';
 import { Modal } from 'components/Modal';
 import { Spoiler } from 'components/Spoiler';
+import { Label } from 'components/Label';
+import { SlideShow } from 'components/SlideShow';
+import { ModalDialog } from 'components/ModalDialog';
 
-import { SlideShow } from '../../components/SlideShow';
-import { ModalDialog } from '../../components/ModalDialog';
+import styles from './EffectExamples.scss';
 
 export const EffectExamples = () => {
   const dispatch = useDispatch();
@@ -446,12 +448,16 @@ export const EffectExamples = () => {
           onClickOff={() => buttonForModalWithConfirmClickHandler(false)}
         />
 
-        <Spoiler style={{ marginTop: '15px' }}>
-          Значимость этих проблем настолько очевидна, что постоянный количественный рост и сфера нашей активности
-          позволяет оценить значение существенных финансовых и административных условий.
-          С другой стороны начало повседневной работы по формированию позиции требуют определения и уточнения
-          существенных финансовых и административных условий.
-        </Spoiler>
+        <div className={styles.item}>
+          <Label label={'Спойлер'} />
+
+          <Spoiler style={{ marginTop: '10px' }}>
+            Значимость этих проблем настолько очевидна, что постоянный количественный рост и сфера нашей активности
+            позволяет оценить значение существенных финансовых и административных условий.
+            С другой стороны начало повседневной работы по формированию позиции требуют определения и уточнения
+            существенных финансовых и административных условий.
+          </Spoiler>
+        </div>
       </div>
     </PageWrapper>
   );

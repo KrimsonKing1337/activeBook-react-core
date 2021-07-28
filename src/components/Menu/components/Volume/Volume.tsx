@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { volumeSelectors } from 'store/volume/reducer';
 import { setBg, setCommon, setOther } from 'store/volume/actions';
 
-import { Label } from '../Label';
+import { Label } from 'components/Label';
 
 import { Slider } from './components/Slider';
 

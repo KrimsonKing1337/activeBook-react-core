@@ -6,9 +6,9 @@ import classNames from 'classnames';
 import { configSelectors } from 'store/config/reducer';
 import { setLineHeight } from 'store/config/actions';
 
-import { getNewValueForNarrativeTextStyle } from 'utils/getNewValueForNarrativeTextStyle';
+import { Label } from 'components/Label';
 
-import { Label } from '../Label';
+import { getNewValueForNarrativeTextStyle } from 'utils/getNewValueForNarrativeTextStyle';
 
 import styles from './LineHeight.scss';
 

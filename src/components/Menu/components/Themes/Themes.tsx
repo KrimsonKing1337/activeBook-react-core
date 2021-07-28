@@ -9,7 +9,7 @@ import { configSelectors } from 'store/config/reducer';
 import { setTheme } from 'store/config/actions';
 import { Theme } from 'store/config/initialState';
 
-import { Label } from '../Label';
+import { Label } from 'components/Label';
 
 import styles from './Themes.scss';
 
@@ -37,7 +37,6 @@ function getClassNames(theme: Theme) {
 
 const themes: Theme[] = ['dark', 'orange', 'darkBlue', 'black'];
 
-// todo: добавить в ассеты иконку галочки, удалить fontawesome;
 export const Themes = () => {
   const dispatch = useDispatch();
   const activeTheme = useSelector(configSelectors.theme);
