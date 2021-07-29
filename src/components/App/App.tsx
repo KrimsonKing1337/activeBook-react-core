@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
-import { store } from 'store';
+import { ConnectedRouter } from 'connected-react-router';
+import { history, store } from 'store';
 
 import { AppWrapper } from 'components/AppWrapper';
 
@@ -17,13 +18,13 @@ export const App = () => {
 
   return (
     <Provider store={store}>
-      <Router>
+      <ConnectedRouter history={history}>
         <Switch>
           <Route path={'/'}>
             <AppWrapper />
           </Route>
         </Switch>
-      </Router>
+      </ConnectedRouter>
     </Provider>
   );
 };

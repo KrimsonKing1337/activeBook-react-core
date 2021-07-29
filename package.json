@@ -123,6 +123,7 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@types/howler": "^2.2.3",
     "axios": "^0.21.1",
+    "connected-react-router": "^6.9.1",
     "howler": "^2.2.3",
     "lodash": "^4.17.21",
     "modern-css-reset": "^1.4.0",
