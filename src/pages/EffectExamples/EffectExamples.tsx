@@ -299,7 +299,12 @@ export const EffectExamples = () => {
           onClickOff={() => buttonForLoadingStateClickHandler(false)}
         />
 
-        <Modal onClose={modalWithImgIsActiveOnClose} isOpen={modalWithImgIsActive} mode={'media'}>
+        <Modal
+          onClose={modalWithImgIsActiveOnClose}
+          isOpen={modalWithImgIsActive}
+          closeFunction={modalWithImgIsActiveOnClose}
+          mode={'media'}
+        >
           <img src="/assets/img/cinemagraph.gif" alt="" />
         </Modal>
 
@@ -314,6 +319,7 @@ export const EffectExamples = () => {
         <Modal
           onClose={modalWithVideoIsActiveOnClose}
           isOpen={modalWithVideoIsActive}
+          closeFunction={modalWithVideoIsActiveOnClose}
           mode={'media'}
           hideExpandButton={true}
         >
@@ -328,7 +334,11 @@ export const EffectExamples = () => {
           onClickOff={() => buttonForModalWithVideoClickHandler(false)}
         />
 
-        <Modal onClose={modalWithTextIsActiveOnClose} isOpen={modalWithTextIsActive}>
+        <Modal
+          onClose={modalWithTextIsActiveOnClose}
+          isOpen={modalWithTextIsActive}
+          closeFunction={modalWithTextIsActiveOnClose}
+        >
           <div>
             Товарищи! начало повседневной работы по формированию позиции играет важную роль в формировании систем
             массового участия. С другой стороны дальнейшее развитие различных форм деятельности играет важную роль в
@@ -354,7 +364,11 @@ export const EffectExamples = () => {
           onClickOff={() => buttonForModalWithTextClickHandler(false)}
         />
 
-        <Modal onClose={modalWithAnyIsActiveOnClose} isOpen={modalWithAnyIsActive}>
+        <Modal
+          onClose={modalWithAnyIsActiveOnClose}
+          isOpen={modalWithAnyIsActive}
+          closeFunction={modalWithAnyIsActiveOnClose}
+        >
           <div>
             <img src="/assets/img/cinemagraph.gif" alt="" />
 
@@ -384,7 +398,11 @@ export const EffectExamples = () => {
           onClickOff={() => buttonForModalWithAnyClickHandler(false)}
         />
 
-        <Modal onClose={modalWithSlideShowIsActiveOnClose} isOpen={modalWithSlideShowIsActive}>
+        <Modal
+          onClose={modalWithSlideShowIsActiveOnClose}
+          isOpen={modalWithSlideShowIsActive}
+          closeFunction={modalWithSlideShowIsActiveOnClose}
+        >
           <SlideShow isVisible={modalWithSlideShowIsActive} mode={'modal'}>
             <img src="/assets/img/1.jpg" alt="" />
             <img src="/assets/img/2.jpg" alt="" />
@@ -401,7 +419,11 @@ export const EffectExamples = () => {
           onClickOff={() => buttonForModalWithSlideShowClickHandler(false)}
         />
 
-        <Modal onClose={modalWithSlideShowWithAnyIsActiveOnClose} isOpen={modalWithSlideShowWithAnyIsActive}>
+        <Modal
+          onClose={modalWithSlideShowWithAnyIsActiveOnClose}
+          isOpen={modalWithSlideShowWithAnyIsActive}
+          closeFunction={modalWithSlideShowWithAnyIsActiveOnClose}
+        >
           <SlideShow isVisible={modalWithSlideShowWithAnyIsActive} mode={'modal'}>
             <img src="/assets/img/1.jpg" alt="" />
 
@@ -438,6 +460,7 @@ export const EffectExamples = () => {
         <ModalDialog
           onClose={modalWithConformIsActiveOnClose}
           isOpen={modalWithConfirmIsActive}
+          closeFunction={modalWithConformIsActiveOnClose}
           onConfirm={modalWithConformIsActiveOnClose}
           onCancel={modalWithConformIsActiveOnClose}
         >

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCompress, faCrop, faExpand, faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -6,27 +7,55 @@ import classNames from 'classnames';
 
 import styles from './Modal.scss';
 
+const MODAL_IS_OPEN_LOCATION = '/modal';
+const MODAL_IS_CLOSE_LOCATION = '/';
+
+type Func = () => void;
+
 type ModalMode = 'media' |  null;
 
 export type ModalProps = {
   children: React.ReactNode;
   isOpen: boolean;
+  closeFunction: Func;
   mode?: ModalMode;
   hideExpandButton?: boolean;
-  onClose: () => void;
+  onClose: Func;
 };
 
 export const Modal = ({
   children,
   onClose,
   isOpen,
+  closeFunction,
   mode = null,
   hideExpandButton = false,
 }: ModalProps) => {
-  const isMediaMode = mode === 'media';
-
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [isCrop, setIsCrop] = useState(true);
+  const [prevLocationPath, setPrevLocationPath] = useState(MODAL_IS_CLOSE_LOCATION);
+  const history = useHistory();
+  const location = useLocation();
+
+  const isMediaMode = mode === 'media';
+
+  useEffect(() => {
+    const { pathname } = location;
+
+    if (prevLocationPath !== pathname) {
+      if (pathname === MODAL_IS_CLOSE_LOCATION) {
+        closeFunction();
+      }
+
+      setPrevLocationPath(pathname);
+    }
+  }, [location]);
+
+  useEffect(() => {
+    const path = isOpen ? MODAL_IS_OPEN_LOCATION : MODAL_IS_CLOSE_LOCATION;
+
+    history.push(path);
+  }, [isOpen]);
 
   const close = () => onClose();
 
