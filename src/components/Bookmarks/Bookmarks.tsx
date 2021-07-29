@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 
 import classNames from 'classnames';
 
@@ -52,16 +53,36 @@ const items: ItemProps[] = [
   },
 ];
 
+const IS_OPEN_LOCATION = '/bookmarks';
+const IS_CLOSE_LOCATION = '/';
+
 const buttonAddClassNames = classNames([styles.button, styles.isAdd]);
 
 export const Bookmarks = () => {
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
 
   const isOpen = useSelector(mainSelectors.bookmarksIsOpen);
+
+  const [prevLocationPath, setPrevLocationPath] = useState(IS_CLOSE_LOCATION);
 
   const closeButtonClickHandler = () => {
     dispatch(setBookmarkIsOpen(false));
   };
+
+  useEffect(() => {
+    if (!prevLocationPath.includes(IS_OPEN_LOCATION) && !pathname.includes(IS_OPEN_LOCATION)) {
+      return;
+    }
+
+    if (prevLocationPath !== pathname) {
+      if (pathname === IS_CLOSE_LOCATION) {
+        dispatch(setBookmarkIsOpen(false));
+      }
+
+      setPrevLocationPath(pathname);
+    }
+  }, [pathname]);
 
   return (
     <Overflow isOpen={isOpen}>
