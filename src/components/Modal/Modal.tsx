@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 
+import { v4 as uuidv4 } from 'uuid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCompress, faCrop, faExpand, faTimes } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
@@ -31,33 +32,55 @@ export const Modal = ({
   mode = null,
   hideExpandButton = false,
 }: ModalProps) => {
+  const [componentUuid, setComponentUuid] = useState('');
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [isCrop, setIsCrop] = useState(true);
   const [prevLocationPath, setPrevLocationPath] = useState(MODAL_IS_CLOSE_LOCATION);
   const history = useHistory();
-  const location = useLocation();
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    const uuidValue = uuidv4();
+
+    setComponentUuid(uuidValue);
+  }, []);
 
   const isMediaMode = mode === 'media';
 
   useEffect(() => {
-    const { pathname } = location;
+    if (!componentUuid) {
+      return;
+    }
+
+    if (!prevLocationPath.includes(componentUuid) && !pathname.includes(componentUuid)) {
+      return;
+    }
 
     if (prevLocationPath !== pathname) {
       if (pathname === MODAL_IS_CLOSE_LOCATION) {
-        closeFunction();
+        close();
       }
 
       setPrevLocationPath(pathname);
     }
-  }, [location]);
+  }, [pathname]);
 
   useEffect(() => {
-    const path = isOpen ? MODAL_IS_OPEN_LOCATION : MODAL_IS_CLOSE_LOCATION;
+    if (!isOpen) {
+      return;
+    }
+
+    const path =`${MODAL_IS_OPEN_LOCATION}/${componentUuid}`;
 
     history.push(path);
   }, [isOpen]);
 
-  const close = () => onClose();
+  const close = () => {
+    closeFunction();
+    history.push(MODAL_IS_CLOSE_LOCATION);
+
+    onClose();
+  };
 
   const closeIconClickHandler = () => close();
   const overflowClickHandler = () => close();
