@@ -1,11 +1,20 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useSwipeable } from 'react-swipeable';
+import Hammer from 'react-hammerjs';
 
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './SlideShow.scss';
+
+const hammerOptions = {
+  recognizers: {
+    tap: {
+      threshold: 200,
+      direction: 6, // horizontal
+    },
+  },
+};
 
 type SlideShowMode = 'modal' | null;
 
@@ -25,10 +34,14 @@ export const SlideShow = ({
   onSlideChange = () => {},
 }: SlideShowType) => {
   const childrenAsArray = React.Children.toArray(children);
+
   const [slideIndex, setSlideIndex] = useState(0);
   const [isOverflow, setIsOverflow] = useState(false);
   const [arrowsAreVisible, setArrowsAreVisible] = useState(true);
+  const [isSwiping, setIsSwiping] = useState(false);
+
   const itemsWrapperRef = useRef<HTMLDivElement>(null);
+
   const isModalMode = mode === 'modal';
 
   const setSlideShowTransformTranslateX = (value: string) => {
@@ -83,12 +96,6 @@ export const SlideShow = ({
     onSlideChange();
   };
 
-  const swipeHandlers = useSwipeable({
-    onSwipedLeft: () => changeSlide(true),
-    onSwipedRight: () => changeSlide(false),
-    delta: 100,
-  });
-
   const wrapperClickHandler = () => {
     setArrowsAreVisible(!arrowsAreVisible);
   };
@@ -98,6 +105,25 @@ export const SlideShow = ({
 
     changeSlide(isNext);
   };
+
+  const swipeHandler = (e: any) => {
+    const { direction, distance } = e;
+
+    if (isSwiping) {
+      return;
+    }
+
+    if (distance < 150) {
+      return;
+    }
+
+    setIsSwiping(true);
+
+    const isNext = direction === 2;
+
+    changeSlide(isNext);
+  };
+
 
   const wrapperClassNames = classNames({
     [styles.wrapper]: true,
@@ -112,33 +138,41 @@ export const SlideShow = ({
   });
 
   return (
-    <div className={wrapperClassNames} onClick={wrapperClickHandler} {...swipeHandlers}>
-      <div className={'SlideShowToolbar'}>
-        <div className={styles.left} onClick={(e) => arrowClickHandler(e,false)}>
-          <FontAwesomeIcon icon={faArrowLeft} />
+    <Hammer
+      options={hammerOptions}
+      direction={'DIRECTION_HORIZONTAL'}
+      onPan={swipeHandler}
+      onPanEnd={() => setIsSwiping(false)}
+      onPanCancel={() => setIsSwiping(false)}
+    >
+      <div className={wrapperClassNames} onClick={wrapperClickHandler}>
+        <div className={'SlideShowToolbar'}>
+          <div className={styles.left} onClick={(e) => arrowClickHandler(e,false)}>
+            <FontAwesomeIcon icon={faArrowLeft} />
+          </div>
+
+          <div className={styles.right} onClick={(e) => arrowClickHandler(e,true)}>
+            <FontAwesomeIcon icon={faArrowRight} />
+          </div>
         </div>
 
-        <div className={styles.right} onClick={(e) => arrowClickHandler(e,true)}>
-          <FontAwesomeIcon icon={faArrowRight} />
+        <div className={slideShowClassNames}>
+          <div ref={itemsWrapperRef} className={styles.itemsWrapper}>
+            {childrenAsArray.map((childCur, index) => {
+              const itemClassNames = classNames({
+                [styles.item]: true,
+                [styles.isActive]: index === slideIndex,
+              });
+
+              return (
+                <div key={index} className={itemClassNames}>
+                  {childCur}
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
-
-      <div className={slideShowClassNames}>
-        <div ref={itemsWrapperRef} className={styles.itemsWrapper}>
-          {childrenAsArray.map((childCur, index) => {
-            const itemClassNames = classNames({
-              [styles.item]: true,
-              [styles.isActive]: index === slideIndex,
-            });
-
-            return (
-              <div key={index} className={itemClassNames}>
-                {childCur}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </div>
+    </Hammer>
   );
 };
