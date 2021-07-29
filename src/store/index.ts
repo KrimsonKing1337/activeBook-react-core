@@ -5,7 +5,7 @@ import { createBrowserHistory } from 'history';
 import createSagaMiddleware from 'redux-saga';
 
 import { incrementReducer, watchIncrementActions } from './increment';
-import { mainReducer } from './main';
+import { mainReducer, watchMainActions } from './main';
 import { configReducer, watchConfigActions } from './config';
 import { volumeReducer } from './volume';
 import { effectsReducer } from './effects';
@@ -34,3 +34,4 @@ export const store = createStore(rootReducer, compose);
 
 sagaMiddleware.run(watchIncrementActions);
 sagaMiddleware.run(watchConfigActions);
+sagaMiddleware.run(watchMainActions);
