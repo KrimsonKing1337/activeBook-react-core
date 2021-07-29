@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
+import Hammer from 'react-hammerjs';
 
 import { v4 as uuidv4 } from 'uuid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,6 +11,16 @@ import styles from './Modal.scss';
 
 const IS_OPEN_LOCATION = '/modal';
 const IS_CLOSE_LOCATION = '/';
+
+const hammerOptions = {
+  recognizers: {
+    pinch: {
+      enable: true,
+      pointers: 2,
+      threshold: 0.5,
+    },
+  },
+};
 
 type Func = () => void;
 
@@ -32,12 +43,14 @@ export const Modal = ({
   mode = null,
   hideExpandButton = false,
 }: ModalProps) => {
+  const history = useHistory();
+  const { pathname } = useLocation();
+
   const [componentUuid, setComponentUuid] = useState('');
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [isCrop, setIsCrop] = useState(true);
   const [prevLocationPath, setPrevLocationPath] = useState(IS_CLOSE_LOCATION);
-  const history = useHistory();
-  const { pathname } = useLocation();
+  const [isZooming, setIsZooming] = useState(false);
 
   useEffect(() => {
     const uuidValue = uuidv4();
@@ -91,6 +104,47 @@ export const Modal = ({
 
   const closeIconClickHandler = () => close();
   const overflowClickHandler = () => close();
+  const doubleTapHandler = () => {
+    if (!isMediaMode) {
+      return;
+    }
+
+    setIsFullScreen(!isFullScreen);
+  };
+
+  const zoomInHandler = () => {
+    if (!isMediaMode) {
+      return;
+    }
+
+    if (!isFullScreen) {
+      setIsZooming(true);
+      setIsFullScreen(true);
+
+      return;
+    }
+
+    if (!isZooming) {
+      setIsCrop(true);
+    }
+  };
+
+  const zoomOutHandler = () => {
+    if (!isMediaMode) {
+      return;
+    }
+
+    if (isCrop) {
+      setIsZooming(true);
+      setIsCrop(false);
+
+      return;
+    }
+
+    if (!isZooming) {
+      setIsFullScreen(false);
+    }
+  };
 
   const overflowClassNames = classNames({
     [styles.overflow]: true,
@@ -132,32 +186,41 @@ export const Modal = ({
   });
 
   return (
-    <div className={overflowClassNames} onClick={overflowClickHandler}>
-      <div className={modalClassNames}>
-        <div className={styles.wrapper} onClick={(e) => e.stopPropagation()}>
-          <div className={'modalToolbar'}>
-            <div className={iconCloseClassNames} onClick={closeIconClickHandler}>
-              <FontAwesomeIcon icon={faTimes} />
+    <Hammer
+      options={hammerOptions}
+      onPinchIn={zoomOutHandler}
+      onPinchOut={zoomInHandler}
+      onPinchEnd={() => setIsZooming(false)}
+      onPinchCancel={() => setIsZooming(false)}
+      onDoubleTap={doubleTapHandler}
+    >
+      <div className={overflowClassNames} onClick={overflowClickHandler}>
+        <div className={modalClassNames}>
+          <div className={styles.wrapper} onClick={(e) => e.stopPropagation()}>
+            <div className={'modalToolbar'}>
+              <div className={iconCloseClassNames} onClick={closeIconClickHandler}>
+                <FontAwesomeIcon icon={faTimes} />
+              </div>
+
+              <div className={iconExpandClassNames} onClick={() => setIsFullScreen(true)}>
+                <FontAwesomeIcon icon={faExpand} />
+              </div>
+
+              <div className={iconCompressClassNames} onClick={() => setIsFullScreen(false)}>
+                <FontAwesomeIcon icon={faCompress} />
+              </div>
+
+              <div className={iconCropClassNames} onClick={() => setIsCrop(!isCrop)}>
+                <FontAwesomeIcon icon={faCrop} />
+              </div>
             </div>
 
-            <div className={iconExpandClassNames} onClick={() => setIsFullScreen(true)}>
-              <FontAwesomeIcon icon={faExpand} />
+            <div className={contentClassNames}>
+              { children }
             </div>
-
-            <div className={iconCompressClassNames} onClick={() => setIsFullScreen(false)}>
-              <FontAwesomeIcon icon={faCompress} />
-            </div>
-
-            <div className={iconCropClassNames} onClick={() => setIsCrop(!isCrop)}>
-              <FontAwesomeIcon icon={faCrop} />
-            </div>
-          </div>
-
-          <div className={contentClassNames}>
-            { children }
           </div>
         </div>
       </div>
-    </div>
+    </Hammer>
   );
 };
