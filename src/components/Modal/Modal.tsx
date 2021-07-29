@@ -8,8 +8,8 @@ import classNames from 'classnames';
 
 import styles from './Modal.scss';
 
-const MODAL_IS_OPEN_LOCATION = '/modal';
-const MODAL_IS_CLOSE_LOCATION = '/';
+const IS_OPEN_LOCATION = '/modal';
+const IS_CLOSE_LOCATION = '/';
 
 type Func = () => void;
 
@@ -35,7 +35,7 @@ export const Modal = ({
   const [componentUuid, setComponentUuid] = useState('');
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [isCrop, setIsCrop] = useState(true);
-  const [prevLocationPath, setPrevLocationPath] = useState(MODAL_IS_CLOSE_LOCATION);
+  const [prevLocationPath, setPrevLocationPath] = useState(IS_CLOSE_LOCATION);
   const history = useHistory();
   const { pathname } = useLocation();
 
@@ -47,6 +47,13 @@ export const Modal = ({
 
   const isMediaMode = mode === 'media';
 
+  /*
+  * todo: мне кажется, я тут какую-то костыльную хрень придумал.
+  *  эта штука будет срабатывать каждый раз, когда меняется pathname по всему приложению.
+  *  и так по всех компонентах, где я использую похожую логику:
+  *  Menu, TableOfContents, Bookmarks.
+  *  разобраться как сделать нормально, если это возможно (посмотреть в сторону Switch у Router)
+  * */
   useEffect(() => {
     if (!componentUuid) {
       return;
@@ -57,7 +64,7 @@ export const Modal = ({
     }
 
     if (prevLocationPath !== pathname) {
-      if (pathname === MODAL_IS_CLOSE_LOCATION) {
+      if (pathname === IS_CLOSE_LOCATION) {
         close();
       }
 
@@ -70,14 +77,14 @@ export const Modal = ({
       return;
     }
 
-    const path =`${MODAL_IS_OPEN_LOCATION}/${componentUuid}`;
+    const path =`${IS_OPEN_LOCATION}/${componentUuid}`;
 
     history.push(path);
   }, [isOpen]);
 
   const close = () => {
     closeFunction();
-    history.push(MODAL_IS_CLOSE_LOCATION);
+    history.push(IS_CLOSE_LOCATION);
 
     onClose();
   };
