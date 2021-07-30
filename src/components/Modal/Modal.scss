@@ -99,12 +99,18 @@ $halfAppWidth: $appWidth / 2;
 
   display: none;
 
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+
   &.isHidden {
     display: none !important;
   }
 
   &.isMediaMode {
-    display: block;
+    display: flex;
 
     &.isFullScreen {
       display: none;
@@ -116,14 +122,20 @@ $halfAppWidth: $appWidth / 2;
 
 .iconCompress {
   position: absolute;
+
   right: 8px;
   bottom: 5px;
   z-index: 1;
 
   display: none;
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
 
   &.isFullScreen {
-    display: block;
+    display: flex;
   }
 
   @include modal-content-icon;
@@ -136,9 +148,14 @@ $halfAppWidth: $appWidth / 2;
   z-index: 1;
 
   display: none;
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
 
   &.isFullScreen {
-    display: block;
+    display: flex;
   }
 
   @include modal-content-icon;
