@@ -76,7 +76,7 @@ export const SlideShow = ({
       return;
     }
 
-    const hammertime = new Hammer(current);
+    const hammertime = new Hammer(current, { domEvents: true });
 
     hammertime.get('swipe').set({
       direction: Hammer.DIRECTION_HORIZONTAL,
@@ -84,7 +84,21 @@ export const SlideShow = ({
     });
 
     // обработчик именно здесь, чтобы onClick не срабатывал вместе с Hammer.swipe. Hammer сам разрулит эту проблему
-    hammertime.on('tap', wrapperClickHandler);
+    hammertime.on('tap', (e) => {
+      const { target } = e;
+
+      const attrOfOnlyIcon = 'data-icon';
+
+      if (target.getAttribute(attrOfOnlyIcon)) {
+        return;
+      }
+
+      if (target.firstElementChild?.getAttribute(attrOfOnlyIcon)) {
+        return;
+      }
+
+      wrapperClickHandler();
+    });
 
     hammertime.on('swipe', (e) => {
       const { direction } = e;
