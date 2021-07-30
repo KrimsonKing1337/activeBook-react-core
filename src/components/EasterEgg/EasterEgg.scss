@@ -1,0 +1,18 @@
+.easterEgg {
+  display: inline-flex;
+
+  opacity: 0.85;
+
+  animation: easter-egg 5s 5s infinite ease-in-out;
+
+  @keyframes easter-egg {
+    1.25% {
+      transform: translateY(5%);
+    }
+
+    2.5%,
+    100% {
+      transform: translateY(0);
+    }
+  }
+}

@@ -20,6 +20,7 @@ import { Spoiler } from 'components/Spoiler';
 import { Label } from 'components/Label';
 import { SlideShow } from 'components/SlideShow';
 import { ModalDialog } from 'components/ModalDialog';
+import { EasterEgg } from 'components/EasterEgg';
 
 import styles from './EffectExamples.scss';
 
@@ -54,6 +55,8 @@ export const EffectExamples = () => {
   const [buttonForModalWithConfirmIsActive, setButtonForModalWithConfirmIsActive] = useState(false);
 
   const [needToSetHeightForSpoilerWithSlider, setNeedToSetHeightForSpoilerWithSlider] = useState(false);
+
+  const [modalWithEasterEggIsActive, setModalWithEasterEggIsActive] = useState(false);
 
   useEffect(() => {
     const singleSound = new Howl({
@@ -222,6 +225,8 @@ export const EffectExamples = () => {
     setModalWithConfirmIsActive(true);
     setButtonForModalWithConfirmIsActive(true);
   };
+
+  const modalWithEasterEggIsActiveOnClose = () => setModalWithEasterEggIsActive(false);
 
   return (
     <PageWrapper title={'Эффекты'} subtitle={'Здесь можно посмотреть все возможные эффекты'}>
@@ -537,6 +542,20 @@ export const EffectExamples = () => {
               <video src="/assets/videos/TV_static-2.mp4" loop autoPlay muted />
             </SlideShow>
           </Spoiler>
+        </div>
+
+        <div className={styles.item}>
+          <Modal
+            onClose={modalWithEasterEggIsActiveOnClose}
+            isOpen={modalWithEasterEggIsActive}
+            closeFunction={modalWithEasterEggIsActiveOnClose}
+          >
+            Вы нашли пасхалку! Вот вам ачивка
+          </Modal>
+
+          <EasterEgg onClick={() => setModalWithEasterEggIsActive(true)}>
+            Текст с пасхалкой (нажми меня)
+          </EasterEgg>
         </div>
       </div>
     </PageWrapper>
