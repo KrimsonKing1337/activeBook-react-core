@@ -129,18 +129,10 @@ export const Modal = ({
   const closeIconClickHandler = () => close();
   const overflowClickHandler = () => close();
   const doubleTapHandler = () => {
-    if (!isMediaMode) {
-      return;
-    }
-
     setIsFullScreen(!isFullScreen);
   };
 
   const zoomInHandler = () => {
-    if (!isMediaMode) {
-      return;
-    }
-
     if (!isFullScreen) {
       setIsZooming(true);
       setIsFullScreen(true);
@@ -154,10 +146,6 @@ export const Modal = ({
   };
 
   const zoomOutHandler = () => {
-    if (!isMediaMode) {
-      return;
-    }
-
     if (isCrop) {
       setIsZooming(true);
       setIsCrop(false);
@@ -184,7 +172,6 @@ export const Modal = ({
   const iconExpandClassNames = classNames({
     [styles.iconExpand]: true,
     [styles.isFullScreen]: isFullScreen,
-    [styles.isMediaMode]: isMediaMode,
     [styles.isHidden]: hideExpandButton,
   });
 
@@ -201,6 +188,7 @@ export const Modal = ({
   const iconCropClassNames = classNames({
     [styles.iconCrop]: true,
     [styles.isFullScreen]: isFullScreen,
+    [styles.isMediaMode]: isMediaMode,
   });
 
   const contentClassNames = classNames({
