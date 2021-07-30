@@ -38,6 +38,12 @@
   overflow-x: hidden;
   overflow-y: auto;
 
+  /*
+  * иначе событие swipe у Hammer.js не срабатывает,
+  * см.: https://stackoverflow.com/questions/60198150/hammerjs-swipe-not-working-on-elements-with-overflow-css-property
+  */
+  touch-action: pan-y !important;
+
   &.isOverflow {
     align-items: flex-start;
   }

@@ -1,20 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Hammer from 'react-hammerjs';
 
+import Hammer from 'hammerjs';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './SlideShow.scss';
-
-const hammerOptions = {
-  recognizers: {
-    tap: {
-      threshold: 200,
-      direction: 6, // horizontal
-    },
-  },
-};
 
 type SlideShowMode = 'modal' | null;
 
@@ -38,9 +29,9 @@ export const SlideShow = ({
   const [slideIndex, setSlideIndex] = useState(0);
   const [isOverflow, setIsOverflow] = useState(false);
   const [arrowsAreVisible, setArrowsAreVisible] = useState(true);
-  const [isSwiping, setIsSwiping] = useState(false);
 
   const itemsWrapperRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   const isModalMode = mode === 'modal';
 
@@ -77,6 +68,39 @@ export const SlideShow = ({
     setIsOverflow(isOverflow);
   }, [slideIndex]);
 
+  // todo: инициализировать один раз, но slideIndex (он юзается в changeSlide()) шоб был актуальный
+  useEffect(() => {
+    const { current } = wrapperRef;
+
+    if (!current) {
+      return;
+    }
+
+    const hammertime = new Hammer(current);
+
+    hammertime.get('swipe').set({
+      direction: Hammer.DIRECTION_HORIZONTAL,
+      threshold: 50,
+    });
+
+    // обработчик именно здесь, чтобы onClick не срабатывал вместе с Hammer.swipe. Hammer сам разрулит эту проблему
+    hammertime.on('tap', wrapperClickHandler);
+
+    hammertime.on('swipe', (e) => {
+      const { direction } = e;
+
+      const isNext = direction === Hammer.DIRECTION_LEFT;
+
+      changeSlide(isNext);
+    });
+
+    return () => {
+      hammertime.off('tap');
+      hammertime.off('swipe');
+      hammertime.destroy();
+    };
+  }, [slideIndex, arrowsAreVisible]);
+
   const changeSlide = (isNext: boolean) => {
     let nextIndex = isNext ? slideIndex + 1 : slideIndex - 1;
     const lastIndex = childrenAsArray.length - 1;
@@ -106,25 +130,6 @@ export const SlideShow = ({
     changeSlide(isNext);
   };
 
-  const swipeHandler = (e: any) => {
-    const { direction, distance } = e;
-
-    if (isSwiping) {
-      return;
-    }
-
-    if (distance < 150) {
-      return;
-    }
-
-    setIsSwiping(true);
-
-    const isNext = direction === 2;
-
-    changeSlide(isNext);
-  };
-
-
   const wrapperClassNames = classNames({
     [styles.wrapper]: true,
     [styles.arrowsAreVisible]: arrowsAreVisible,
@@ -138,41 +143,33 @@ export const SlideShow = ({
   });
 
   return (
-    <Hammer
-      options={hammerOptions}
-      direction={'DIRECTION_HORIZONTAL'}
-      onPan={swipeHandler}
-      onPanEnd={() => setIsSwiping(false)}
-      onPanCancel={() => setIsSwiping(false)}
-    >
-      <div className={wrapperClassNames} onClick={wrapperClickHandler}>
-        <div className={'SlideShowToolbar'}>
-          <div className={styles.left} onClick={(e) => arrowClickHandler(e,false)}>
-            <FontAwesomeIcon icon={faArrowLeft} />
-          </div>
-
-          <div className={styles.right} onClick={(e) => arrowClickHandler(e,true)}>
-            <FontAwesomeIcon icon={faArrowRight} />
-          </div>
+    <div ref={wrapperRef} className={wrapperClassNames}>
+      <div className={'SlideShowToolbar'}>
+        <div className={styles.left} onClick={(e) => arrowClickHandler(e,false)}>
+          <FontAwesomeIcon icon={faArrowLeft} />
         </div>
 
-        <div className={slideShowClassNames}>
-          <div ref={itemsWrapperRef} className={styles.itemsWrapper}>
-            {childrenAsArray.map((childCur, index) => {
-              const itemClassNames = classNames({
-                [styles.item]: true,
-                [styles.isActive]: index === slideIndex,
-              });
-
-              return (
-                <div key={index} className={itemClassNames}>
-                  {childCur}
-                </div>
-              );
-            })}
-          </div>
+        <div className={styles.right} onClick={(e) => arrowClickHandler(e,true)}>
+          <FontAwesomeIcon icon={faArrowRight} />
         </div>
       </div>
-    </Hammer>
+
+      <div className={slideShowClassNames}>
+        <div ref={itemsWrapperRef} className={styles.itemsWrapper}>
+          {childrenAsArray.map((childCur, index) => {
+            const itemClassNames = classNames({
+              [styles.item]: true,
+              [styles.isActive]: index === slideIndex,
+            });
+
+            return (
+              <div key={index} className={itemClassNames}>
+                {childCur}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
   );
 };

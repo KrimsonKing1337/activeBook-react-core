@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import Hammer from 'react-hammerjs';
 
+import Hammer from 'hammerjs';
 import { v4 as uuidv4 } from 'uuid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCompress, faCrop, faExpand, faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -11,16 +11,6 @@ import styles from './Modal.scss';
 
 const IS_OPEN_LOCATION = '/modal';
 const IS_CLOSE_LOCATION = '/';
-
-const hammerOptions = {
-  recognizers: {
-    pinch: {
-      enable: true,
-      pointers: 2,
-      threshold: 0.5,
-    },
-  },
-};
 
 type Func = () => void;
 
@@ -51,6 +41,8 @@ export const Modal = ({
   const [isCrop, setIsCrop] = useState(true);
   const [prevLocationPath, setPrevLocationPath] = useState(IS_CLOSE_LOCATION);
   const [isZooming, setIsZooming] = useState(false);
+
+  const overflowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const uuidValue = uuidv4();
@@ -94,6 +86,38 @@ export const Modal = ({
 
     history.push(path);
   }, [isOpen]);
+
+  // todo: инициализировать один раз, но переменные в зависимостях шоб были актуальные (они нужны в хэндлерах)
+  useEffect(() => {
+    const { current } = overflowRef;
+
+    if (!current) {
+      return;
+    }
+
+    const hammertime = new Hammer(current);
+
+    hammertime.get('tap').set({
+      taps: 2,
+    });
+
+    hammertime.get('pinch').set({
+      enable: true,
+      threshold: 0.5,
+    });
+
+    hammertime.on('tap', doubleTapHandler);
+    hammertime.on('pinchout', zoomInHandler);
+    hammertime.on('pinchin', zoomOutHandler);
+    hammertime.on('pinchend pinchcancel', () => setIsZooming(false));
+
+    return () => {
+      setIsZooming(false);
+      hammertime.off('tap');
+      hammertime.off('pinch');
+      hammertime.destroy();
+    };
+  }, [isFullScreen, isZooming, isCrop]);
 
   const close = () => {
     closeFunction();
@@ -186,41 +210,32 @@ export const Modal = ({
   });
 
   return (
-    <Hammer
-      options={hammerOptions}
-      onPinchIn={zoomOutHandler}
-      onPinchOut={zoomInHandler}
-      onPinchEnd={() => setIsZooming(false)}
-      onPinchCancel={() => setIsZooming(false)}
-      onDoubleTap={doubleTapHandler}
-    >
-      <div className={overflowClassNames} onClick={overflowClickHandler}>
-        <div className={modalClassNames}>
-          <div className={styles.wrapper} onClick={(e) => e.stopPropagation()}>
-            <div className={'modalToolbar'}>
-              <div className={iconCloseClassNames} onClick={closeIconClickHandler}>
-                <FontAwesomeIcon icon={faTimes} />
-              </div>
-
-              <div className={iconExpandClassNames} onClick={() => setIsFullScreen(true)}>
-                <FontAwesomeIcon icon={faExpand} />
-              </div>
-
-              <div className={iconCompressClassNames} onClick={() => setIsFullScreen(false)}>
-                <FontAwesomeIcon icon={faCompress} />
-              </div>
-
-              <div className={iconCropClassNames} onClick={() => setIsCrop(!isCrop)}>
-                <FontAwesomeIcon icon={faCrop} />
-              </div>
+    <div ref={overflowRef} className={overflowClassNames} onClick={overflowClickHandler}>
+      <div className={modalClassNames}>
+        <div className={styles.wrapper} onClick={(e) => e.stopPropagation()}>
+          <div className={'modalToolbar'}>
+            <div className={iconCloseClassNames} onClick={closeIconClickHandler}>
+              <FontAwesomeIcon icon={faTimes} />
             </div>
 
-            <div className={contentClassNames}>
-              { children }
+            <div className={iconExpandClassNames} onClick={() => setIsFullScreen(true)}>
+              <FontAwesomeIcon icon={faExpand} />
             </div>
+
+            <div className={iconCompressClassNames} onClick={() => setIsFullScreen(false)}>
+              <FontAwesomeIcon icon={faCompress} />
+            </div>
+
+            <div className={iconCropClassNames} onClick={() => setIsCrop(!isCrop)}>
+              <FontAwesomeIcon icon={faCrop} />
+            </div>
+          </div>
+
+          <div className={contentClassNames}>
+            { children }
           </div>
         </div>
       </div>
-    </Hammer>
+    </div>
   );
 };
