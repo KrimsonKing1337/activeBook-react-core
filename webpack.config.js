@@ -30,7 +30,7 @@ module.exports = (env = {}, argv) => {
       patterns: [
         { from: 'assets', to: 'assets' },
       ],
-    })
+    }),
   ];
 
   if (analyze) {
@@ -101,9 +101,9 @@ module.exports = (env = {}, argv) => {
                 postcssOptions: {
                   ident: 'postcss',
                   plugins: [
-                    require('autoprefixer')
+                    require('autoprefixer'),
                   ],
-                }
+                },
               },
             },
             { loader: 'sass-loader' },
