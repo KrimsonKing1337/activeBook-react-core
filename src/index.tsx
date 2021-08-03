@@ -3,6 +3,8 @@ import { render } from 'react-dom';
 
 import { App } from 'components/App';
 
+import { getIsMobile } from 'utils/getIsMobile';
+
 import 'modern-css-reset/dist/reset.min.css';
 import 'styles/reset.scss';
 import 'styles/fonts.scss';
@@ -16,10 +18,10 @@ if (module.hot) {
   module.hot.accept();
 }
 
-if ((window as any).cordova) {
-  document.addEventListener('deviceready', () => {
-    initApp();
-  }, false);
+const isMobile = getIsMobile();
+
+if (isMobile) {
+  document.addEventListener('deviceready', initApp, false);
 } else {
   initApp();
 }
