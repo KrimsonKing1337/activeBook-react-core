@@ -24,6 +24,8 @@ $halfAppWidth: $appWidth / 2;
 }
 
 .modal {
+  $transition: width #{$transitionDefault}, height #{$transitionDefault};
+
   position: fixed;
   top: 0;
   right: 0;
@@ -55,7 +57,7 @@ $halfAppWidth: $appWidth / 2;
     }
   }
 
-  @include scrollbar();
+  @include scrollbar($transition);
 }
 
 .wrapper {

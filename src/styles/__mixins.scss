@@ -1,9 +1,7 @@
+@import "~styles/__variables.scss";
+
 @mixin scrollbar($transitionAdd: '') {
   $transition: border-color 0.75s linear;
-
-  @if $transitionAdd != '' {
-    $transition: #{$transitionAdd}, $transition;
-  }
 
   border-color: transparent;
 
@@ -30,28 +28,32 @@
 
     border-color: var(--main);
   }
-}
-
-@mixin transition-default($value: 'all') {
-  transition: #{$value} ease 0.3s 0s;
-}
-
-@mixin transition-fade-default() {
-  transition: opacity ease 0.3s 0s;
-}
-
-@mixin hover-default($transitionAdd: '') {
-  $transition: opacity ease 0.3s 0s;
 
   @if $transitionAdd != '' {
     $transition: #{$transitionAdd}, $transition;
   }
+}
+
+@mixin transition-default($value: 'all') {
+  transition: #{$value} #{$transitionDefault};
+}
+
+@mixin transition-fade-default() {
+  transition: opacity #{$transitionDefault};
+}
+
+@mixin hover-default($transitionAdd: '') {
+  $transition: opacity #{$transitionDefault};
 
   transition: $transition;
 
   &:hover {
     cursor: pointer;
     opacity: 0.65;
+  }
+
+  @if $transitionAdd != '' {
+    $transition: #{$transitionAdd}, $transition;
   }
 }
 
@@ -60,7 +62,7 @@
 
   opacity: 0.5;
 
-  transition: opacity ease 0.3s 0s;
+  transition: opacity #{$transitionDefault};
 
   &:hover {
     cursor: pointer;
