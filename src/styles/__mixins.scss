@@ -3,6 +3,10 @@
 @mixin scrollbar($transitionAdd: '') {
   $transition: border-color 0.75s linear;
 
+  @if $transitionAdd != '' {
+    $transition: #{$transitionAdd}, $transition;
+  }
+
   border-color: transparent;
 
   transition: $transition;
@@ -28,10 +32,6 @@
 
     border-color: var(--main);
   }
-
-  @if $transitionAdd != '' {
-    $transition: #{$transitionAdd}, $transition;
-  }
 }
 
 @mixin transition-default($value: 'all') {
@@ -45,15 +45,15 @@
 @mixin hover-default($transitionAdd: '') {
   $transition: opacity #{$transitionDefault};
 
+  @if $transitionAdd != '' {
+    $transition: #{$transitionAdd}, $transition;
+  }
+
   transition: $transition;
 
   &:hover {
     cursor: pointer;
     opacity: 0.65;
-  }
-
-  @if $transitionAdd != '' {
-    $transition: #{$transitionAdd}, $transition;
   }
 }
 
