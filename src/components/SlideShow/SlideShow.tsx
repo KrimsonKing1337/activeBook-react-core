@@ -102,6 +102,19 @@ export class SlideShow extends React.Component<SlideShowProp, SlideShowState> {
     this.hammertime.destroy();
   }
 
+  componentDidUpdate(prevProps: SlideShowProp, prevState: SlideShowState) {
+    const { isVisible } = this.props;
+    const { slideIndex } = this.state;
+
+    if (isVisible !== prevProps.isVisible && !isVisible) {
+      this.isNotVisibleHandler();
+    }
+
+    if (slideIndex !== prevState.slideIndex) {
+      this.setIsOverflow();
+    }
+  }
+
   setSlideShowTransformTranslateX = (value: string) => {
     const itemsWrapperElement = this.itemsWrapperRef?.current;
 
@@ -138,6 +151,33 @@ export class SlideShow extends React.Component<SlideShowProp, SlideShowState> {
     }
   };
 
+  setIsOverflow = () => {
+    const itemsWrapperElement = this.itemsWrapperRef?.current;
+
+    if (!itemsWrapperElement) {
+      return;
+    }
+
+    const activeItem = itemsWrapperElement.querySelector(`.${styles.isActive}`) as HTMLElement;
+
+    if (!activeItem) {
+      return;
+    }
+
+    const isOverflow = activeItem.offsetHeight > itemsWrapperElement.offsetHeight;
+
+    this.setState({ isOverflow });
+  };
+
+  isNotVisibleHandler = () => {
+    this.setState({
+      slideIndex: 0,
+      isOverflow: false,
+    });
+
+    this.setSlideShowTransformTranslateX('0%');
+  };
+
   wrapperClickHandler = () => {
     const { arrowsAreVisible } = this.state;
 
@@ -162,12 +202,19 @@ export class SlideShow extends React.Component<SlideShowProp, SlideShowState> {
       [styles.wrapper]: true,
       [styles.arrowsAreVisible]: arrowsAreVisible,
       [styles.isWithoutBorders]: isWithoutBorders || isModalMode,
+      [styles.isModalMode]: isModalMode,
     });
 
     const slideShowClassNames = classNames({
       [styles.slideShow]: true,
       [styles.isOverflow]: isOverflow,
       [styles.isModalMode]: isModalMode,
+    });
+
+    const itemsWrapperClassNames = classNames({
+      [styles.itemsWrapper]: true,
+      [styles.isModalMode]: isModalMode,
+      [styles.isOverflow]: isOverflow,
     });
 
     return (
@@ -183,7 +230,7 @@ export class SlideShow extends React.Component<SlideShowProp, SlideShowState> {
         </div>
 
         <div className={slideShowClassNames}>
-          <div ref={this.itemsWrapperRef} className={styles.itemsWrapper}>
+          <div ref={this.itemsWrapperRef} className={itemsWrapperClassNames}>
             {this.childrenAsArray.map((childCur, index) => {
               const itemClassNames = classNames({
                 [styles.item]: true,

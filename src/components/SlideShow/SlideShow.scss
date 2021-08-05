@@ -34,7 +34,7 @@
   justify-content: flex-start;
 
   width: 100%;
-  max-width: $appWidth;
+  max-width: 100%;
   overflow-x: hidden;
   overflow-y: auto;
 
@@ -49,7 +49,17 @@
   }
 
   &.isModalMode {
+    align-items: center;
     height: $modalHeight;
+    max-height: 100%;
+  }
+
+  [class*="isFullScreen"] & {
+    align-items: center;
+    width: inherit;
+    max-width: inherit;
+    height: inherit;
+    max-height: 100vh;
   }
 
   @include scrollbar();
@@ -64,6 +74,22 @@
   transition: transform ease 0.15s 0s;
 
   will-change: transform;
+
+  &.isModalMode {
+    width: 100%;
+    height: inherit;
+    max-height: inherit;
+  }
+
+  &.isOverflow {
+    align-items: flex-start;
+  }
+
+  [class*="isMediaMode"][class*="isFullScreen"] & {
+    width: 100%;
+    height: inherit;
+    max-height: inherit;
+  }
 }
 
 .item {
@@ -74,6 +100,16 @@
 
   &.isActive {
     height: auto;
+  }
+
+  [class*="isMediaMode"] & {
+    max-height: inherit;
+    object-fit: cover;
+
+    > * {
+      max-height: inherit;
+      object-fit: cover;
+    }
   }
 }
 

@@ -407,6 +407,8 @@ export const EffectExamples = () => {
           onClose={modalWithSlideShowIsActiveOnClose}
           isOpen={modalWithSlideShowIsActive}
           closeFunction={modalWithSlideShowIsActiveOnClose}
+          mode={'media'}
+          hideCropButton={true}
         >
           <SlideShow isVisible={modalWithSlideShowIsActive} mode={'modal'}>
             <img src="/assets/img/1.jpg" alt="" />

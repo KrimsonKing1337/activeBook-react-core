@@ -22,6 +22,7 @@ export type ModalProps = {
   closeFunction: Func;
   mode?: ModalMode;
   hideExpandButton?: boolean;
+  hideCropButton?: boolean;
   onClose: Func;
 };
 
@@ -32,6 +33,7 @@ export const Modal = ({
   closeFunction,
   mode = null,
   hideExpandButton = false,
+  hideCropButton = false,
 }: ModalProps) => {
   const history = useHistory();
   const { pathname } = useLocation();
@@ -43,6 +45,11 @@ export const Modal = ({
   const [isZooming, setIsZooming] = useState(false);
 
   const overflowRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const iconCloseRef = useRef<HTMLDivElement>(null);
+  const iconExpandRef = useRef<HTMLDivElement>(null);
+  const iconCompressRef = useRef<HTMLDivElement>(null);
+  const iconCropRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const uuidValue = uuidv4();
@@ -119,6 +126,33 @@ export const Modal = ({
     };
   }, [isFullScreen, isZooming, isCrop]);
 
+  useEffect(() => {
+    const { current } = wrapperRef;
+
+    if (!current) {
+      return;
+    }
+
+    const wrapperWidth = current.clientWidth;
+
+    const applyStyleLeftForElement = (element: HTMLDivElement) => {
+      element.style.left = `${wrapperWidth}px`;
+    };
+
+    const iconClose = iconCloseRef.current;
+    const iconExpand = iconExpandRef.current;
+    const iconCompress = iconCompressRef.current;
+    const iconCrop = iconCropRef.current;
+
+    if (!iconClose || !iconExpand || !iconCompress || !iconCrop) {
+      return;
+    }
+
+    const arr = [iconClose, iconExpand, iconCompress, iconCrop];
+
+    arr.forEach((cur) => applyStyleLeftForElement(cur));
+  }, [isOpen]);
+
   const close = () => {
     closeFunction();
     history.push(IS_CLOSE_LOCATION);
@@ -172,12 +206,14 @@ export const Modal = ({
   const iconExpandClassNames = classNames({
     [styles.iconExpand]: true,
     [styles.isFullScreen]: isFullScreen,
+    [styles.isMediaMode]: isMediaMode,
     [styles.isHidden]: hideExpandButton,
   });
 
   const iconCloseClassNames = classNames({
     [styles.iconClose]: true,
     [styles.isMediaMode]: isMediaMode,
+    [styles.isFullScreen]: isFullScreen,
   });
 
   const iconCompressClassNames = classNames({
@@ -189,6 +225,7 @@ export const Modal = ({
     [styles.iconCrop]: true,
     [styles.isFullScreen]: isFullScreen,
     [styles.isMediaMode]: isMediaMode,
+    [styles.isHidden]: hideCropButton,
   });
 
   const contentClassNames = classNames({
@@ -199,22 +236,22 @@ export const Modal = ({
 
   return (
     <div ref={overflowRef} className={overflowClassNames} onClick={overflowClickHandler}>
-      <div className={modalClassNames}>
+      <div ref={wrapperRef} className={modalClassNames}>
         <div className={styles.wrapper} onClick={(e) => e.stopPropagation()}>
           <div className={'modalToolbar'}>
-            <div className={iconCloseClassNames} onClick={closeIconClickHandler}>
+            <div ref={iconCloseRef} className={iconCloseClassNames} onClick={closeIconClickHandler}>
               <FontAwesomeIcon icon={faTimes} />
             </div>
 
-            <div className={iconExpandClassNames} onClick={() => setIsFullScreen(true)}>
+            <div ref={iconExpandRef} className={iconExpandClassNames} onClick={() => setIsFullScreen(true)}>
               <FontAwesomeIcon icon={faExpand} />
             </div>
 
-            <div className={iconCompressClassNames} onClick={() => setIsFullScreen(false)}>
+            <div ref={iconCompressRef} className={iconCompressClassNames} onClick={() => setIsFullScreen(false)}>
               <FontAwesomeIcon icon={faCompress} />
             </div>
 
-            <div className={iconCropClassNames} onClick={() => setIsCrop(!isCrop)}>
+            <div ref={iconCropRef} className={iconCropClassNames} onClick={() => setIsCrop(!isCrop)}>
               <FontAwesomeIcon icon={faCrop} />
             </div>
           </div>
