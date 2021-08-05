@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import classNames from 'classnames';
 
@@ -15,9 +16,15 @@ import styles from './AppWrapper.scss';
 
 export const AppWrapper = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const config = useSelector(configSelectors.all);
   const volume = useSelector(volumeSelectors.all);
   const isLoading = useSelector(mainSelectors.isLoading);
+
+  // сбрасываю адресную строку
+  useEffect(() => {
+    history.push('/');
+  }, []);
 
   useEffect(() => {
     const configAsJson = localStorage.getItem('config');
