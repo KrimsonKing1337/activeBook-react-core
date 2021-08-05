@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import React from 'react';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 
 import Hammer from 'hammerjs';
 import { v4 as uuidv4 } from 'uuid';
@@ -14,120 +14,141 @@ const IS_CLOSE_LOCATION = '/';
 
 type Func = () => void;
 
-type ModalMode = 'media' |  null;
+type ModalMode = 'media' | null;
 
 export type ModalProps = {
   children: React.ReactNode;
   isOpen: boolean;
-  closeFunction: Func;
+  closeFunction: Func; // todo: убрать onClose?
   mode?: ModalMode;
   hideExpandButton?: boolean;
   hideCropButton?: boolean;
   onClose: Func;
 };
 
-export const Modal = ({
-  children,
-  onClose,
-  isOpen,
-  closeFunction,
-  mode = null,
-  hideExpandButton = false,
-  hideCropButton = false,
-}: ModalProps) => {
-  const history = useHistory();
-  const { pathname } = useLocation();
+type Props = RouteComponentProps & ModalProps;
 
-  const [componentUuid, setComponentUuid] = useState('');
-  const [isFullScreen, setIsFullScreen] = useState(false);
-  const [isCrop, setIsCrop] = useState(true);
-  const [prevLocationPath, setPrevLocationPath] = useState(IS_CLOSE_LOCATION);
-  const [isZooming, setIsZooming] = useState(false);
+type ModalState = {
+  componentUuid: string;
+  isFullScreen: boolean;
+  isCrop: boolean;
+  prevLocationPath: string;
+  isZooming: boolean;
+};
 
-  const overflowRef = useRef<HTMLDivElement>(null);
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const iconCloseRef = useRef<HTMLDivElement>(null);
-  const iconExpandRef = useRef<HTMLDivElement>(null);
-  const iconCompressRef = useRef<HTMLDivElement>(null);
-  const iconCropRef = useRef<HTMLDivElement>(null);
+class ModalComponent extends React.Component<Props, ModalState> {
+  static defaultProps = {
+    mode: null,
+    hideExpandButton: false,
+    hideCropButton: false,
+  };
 
-  useEffect(() => {
-    const uuidValue = uuidv4();
+  private hammertime: HammerManager | null;
 
-    setComponentUuid(uuidValue);
-  }, []);
+  private readonly overflowRef: React.RefObject<HTMLDivElement>;
+  private readonly wrapperRef: React.RefObject<HTMLDivElement>;
+  private readonly iconCloseRef: React.RefObject<HTMLDivElement>;
+  private readonly iconExpandRef: React.RefObject<HTMLDivElement>;
+  private readonly iconCompressRef: React.RefObject<HTMLDivElement>;
+  private readonly iconCropRef: React.RefObject<HTMLDivElement>;
 
-  const isMediaMode = mode === 'media';
+  constructor(props: Props) {
+    super(props);
 
-  /*
-  * todo: мне кажется, я тут какую-то костыльную хрень придумал.
-  *  эта штука будет срабатывать каждый раз, когда меняется pathname по всему приложению.
-  *  и так по всех компонентах, где я использую похожую логику:
-  *  Menu, TableOfContents, Bookmarks.
-  *  разобраться как сделать нормально, если это возможно (посмотреть в сторону Switch у Router)
-  * */
-  useEffect(() => {
-    if (!componentUuid) {
-      return;
+    this.overflowRef = React.createRef();
+    this.wrapperRef = React.createRef();
+    this.iconCloseRef = React.createRef();
+    this.iconExpandRef = React.createRef();
+    this.iconCompressRef = React.createRef();
+    this.iconCropRef = React.createRef();
+
+    this.hammertime = null;
+
+    this.state = {
+      componentUuid: '',
+      isFullScreen: false,
+      isCrop: false,
+      prevLocationPath: IS_CLOSE_LOCATION,
+      isZooming: false,
+    };
+  }
+
+  componentDidMount() {
+    this.setUuid();
+    this.initHammer();
+  }
+
+  componentWillUnmount() {
+    this.destroyHammer();
+  }
+
+  componentDidUpdate(prevProps: Props) {
+    const { isOpen, location } = this.props;
+    const { pathname } = location;
+
+    if (isOpen !== prevProps.isOpen && isOpen) {
+      this.setStyleLeftForIcons();
+      this.setHistory();
     }
 
-    if (!prevLocationPath.includes(componentUuid) && !pathname.includes(componentUuid)) {
-      return;
+    if (pathname !== prevProps.location.pathname) {
+      this.navigatorBackHandler();
     }
+  }
 
-    if (prevLocationPath !== pathname) {
-      if (pathname === IS_CLOSE_LOCATION) {
-        close();
-      }
-
-      setPrevLocationPath(pathname);
-    }
-  }, [pathname]);
-
-  useEffect(() => {
-    if (!isOpen) {
-      return;
-    }
-
-    const path =`${IS_OPEN_LOCATION}/${componentUuid}`;
-
-    history.push(path);
-  }, [isOpen]);
-
-  // todo: инициализировать один раз, но переменные в зависимостях шоб были актуальные (они нужны в хэндлерах)
-  useEffect(() => {
-    const { current } = overflowRef;
+  initHammer = () => {
+    const { current } = this.overflowRef;
 
     if (!current) {
       return;
     }
 
-    const hammertime = new Hammer(current);
+    this.hammertime = new Hammer(current);
 
-    hammertime.get('tap').set({
+    this.hammertime.get('tap').set({
       taps: 2,
     });
 
-    hammertime.get('pinch').set({
+    this.hammertime.get('pinch').set({
       enable: true,
       threshold: 0.5,
     });
 
-    hammertime.on('tap', doubleTapHandler);
-    hammertime.on('pinchout', zoomInHandler);
-    hammertime.on('pinchin', zoomOutHandler);
-    hammertime.on('pinchend pinchcancel', () => setIsZooming(false));
+    this.hammertime.on('tap', this.doubleTapHandler);
+    this.hammertime.on('pinchout', this.zoomInHandler);
+    this.hammertime.on('pinchin', this.zoomOutHandler);
+    this.hammertime.on('pinchend pinchcancel', () => this.setState({ isZooming: false }));
+  };
 
-    return () => {
-      setIsZooming(false);
-      hammertime.off('tap');
-      hammertime.off('pinch');
-      hammertime.destroy();
-    };
-  }, [isFullScreen, isZooming, isCrop]);
+  destroyHammer = () => {
+    this.setState({ isZooming: false });
 
-  useEffect(() => {
-    const { current } = wrapperRef;
+    if (!this.hammertime) {
+      return;
+    }
+
+    this.hammertime.off('tap');
+    this.hammertime.off('pinch');
+    this.hammertime.destroy();
+  };
+
+  setUuid = () => {
+    const uuidValue = uuidv4();
+
+    this.setState({ componentUuid: uuidValue });
+  };
+
+  setHistory = () => {
+    const { history } = this.props;
+    const { componentUuid } = this.state;
+
+    const path = `${IS_OPEN_LOCATION}/${componentUuid}`;
+
+    history.push(path);
+  }
+
+  setStyleLeftForIcons = () => {
+    const { current } = this.wrapperRef;
 
     if (!current) {
       return;
@@ -139,10 +160,10 @@ export const Modal = ({
       element.style.left = `${wrapperWidth}px`;
     };
 
-    const iconClose = iconCloseRef.current;
-    const iconExpand = iconExpandRef.current;
-    const iconCompress = iconCompressRef.current;
-    const iconCrop = iconCropRef.current;
+    const iconClose = this.iconCloseRef.current;
+    const iconExpand = this.iconExpandRef.current;
+    const iconCompress = this.iconCompressRef.current;
+    const iconCrop = this.iconCropRef.current;
 
     if (!iconClose || !iconExpand || !iconCompress || !iconCrop) {
       return;
@@ -151,116 +172,169 @@ export const Modal = ({
     const arr = [iconClose, iconExpand, iconCompress, iconCrop];
 
     arr.forEach((cur) => applyStyleLeftForElement(cur));
-  }, [isOpen]);
+  };
 
-  const close = () => {
+  // todo: вызывается дважды
+  close = () => {
+    const { closeFunction, onClose, history } = this.props;
+
     closeFunction();
+
     history.push(IS_CLOSE_LOCATION);
 
     onClose();
-  };
+  }
 
-  const closeIconClickHandler = () => close();
-  const overflowClickHandler = () => close();
-  const doubleTapHandler = () => {
-    setIsFullScreen(!isFullScreen);
-  };
+  overflowClickHandler = () => this.close();
+  closeIconClickHandler = () => this.close();
+  expandIconClickHandler = () => this.setState({ isFullScreen: true });
+  compressIconClickHandler = () => this.setState({ isFullScreen: false });
+  cropIconClickHandler = () => this.setState({ isCrop: !this.state.isCrop });
 
-  const zoomInHandler = () => {
+  zoomInHandler = () => {
+    const { isFullScreen, isZooming } = this.state;
+
     if (!isFullScreen) {
-      setIsZooming(true);
-      setIsFullScreen(true);
+      this.setState({
+        isZooming: true,
+        isFullScreen: true,
+      });
 
       return;
     }
 
     if (!isZooming) {
-      setIsCrop(true);
+      this.setState({ isCrop: true });
     }
   };
 
-  const zoomOutHandler = () => {
+  zoomOutHandler = () => {
+    const { isCrop, isZooming } = this.state;
+
     if (isCrop) {
-      setIsZooming(true);
-      setIsCrop(false);
+      this.setState({
+        isZooming: true,
+        isCrop: false,
+      });
 
       return;
     }
 
     if (!isZooming) {
-      setIsFullScreen(false);
+      this.setState({ isFullScreen: false });
     }
   };
 
-  const overflowClassNames = classNames({
-    [styles.overflow]: true,
-    [styles.isOpen]: isOpen,
-  });
+  doubleTapHandler = () => this.setState({ isFullScreen: !this.state.isFullScreen });
 
-  const modalClassNames = classNames({
-    [styles.modal]: true,
-    [styles.isFullScreen]: isFullScreen,
-    [styles.isMediaMode]: isMediaMode,
-  });
+  /*
+  * todo: мне кажется, я тут какую-то костыльную хрень придумал.
+  *  эта штука будет срабатывать каждый раз, когда меняется pathname по всему приложению.
+  *  и так по всех компонентах, где я использую похожую логику:
+  *  Menu, TableOfContents, Bookmarks.
+  *  разобраться как сделать нормально, если это возможно (посмотреть в сторону Switch у Router)
+  * */
+  navigatorBackHandler = () => {
+    const { location } = this.props;
+    const { componentUuid, prevLocationPath } = this.state;
 
-  const iconExpandClassNames = classNames({
-    [styles.iconExpand]: true,
-    [styles.isFullScreen]: isFullScreen,
-    [styles.isMediaMode]: isMediaMode,
-    [styles.isHidden]: hideExpandButton,
-  });
+    const { pathname } = location;
 
-  const iconCloseClassNames = classNames({
-    [styles.iconClose]: true,
-    [styles.isMediaMode]: isMediaMode,
-    [styles.isFullScreen]: isFullScreen,
-  });
+    if (!componentUuid) {
+      return;
+    }
 
-  const iconCompressClassNames = classNames({
-    [styles.iconCompress]: true,
-    [styles.isFullScreen]: isFullScreen,
-  });
+    if (!prevLocationPath.includes(componentUuid) && !pathname.includes(componentUuid)) {
+      return;
+    }
 
-  const iconCropClassNames = classNames({
-    [styles.iconCrop]: true,
-    [styles.isFullScreen]: isFullScreen,
-    [styles.isMediaMode]: isMediaMode,
-    [styles.isHidden]: hideCropButton,
-  });
+    if (prevLocationPath !== pathname) {
+      if (pathname === IS_CLOSE_LOCATION) {
+        this.close();
+      }
 
-  const contentClassNames = classNames({
-    [styles.content]: true,
-    [styles.isFullScreen]: isFullScreen,
-    [styles.isCrop]: isCrop,
-  });
+      this.setState({ prevLocationPath: pathname });
+    }
+  };
 
-  return (
-    <div ref={overflowRef} className={overflowClassNames} onClick={overflowClickHandler}>
-      <div ref={wrapperRef} className={modalClassNames}>
-        <div className={styles.wrapper} onClick={(e) => e.stopPropagation()}>
-          <div className={'modalToolbar'}>
-            <div ref={iconCloseRef} className={iconCloseClassNames} onClick={closeIconClickHandler}>
-              <FontAwesomeIcon icon={faTimes} />
+  render() {
+    const { children, isOpen, hideExpandButton, hideCropButton, mode } = this.props;
+    const { isFullScreen, isCrop } = this.state;
+
+    const isMediaMode = mode === 'media';
+
+    const overflowClassNames = classNames({
+      [styles.overflow]: true,
+      [styles.isOpen]: isOpen,
+    });
+
+    const modalClassNames = classNames({
+      [styles.modal]: true,
+      [styles.isFullScreen]: isFullScreen,
+      [styles.isMediaMode]: isMediaMode,
+    });
+
+    const iconExpandClassNames = classNames({
+      [styles.iconExpand]: true,
+      [styles.isFullScreen]: isFullScreen,
+      [styles.isMediaMode]: isMediaMode,
+      [styles.isHidden]: hideExpandButton,
+    });
+
+    const iconCloseClassNames = classNames({
+      [styles.iconClose]: true,
+      [styles.isMediaMode]: isMediaMode,
+      [styles.isFullScreen]: isFullScreen,
+    });
+
+    const iconCompressClassNames = classNames({
+      [styles.iconCompress]: true,
+      [styles.isFullScreen]: isFullScreen,
+    });
+
+    const iconCropClassNames = classNames({
+      [styles.iconCrop]: true,
+      [styles.isFullScreen]: isFullScreen,
+      [styles.isMediaMode]: isMediaMode,
+      [styles.isHidden]: hideCropButton,
+    });
+
+    const contentClassNames = classNames({
+      [styles.content]: true,
+      [styles.isFullScreen]: isFullScreen,
+      [styles.isCrop]: isCrop,
+    });
+
+    return (
+      <div ref={this.overflowRef} className={overflowClassNames} onClick={() => this.overflowClickHandler()}>
+        <div ref={this.wrapperRef} className={modalClassNames}>
+          <div className={styles.wrapper} onClick={(e) => e.stopPropagation()}>
+            <div className={'modalToolbar'}>
+              <div ref={this.iconCloseRef} className={iconCloseClassNames} onClick={() => this.closeIconClickHandler()}>
+                <FontAwesomeIcon icon={faTimes} />
+              </div>
+
+              <div ref={this.iconExpandRef} className={iconExpandClassNames} onClick={() => this.expandIconClickHandler()}>
+                <FontAwesomeIcon icon={faExpand} />
+              </div>
+
+              <div ref={this.iconCompressRef} className={iconCompressClassNames} onClick={() => this.compressIconClickHandler()}>
+                <FontAwesomeIcon icon={faCompress} />
+              </div>
+
+              <div ref={this.iconCropRef} className={iconCropClassNames} onClick={() => this.cropIconClickHandler()}>
+                <FontAwesomeIcon icon={faCrop} />
+              </div>
             </div>
 
-            <div ref={iconExpandRef} className={iconExpandClassNames} onClick={() => setIsFullScreen(true)}>
-              <FontAwesomeIcon icon={faExpand} />
+            <div className={contentClassNames}>
+              {children}
             </div>
-
-            <div ref={iconCompressRef} className={iconCompressClassNames} onClick={() => setIsFullScreen(false)}>
-              <FontAwesomeIcon icon={faCompress} />
-            </div>
-
-            <div ref={iconCropRef} className={iconCropClassNames} onClick={() => setIsCrop(!isCrop)}>
-              <FontAwesomeIcon icon={faCrop} />
-            </div>
-          </div>
-
-          <div className={contentClassNames}>
-            { children }
           </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
+
+export const Modal = withRouter(ModalComponent);
