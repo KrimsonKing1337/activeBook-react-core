@@ -305,7 +305,6 @@ export const EffectExamples = () => {
         />
 
         <Modal
-          onClose={modalWithImgIsActiveOnClose}
           isOpen={modalWithImgIsActive}
           closeFunction={modalWithImgIsActiveOnClose}
           mode={'media'}
@@ -322,7 +321,6 @@ export const EffectExamples = () => {
         />
 
         <Modal
-          onClose={modalWithVideoIsActiveOnClose}
           isOpen={modalWithVideoIsActive}
           closeFunction={modalWithVideoIsActiveOnClose}
           mode={'media'}
@@ -339,11 +337,7 @@ export const EffectExamples = () => {
           onClickOff={() => buttonForModalWithVideoClickHandler(false)}
         />
 
-        <Modal
-          onClose={modalWithTextIsActiveOnClose}
-          isOpen={modalWithTextIsActive}
-          closeFunction={modalWithTextIsActiveOnClose}
-        >
+        <Modal isOpen={modalWithTextIsActive} closeFunction={modalWithTextIsActiveOnClose}>
           <div>
             Товарищи! начало повседневной работы по формированию позиции играет важную роль в формировании систем
             массового участия. С другой стороны дальнейшее развитие различных форм деятельности играет важную роль в
@@ -369,11 +363,7 @@ export const EffectExamples = () => {
           onClickOff={() => buttonForModalWithTextClickHandler(false)}
         />
 
-        <Modal
-          onClose={modalWithAnyIsActiveOnClose}
-          isOpen={modalWithAnyIsActive}
-          closeFunction={modalWithAnyIsActiveOnClose}
-        >
+        <Modal isOpen={modalWithAnyIsActive} closeFunction={modalWithAnyIsActiveOnClose}>
           <div>
             <img src="/assets/img/cinemagraph.gif" alt="" />
 
@@ -404,7 +394,6 @@ export const EffectExamples = () => {
         />
 
         <Modal
-          onClose={modalWithSlideShowIsActiveOnClose}
           isOpen={modalWithSlideShowIsActive}
           closeFunction={modalWithSlideShowIsActiveOnClose}
           mode={'media'}
@@ -426,11 +415,7 @@ export const EffectExamples = () => {
           onClickOff={() => buttonForModalWithSlideShowClickHandler(false)}
         />
 
-        <Modal
-          onClose={modalWithSlideShowWithAnyIsActiveOnClose}
-          isOpen={modalWithSlideShowWithAnyIsActive}
-          closeFunction={modalWithSlideShowWithAnyIsActiveOnClose}
-        >
+        <Modal isOpen={modalWithSlideShowWithAnyIsActive} closeFunction={modalWithSlideShowWithAnyIsActiveOnClose}>
           <SlideShow isVisible={modalWithSlideShowWithAnyIsActive} mode={'modal'}>
             <img src="/assets/img/1.jpg" alt="" />
 
@@ -465,7 +450,6 @@ export const EffectExamples = () => {
         />
 
         <ModalDialog
-          onClose={modalWithConformIsActiveOnClose}
           isOpen={modalWithConfirmIsActive}
           closeFunction={modalWithConformIsActiveOnClose}
           onConfirm={modalWithConformIsActiveOnClose}
@@ -547,11 +531,7 @@ export const EffectExamples = () => {
         </div>
 
         <div className={styles.item}>
-          <Modal
-            onClose={modalWithEasterEggIsActiveOnClose}
-            isOpen={modalWithEasterEggIsActive}
-            closeFunction={modalWithEasterEggIsActiveOnClose}
-          >
+          <Modal isOpen={modalWithEasterEggIsActive} closeFunction={modalWithEasterEggIsActiveOnClose}>
             Вы нашли пасхалку! Вот вам ачивка
           </Modal>
 

@@ -19,11 +19,10 @@ type ModalMode = 'media' | null;
 export type ModalProps = {
   children: React.ReactNode;
   isOpen: boolean;
-  closeFunction: Func; // todo: убрать onClose?
+  closeFunction: Func;
   mode?: ModalMode;
   hideExpandButton?: boolean;
   hideCropButton?: boolean;
-  onClose: Func;
 };
 
 type Props = RouteComponentProps & ModalProps;
@@ -174,15 +173,12 @@ class ModalComponent extends React.Component<Props, ModalState> {
     arr.forEach((cur) => applyStyleLeftForElement(cur));
   };
 
-  // todo: вызывается дважды
   close = () => {
-    const { closeFunction, onClose, history } = this.props;
+    const { closeFunction, history } = this.props;
 
     closeFunction();
 
     history.push(IS_CLOSE_LOCATION);
-
-    onClose();
   }
 
   overflowClickHandler = () => this.close();
