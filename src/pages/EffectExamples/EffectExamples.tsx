@@ -324,9 +324,9 @@ export const EffectExamples = () => {
           isOpen={modalWithVideoIsActive}
           closeFunction={modalWithVideoIsActiveOnClose}
           mode={'media'}
-          hideExpandButton={true}
         >
-          <video src="/assets/videos/TV_static-2.mp4" loop autoPlay muted controls />
+          {/* todo: видеоплеер, controls тут мешают элементам управления модалки */}
+          <video src="/assets/videos/TV_static-2.mp4" loop autoPlay muted />
         </Modal>
 
         <Toggle

@@ -286,6 +286,7 @@ class ModalComponent extends React.Component<Props, ModalState> {
     const iconCompressClassNames = classNames({
       [styles.iconCompress]: true,
       [styles.isFullScreen]: isFullScreen,
+      [styles.isMediaMode]: isMediaMode,
     });
 
     const iconCropClassNames = classNames({
@@ -298,6 +299,7 @@ class ModalComponent extends React.Component<Props, ModalState> {
     const contentClassNames = classNames({
       [styles.content]: true,
       [styles.isFullScreen]: isFullScreen,
+      [styles.isMediaMode]: isMediaMode,
       [styles.isCrop]: isCrop,
     });
 

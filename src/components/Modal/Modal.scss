@@ -63,6 +63,10 @@ $halfAppWidth: $appWidth / 2;
 .wrapper {
   position: relative;
 
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
   width: 100%;
 }
 
@@ -84,7 +88,7 @@ $halfAppWidth: $appWidth / 2;
   height: 40px;
   margin: auto;
 
-  transform: translateY(25%);
+  transform: translateY(25%) translateX(75%);
 
   &.isMediaMode {
     position: absolute;
@@ -93,12 +97,6 @@ $halfAppWidth: $appWidth / 2;
     left: auto !important;
 
     transform: none;
-  }
-
-  &.isFullScreen {
-    position: absolute;
-    right: 8px;
-    left: auto !important;
   }
 
   @include modal-content-icon;
@@ -121,19 +119,10 @@ $halfAppWidth: $appWidth / 2;
 
   margin: auto;
 
-  transform: translateY(-25%);
+  transform: translateY(-25%) translateX(75%);
 
   &.isHidden {
     display: none !important;
-  }
-
-  &.isFullScreen {
-    position: absolute;
-    right: 8px;
-    bottom: 5px;
-    left: auto !important;
-
-    display: none;
   }
 
   &.isMediaMode {
@@ -145,12 +134,14 @@ $halfAppWidth: $appWidth / 2;
     transform: none;
   }
 
+  &.isFullScreen {
+    display: none;
+  }
+
   @include modal-content-icon;
 }
 
 .iconCompress {
-  position: fixed;
-
   display: none;
 
   &.isFullScreen {
@@ -185,18 +176,26 @@ $halfAppWidth: $appWidth / 2;
 }
 
 .content {
-  &.isFullScreen {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100vh;
+  height: 80vh;
 
+  &.isFullScreen {
+    height: 100vh;
+  }
+
+  &.isMediaMode {
     > img,
     > video {
       width: inherit;
       height: inherit;
       object-fit: contain;
+    }
+
+    &.isFullScreen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100vh;
     }
   }
 
