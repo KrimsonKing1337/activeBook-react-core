@@ -24,6 +24,13 @@
 
     box-shadow: none;
   }
+
+  [class*="isFullScreen"] & {
+    align-items: center;
+    width: inherit;
+    max-width: inherit;
+    height: inherit;
+  }
 }
 
 .slideShow {
@@ -51,11 +58,7 @@
   }
 
   [class*="isFullScreen"] & {
-    align-items: center;
-    width: inherit;
-    max-width: inherit;
     height: inherit;
-    max-height: 100vh;
   }
 
   &.isOverflow {
@@ -77,6 +80,10 @@
 
   &.isOverflow {
     align-items: flex-start;
+  }
+
+  &.isModalMode {
+    height: inherit;
   }
 
   [class*="isMediaMode"][class*="isFullScreen"] & {
@@ -102,8 +109,9 @@
     object-fit: cover;
 
     > * {
+      height: inherit;
       max-height: inherit;
-      object-fit: cover;
+      object-fit: inherit;
     }
   }
 }

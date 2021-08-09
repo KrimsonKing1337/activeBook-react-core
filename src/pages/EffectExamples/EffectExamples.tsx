@@ -418,7 +418,6 @@ export const EffectExamples = () => {
         <Modal
           isOpen={modalWithSlideShowWithAnyIsActive}
           closeFunction={modalWithSlideShowWithAnyIsActiveOnClose}
-          hideExpandButton={true}
         >
           <SlideShow isVisible={modalWithSlideShowWithAnyIsActive} mode={'modal'}>
             <img src="/assets/img/1.jpg" alt="" />
@@ -458,6 +457,7 @@ export const EffectExamples = () => {
           closeFunction={modalWithConformIsActiveOnClose}
           onConfirm={modalWithConformIsActiveOnClose}
           onCancel={modalWithConformIsActiveOnClose}
+          hideExpandButton={true}
         >
           <div>
             Вы действительно хотите сделать действие?
@@ -535,7 +535,11 @@ export const EffectExamples = () => {
         </div>
 
         <div className={styles.item}>
-          <Modal isOpen={modalWithEasterEggIsActive} closeFunction={modalWithEasterEggIsActiveOnClose}>
+          <Modal
+            isOpen={modalWithEasterEggIsActive}
+            closeFunction={modalWithEasterEggIsActiveOnClose}
+            hideExpandButton={true}
+          >
             Вы нашли пасхалку! Вот вам ачивка
           </Modal>
 
