@@ -1,8 +1,6 @@
 @import "~styles/__mixins.scss";
 @import "~styles/__variables.scss";
 
-$halfAppWidth: $appWidth / 2;
-
 .overflow {
   position: fixed;
   top: 0;
@@ -176,7 +174,7 @@ $halfAppWidth: $appWidth / 2;
 }
 
 .content {
-  height: 80vh;
+  height: $modalHeight;
 
   &.isFullScreen {
     height: 100vh;
