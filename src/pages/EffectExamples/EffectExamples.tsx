@@ -415,7 +415,11 @@ export const EffectExamples = () => {
           onClickOff={() => buttonForModalWithSlideShowClickHandler(false)}
         />
 
-        <Modal isOpen={modalWithSlideShowWithAnyIsActive} closeFunction={modalWithSlideShowWithAnyIsActiveOnClose}>
+        <Modal
+          isOpen={modalWithSlideShowWithAnyIsActive}
+          closeFunction={modalWithSlideShowWithAnyIsActiveOnClose}
+          hideExpandButton={true}
+        >
           <SlideShow isVisible={modalWithSlideShowWithAnyIsActive} mode={'modal'}>
             <img src="/assets/img/1.jpg" alt="" />
 

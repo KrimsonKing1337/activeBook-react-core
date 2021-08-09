@@ -35,6 +35,7 @@ export class SlideShow extends React.Component<SlideShowProp, SlideShowState> {
   private hammertime: HammerManager | null;
   private readonly itemsWrapperRef: React.RefObject<HTMLDivElement>;
   private readonly wrapperRef: React.RefObject<HTMLDivElement>;
+  private readonly slideShowRef: React.RefObject<HTMLDivElement>;
 
   childrenAsArray = React.Children.toArray(this.props.children);
 
@@ -43,6 +44,7 @@ export class SlideShow extends React.Component<SlideShowProp, SlideShowState> {
 
     this.itemsWrapperRef = React.createRef();
     this.wrapperRef = React.createRef();
+    this.slideShowRef = React.createRef();
     this.hammertime = null;
 
     this.state = {
@@ -152,19 +154,23 @@ export class SlideShow extends React.Component<SlideShowProp, SlideShowState> {
   };
 
   setIsOverflow = () => {
-    const itemsWrapperElement = this.itemsWrapperRef?.current;
-
-    if (!itemsWrapperElement) {
+    if (this.props.mode !== 'modal') {
       return;
     }
 
-    const activeItem = itemsWrapperElement.querySelector(`.${styles.isActive}`) as HTMLElement;
+    const slideShowElement = this.slideShowRef?.current;
+
+    if (!slideShowElement) {
+      return;
+    }
+
+    const activeItem = slideShowElement.querySelector(`.${styles.isActive}`) as HTMLElement;
 
     if (!activeItem) {
       return;
     }
 
-    const isOverflow = activeItem.offsetHeight > itemsWrapperElement.offsetHeight;
+    const isOverflow = activeItem.offsetHeight > slideShowElement.offsetHeight;
 
     this.setState({ isOverflow });
   };
@@ -229,7 +235,7 @@ export class SlideShow extends React.Component<SlideShowProp, SlideShowState> {
           </div>
         </div>
 
-        <div className={slideShowClassNames}>
+        <div ref={this.slideShowRef} className={slideShowClassNames}>
           <div ref={this.itemsWrapperRef} className={itemsWrapperClassNames}>
             {this.childrenAsArray.map((childCur, index) => {
               const itemClassNames = classNames({

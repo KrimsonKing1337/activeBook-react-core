@@ -44,10 +44,6 @@
   */
   touch-action: pan-y !important;
 
-  &.isOverflow {
-    align-items: flex-start;
-  }
-
   &.isModalMode {
     align-items: center;
     height: $modalHeight;
@@ -62,6 +58,10 @@
     max-height: 100vh;
   }
 
+  &.isOverflow {
+    align-items: flex-start;
+  }
+
   @include scrollbar();
 }
 
@@ -74,12 +74,6 @@
   transition: transform ease 0.15s 0s;
 
   will-change: transform;
-
-  &.isModalMode {
-    width: 100%;
-    height: inherit;
-    max-height: inherit;
-  }
 
   &.isOverflow {
     align-items: flex-start;
