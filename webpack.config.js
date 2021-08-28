@@ -4,7 +4,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const TerserPlugin = require('terser-webpack-plugin');
-
 const path = require('path');
 
 module.exports = (env = {}, argv) => {
@@ -37,20 +36,108 @@ module.exports = (env = {}, argv) => {
     plugins.push(new BundleAnalyzerPlugin());
   }
 
+  const rules = [
+    {
+      test: /\.m?js/,
+      resolve: {
+        fullySpecified: false,
+      },
+    },
+    {
+      test: /\.tsx?$/,
+      use: {
+        loader: 'babel-loader',
+      },
+      exclude: /node_modules/,
+    },
+    {
+      test: /\.s?css$/,
+      use: [
+        'style-loader',
+        {
+          loader: 'css-loader',
+          options: {
+            modules: {
+              localIdentName: '[name]__[local]__[hash:base64:5]',
+            },
+          },
+        },
+        {
+          loader: 'postcss-loader',
+          options: {
+            postcssOptions: {
+              ident: 'postcss',
+              plugins: [
+                require('autoprefixer'),
+              ],
+            },
+          },
+        },
+        { loader: 'sass-loader' },
+      ],
+    },
+    {
+      test: /\.svg$/,
+      oneOf: [
+        {
+          resourceQuery: /sprite/,
+          use: [
+            {
+              loader: 'url-loader',
+              options: {
+                esModule: false,
+              },
+            },
+          ],
+        },
+        {
+          use: ['@svgr/webpack'],
+        },
+      ],
+    },
+    {
+      test: /\.(jpeg|jpg|png|docx)$/i,
+      use: [
+        {
+          loader: 'url-loader',
+          options: {
+            esModule: false,
+          },
+        },
+      ],
+    },
+    { test: /\.(woff|woff2|eot|ttf)$/, use: ['url-loader?limit=100000'] },
+  ];
+
+  if (mobile) {
+    rules.push({
+      test: /\.tsx?$/,
+      loader: 'string-replace-loader',
+      options: {
+        search: '/assets',
+        replace: 'file:///android_asset/www/assets',
+        flags: 'g',
+      },
+    });
+  }
+
+  const buildDir = path.join(__dirname, (mobile ? 'cordova/www' : 'dist'));
+
   return {
     entry: ['core-js/stable', './src/index'],
     mode: webpackMode,
     devtool: !isProd ? 'eval-source-map' : false,
     devServer: {
-      contentBase: path.join(__dirname, 'dist'),
+      contentBase: buildDir,
       port: 3001, // todo
       historyApiFallback: true,
       hot: true,
       liveReload: false,
     },
     output: {
-      publicPath: '/',
-      path: path.join(__dirname, '/dist'),
+      // пустой publicPath нужен для кордовы. она не может найти bundle.min.js, если его путь начинается с '/'
+      publicPath: mobile ? '' : '/',
+      path: buildDir,
       filename: 'bundle.min.js',
     },
     target: !isProd ? 'web' : ['web', 'es5'],
@@ -69,78 +156,7 @@ module.exports = (env = {}, argv) => {
       },
     },
     module: {
-      rules: [
-        {
-          test: /\.m?js/,
-          resolve: {
-            fullySpecified: false,
-          },
-        },
-        {
-          test: /\.tsx?$/,
-          use: {
-            loader: 'babel-loader',
-          },
-          exclude: /node_modules/,
-        },
-        {
-          test: /\.s?css$/,
-          use: [
-            'style-loader',
-            {
-              loader: 'css-loader',
-              options: {
-                modules: {
-                  localIdentName: '[name]__[local]__[hash:base64:5]',
-                },
-              },
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                postcssOptions: {
-                  ident: 'postcss',
-                  plugins: [
-                    require('autoprefixer'),
-                  ],
-                },
-              },
-            },
-            { loader: 'sass-loader' },
-          ],
-        },
-        {
-          test: /\.svg$/,
-          oneOf: [
-            {
-              resourceQuery: /sprite/,
-              use: [
-                {
-                  loader: 'url-loader',
-                  options: {
-                    esModule: false,
-                  },
-                },
-              ],
-            },
-            {
-              use: ['@svgr/webpack'],
-            },
-          ],
-        },
-        {
-          test: /\.(jpeg|jpg|png|docx)$/i,
-          use: [
-            {
-              loader: 'url-loader',
-              options: {
-                esModule: false,
-              },
-            },
-          ],
-        },
-        { test: /\.(woff|woff2|eot|ttf)$/, use: ['url-loader?limit=100000'] },
-      ],
+      rules: rules,
     },
     plugins: plugins,
     optimization: {

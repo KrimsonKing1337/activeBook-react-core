@@ -100,6 +100,7 @@
     "react-router-dom": "^5.2.0",
     "sass": "^1.32.12",
     "sass-loader": "^11.0.1",
+    "string-replace-loader": "^3.0.3",
     "style-loader": "^2.0.0",
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^22.0.0",
