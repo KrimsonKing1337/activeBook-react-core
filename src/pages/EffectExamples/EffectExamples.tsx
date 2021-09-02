@@ -58,6 +58,8 @@ export const EffectExamples = () => {
 
   const [modalWithEasterEggIsActive, setModalWithEasterEggIsActive] = useState(false);
 
+  const [buttonForVibrationIsActive, setButtonForVibrationIsActive] = useState(false);
+
   useEffect(() => {
     const singleSound = new Howl({
       src: ['assets/audios/single.mp3'],
@@ -227,6 +229,24 @@ export const EffectExamples = () => {
   };
 
   const modalWithEasterEggIsActiveOnClose = () => setModalWithEasterEggIsActive(false);
+
+  const buttonForVibrationClickHandler = (value: boolean) => {
+    if (!value) {
+      navigator.vibrate(0);
+
+      setButtonForVibrationIsActive(false);
+    } else {
+      const value = 200;
+
+      navigator.vibrate(value);
+
+      setButtonForVibrationIsActive(true);
+
+      setTimeout(() => {
+        setButtonForVibrationIsActive(false);
+      }, value);
+    }
+  };
 
   return (
     <PageWrapper title={'Эффекты'} subtitle={'Здесь можно посмотреть все возможные эффекты'}>
@@ -546,6 +566,16 @@ export const EffectExamples = () => {
           <EasterEgg onClick={() => setModalWithEasterEggIsActive(true)}>
             Текст с пасхалкой (нажми меня)
           </EasterEgg>
+        </div>
+
+        <div className={styles.item}>
+          <Toggle
+            label={'Вибрация'}
+            isActiveDefault={false}
+            isActive={buttonForVibrationIsActive}
+            onClickOn={() => buttonForVibrationClickHandler(true)}
+            onClickOff={() => buttonForVibrationClickHandler(false)}
+          />
         </div>
       </div>
     </PageWrapper>
