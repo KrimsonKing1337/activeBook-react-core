@@ -39,6 +39,9 @@ jspm_packages/
 # build folders
 dist
 
+# sign for app
+*.keystore
+
 # book data
 /assets/
 sources/
