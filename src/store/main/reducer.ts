@@ -20,6 +20,16 @@ export function mainReducer(state = initialState, action: MainActions): MainStat
       ...state,
       isLoading: action.payload,
     };
+  case actionsTypes.SET_IS_VIBRATION_AVAILABLE:
+    return {
+      ...state,
+      isVibrationAvailable: action.payload,
+    };
+  case actionsTypes.SET_IS_FLASHLIGHT_AVAILABLE:
+    return {
+      ...state,
+      isFlashlightAvailable: action.payload,
+    };
   default:
     return state;
   }
@@ -29,4 +39,6 @@ export const mainSelectors = {
   menuActiveState: (state: RootState) => state.main.menuActiveState,
   bookmarksIsOpen: (state: RootState) => state.main.bookmarksIsOpen,
   isLoading: (state: RootState) => state.main.isLoading,
+  isVibrationAvailable: (state: RootState) => state.main.isVibrationAvailable,
+  isFlashlightAvailable: (state: RootState) => state.main.isFlashlightAvailable,
 };

@@ -6,6 +6,7 @@ import classNames from 'classnames';
 
 import { setAll as setAllVolume } from 'store/volume/actions';
 import { setAll as setAllConfig } from 'store/config/actions';
+import { setIsFlashlightAvailable, setIsVibrationAvailable } from 'store/main/actions';
 import { volumeSelectors } from 'store/volume/reducer';
 import { configSelectors } from 'store/config/reducer';
 import { mainSelectors } from 'store/main/reducer';
@@ -24,6 +25,16 @@ export const AppWrapper = () => {
   // сбрасываю адресную строку
   useEffect(() => {
     history.push('/');
+  }, []);
+
+  useEffect(() => {
+    const canVibrate = !!navigator.vibrate;
+
+    dispatch(setIsVibrationAvailable(canVibrate));
+
+    (window as any).plugins?.flashlight.available((isAvailable: boolean) => {
+      dispatch(setIsFlashlightAvailable(isAvailable));
+    });
   }, []);
 
   useEffect(() => {

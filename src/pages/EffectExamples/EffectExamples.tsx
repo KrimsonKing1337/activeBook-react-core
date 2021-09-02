@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Howl } from 'howler';
 
@@ -12,6 +12,7 @@ import {
   setSideTextActiveState,
 } from 'store/effects/actions';
 import { setIsLoading } from 'store/main/actions';
+import { mainSelectors } from 'store/main/reducer';
 
 import { PageWrapper } from 'components/PageWrapper';
 import { Toggle } from 'components/Menu/components/Toggle';
@@ -26,6 +27,8 @@ import styles from './EffectExamples.scss';
 
 export const EffectExamples = () => {
   const dispatch = useDispatch();
+  const isVibrationAvailable = useSelector(mainSelectors.isVibrationAvailable);
+  const isFlashlightAvailable = useSelector(mainSelectors.isFlashlightAvailable);
 
   const [singleSound, setSingleSound] = useState<Howl>();
   const [loopSound, setLoopSound] = useState<Howl>();
@@ -59,6 +62,7 @@ export const EffectExamples = () => {
   const [modalWithEasterEggIsActive, setModalWithEasterEggIsActive] = useState(false);
 
   const [buttonForVibrationIsActive, setButtonForVibrationIsActive] = useState(false);
+  const [buttonForFlashlightIsActive, setButtonForFlashlightIsActive] = useState(false);
 
   useEffect(() => {
     const singleSound = new Howl({
@@ -245,6 +249,18 @@ export const EffectExamples = () => {
       setTimeout(() => {
         setButtonForVibrationIsActive(false);
       }, value);
+    }
+  };
+
+  const buttonForFlashlightClickHandler = (value: boolean) => {
+    if (!value) {
+      (window as any).plugins.flashlight.switchOff();
+
+      setButtonForFlashlightIsActive(false);
+    } else {
+      (window as any).plugins.flashlight.switchOn();
+
+      setButtonForFlashlightIsActive(true);
     }
   };
 
@@ -568,15 +584,29 @@ export const EffectExamples = () => {
           </EasterEgg>
         </div>
 
-        <div className={styles.item}>
-          <Toggle
-            label={'Вибрация'}
-            isActiveDefault={false}
-            isActive={buttonForVibrationIsActive}
-            onClickOn={() => buttonForVibrationClickHandler(true)}
-            onClickOff={() => buttonForVibrationClickHandler(false)}
-          />
-        </div>
+        {isVibrationAvailable && (
+          <div className={styles.item}>
+            <Toggle
+              label={'Вибрация'}
+              isActiveDefault={false}
+              isActive={buttonForVibrationIsActive}
+              onClickOn={() => buttonForVibrationClickHandler(true)}
+              onClickOff={() => buttonForVibrationClickHandler(false)}
+            />
+          </div>
+        )}
+
+        {isFlashlightAvailable && (
+          <div className={styles.item}>
+            <Toggle
+              label={'Вспышка'}
+              isActiveDefault={false}
+              isActive={buttonForFlashlightIsActive}
+              onClickOn={() => buttonForFlashlightClickHandler(true)}
+              onClickOff={() => buttonForFlashlightClickHandler(false)}
+            />
+          </div>
+        )}
       </div>
     </PageWrapper>
   );
