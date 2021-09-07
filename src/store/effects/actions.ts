@@ -14,7 +14,7 @@ export type SetSideShadowActiveState = {
   payload: EffectsState['sideShadowIsActive'];
 };
 
-export function setMenuActiveState(value: SetSideShadowActiveState['payload']): SetSideShadowActiveState {
+export function setSideShadowActiveState(value: SetSideShadowActiveState['payload']): SetSideShadowActiveState {
   return {
     type: actionsTypes.SET_SIDE_SHADOW_ACTIVE_STATE,
     payload: value,

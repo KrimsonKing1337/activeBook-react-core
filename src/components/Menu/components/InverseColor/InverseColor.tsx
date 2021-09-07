@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setInverseColor } from 'store/config/actions';
 import { configSelectors } from 'store/config/reducer';
 
-import { Toggle } from '../Toggle';
+import { Toggle } from '../../../Toggle';
 
 export const InverseColor = () => {
   const dispatch = useDispatch();

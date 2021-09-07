@@ -1,0 +1,1 @@
+export { FishText } from './FishText';
