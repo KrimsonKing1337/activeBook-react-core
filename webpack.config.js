@@ -8,7 +8,7 @@ const path = require('path');
 
 module.exports = (env = {}, argv) => {
   const webpackMode = argv.mode;
-  const { analyze, mobile } = env;
+  const { analyze, mobile, lib } = env;
   const isProd = webpackMode === 'production';
 
   const plugins = [
@@ -21,20 +21,34 @@ module.exports = (env = {}, argv) => {
         },
       },
     }),
-    new HtmlWebpackPlugin({
-      template: './public/index.ejs',
-      isMobile: !!mobile,
-    }),
-    new CopyWebpackPlugin({
-      patterns: [
-        { from: 'assets', to: 'assets' },
-      ],
-    }),
   ];
+
+  if (!lib) {
+    plugins.push(
+      new HtmlWebpackPlugin({
+        template: './public/index.ejs',
+        isMobile: !!mobile,
+      }),
+      new CopyWebpackPlugin({
+        patterns: [
+          { from: 'assets', to: 'assets' },
+        ],
+      }),
+    );
+  }
 
   if (analyze) {
     plugins.push(new BundleAnalyzerPlugin());
   }
+
+  const tsLoader = !lib
+    ? 'babel-loader'
+    : {
+      loader: 'ts-loader',
+      options: {
+        configFile: 'tsconfig-lib.json',
+      },
+    };
 
   const rules = [
     {
@@ -45,9 +59,12 @@ module.exports = (env = {}, argv) => {
     },
     {
       test: /\.tsx?$/,
-      use: {
-        loader: 'babel-loader',
-      },
+      use: [tsLoader, {
+        loader: 'ifdef-loader',
+        options: {
+          lib: lib,
+        },
+      }],
       exclude: /node_modules/,
     },
     {
@@ -123,8 +140,39 @@ module.exports = (env = {}, argv) => {
 
   const buildDir = path.join(__dirname, (mobile ? 'cordova/www' : 'dist'));
 
+  const entry = lib
+    ? {
+      'lib': './src/lib.ts',
+      'components': './src/components/index.ts',
+    }
+    : [
+      'core-js/stable',
+      './src/index',
+    ];
+
+  const library = lib ? {
+    name: 'core',
+    type: 'umd',
+    umdNamedDefine: true,
+  } : undefined;
+
+  const externals = lib ? {
+    react: {
+      root: 'React',
+      commonjs2: 'react',
+      commonjs: 'react',
+      amd: 'react',
+    },
+    'react-dom': {
+      root: 'ReactDOM',
+      commonjs2: 'react-dom',
+      commonjs: 'react-dom',
+      amd: 'react-dom',
+    },
+  } : undefined;
+
   return {
-    entry: ['core-js/stable', './src/index'],
+    entry: entry,
     mode: webpackMode,
     devtool: !isProd ? 'eval-source-map' : false,
     devServer: {
@@ -137,10 +185,14 @@ module.exports = (env = {}, argv) => {
     output: {
       // пустой publicPath нужен для кордовы. она не может найти bundle.min.js, если его путь начинается с '/'
       publicPath: mobile ? '' : '/',
-      path: buildDir,
-      filename: 'bundle.min.js',
+      path: lib ? path.join(__dirname, 'lib') : buildDir,
+      // filename: 'bundle.min.js',
+      filename: '[name].js',
+      library: library,
+      // umdNamedDefine: true,
     },
     target: !isProd ? 'web' : ['web', 'es5'],
+    externals: externals,
     resolve: {
       extensions: ['.ts', '.tsx', '.js', '.scss'],
       modules: [

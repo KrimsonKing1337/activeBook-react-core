@@ -23,7 +23,7 @@ describe('sagas', () => {
         dispatch: (action: IncrementAction) => dispatched.push(action),
         getState: () => ({ type: actionsTypes.INCREMENT }),
       },
-      incrementSaga
+      incrementSaga,
     ).toPromise();
 
     expect(dispatched).toEqual([{ type: actionsTypes.INCREMENT }]);

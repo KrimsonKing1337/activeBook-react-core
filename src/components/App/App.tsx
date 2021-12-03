@@ -10,7 +10,11 @@ import { AppWrapper } from 'components/AppWrapper';
 import { addTouchSupportForCssHover } from 'utils/touch/addTouchSupportForCssHover';
 import { hideAddressBarInMobileDevices } from 'utils/hideAddressBarInMobileDevices';
 
-export const App = () => {
+type AppProps = {
+  children: React.ReactNode;
+};
+
+export const App = ({ children }: AppProps) => {
   useEffect(() => {
     addTouchSupportForCssHover();
     hideAddressBarInMobileDevices();
@@ -21,7 +25,9 @@ export const App = () => {
       <ConnectedRouter history={history}>
         <Switch>
           <Route path={'/'}>
-            <AppWrapper />
+            <AppWrapper>
+              {children}
+            </AppWrapper>
           </Route>
         </Switch>
       </ConnectedRouter>

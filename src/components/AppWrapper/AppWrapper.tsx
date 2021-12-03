@@ -11,11 +11,13 @@ import { volumeSelectors } from 'store/volume/reducer';
 import { configSelectors } from 'store/config/reducer';
 import { mainSelectors } from 'store/main/reducer';
 
-import { EffectExamples } from 'pages/EffectExamples';
-
 import styles from './AppWrapper.scss';
 
-export const AppWrapper = () => {
+type AppWrapperProps = {
+  children: React.ReactNode;
+};
+
+export const AppWrapper = ({ children }: AppWrapperProps) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const config = useSelector(configSelectors.all);
@@ -73,7 +75,7 @@ export const AppWrapper = () => {
 
   return (
     <div className={appWrapperClassNames}>
-      <EffectExamples />
+      {children}
     </div>
   );
 };

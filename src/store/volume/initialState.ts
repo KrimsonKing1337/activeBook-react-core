@@ -7,5 +7,5 @@ export interface VolumeState {
 export const initialState: VolumeState = {
   common: 100,
   bg: 100,
-  other: 100
+  other: 100,
 };

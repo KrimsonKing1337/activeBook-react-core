@@ -8,25 +8,25 @@ export function setThemeCss(theme: Theme) {
       main: '#a3a3a3',
       secondary: '#828282',
       hover: '#7a7a7a',
-      bg: '#111'
+      bg: '#111',
     },
     orange: {
       main: '#f2994a',
       secondary: '#000',
       hover: '#f2c94c',
-      bg: '#fff'
+      bg: '#fff',
     },
     darkBlue: {
       main: '#728c9a',
       secondary: '#000',
       hover: '#9bc4d9',
-      bg: '#fff'
+      bg: '#fff',
     },
     black: {
       main: '#111',
       secondary: '#000',
       hover: '#a3a3a3',
-      bg: '#fff'
+      bg: '#fff',
     },
   };
 

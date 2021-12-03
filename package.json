@@ -5,6 +5,9 @@
   "scripts": {
     "start": "webpack serve --mode=development --host 0.0.0.0 --disable-host-check",
     "build:web": "webpack --mode=production",
+    "build:lib": "webpack --mode=production --env lib=true",
+    "build:lib-types": "tsc --project tsconfig-lib.json",
+    "build:lib-types-npm-dts": "npm-dts generate -o lib/bundle.min.d.ts",
     "build:android": "webpack --mode=production --env mobile=true",
     "analyze": "webpack --mode=production --env analyze=true",
     "lint": "npm-run-all --parallel lint:*",
@@ -18,6 +21,24 @@
     "release:minor": "changelog -m && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version minor && git push origin && git push origin --tags",
     "release:patch": "changelog -p && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version patch && git push origin && git push origin --tags",
     "lint-staged": "lint-staged"
+  },
+  "files": [
+    "lib/"
+  ],
+  "types": "lib/src/lib.d.ts",
+  "main": "lib/lib.js",
+  "exports": {
+    ".": {
+      "default": "./lib/lib.js"
+    },
+    "./components": {
+      "default": "./lib/components.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "components": ["lib/src/components/index.d.ts"]
+    }
   },
   "husky": {
     "hooks": {
@@ -109,6 +130,7 @@
     "stylelint-scss": "^3.19.0",
     "terser-webpack-plugin": "^5.1.1",
     "ts-jest": "^26.5.5",
+    "ts-loader": "^9.2.6",
     "tslint": "^6.1.3",
     "tslint-react": "^5.0.0",
     "typescript": "^4.2.4",
