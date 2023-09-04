@@ -1,6 +1,6 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'store';
 
-import { counterSelectors, counterActions } from '../../store/counter'
+import { counterSelectors, counterActions } from 'store/counter'
 
 import styles from './Counter.scss';
 
