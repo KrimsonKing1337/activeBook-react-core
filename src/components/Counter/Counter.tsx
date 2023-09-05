@@ -10,15 +10,11 @@ export const Counter = () => {
   const count = useSelector(counterSelectors.count);
 
   const minusClickHandler = () => {
-    const newValue = count - 1;
-
-    dispatch(counterActions.setCount(newValue));
+    dispatch(counterActions.decrement());
   }
 
   const plusClickHandler = () => {
-    const newValue = count + 1;
-
-    dispatch(counterActions.setCount(newValue));
+    dispatch(counterActions.increment());
   }
 
   return (

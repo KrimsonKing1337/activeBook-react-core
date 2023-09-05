@@ -6,12 +6,10 @@ export var Counter = function () {
     var dispatch = useDispatch();
     var count = useSelector(counterSelectors.count);
     var minusClickHandler = function () {
-        var newValue = count - 1;
-        dispatch(counterActions.setCount(newValue));
+        dispatch(counterActions.decrement());
     };
     var plusClickHandler = function () {
-        var newValue = count + 1;
-        dispatch(counterActions.setCount(newValue));
+        dispatch(counterActions.increment());
     };
     return (_jsxs("div", { className: styles.Wrapper, children: [_jsx("button", { onClick: minusClickHandler, children: "-" }), _jsx("div", { children: count }), _jsx("button", { onClick: plusClickHandler, children: "+" })] }));
 };

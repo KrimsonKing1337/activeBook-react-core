@@ -2,9 +2,7 @@
 import { type ReactReduxContextValue } from 'react-redux';
 export declare const store: import("@reduxjs/toolkit/dist/configureStore").ToolkitStore<{
     counter: import("./counter/@types").State;
-}, import("redux").AnyAction, [import("@reduxjs/toolkit").ThunkMiddleware<{
-    counter: import("./counter/@types").State;
-}, import("redux").AnyAction>]>;
+}, import("redux").AnyAction, import("redux-saga").SagaMiddleware<object>[]>;
 export type RootState = ReturnType<typeof store.getState>;
 export declare const storeContext: import("react").Context<ReactReduxContextValue<any, import("redux").AnyAction>>;
 export declare const useStore: () => import("redux").Store<any, import("redux").AnyAction>;
