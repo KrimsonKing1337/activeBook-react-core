@@ -1,0 +1,1 @@
+{"version":3,"file":"removeCssHover.js","sourceRoot":"","sources":["../../../../src/utils/touch/removeCssHover.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,yBAAyB,EAAE,MAAM,6BAA6B,CAAC;AAExE,MAAM,UAAU,cAAc;IAC5B,IAAI,cAAc,IAAI,QAAQ,CAAC,eAAe,EAAE;QAC9C,UAAU,CAAC;YACT;;;;;cAKE;YACF,yBAAyB,CAAC,QAAQ,EAAE,eAAe,CAAC,CAAC;QACvD,CAAC,EAAE,CAAC,CAAC,CAAC;KACP;AACH,CAAC"}

@@ -16,7 +16,7 @@ function* watchIncrement() {
 function* watchDecrement() {
   const count: State['count'] = yield select(selectors.count);
 
-  const newValue = count + 1;
+  const newValue = count - 1;
 
   yield put(actions.setCount(newValue));
 }

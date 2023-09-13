@@ -1,0 +1,1 @@
+{"version":3,"file":"selectors.js","sourceRoot":"","sources":["../../../../src/store/bookmarks/selectors.ts"],"names":[],"mappings":";;;AAEa,QAAA,SAAS,GAAG;IACvB,MAAM,EAAE,UAAC,KAAgB,IAAK,OAAA,KAAK,CAAC,SAAS,CAAC,MAAM,EAAtB,CAAsB;IACpD,SAAS,EAAE,UAAC,KAAgB,IAAK,OAAA,KAAK,CAAC,SAAS,CAAC,SAAS,EAAzB,CAAyB;CAC3D,CAAC"}

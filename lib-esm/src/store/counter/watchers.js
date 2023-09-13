@@ -50,7 +50,7 @@ function watchDecrement() {
             case 0: return [4 /*yield*/, select(selectors.count)];
             case 1:
                 count = _a.sent();
-                newValue = count + 1;
+                newValue = count - 1;
                 return [4 /*yield*/, put(actions.setCount(newValue))];
             case 2:
                 _a.sent();
