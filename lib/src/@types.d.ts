@@ -6,13 +6,16 @@ export type Range = {
     to: number;
 };
 export type RangeEffect = {
-    id: string;
     type: string;
-    src: string;
-    fadeOutSpeed: number;
-    fadeInSpeed: number;
     range: Range[];
 };
+export type AudioRangeEffect = RangeEffect & {
+    id: string;
+    src: string;
+    fadeOutSpeed?: number;
+    delay?: number;
+};
+export type DotsRangeEffect = RangeEffect;
 export type Theme = 'dark' | 'darkBlue' | 'orange' | 'black';
 export type HowlExtended = Howl & {
     _howls: Howl[];
