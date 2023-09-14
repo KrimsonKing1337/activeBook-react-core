@@ -1,0 +1,30 @@
+@import '~styles/__mixins.scss';
+
+.item {
+  position: relative;
+
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  height: 24px;
+  margin-left: auto;
+
+  cursor: pointer;
+
+  &:nth-child(1) {
+    margin-left: 0;
+  }
+
+  svg {
+    will-change: fill;
+    fill: currentColor;
+
+    @include transition-default(fill);
+  }
+
+  &:hover {
+    > svg {
+      fill: var(--hover);
+    }
+  }
+}

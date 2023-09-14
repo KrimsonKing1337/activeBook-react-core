@@ -1,0 +1,11 @@
+.volume {
+  margin-top: 31px;
+}
+
+.item {
+  margin-top: 17px;
+
+  &:nth-child(1) {
+    margin-top: 0;
+  }
+}

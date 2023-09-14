@@ -1,0 +1,40 @@
+.sideShadow {
+  display: block;
+  width: 100%;
+  height: calc(100% + 60px); //100% + box-shadow width * 2
+  margin-top: -30px; //box-shadow width
+
+  box-shadow: inset 0 0 30px var(--text-shadow-color);
+
+  animation: var(--text-shadow-animation) var(--text-shadow-animation-speed) ease infinite;
+
+  will-change: opacity;
+
+  &.isActive {
+    display: block;
+  }
+}
+
+@keyframes :global(blink) {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes :global(static) {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

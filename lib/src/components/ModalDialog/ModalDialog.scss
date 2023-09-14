@@ -1,0 +1,49 @@
+@import "~styles/__mixins.scss";
+@import "~styles/__variables.scss";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: $modalHeight;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 15px;
+}
+
+.buttonConfirm,
+.buttonCancel {
+  margin-left: 15px;
+  padding: 4px;
+
+  background: #9a9a9a;
+
+  border-radius: 4px;
+
+  &:nth-child(1) {
+    margin-left: 0;
+  }
+
+  &.canClose {
+    @include hover-default();
+  }
+
+  @include hover-disable();
+}
+
+.buttonConfirm {
+  &.canClose {
+    background: #28a745;
+  }
+}
+
+.buttonCancel {
+  &.canClose {
+    background: #dc3545;
+  }
+}

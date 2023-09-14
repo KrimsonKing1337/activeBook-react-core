@@ -1,0 +1,20 @@
+@import "~@src/styles/__variables.scss";
+@import "~@src/styles/__mixins.scss";
+
+.authorComment {
+  display: inline;
+
+  color: #fd0;
+  font-size: 1em;
+  font-weight: bold;
+
+  opacity: 0.85;
+
+  transition: text-shadow $transitionDefault;
+
+  &:hover {
+    cursor: pointer;
+
+    @include text-shadow-default;
+  }
+}

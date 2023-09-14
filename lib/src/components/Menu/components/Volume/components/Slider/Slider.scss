@@ -1,0 +1,27 @@
+.slider {
+  width: 150px;
+  height: 12px;
+  margin-top: 5px;
+}
+
+.thumb {
+  width: 18px;
+  height: 18px;
+
+  background: var(--main);
+  border-radius: 50%;
+  transform: translateY(-6px);
+  cursor: pointer;
+}
+
+.track {
+  height: 6px;
+
+  &[class$="-0"] {
+    background: var(--main);
+  }
+
+  &[class$="-1"] {
+    background: #ccc;
+  }
+}

@@ -1,0 +1,27 @@
+/*
+вариант с изменением translateY не проканал,
+т.к. transform работает только с блочными элементами.
+а здесь нужен именно inline;
+*/
+
+.easterEgg {
+  position: relative;
+  top: 0;
+
+  display: inline;
+
+  opacity: 0.85;
+
+  animation: easter-egg 5s 5s infinite ease-in-out;
+
+  @keyframes easter-egg {
+    1.25% {
+      top: 1px;
+    }
+
+    2.5%,
+    100% {
+      top: 0;
+    }
+  }
+}

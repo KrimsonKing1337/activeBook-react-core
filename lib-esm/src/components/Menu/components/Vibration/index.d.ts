@@ -1,0 +1,1 @@
+export { Vibration } from './Vibration';

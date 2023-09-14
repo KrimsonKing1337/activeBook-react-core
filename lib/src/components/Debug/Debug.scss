@@ -1,0 +1,10 @@
+.debug {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999; // todo: вынести все z-index'ы в __variables
+
+  color: red;
+
+  border: 1px red solid;
+}

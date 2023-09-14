@@ -1,0 +1,51 @@
+@import '~styles/__mixins.scss';
+
+.item {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 24px;
+
+  &:before {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -12px;
+
+    display: block;
+    width: 4px;
+    height: 90%;
+    margin: auto 0;
+  }
+
+  &:nth-child(1) {
+    margin-top: 0;
+  }
+
+  &:global {
+    &.regular:before {
+      background-color: #07bc0c;
+    }
+
+    &.gold:before {
+      background-color: #f1c40f;
+    }
+
+    &.platinum:before {
+      background-color: #757575;
+    }
+  }
+}
+
+.title {
+  // flex-shrink: 0;
+}
+
+.status {
+  flex-shrink: 0;
+  margin-left: auto;
+}

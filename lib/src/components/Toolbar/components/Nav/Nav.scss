@@ -1,0 +1,71 @@
+@import '~styles/__mixins.scss';
+
+.goToWithArrows {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.isHide {
+    display: none;
+  }
+}
+
+.pageNumber {
+  margin-left: auto;
+  padding: 0 12px;
+}
+
+.goToWithInput {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 140px;
+  height: 23px;
+
+  font-size: 15px;
+
+  background: var(--main);
+  border-radius: 20px;
+
+  &.isHide {
+    display: none;
+  }
+}
+
+.wrapperInput {
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 21px;
+  margin-left: 1px;
+
+  color: var(--secondary);
+
+  background: var(--bg);
+  border-radius: 20px;
+
+  &.hasError {
+    border: 1px red solid;
+  }
+}
+
+.input {
+  width: 100%;
+
+  color: inherit;
+  line-height: normal;
+  text-align: center;
+
+  background: none;
+  outline: none;
+}
+
+.button {
+  padding-left: 13px;
+
+  color: #fff;
+
+  background-color: inherit;
+
+  @include hover-default;
+}
