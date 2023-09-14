@@ -1,0 +1,93 @@
+:global {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+    font-size: 100%;
+
+    border: 0;
+    outline: 0;
+    -webkit-text-size-adjust: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    width: 100%;
+    height: 100%;
+  }
+
+  body {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 22px;
+
+    user-select: none;
+  }
+
+  #root {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+  }
+
+  img,
+  video,
+  audio {
+    width: 100%;
+    max-width: 100%;
+
+    vertical-align: top;
+  }
+
+  img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    margin: 0;
+
+    -webkit-appearance: none;
+  }
+
+  *:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+:root {
+  --scrollbar-width: 0;
+  --text-shadow-color: red;
+  --text-shadow-animation: blink;
+  --text-shadow-animation-speed: 1000ms;
+  --background-animation: blink;
+  --background-animation-speed: 1000ms;
+  --side-scroll-text-animation-speed: 60000ms;
+  --animate-css-duration: 150ms;
+  --modal-content-object-fit: contain;
+  // color theme
+  --main: #a3a3a3;
+  --secondary: #828282;
+  --hover: #9a9a9a;
+  --bg: #111;
+  --overflow: #000d; // hex with opacity
+  --text-shadow-for-hover: #ffffff7f;
+}

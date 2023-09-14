@@ -1,0 +1,43 @@
+@font-face {
+  font-family: 'Roboto';
+  font-weight: normal;
+  font-style: normal;
+  src: url('../assets/fonts/Roboto/RobotoRegular/RobotoRegular.eot');
+  src:
+    url('../assets/fonts/Roboto/RobotoRegular/RobotoRegular.eot?#iefix') format('embedded-opentype'),
+    url('../assets/fonts/Roboto/RobotoRegular/RobotoRegular.woff') format('woff'),
+    url('../assets/fonts/Roboto/RobotoRegular/RobotoRegular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 100;
+  font-style: normal;
+  src: url('../assets/fonts/Roboto/RobotoLight/RobotoLight.eot');
+  src:
+    url('../assets/fonts/Roboto/RobotoLight/RobotoLight.eot?#iefix') format('embedded-opentype'),
+    url('../assets/fonts/Roboto/RobotoLight/RobotoLight.woff') format('woff'),
+    url('../assets/fonts/Roboto/RobotoLight/RobotoLight.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-style: normal;
+  src: url('../assets/fonts/Roboto/RobotoMedium/RobotoMedium.eot');
+  src:
+    url('../assets/fonts/Roboto/RobotoMedium/RobotoMedium.eot?#iefix') format('embedded-opentype'),
+    url('../assets/fonts/Roboto/RobotoMedium/RobotoMedium.woff') format('woff'),
+    url('../assets/fonts/Roboto/RobotoMedium/RobotoMedium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-weight: bold;
+  font-style: normal;
+  src: url('../assets/fonts/Roboto/RobotoBold/RobotoBold.eot');
+  src:
+    url('../assets/fonts/Roboto/RobotoBold/RobotoBold.eot?#iefix') format('embedded-opentype'),
+    url('../assets/fonts/Roboto/RobotoBold/RobotoBold.woff') format('woff'),
+    url('../assets/fonts/Roboto/RobotoBold/RobotoBold.ttf') format('truetype');
+}

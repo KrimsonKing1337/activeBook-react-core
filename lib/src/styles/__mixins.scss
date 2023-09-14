@@ -1,0 +1,81 @@
+@import "./__variables.scss";
+
+@mixin scrollbar($transitionAdd: '') {
+  $transition: border-color 0.75s linear;
+
+  @if $transitionAdd != '' {
+    $transition: #{$transitionAdd}, $transition;
+  }
+
+  border-color: transparent;
+
+  transition: $transition;
+
+  // firefox only
+  scrollbar-color: transparent;
+  scrollbar-width: 7px;
+
+  &::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-color: inherit;
+    border-right-width: calc(100vw + 100vh);
+    border-right-style: inset;
+    border-radius: 7px;
+  }
+
+  &:hover {
+    scrollbar-color: var(--main);
+    scrollbar-face-color: var(--main);
+
+    border-color: var(--main);
+  }
+}
+
+@mixin transition-default($value: 'all') {
+  transition: #{$value} #{$transitionDefault};
+}
+
+@mixin transition-fade-default() {
+  transition: opacity #{$transitionDefault};
+}
+
+@mixin hover-default($transitionAdd: '') {
+  $transition: opacity #{$transitionDefault};
+
+  @if $transitionAdd != '' {
+    $transition: #{$transitionAdd}, $transition;
+  }
+
+  transition: $transition;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.65;
+  }
+}
+
+@mixin modal-content-icon() {
+  color: #fff;
+
+  opacity: 0.5;
+
+  transition: opacity #{$transitionDefault};
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+}
+
+@mixin hover-disable() {
+  &:hover {
+    opacity: 1;
+  }
+}
+
+@mixin text-shadow-default() {
+  text-shadow: 1px 1px 30px var(--text-shadow-for-hover);
+}
