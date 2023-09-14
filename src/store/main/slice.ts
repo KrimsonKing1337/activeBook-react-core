@@ -5,9 +5,9 @@ import { State } from './@types';
 export const initialState: State = {
   route: '/',
   page: 0,
-  pages: 44,
-  easterEggs: 7,
-  authorComments: 43,
+  pages: 44, // todo: передавать извне
+  easterEggs: 7, // todo: передавать извне
+  authorComments: 43, // todo: передавать извне
   menuActiveState: null,
   isLoading: false,
   isVibrationAvailable: false,
