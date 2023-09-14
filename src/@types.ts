@@ -1,7 +1,7 @@
 import { Howl } from 'howler';
 
 export type Timer = ReturnType<typeof setTimeout> | null;
-export type Interval = ReturnType<typeof setInterval> | null
+export type Interval = ReturnType<typeof setInterval> | null;
 
 export type Range = {
   from: number;
@@ -21,6 +21,10 @@ export type AudioRangeEffect = RangeEffect & {
 };
 
 export type DotsRangeEffect = RangeEffect;
+
+export type EffectsJson = {
+  effects: RangeEffect[];
+};
 
 export type Theme = 'dark' | 'darkBlue' | 'orange' | 'black';
 
