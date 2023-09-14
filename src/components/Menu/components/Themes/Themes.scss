@@ -1,0 +1,58 @@
+@import '~styles/__mixins.scss';
+
+.themes {
+  margin-top: 24px;
+  padding: 20px 0;
+
+  border-top: 1px #eaeaea solid;
+  border-bottom: 1px #eaeaea solid;
+}
+
+.themesItemsWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 7px;
+}
+
+.themesItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin-left: 10px;
+
+  border-radius: 50%;
+  cursor: pointer;
+
+  &:nth-child(1) {
+    margin-left: 0;
+  }
+
+  &.isDark {
+    color: #a3a3a3;
+
+    background: #828282;
+  }
+
+  &.isOrange {
+    background: #fff;
+    border: 1px #f2994a solid;
+  }
+
+  &.isDarkBlue {
+    background: #728c9a;
+  }
+
+  &.isBlack {
+    background: #fff;
+    border: 1px #111 solid;
+  }
+
+  @include hover-default;
+}
+
+.spoiler {
+  margin-top: 20px;
+}

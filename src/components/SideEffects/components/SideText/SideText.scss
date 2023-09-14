@@ -1,0 +1,93 @@
+.sideTextScrollWrapper {
+  display: block;
+}
+
+.sideTextScrollLeftWrapper {
+  transform: rotate(-90deg) translateX(-2px);
+  transform-origin: left;
+}
+
+.sideTextScrollLeft {
+  $defaultState: translateX(0);
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  transform: $defaultState;
+
+  animation: scroll-text-left var(--side-scroll-text-animation-speed) linear infinite;
+
+  will-change: transform;
+
+  @keyframes scroll-text-left {
+    0% {
+      transform: $defaultState;
+    }
+
+    100% {
+      transform: translateX(calc(-100% - 100vh));
+    }
+  }
+}
+
+.sideTextScrollRightWrapper {
+  transform: rotate(90deg) translateY(-2px);
+  transform-origin: right;
+}
+
+.sideTextScrollRight {
+  $defaultState: translateX(calc(100% + 100vh));
+
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  transform: $defaultState;
+
+  animation: scroll-text-right var(--side-scroll-text-animation-speed) linear infinite;
+
+  will-change: transform;
+
+  @keyframes scroll-text-right {
+    0% {
+      transform: $defaultState;
+    }
+
+    100% {
+      transform: translateX(0);
+    }
+  }
+}
+
+.sideTextScrollContent {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 16px;
+  padding-left: 5px; //width of &nbsp;
+
+  color: #a3a3a3;
+  font-size: 12px;
+  line-height: 1;
+  white-space: nowrap;
+  text-transform: lowercase;
+
+  background-color: rgba(255, 255, 255, 0.1);
+
+  .defaultMargin {
+    margin-right: 70px;
+  }
+
+  .warning {
+    color: #f2c94c;
+  }
+
+  .error {
+    color: #fd0006;
+  }
+
+  .ok {
+    color: #0c3;
+  }
+}

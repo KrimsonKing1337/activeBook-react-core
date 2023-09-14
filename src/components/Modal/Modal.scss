@@ -1,0 +1,224 @@
+@import "~styles/__mixins.scss";
+@import "~styles/__variables.scss";
+
+.overflow {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+
+  display: none;
+  width: 100%;
+  height: 100vh;
+  margin: auto;
+
+  background: var(--overflow);
+
+  &.isOpen {
+    display: block;
+  }
+}
+
+.modal {
+  $transition: width #{$transitionDefault}, height #{$transitionDefault};
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 11;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: $modalWidth;
+  max-width: $appWidth;
+  height: $modalHeight;
+  margin: auto;
+  overflow: auto;
+
+  &.isFullScreen {
+    width: 100%;
+    height: 95vh;
+  }
+
+  &.isMediaMode {
+    align-items: center;
+    max-width: none;
+
+    &.isFullScreen {
+      width: 100%;
+      height: 100vh;
+    }
+  }
+
+  @include scrollbar($transition);
+}
+
+.wrapper {
+  position: relative;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  width: 100%;
+}
+
+.toolbar {
+  display: block;
+}
+
+.iconClose {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin: auto;
+
+  transform: translateY(25%) translateX(75%);
+
+  &.isMediaMode {
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    left: auto !important;
+
+    transform: none;
+  }
+
+  &.canClose {
+    display: flex;
+  }
+
+  @include modal-content-icon;
+}
+
+.iconExpand,
+.iconCompress {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+
+  margin: auto;
+
+  transform: translateY(-25%) translateX(75%);
+
+  &.isHidden {
+    display: none !important;
+  }
+
+  &.isMediaMode {
+    position: absolute;
+    right: 8px;
+    bottom: 5px;
+    left: auto !important;
+
+    transform: none;
+  }
+
+  &.isFullScreen {
+    display: none;
+  }
+
+  @include modal-content-icon;
+}
+
+.iconCompress {
+  display: none;
+
+  &.isFullScreen {
+    display: flex;
+  }
+}
+
+.iconCrop {
+  position: absolute;
+  bottom: 5px;
+  left: 8px !important;
+  z-index: 1;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+
+  &.isHidden {
+    display: none !important;
+  }
+
+  &.isMediaMode {
+    &.isFullScreen {
+      display: flex;
+    }
+  }
+
+  @include modal-content-icon;
+}
+
+.content {
+  height: $modalHeight;
+
+  &.isFullScreen {
+    height: 95vh;
+  }
+
+  &.isMediaMode {
+    > img,
+    > video {
+      width: inherit;
+      height: inherit;
+      object-fit: contain;
+    }
+
+    &.isFullScreen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100vh;
+    }
+  }
+
+  &.isCrop {
+    > img,
+    > video {
+      object-fit: cover;
+    }
+  }
+}
+
+.confirm {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  button {
+    margin-left: 15px;
+
+    &:nth-child(1) {
+      margin-left: 0;
+    }
+  }
+}

@@ -1,0 +1,58 @@
+@import '~@src/styles/__mixins.scss';
+
+.toggle {
+  margin-top: 20px;
+  padding: 20px 0;
+
+  border-bottom: 1px #eaeaea solid;
+
+  &.isWithoutBorder {
+    border-bottom: none;
+  }
+}
+
+.itemsWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 31px;
+  margin-top: 11px;
+
+  border: 1px var(--main) solid;
+  border-radius: 16px;
+}
+
+.item {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  height: inherit;
+
+  color: var(--secondary);
+  font-size: 14px;
+  font-weight: 100;
+  text-transform: capitalize;
+
+  background: transparent;
+  cursor: pointer;
+
+  &:nth-child(1) {
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+  }
+
+  &:nth-child(2) {
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+  }
+
+  &.isActive {
+    color: #fff;
+
+    background-color: var(--main);
+  }
+
+  @include hover-default;
+}

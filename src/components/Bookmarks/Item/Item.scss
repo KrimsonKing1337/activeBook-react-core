@@ -1,0 +1,41 @@
+@import '~styles/__mixins.scss';
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 24px;
+
+  font-size: 24px;
+
+  &:nth-child(1) {
+    margin-top: 0;
+  }
+
+  @include hover-default;
+}
+
+.title {
+  flex-shrink: 0;
+}
+
+.subtitle {
+  margin-left: 9px;
+  overflow: hidden;
+
+  font-size: 18px;
+  // font-style: italic;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.pageNumber {
+  flex-shrink: 0;
+  margin-left: 15px;
+}
+
+.deleteIcon {
+  flex-shrink: 0;
+  margin-left: auto;
+}

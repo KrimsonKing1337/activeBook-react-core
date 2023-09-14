@@ -1,0 +1,39 @@
+@import '~styles/__mixins.scss';
+
+.lineHeight {
+  margin-top: 20px;
+  padding: 20px 0;
+
+  border-bottom: 1px #eaeaea solid;
+}
+
+.itemsWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 11px;
+}
+
+.item {
+  margin-left: 8px;
+
+  &:nth-child(1) {
+    margin-left: 0;
+  }
+
+  &.isMinus,
+  &.isPlus {
+    font-size: 22px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    @include hover-default;
+  }
+
+  &.isValue {
+    color: var(--main);
+    font-size: 14px;
+    font-weight: 100;
+  }
+}

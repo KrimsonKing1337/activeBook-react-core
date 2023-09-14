@@ -1,0 +1,157 @@
+@import "~styles/__mixins.scss";
+@import "~styles/__variables.scss";
+
+.wrapper {
+  padding: 10px;
+  overflow-x: hidden;
+
+  box-shadow: inset 0 0 0 1px #c3cbd1;
+  // todo: проверить, что в других целевых браузерах стрелочки тоже скрываются
+  transform: translateZ(0);
+
+  &.arrowsAreVisible {
+    .left {
+      margin-left: 5%;
+    }
+
+    .right {
+      margin-right: 5%;
+    }
+  }
+
+  &.isWithoutBorders {
+    padding: 0;
+
+    box-shadow: none;
+  }
+
+  [class*="isFullScreen"] & {
+    align-items: center;
+    width: inherit;
+    max-width: inherit;
+    height: inherit;
+  }
+}
+
+.slideShow {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  /*
+  * иначе событие swipe у Hammer.js не срабатывает,
+  * см.: https://stackoverflow.com/questions/60198150/hammerjs-swipe-not-working-on-elements-with-overflow-css-property
+  */
+  touch-action: pan-y !important;
+
+  &.isModalMode {
+    align-items: center;
+    height: $modalHeight;
+    max-height: 100%;
+  }
+
+  [class*="isFullScreen"] & {
+    height: inherit;
+  }
+
+  &.isOverflow {
+    align-items: flex-start;
+  }
+
+  @include scrollbar();
+}
+
+.itemsWrapper {
+  display: flex;
+  align-items: center;
+
+  transform: translateX(0%);
+
+  transition: transform ease 0.15s 0s;
+
+  will-change: transform;
+
+  &.isOverflow {
+    align-items: flex-start;
+  }
+
+  &.isModalMode {
+    height: inherit;
+  }
+
+  [class*="isMediaMode"][class*="isFullScreen"] & {
+    width: 100%;
+    height: inherit;
+    max-height: inherit;
+  }
+}
+
+.item {
+  flex-shrink: 0;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+
+  &.isActive {
+    height: auto;
+  }
+
+  [class*="isMediaMode"] & {
+    height: 100%;
+    max-height: inherit;
+    object-fit: cover;
+
+    > * {
+      height: inherit;
+      max-height: inherit;
+      object-fit: inherit;
+    }
+  }
+}
+
+// позиционируем элементы ровно посередине
+.left,
+.right {
+  $transition: margin ease 0.15s 0s;
+
+  position: fixed;
+  top: 50%;
+  right: 0;
+  left: 0;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin: auto;
+  padding: 15px;
+
+  color: #fff;
+
+  background: rgba(#111, 0.4);
+
+  border: 1px #111 solid;
+  border-radius: 50%;
+  transform: translateY(-50%);
+
+  will-change: opacity, margin;
+
+  @include hover-default($transition);
+}
+
+.left {
+  margin-left: -25%;
+}
+
+.right {
+  margin-right: -25%;
+}

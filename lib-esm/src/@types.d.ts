@@ -16,6 +16,9 @@ export type AudioRangeEffect = RangeEffect & {
     delay?: number;
 };
 export type DotsRangeEffect = RangeEffect;
+export type EffectsJson = {
+    effects: RangeEffect[];
+};
 export type Theme = 'dark' | 'darkBlue' | 'orange' | 'black';
 export type HowlExtended = Howl & {
     _howls: Howl[];

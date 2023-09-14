@@ -1,0 +1,17 @@
+:root {
+  --toastify-toast-width: 500px;
+}
+
+:global {
+  .Toastify {
+    svg {
+      display: none;
+    }
+
+    &__toast {
+      margin-bottom: 32px;
+
+      font-size: 18px;
+    }
+  }
+}
