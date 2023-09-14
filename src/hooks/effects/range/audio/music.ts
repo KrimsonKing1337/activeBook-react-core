@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { EffectsJson, AudioRangeEffect } from '@types';
+import { RangeEffectsJson, AudioRangeEffect } from '@types';
 
 import { useDispatch, useSelector } from 'store';
 import { musicEffectsActions, musicEffectsSelectors } from 'store/effects/audio/music';
@@ -8,7 +8,7 @@ import { mainSelectors } from 'store/main';
 import { HowlWrapper } from 'utils/effects/audio/HowlWrapper';
 import { getEffectInRange } from 'utils/effects/rangeEffects';
 
-export function useMusicInRange(effects: EffectsJson) {
+export function useMusicInRange(effects: RangeEffectsJson) {
   const dispatch = useDispatch();
 
   const [musicInRange, setMusicInRange] = useState<AudioRangeEffect | null>(null);

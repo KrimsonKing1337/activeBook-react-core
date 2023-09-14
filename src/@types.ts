@@ -22,7 +22,7 @@ export type AudioRangeEffect = RangeEffect & {
 
 export type DotsRangeEffect = RangeEffect;
 
-export type EffectsJson = {
+export type RangeEffectsJson = {
   effects: RangeEffect[];
 };
 

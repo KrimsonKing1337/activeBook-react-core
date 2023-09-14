@@ -18,3 +18,4 @@ declare var process: {
         AUTHOR_COMMENTS: string;
     };
 };
+declare var isDemoMode: boolean;

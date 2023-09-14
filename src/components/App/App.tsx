@@ -8,15 +8,15 @@ import { AppWrapper } from 'components/AppWrapper';
 import { hideAddressBarInMobileDevices } from 'utils/mobile/hideAddressBarInMobileDevices';
 import { addKeyboardControl } from 'utils/control/keyboardControl';
 
-import { EffectsJson } from '@types';
+import { RangeEffectsJson } from '@types';
 
 import { Routes } from './Routes';
 
 export type AppProps = {
-  effectsJson: EffectsJson;
+  rangeEffectsJson: RangeEffectsJson;
 };
 
-export const App = ({ effectsJson, children }: PropsWithChildren<AppProps>) => {
+export const App = ({ rangeEffectsJson, children }: PropsWithChildren<AppProps>) => {
   useEffect(() => {
     // addTouchSupportForCssHover(); // вместо этого просто "удаляю" :hover везде, возможно так и оставлю
     addKeyboardControl();
@@ -26,7 +26,7 @@ export const App = ({ effectsJson, children }: PropsWithChildren<AppProps>) => {
   return (
     <StoreProvider>
       <HistoryRouter history={history}>
-        <AppWrapper effectsJson={effectsJson}>
+        <AppWrapper rangeEffectsJson={rangeEffectsJson}>
           <Counter />
 
           <Routes>

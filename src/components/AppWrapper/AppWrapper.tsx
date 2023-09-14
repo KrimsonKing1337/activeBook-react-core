@@ -1,7 +1,7 @@
 import { PropsWithChildren, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { EffectsJson } from '@types';
+import { RangeEffectsJson } from '@types';
 
 import { useDispatch, useSelector } from 'store';
 import classNames from 'classnames';
@@ -25,10 +25,10 @@ import { Achievement } from 'components/Achievement';
 import styles from './AppWrapper.scss';
 
 export type AppWrapperProps = {
-  effectsJson: EffectsJson;
+  rangeEffectsJson: RangeEffectsJson;
 };
 
-export const AppWrapper = ({ children, effectsJson }: PropsWithChildren<AppWrapperProps>) => {
+export const AppWrapper = ({ children, rangeEffectsJson }: PropsWithChildren<AppWrapperProps>) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -125,7 +125,7 @@ export const AppWrapper = ({ children, effectsJson }: PropsWithChildren<AppWrapp
     };
   }, [page]);
 
-  useEffectsInRange(effectsJson);
+  useEffectsInRange(rangeEffectsJson);
 
   const appWrapperClassNames = classNames({
     [styles.appWrapper]: true,

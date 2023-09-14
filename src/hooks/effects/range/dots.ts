@@ -5,9 +5,9 @@ import { effectsActions } from 'store/effects/common';
 import { mainSelectors } from 'store/main';
 import { getEffectInRange } from 'utils/effects/rangeEffects';
 
-import { DotsRangeEffect, EffectsJson } from '@types';
+import { DotsRangeEffect, RangeEffectsJson } from '@types';
 
-export function useDotsInRange(effects: EffectsJson) {
+export function useDotsInRange(effects: RangeEffectsJson) {
   const dispatch = useDispatch();
 
   const page = useSelector(mainSelectors.page);

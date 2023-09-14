@@ -30,7 +30,7 @@ import { play } from 'utils/effects/achievements';
 import { Flags as AchievementsFlags } from 'utils/effects/achievements/utils';
 import styles from './AuthorComment.scss';
 export var AuthorComment = function (_a) {
-    var _b = _a.isDemoMode, isDemoMode = _b === void 0 ? false : _b, _c = _a.onClick, onClick = _c === void 0 ? function () { } : _c, children = _a.children, props = __rest(_a, ["isDemoMode", "onClick", "children"]);
+    var _b = _a.onClick, onClick = _b === void 0 ? function () { } : _b, children = _a.children, props = __rest(_a, ["onClick", "children"]);
     var achievements = useSelector(achievementsSelectors.achievements);
     var authorCommentsIsOn = useSelector(configSelectors.authorComments);
     var authorCommentsLength = useSelector(mainSelectors.authorComments);
