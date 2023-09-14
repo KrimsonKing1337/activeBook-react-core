@@ -12,12 +12,10 @@ import styles from './AuthorComment.scss';
 
 export type ActionProps = {
   [name: string]: any;
-  isDemoMode?: boolean;
   onClick?: () => void;
 };
 
 export const AuthorComment = ({
-  isDemoMode = false,
   onClick = () => {},
   children,
   ...props
