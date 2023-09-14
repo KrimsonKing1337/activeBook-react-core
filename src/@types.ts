@@ -31,3 +31,4 @@ export type Theme = 'dark' | 'darkBlue' | 'orange' | 'black';
 export type HowlExtended = Howl & {
   _howls: Howl[];
 };
+

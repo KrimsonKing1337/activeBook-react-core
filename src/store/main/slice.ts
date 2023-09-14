@@ -2,12 +2,16 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { State } from './@types';
 
+const pages = Number(process.env.PAGES);
+const easterEggs = Number(process.env.EASTER_EGGS);
+const authorComments = Number(process.env.AUTHOR_COMMENTS);
+
 export const initialState: State = {
   route: '/',
   page: 0,
-  pages: 44, // todo: передавать извне
-  easterEggs: 7, // todo: передавать извне
-  authorComments: 43, // todo: передавать извне
+  pages,
+  easterEggs,
+  authorComments,
   menuActiveState: null,
   isLoading: false,
   isVibrationAvailable: false,
