@@ -16,7 +16,7 @@ export type AudioRangeEffect = RangeEffect & {
     delay?: number;
 };
 export type DotsRangeEffect = RangeEffect;
-export type EffectsJson = {
+export type RangeEffectsJson = {
     effects: RangeEffect[];
 };
 export type Theme = 'dark' | 'darkBlue' | 'orange' | 'black';

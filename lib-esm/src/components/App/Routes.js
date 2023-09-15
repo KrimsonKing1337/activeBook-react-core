@@ -8,7 +8,7 @@ var getPageComponents = function () {
     var pages = initialState.pages;
     var arr = [];
     for (var i = 0; i <= pages; i++) {
-        var PageComponent = require("book_pages/Page".concat(i))["Page".concat(i)];
+        var PageComponent = require("pages/Page".concat(i))["Page".concat(i)];
         arr.push(PageComponent);
     }
     return arr;

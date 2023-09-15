@@ -22,7 +22,7 @@ import { Achievement } from 'components/Achievement';
 import styles from './AppWrapper.scss';
 export var AppWrapper = function (_a) {
     var _b;
-    var children = _a.children, effectsJson = _a.effectsJson;
+    var children = _a.children, rangeEffectsJson = _a.rangeEffectsJson;
     var dispatch = useDispatch();
     var navigate = useNavigate();
     var isLoading = useSelector(mainSelectors.isLoading);
@@ -95,7 +95,7 @@ export var AppWrapper = function (_a) {
             window.removeEventListener('beforeunload', listener);
         };
     }, [page]);
-    useEffectsInRange(effectsJson);
+    useEffectsInRange(rangeEffectsJson);
     var appWrapperClassNames = classNames((_b = {},
         _b[styles.appWrapper] = true,
         _b[styles.isLoading] = isLoading,

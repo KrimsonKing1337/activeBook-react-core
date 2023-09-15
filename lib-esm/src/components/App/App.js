@@ -8,12 +8,12 @@ import { hideAddressBarInMobileDevices } from 'utils/mobile/hideAddressBarInMobi
 import { addKeyboardControl } from 'utils/control/keyboardControl';
 import { Routes } from './Routes';
 export var App = function (_a) {
-    var effectsJson = _a.effectsJson, children = _a.children;
+    var rangeEffectsJson = _a.rangeEffectsJson, children = _a.children;
     useEffect(function () {
         // addTouchSupportForCssHover(); // вместо этого просто "удаляю" :hover везде, возможно так и оставлю
         addKeyboardControl();
         hideAddressBarInMobileDevices();
     }, []);
-    return (_jsx(StoreProvider, { children: _jsx(HistoryRouter, { history: history, children: _jsxs(AppWrapper, { effectsJson: effectsJson, children: [_jsx(Counter, {}), _jsx(Routes, { children: children })] }) }) }));
+    return (_jsx(StoreProvider, { children: _jsx(HistoryRouter, { history: history, children: _jsxs(AppWrapper, { rangeEffectsJson: rangeEffectsJson, children: [_jsx(Counter, {}), _jsx(Routes, { children: children })] }) }) }));
 };
 //# sourceMappingURL=App.js.map
