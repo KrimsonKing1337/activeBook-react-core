@@ -3,3 +3,4 @@ cypress
 lib
 lib-esm
 scripts
+.eslintrc.js
