@@ -25,8 +25,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import { Howler } from 'howler';
 import { call, put, select, takeLatest } from 'redux-saga/effects';
+import { Howler } from 'howler';
 import { getAudioInstances } from 'utils/effects/audio/getAudioInstances';
 import { actions } from './slice';
 import { selectors } from './selectors';

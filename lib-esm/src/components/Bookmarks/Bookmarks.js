@@ -8,8 +8,8 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     return to.concat(ar || Array.prototype.slice.call(from));
 };
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { useDispatch, useSelector } from 'store';
 import classNames from 'classnames';
+import { useDispatch, useSelector } from 'store';
 import { mainSelectors } from 'store/main';
 import { bookmarksActions, bookmarksSelectors } from 'store/bookmarks';
 import { Header } from 'components/Header';

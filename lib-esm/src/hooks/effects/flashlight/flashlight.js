@@ -36,9 +36,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 import { useSelector } from 'store';
 import { configSelectors } from 'store/config';
+import { useSideShadow } from 'hooks/effects/side/shadow';
 import { flashlightInst } from 'utils/effects/flashlight';
 import { sleep } from 'utils/sleep';
-import { useSideShadow } from 'hooks/effects/side/shadow';
 export function useFlashlight(withSideShadow, speed) {
     var _this = this;
     if (withSideShadow === void 0) { withSideShadow = false; }

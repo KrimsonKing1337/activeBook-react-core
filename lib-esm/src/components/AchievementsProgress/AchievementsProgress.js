@@ -14,9 +14,9 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'store';
 import { achievementsSelectors } from 'store/achievements';
 import { mainActions, mainSelectors } from 'store/main';
-import { hiddenAchievements, voc } from 'utils/effects/achievements/utils';
 import { Header } from 'components/Header';
 import { Overflow } from 'components/Overflow';
+import { hiddenAchievements, voc } from 'utils/effects/achievements/utils';
 import { Item } from './Item';
 import styles from './AchievementsProgress.scss';
 export var AchievementsProgress = function () {

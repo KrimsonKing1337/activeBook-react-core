@@ -1,9 +1,9 @@
 import { createContext } from 'react';
-import { createStoreHook, createDispatchHook, createSelectorHook } from 'react-redux';
+import { createStoreHook, createDispatchHook, createSelectorHook, } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import { createReduxHistoryContext } from 'redux-first-history';
-import { createBrowserHistory } from 'history';
 import createSagaMiddleware from 'redux-saga';
+import { createBrowserHistory } from 'history';
 import { mainReducer, watchMainActions } from './main';
 import { configReducer, watchConfigActions } from './config';
 import { volumeReducer, watchVolumeActions } from './volume';

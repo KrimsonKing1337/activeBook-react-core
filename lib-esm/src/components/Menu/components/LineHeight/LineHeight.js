@@ -2,8 +2,8 @@ import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import classNames from 'classnames';
 import { useDispatch, useSelector } from 'store';
 import { configActions, configSelectors } from 'store/config';
-import { getNewValueForNarrativeTextStyle } from 'utils/styles/getNewValueForNarrativeTextStyle';
 import { Label } from 'components/Label';
+import { getNewValueForNarrativeTextStyle } from 'utils/styles/getNewValueForNarrativeTextStyle';
 import styles from './LineHeight.scss';
 function getClassNames(className) {
     return classNames([

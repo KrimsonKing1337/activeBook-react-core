@@ -35,8 +35,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import { useEffect } from 'react';
-import { sleep } from 'utils/sleep';
 import { useFlashlight } from 'hooks/effects/flashlight';
+import { sleep } from 'utils/sleep';
 var letItBe = false;
 function play(flashlightOn) {
     return __awaiter(this, void 0, void 0, function () {
