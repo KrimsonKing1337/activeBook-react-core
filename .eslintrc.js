@@ -1,29 +1,24 @@
 module.exports = {
-  parser: '@typescript-eslint/parser',
-  plugins: ['import', '@typescript-eslint', '@typescript-eslint/tslint', 'react', 'jest'],
-  extends: [
+  'parser': '@typescript-eslint/parser',
+  'plugins': ['import', '@typescript-eslint', '@typescript-eslint/tslint', 'react', 'jest'],
+  'extends': [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended'
   ],
-  parserOptions: {
-    project: './tsconfig.json',
-    ecmaVersion: 2021,
-    sourceType: 'module',
-    ecmaFeatures: {
-      jsx: true
+  'parserOptions': {
+    'project': './tsconfig.json',
+    'ecmaVersion': 2020,
+    'sourceType': 'module',
+    'ecmaFeatures': {
+      'jsx': true
     }
   },
-  settings: {
-    'import/resolver': {
-      node: {
-        extensions: ['.ts', '.tsx', 'jsx'],
-      },
-    },
-    react: {
-      version: 'detect',
+  'settings': {
+    'react': {
+      'version': 'detect',
     },
   },
-  rules: {
+  'rules': {
     'eol-last': ['error', 'always'],
     'comma-dangle': ['error', 'always-multiline'],
     'semi': ['error', 'always'],
@@ -52,6 +47,7 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 0,
     '@typescript-eslint/no-var-requires': 0,
     '@typescript-eslint/no-explicit-any': ['warn', { 'ignoreRestArgs': false }],
+
     '@typescript-eslint/tslint/config': [
       'error',
       {
@@ -62,39 +58,53 @@ module.exports = {
               'module-source-path': 'full',
               'grouped-imports': true,
               'import-sources-order': 'any',
+              'named-imports-order': 'any',
               'groups': [
                 {
                   'match': '^react',
                   'order': 1
                 },
                 {
+                  'match': '^@redux',
+                  'order': 2
+                },
+                {
+                  'match': '^redux',
+                  'order': 3
+                },
+                {
+                  'name': 'Global types',
+                  'match': '@types',
+                  'order': 6
+                },
+                {
                   'name': 'Store',
-                  'match': '^store/',
+                  'match': '^store',
                   'order': 7
                 },
                 {
                   'name': 'Assets',
-                  'match': '^assets/',
+                  'match': '^assets',
                   'order': 10
                 },
                 {
-                  'name': 'Components',
-                  'match': '^components/',
+                  'name': 'Pages',
+                  'match': '^pages',
                   'order': 20
                 },
                 {
-                  'name': 'Pages',
-                  'match': '^pages/',
+                  'name': 'Components',
+                  'match': '^components',
                   'order': 30
                 },
                 {
                   'name': 'Hooks',
-                  'match': '^hooks/',
+                  'match': '^hooks',
                   'order': 40
                 },
                 {
                   'name': 'Utils',
-                  'match': '^utils/',
+                  'match': '^utils',
                   'order': 70
                 },
                 {
@@ -118,15 +128,10 @@ module.exports = {
                   'order': 90
                 },
                 {
-                  'name': 'Global types',
-                  'match': '@types',
-                  'order': 6
-                },
-                {
                   'name': 'Vendors & Packages',
-                  'match': '^[^\\.]',
+                  'match': '.*',
                   'order': 5
-                }
+                },
               ]
             }
           ]
