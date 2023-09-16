@@ -4,3 +4,4 @@ lib
 lib-esm
 scripts
 .eslintrc.js
+d.ts
