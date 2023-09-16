@@ -1,5 +1,5 @@
-@import "~styles/__mixins.scss";
-@import "~styles/__variables.scss";
+@import "~styles/__mixins";
+@import "~styles/__variables";
 
 .wrapper {
   padding: 10px;
@@ -65,7 +65,7 @@
     align-items: flex-start;
   }
 
-  @include scrollbar();
+  @include scrollbar;
 }
 
 .itemsWrapper {

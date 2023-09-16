@@ -18,7 +18,7 @@
   */
   touch-action: pan-y !important;
 
-  @include scrollbar();
+  @include scrollbar;
 }
 
 .text {

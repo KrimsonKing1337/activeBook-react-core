@@ -1,5 +1,5 @@
 @import "~styles/__mixins";
-@import "~styles/__variables.scss";
+@import "~styles/__variables";
 
 .pageWrapper {
   position: relative;
@@ -36,7 +36,7 @@
   overflow: hidden;
 
   background: var(--bg);
-  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.75);
+  box-shadow: 1px 1px 5px 0 rgb(0 0 0 / 75%);
 
   &.isLoading {
     height: calc(100vh - 5px - 10px); // padding-top + padding-bottom from .pageWrapper

@@ -1,5 +1,5 @@
-@import "~styles/__mixins.scss";
-@import "~styles/__variables.scss";
+@import "~styles/__mixins";
+@import "~styles/__variables";
 
 .wrapper {
   display: flex;
@@ -30,10 +30,10 @@
   }
 
   &.canClose {
-    @include hover-default();
+    @include hover-default;
   }
 
-  @include hover-disable();
+  @include hover-disable;
 }
 
 .buttonConfirm {
