@@ -15,6 +15,7 @@
     "postinstall": "node ./scripts/postinstall.js",
     "lint-staged": "lint-staged",
     "lint:ts": "eslint \"./src/**/*.{ts,tsx}\" --fix",
+    "lint:css": "stylelint \"src/**/*.scss\" --fix",
     "pre-commit": "lint-staged"
   },
   "husky": {
@@ -80,7 +81,9 @@
     "stylelint-config-standard": "^34.0.0",
     "stylelint-declaration-block-no-ignored-properties": "^2.7.0",
     "stylelint-order": "^6.0.3",
-    "stylelint-scss": "^5.1.0"
+    "stylelint-scss": "^5.1.0",
+    "stylelint-config-standard-scss": "^11.0.0",
+    "postcss": "^8.4.28"
   },
   "repository": {
     "type": "git",
