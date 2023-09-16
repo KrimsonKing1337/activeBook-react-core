@@ -15,7 +15,7 @@
     "postinstall": "node ./scripts/postinstall.js",
     "lint-staged": "lint-staged",
     "lint:ts": "eslint \"./src/**/*.{ts,tsx}\" --fix",
-    "lint:css": "stylelint \"src/**/*.scss\" --fix",
+    "lint:css": "stylelint \"src/**/*.scss\"",
     "pre-commit": "lint-staged"
   },
   "husky": {
