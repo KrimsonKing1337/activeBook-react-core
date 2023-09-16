@@ -2,6 +2,7 @@ import { PropsWithChildren } from 'react';
 
 import { useSelector } from 'store';
 import { mainSelectors } from 'store/main';
+
 import { foundEasterEggs } from 'utils/localStorage/foundEasterEggs';
 import { Flags } from 'utils/effects/achievements/utils';
 import { play } from 'utils/effects/achievements';

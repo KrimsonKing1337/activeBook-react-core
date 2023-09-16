@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'store';
 import { musicEffectsActions, musicEffectsSelectors } from 'store/effects/audio/music';
+
 import { HowlWrapper } from 'utils/effects/audio/HowlWrapper';
 
 type UseMusicProps = {

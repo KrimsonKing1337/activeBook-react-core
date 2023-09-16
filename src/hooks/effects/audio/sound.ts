@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 
+import { Timer } from '@types';
+
 import { useDispatch, useSelector } from 'store';
 import { soundEffectsActions, soundEffectsSelectors } from 'store/effects/audio/sound';
-import { HowlWrapper, HowlWrapperOptions } from 'utils/effects/audio/HowlWrapper';
 
-import { Timer } from '@types';
+import { HowlWrapper, HowlWrapperOptions } from 'utils/effects/audio/HowlWrapper';
 
 type UseSoundProps = {
   src: string;

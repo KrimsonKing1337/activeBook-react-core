@@ -8,4 +8,4 @@ export const StoreProvider = ({ children } : { children: React.ReactNode }) => {
       {children}
     </Provider>
   );
-}
+};

@@ -3,10 +3,11 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'store';
 import { achievementsSelectors } from 'store/achievements';
 import { mainActions, mainSelectors } from 'store/main';
-import { FlagsWithoutHidden, hiddenAchievements, voc } from 'utils/effects/achievements/utils';
 
 import { Header } from 'components/Header';
 import { Overflow } from 'components/Overflow';
+
+import { FlagsWithoutHidden, hiddenAchievements, voc } from 'utils/effects/achievements/utils';
 
 import { Item, ItemProps } from './Item';
 

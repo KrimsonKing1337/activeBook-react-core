@@ -1,5 +1,6 @@
-import { useDispatch, useSelector } from 'store';
 import classNames from 'classnames';
+
+import { useDispatch, useSelector } from 'store';
 import { mainSelectors } from 'store/main';
 import { bookmarksActions, bookmarksSelectors } from 'store/bookmarks';
 

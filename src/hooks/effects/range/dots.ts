@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 
+import { DotsRangeEffect, RangeEffectsJson } from '@types';
+
 import { useDispatch, useSelector } from 'store';
 import { effectsActions } from 'store/effects/common';
 import { mainSelectors } from 'store/main';
-import { getEffectInRange } from 'utils/effects/rangeEffects';
 
-import { DotsRangeEffect, RangeEffectsJson } from '@types';
+import { getEffectInRange } from 'utils/effects/rangeEffects';
 
 export function useDotsInRange(effects: RangeEffectsJson) {
   const dispatch = useDispatch();

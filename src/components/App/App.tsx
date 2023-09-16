@@ -2,13 +2,15 @@ import { PropsWithChildren, useEffect } from 'react';
 
 import { HistoryRouter } from 'redux-first-history/rr6';
 
+import { RangeEffectsJson } from '@types';
+
 import { history, StoreProvider } from 'store';
+
 import { Counter } from 'components';
 import { AppWrapper } from 'components/AppWrapper';
+
 import { hideAddressBarInMobileDevices } from 'utils/mobile/hideAddressBarInMobileDevices';
 import { addKeyboardControl } from 'utils/control/keyboardControl';
-
-import { RangeEffectsJson } from '@types';
 
 import { Routes } from './Routes';
 

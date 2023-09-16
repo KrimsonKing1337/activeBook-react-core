@@ -1,5 +1,6 @@
 import { useSelector } from 'store';
 import { mainSelectors } from 'store/main';
+
 import { goToPage } from 'utils/control/goToPage';
 
 import { playAchievement } from './utils';

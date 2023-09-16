@@ -1,9 +1,9 @@
 import { toast } from 'react-toastify';
 
-import { store } from 'store';
-
-import { achievementsActions } from 'store/achievements';
 import { Achievement } from 'store/achievements/@types';
+
+import { store } from 'store';
+import { achievementsActions } from 'store/achievements';
 
 import { HowlWrapper } from 'utils/effects/audio/HowlWrapper';
 import { achievements as achievementsLocalStorage } from 'utils/localStorage/achievements';

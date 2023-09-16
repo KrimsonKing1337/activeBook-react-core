@@ -1,11 +1,13 @@
 import { PayloadAction } from '@reduxjs/toolkit';
+
 import { push } from 'redux-first-history';
-import { Location } from 'history';
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 
-import { mainSelectors } from 'store/main';
+import { Location } from 'history';
 
 import { State } from './@types';
+
+import { mainSelectors } from 'store/main';
 
 import { actions } from './slice';
 import { selectors } from './selectors';

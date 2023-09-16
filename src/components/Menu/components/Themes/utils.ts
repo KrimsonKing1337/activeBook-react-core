@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 
+import { Theme } from '@types';
+
 import { play } from 'utils/effects/achievements';
 import { Flags } from 'utils/effects/achievements/utils';
-
-import { Theme } from '@types';
 
 import styles from './Themes.scss';
 

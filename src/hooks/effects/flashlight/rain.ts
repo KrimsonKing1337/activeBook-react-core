@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 
-import { sleep } from 'utils/sleep';
-
 import { useFlashlight } from 'hooks/effects/flashlight';
+
+import { sleep } from 'utils/sleep';
 
 let letItBe = false;
 

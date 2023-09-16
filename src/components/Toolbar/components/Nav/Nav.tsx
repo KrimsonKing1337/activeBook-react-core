@@ -4,12 +4,13 @@ import classNames from 'classnames';
 
 import { useSelector } from 'store';
 import { mainSelectors } from 'store/main';
-import { goNextPage, goPrevPage, goToPage } from 'utils/control/goToPage';
 
 import ArrowLeft from 'assets/img/toolbar/i-arrow-left.svg';
 import ArrowRight from 'assets/img/toolbar/i-arrow-right.svg';
 
 import { Item } from 'components/Toolbar/components/Item';
+
+import { goNextPage, goPrevPage, goToPage } from 'utils/control/goToPage';
 
 import styles from './Nav.scss';
 

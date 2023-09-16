@@ -1,9 +1,10 @@
 import { useSelector } from 'store';
 import { configSelectors } from 'store/config';
-import { flashlightInst } from 'utils/effects/flashlight';
-import { sleep } from 'utils/sleep';
 
 import { useSideShadow } from 'hooks/effects/side/shadow';
+
+import { flashlightInst } from 'utils/effects/flashlight';
+import { sleep } from 'utils/sleep';
 
 export function useFlashlight(withSideShadow = false, speed = 150) {
   const theme = useSelector(configSelectors.theme);

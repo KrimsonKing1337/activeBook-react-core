@@ -1,5 +1,4 @@
 import { store } from 'store';
-
 import { mainActions } from 'store/main';
 
 export function goToPage(n: number) {

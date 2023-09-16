@@ -1,4 +1,5 @@
 import { Howl, HowlOptions } from 'howler';
+
 import { store } from 'store';
 
 type AudioType = 'bg' | 'music' | 'sfx';

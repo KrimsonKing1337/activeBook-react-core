@@ -2,6 +2,7 @@ import { RefObject, useEffect } from 'react';
 
 import { useSelector } from 'store';
 import { sideShadowEffectSelectors } from 'store/effects/side/shadow';
+
 import { setCssVariable } from 'utils/styles/setCssVariable';
 
 export function useColorPolice(sideShadowRef: RefObject<HTMLDivElement>) {
