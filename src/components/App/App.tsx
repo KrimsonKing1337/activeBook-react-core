@@ -6,7 +6,6 @@ import { RangeEffectsJson } from '@types';
 
 import { history, StoreProvider } from 'store';
 
-import { Counter } from 'components';
 import { AppWrapper } from 'components/AppWrapper';
 
 import { hideAddressBarInMobileDevices } from 'utils/mobile/hideAddressBarInMobileDevices';
@@ -29,8 +28,6 @@ export const App = ({ rangeEffectsJson, children }: PropsWithChildren<AppProps>)
     <StoreProvider>
       <HistoryRouter history={history}>
         <AppWrapper rangeEffectsJson={rangeEffectsJson}>
-          <Counter />
-
           <Routes>
             {children}
           </Routes>
