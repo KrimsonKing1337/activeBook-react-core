@@ -86,6 +86,10 @@ export class Flashlight {
 
     this.track = stream.getVideoTracks()[0];
 
+    if (!(window as any).ImageCapture) {
+      return Promise.resolve();
+    }
+
     const imageCapture = new ImageCapture(this.track);
 
     const capabilities = await imageCapture.getPhotoCapabilities() as any;
