@@ -1,8 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import classNames from 'classnames';
-import { useSelector } from 'store';
-import { effectsSelectors } from 'store/effects/common';
-import { mainSelectors } from 'store/main';
 import { Toolbar } from 'components/Toolbar';
 import { Menu } from 'components/Menu';
 import { AchievementsProgress } from 'components/AchievementsProgress';
@@ -10,6 +7,9 @@ import { TableOfContents } from 'components/TableOfContents';
 import { Bookmarks } from 'components/Bookmarks';
 import { SideEffects } from 'components/SideEffects';
 import { BackgroundEffects } from 'components/BackgroundEffects';
+import { mainSelectors } from 'store/main';
+import { effectsSelectors } from 'store/effects/common';
+import { useSelector } from 'store';
 import { Narrative } from './components/Narrative';
 import styles from './PageWrapper.scss';
 export var PageWrapper = function (_a) {

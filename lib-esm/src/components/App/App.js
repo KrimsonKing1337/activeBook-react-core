@@ -1,8 +1,8 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import { useEffect } from 'react';
 import { HistoryRouter } from 'redux-first-history/rr6';
-import { history, StoreProvider } from 'store';
 import { AppWrapper } from 'components/AppWrapper';
+import { history, StoreProvider } from 'store';
 import { hideAddressBarInMobileDevices } from 'utils/mobile/hideAddressBarInMobileDevices';
 import { addKeyboardControl } from 'utils/control/keyboardControl';
 import { Routes } from './Routes';

@@ -24,10 +24,10 @@ var slice = createSlice({
         setPage: function (state, action) {
             state.page = action.payload;
         },
-        prevPage: function (_state) {
-        },
-        nextPage: function (_state) {
-        },
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        prevPage: function (_state) { },
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        nextPage: function (_state) { },
         setMenuActiveState: function (state, action) {
             state.menuActiveState = action.payload;
         },

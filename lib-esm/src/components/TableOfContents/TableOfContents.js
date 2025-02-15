@@ -10,10 +10,10 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { useDispatch, useSelector } from 'store';
-import { mainActions, mainSelectors } from 'store/main';
 import { Header } from 'components/Header';
 import { Overflow } from 'components/Overflow';
+import { useDispatch, useSelector } from 'store';
+import { mainActions, mainSelectors } from 'store/main';
 import { Item } from './Item';
 import { items } from './utils';
 import styles from './TableOfContents.scss';

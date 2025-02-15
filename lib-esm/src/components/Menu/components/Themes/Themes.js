@@ -1,10 +1,10 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { useDispatch, useSelector } from 'store';
-import { configActions, configSelectors } from 'store/config';
 import { Label } from 'components/Label';
 import { Spoiler } from 'components/Spoiler';
+import { useDispatch, useSelector } from 'store';
+import { configActions, configSelectors } from 'store/config';
 import { getIsMobile } from 'utils/mobile/getIsMobile';
 import { getClassNames, playAchievement, themes } from './utils';
 import styles from './Themes.scss';

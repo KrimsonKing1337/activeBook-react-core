@@ -11,11 +11,11 @@ var __assign = (this && this.__assign) || function () {
 };
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useEffect, useRef, useState } from 'react';
+import { Header } from 'components/Header';
+import { Overflow } from 'components/Overflow';
 import { useDispatch, useSelector } from 'store';
 import { achievementsSelectors } from 'store/achievements';
 import { mainActions, mainSelectors } from 'store/main';
-import { Header } from 'components/Header';
-import { Overflow } from 'components/Overflow';
 import { hiddenAchievements, voc } from 'utils/effects/achievements/utils';
 import { Item } from './Item';
 import styles from './AchievementsProgress.scss';

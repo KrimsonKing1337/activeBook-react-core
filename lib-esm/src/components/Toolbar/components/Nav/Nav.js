@@ -1,11 +1,11 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 import { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
+import { Item } from 'components/Toolbar/components/Item';
 import { useSelector } from 'store';
 import { mainSelectors } from 'store/main';
 import ArrowLeft from 'assets/img/toolbar/i-arrow-left.svg';
 import ArrowRight from 'assets/img/toolbar/i-arrow-right.svg';
-import { Item } from 'components/Toolbar/components/Item';
 import { goNextPage, goPrevPage, goToPage } from 'utils/control/goToPage';
 import styles from './Nav.scss';
 export var Nav = function () {

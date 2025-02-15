@@ -1,7 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { Label } from 'components/Label';
 import { useDispatch, useSelector } from 'store';
 import { volumeActions, volumeSelectors } from 'store/volume';
-import { Label } from 'components/Label';
 import { Slider } from './components/Slider';
 import { playAchievement } from './utils';
 import styles from './Volume.scss';
