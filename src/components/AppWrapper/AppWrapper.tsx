@@ -1,10 +1,10 @@
 import { PropsWithChildren, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
+import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 import { Howler } from 'howler';
-
 import { RangeEffectsJson } from '@types';
+import { Achievement } from 'components/Achievement';
 
 import { useDispatch, useSelector } from 'store';
 import { volumeActions } from 'store/volume';
@@ -13,12 +13,8 @@ import { configActions } from 'store/config';
 import { initialState as configInitialState } from 'store/config/slice';
 import { mainActions, mainSelectors } from 'store/main';
 import { achievementsActions } from 'store/achievements';
-
-import { Achievement } from 'components/Achievement';
-
 import { useEffectsInRange } from 'hooks/effects/range';
 import { useVibration } from 'hooks/effects/vibration';
-
 import { seenPages } from 'utils/localStorage/seenPages';
 import { play as achievementPlay } from 'utils/effects/achievements';
 import { achievements as achievementsUtils } from 'utils/localStorage/achievements';

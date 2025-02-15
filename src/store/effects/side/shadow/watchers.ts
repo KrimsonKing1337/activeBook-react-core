@@ -1,11 +1,9 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-
 import { takeLatest } from 'redux-saga/effects';
-
-import { State } from './@types';
 
 import { setCssVariable } from 'utils/styles/setCssVariable';
 
+import { State } from './@types';
 import { actions } from './slice';
 
 function* watchSetColor(action: PayloadAction<State['color']>) {

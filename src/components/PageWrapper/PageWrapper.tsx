@@ -1,11 +1,6 @@
 import { PropsWithChildren } from 'react';
 
 import classNames from 'classnames';
-
-import { useSelector } from 'store';
-import { effectsSelectors } from 'store/effects/common';
-import { mainSelectors } from 'store/main';
-
 import { Toolbar } from 'components/Toolbar';
 import { Menu } from 'components/Menu';
 import { AchievementsProgress } from 'components/AchievementsProgress';
@@ -14,8 +9,11 @@ import { Bookmarks } from 'components/Bookmarks';
 import { SideEffects } from 'components/SideEffects';
 import { BackgroundEffects } from 'components/BackgroundEffects';
 
-import { Narrative } from './components/Narrative';
+import { mainSelectors } from 'store/main';
+import { effectsSelectors } from 'store/effects/common';
+import { useSelector } from 'store';
 
+import { Narrative } from './components/Narrative';
 import styles from './PageWrapper.scss';
 
 export type PageWrapperProps = {

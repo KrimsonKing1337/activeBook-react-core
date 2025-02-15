@@ -5,7 +5,6 @@ import { play } from 'utils/effects/achievements';
 import { achievements } from 'utils/localStorage/achievements';
 
 import { createDotsAsArray, getPlaceInLineByLocationStyles, orderDefaultState } from './utils';
-
 import styles from './Dots.scss';
 
 export const Dots = () => {

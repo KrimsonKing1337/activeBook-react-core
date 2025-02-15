@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-
 import { Theme } from '@types';
 
 import { play } from 'utils/effects/achievements';

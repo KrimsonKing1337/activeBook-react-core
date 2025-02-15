@@ -1,13 +1,13 @@
+import { Video } from 'components/Video';
+import { Img } from 'components/Img';
+
 import { useSelector } from 'store';
 import { effectsSelectors } from 'store/effects/common';
 import { backgroundVideoEffectSelectors } from 'store/effects/background/video';
 import { backgroundImgEffectSelectors } from 'store/effects/background/img';
 
-import { Video } from 'components/Video';
-import { Img } from 'components/Img';
 
 import { Dots } from './components/Dots';
-
 import styles from './BackgroundEffects.scss';
 
 export const BackgroundEffects = () => {

@@ -1,18 +1,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
-
 import { Theme } from '@types';
-
-import { useDispatch, useSelector } from 'store';
-import { configActions, configSelectors } from 'store/config';
-
 import { Label } from 'components/Label';
 import { Spoiler } from 'components/Spoiler';
 
+import { useDispatch, useSelector } from 'store';
+import { configActions, configSelectors } from 'store/config';
 import { getIsMobile } from 'utils/mobile/getIsMobile';
 
 import { getClassNames, playAchievement, themes } from './utils';
-
 import styles from './Themes.scss';
 
 const isMobile = getIsMobile();

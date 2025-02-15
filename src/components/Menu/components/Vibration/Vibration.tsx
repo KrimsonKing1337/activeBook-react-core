@@ -1,11 +1,10 @@
-import { useDispatch, useSelector } from 'store';
-import { configActions, configSelectors } from 'store/config';
-import { mainSelectors } from 'store/main';
-
 import { Toggle } from 'components/Toggle';
 import { Spoiler } from 'components/Spoiler';
 import { playAchievement } from 'components/Menu/utils';
 
+import { useDispatch, useSelector } from 'store';
+import { configActions, configSelectors } from 'store/config';
+import { mainSelectors } from 'store/main';
 import { on as vibrationOn } from 'utils/effects/vibration';
 
 import styles from './Vibration.scss';

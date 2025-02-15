@@ -1,4 +1,5 @@
 import { PropsWithChildren } from 'react';
+
 import { Route, Routes as ReactRouterRoutes } from 'react-router-dom';
 
 import { initialState } from 'store/main/slice';

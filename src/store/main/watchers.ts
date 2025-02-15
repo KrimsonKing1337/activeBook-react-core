@@ -1,14 +1,11 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-
 import { push } from 'redux-first-history';
 import { call, put, select, takeLatest } from 'redux-saga/effects';
-
 import { Location } from 'history';
 import { Howl, Howler } from 'howler';
-
 import { HowlExtended } from '@types';
-import { State } from './@types';
 
+import { State } from './@types';
 import { actions } from './slice';
 import { selectors } from './selectors';
 

@@ -1,9 +1,7 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-
 import { put, select, takeLatest } from 'redux-saga/effects';
 
 import { HowlInst, LastInstIndex } from './@types';
-
 import { actions } from './slice';
 import { selectors } from './selectors';
 

@@ -1,13 +1,10 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-
 import { call, put, select, takeLatest } from 'redux-saga/effects';
-
 import { Howler } from 'howler';
-
-import { State } from './@types';
 
 import { getAudioInstances } from 'utils/effects/audio/getAudioInstances';
 
+import { State } from './@types';
 import { actions } from './slice';
 import { selectors } from './selectors';
 

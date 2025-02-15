@@ -1,11 +1,11 @@
 import { PropsWithChildren, useEffect, useRef } from 'react';
 
 import classNames from 'classnames';
+import { getNarrativeElement } from 'components/PageWrapper/components/Narrative/utils';
 
 import { useDispatch } from 'store';
 import { mainActions } from 'store/main';
 
-import { getNarrativeElement } from 'components/PageWrapper/components/Narrative/utils';
 
 import styles from './Overflow.scss';
 

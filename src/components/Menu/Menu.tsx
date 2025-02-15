@@ -1,13 +1,14 @@
 import { useEffect } from 'react';
+
 import { useLocation } from 'react-router-dom';
+import { Overflow } from 'components/Overflow';
+import { Header } from 'components/Header';
 
 import { useDispatch, useSelector } from 'store';
 import { mainActions, mainSelectors } from 'store/main';
 import { achievementsSelectors } from 'store/achievements';
 import { bookmarksActions, bookmarksSelectors } from 'store/bookmarks';
 
-import { Overflow } from 'components/Overflow';
-import { Header } from 'components/Header';
 
 import { Volume } from './components/Volume';
 import { Themes } from './components/Themes';

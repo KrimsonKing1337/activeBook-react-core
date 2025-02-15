@@ -1,12 +1,12 @@
-import { useDispatch, useSelector } from 'store';
-import { mainActions, mainSelectors } from 'store/main';
-
 import { Header } from 'components/Header';
 import { Overflow } from 'components/Overflow';
 
+import { useDispatch, useSelector } from 'store';
+import { mainActions, mainSelectors } from 'store/main';
+
+
 import { Item } from './Item';
 import { items } from './utils';
-
 import styles from './TableOfContents.scss';
 
 export const TableOfContents = () => {

@@ -1,8 +1,6 @@
 import { useSelector } from 'store';
 import { configSelectors } from 'store/config';
-
 import { useSideShadow } from 'hooks/effects/side/shadow';
-
 import { flashlightInst } from 'utils/effects/flashlight';
 import { sleep } from 'utils/sleep';
 

@@ -1,16 +1,14 @@
 import { createContext } from 'react';
+
 import {
   type ReactReduxContextValue,
   createStoreHook,
   createDispatchHook,
   createSelectorHook,
 } from 'react-redux';
-
 import { configureStore } from '@reduxjs/toolkit';
-
 import { createReduxHistoryContext } from 'redux-first-history';
 import createSagaMiddleware from 'redux-saga';
-
 import { createBrowserHistory } from 'history';
 
 import { mainReducer, watchMainActions } from './main';

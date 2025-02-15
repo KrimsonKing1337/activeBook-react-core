@@ -5,7 +5,6 @@ import { DotsRangeEffect, RangeEffectsJson } from '@types';
 import { useDispatch, useSelector } from 'store';
 import { effectsActions } from 'store/effects/common';
 import { mainSelectors } from 'store/main';
-
 import { getEffectInRange } from 'utils/effects/rangeEffects';
 
 export function useDotsInRange(effects: RangeEffectsJson) {

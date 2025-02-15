@@ -1,10 +1,8 @@
 import { useSelector } from 'store';
 import { mainSelectors } from 'store/main';
-
 import { goToPage } from 'utils/control/goToPage';
 
 import { playAchievement } from './utils';
-
 import styles from './Item.scss';
 
 export type ItemProps = {

@@ -1,7 +1,6 @@
 import { put, select, takeLatest } from 'redux-saga/effects';
 
 import { State } from './@types';
-
 import { actions } from './slice';
 import { selectors } from './selectors';
 

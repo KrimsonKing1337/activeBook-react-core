@@ -1,11 +1,9 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-
 import { call, put, select, takeLatest } from 'redux-saga/effects';
-
-import { State } from './@types';
 
 import { setThemeCss } from 'utils/styles/setThemeCss';
 
+import { State } from './@types';
 import { actions } from './slice';
 import { selectors } from './selectors';
 

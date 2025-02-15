@@ -1,7 +1,6 @@
 import { useRef } from 'react';
 
 import { useColorCarameldansen, useColorPolice, useResetNameOfTextShadowAnimationCss } from './hooks';
-
 import styles from './SideShadow.scss';
 
 export const SideShadow = () => {

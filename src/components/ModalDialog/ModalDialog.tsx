@@ -1,9 +1,7 @@
 import { PropsWithChildren, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
-
 import { Interval, Timer } from '@types';
-
 import { Modal, ModalProps } from 'components/Modal';
 
 import styles from './ModalDialog.scss';

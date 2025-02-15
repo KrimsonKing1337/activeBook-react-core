@@ -1,12 +1,10 @@
 import { PropsWithChildren, useEffect, useRef } from 'react';
 
 import Hammer from 'hammerjs';
+import { PageWrapperProps } from 'components/PageWrapper/PageWrapper';
 
 import { useSelector } from 'store';
 import { configSelectors } from 'store/config';
-
-import { PageWrapperProps } from 'components/PageWrapper/PageWrapper';
-
 import { goNextPage, goPrevPage } from 'utils/control/goToPage';
 
 import styles from './Narrative.scss';

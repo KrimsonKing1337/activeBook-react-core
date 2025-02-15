@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 
 import { useSelector } from 'store';
 import { mainSelectors } from 'store/main';
-
 import { off as vibrationOff, on as vibrationOn } from 'utils/effects/vibration';
 
 export function useVibration() {
