@@ -1,8 +1,7 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { jsx as _jsx } from "react/jsx-runtime";
 import { useEffect } from 'react';
 import { HistoryRouter } from 'redux-first-history/rr6';
 import { history, StoreProvider } from 'store';
-import { Counter } from 'components';
 import { AppWrapper } from 'components/AppWrapper';
 import { hideAddressBarInMobileDevices } from 'utils/mobile/hideAddressBarInMobileDevices';
 import { addKeyboardControl } from 'utils/control/keyboardControl';
@@ -14,6 +13,6 @@ export var App = function (_a) {
         addKeyboardControl();
         hideAddressBarInMobileDevices();
     }, []);
-    return (_jsx(StoreProvider, { children: _jsx(HistoryRouter, { history: history, children: _jsxs(AppWrapper, { rangeEffectsJson: rangeEffectsJson, children: [_jsx(Counter, {}), _jsx(Routes, { children: children })] }) }) }));
+    return (_jsx(StoreProvider, { children: _jsx(HistoryRouter, { history: history, children: _jsx(AppWrapper, { rangeEffectsJson: rangeEffectsJson, children: _jsx(Routes, { children: children }) }) }) }));
 };
 //# sourceMappingURL=App.js.map
