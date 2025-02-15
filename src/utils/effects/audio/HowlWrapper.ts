@@ -30,7 +30,12 @@ export class HowlWrapper {
   public onPlay: () => void;
 
   constructor({
-    id, src, loop, type = 'sfx', screamer = false, onPlay = () => {
+    id,
+    src,
+    loop,
+    type = 'sfx',
+    screamer = false,
+    onPlay = () => {
     },
   }: HowlWrapperOptions) {
     const volume = this.getVolume();
