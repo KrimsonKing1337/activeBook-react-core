@@ -15,7 +15,7 @@ import { Narrative } from './components/Narrative';
 import styles from './PageWrapper.scss';
 export var PageWrapper = function (_a) {
     var _b, _c;
-    var children = _a.children, BackgroundComponent = _a.BackgroundComponent, withoutToolbar = _a.withoutToolbar, sbMode = _a.sbMode;
+    var children = _a.children, backgroundComponent = _a.backgroundComponent, withoutToolbar = _a.withoutToolbar, sbMode = _a.sbMode;
     var inverseColorIsActive = useSelector(effectsSelectors.inverseColorIsActive);
     var isLoading = useSelector(mainSelectors.isLoading);
     var pageWrapperClassNames = classNames((_b = {},
@@ -26,6 +26,6 @@ export var PageWrapper = function (_a) {
         _c[styles.mainContent] = true,
         _c[styles.isLoading] = isLoading,
         _c));
-    return (_jsx("div", { className: pageWrapperClassNames, children: _jsxs("div", { className: mainContendClassNames, children: [_jsx(Narrative, { children: children }), _jsx(SideEffects, {}), _jsx(BackgroundEffects, {}), _jsx(Background, { children: BackgroundComponent }), !withoutToolbar && (_jsx(Toolbar, { sbMode: sbMode })), _jsx(Menu, {}), _jsx(TableOfContents, {}), _jsx(Bookmarks, {}), _jsx(AchievementsProgress, {})] }) }));
+    return (_jsx("div", { className: pageWrapperClassNames, children: _jsxs("div", { className: mainContendClassNames, children: [_jsx(Narrative, { children: children }), _jsx(SideEffects, {}), _jsx(BackgroundEffects, {}), _jsx(Background, { withShadow: backgroundComponent === null || backgroundComponent === void 0 ? void 0 : backgroundComponent.withShadow, children: backgroundComponent === null || backgroundComponent === void 0 ? void 0 : backgroundComponent.Component }), !withoutToolbar && (_jsx(Toolbar, { sbMode: sbMode })), _jsx(Menu, {}), _jsx(TableOfContents, {}), _jsx(Bookmarks, {}), _jsx(AchievementsProgress, {})] }) }));
 };
 //# sourceMappingURL=PageWrapper.js.map

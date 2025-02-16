@@ -1,8 +1,8 @@
 import { PropsWithChildren } from 'react';
-export type SpoilerProps = {
+export type SpoilerProps = React.HTMLAttributes<HTMLDivElement> & {
     label?: string;
+    isOpenDefault?: boolean;
     needToSetHeight?: boolean;
     setNeedToSetHeightToFalse?: () => void;
-    [name: string]: any;
 };
-export declare const Spoiler: ({ children, label, needToSetHeight, setNeedToSetHeightToFalse, ...rest }: PropsWithChildren<SpoilerProps>) => import("react/jsx-runtime").JSX.Element;
+export declare const Spoiler: ({ children, label, isOpenDefault, needToSetHeight, setNeedToSetHeightToFalse, ...rest }: PropsWithChildren<SpoilerProps>) => import("react/jsx-runtime").JSX.Element;

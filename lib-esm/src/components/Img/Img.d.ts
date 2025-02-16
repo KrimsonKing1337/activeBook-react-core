@@ -1,5 +1,5 @@
-type ImgProps = {
-    [key: string]: any;
+/// <reference types="react" />
+type ImgProps = React.HTMLAttributes<HTMLImageElement> & {
     className?: string;
     src: string;
 };

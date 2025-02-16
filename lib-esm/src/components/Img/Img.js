@@ -23,6 +23,6 @@ var __rest = (this && this.__rest) || function (s, e) {
 import { jsx as _jsx } from "react/jsx-runtime";
 export var Img = function (_a) {
     var _b = _a.className, className = _b === void 0 ? '' : _b, src = _a.src, etc = __rest(_a, ["className", "src"]);
-    return _jsx("img", __assign({ className: className, src: src, alt: "" }, etc));
+    return (_jsx("img", __assign({ className: className, src: src, alt: "" }, etc)));
 };
 //# sourceMappingURL=Img.js.map

@@ -54,7 +54,7 @@ export const Flashlight = () => {
     <div className={styles.flashlight}>
       <Toggle
         label="Вспышка (там, где доступно)"
-        isActiveDefault={false}
+        isActiveDefault={true}
         onClickOn={() => toggleClickHandler(true)}
         onClickOff={() => toggleClickHandler(false)}
       />

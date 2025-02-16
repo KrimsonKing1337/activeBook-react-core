@@ -21,12 +21,15 @@ import styles from './PageWrapper.scss';
 export type PageWrapperProps = {
   withoutToolbar?: boolean;
   sbMode?: boolean;
-  BackgroundComponent?: React.ReactNode;
+  backgroundComponent?: {
+    Component: React.ReactNode;
+    withShadow?: boolean;
+  };
 };
 
 export const PageWrapper = ({
   children,
-  BackgroundComponent,
+  backgroundComponent,
   withoutToolbar,
   sbMode,
 }: PropsWithChildren<PageWrapperProps>) => {
@@ -53,8 +56,8 @@ export const PageWrapper = ({
         <SideEffects />
         <BackgroundEffects />
 
-        <Background>
-          {BackgroundComponent}
+        <Background withShadow={backgroundComponent?.withShadow}>
+          {backgroundComponent?.Component}
         </Background>
 
         {!withoutToolbar && (

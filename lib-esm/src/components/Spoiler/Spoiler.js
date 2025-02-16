@@ -24,9 +24,12 @@ import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useEffect, useRef, useState } from 'react';
 import styles from './Spoiler.scss';
 export var Spoiler = function (_a) {
-    var children = _a.children, label = _a.label, _b = _a.needToSetHeight, needToSetHeight = _b === void 0 ? false : _b, _c = _a.setNeedToSetHeightToFalse, setNeedToSetHeightToFalse = _c === void 0 ? function () {
-    } : _c, rest = __rest(_a, ["children", "label", "needToSetHeight", "setNeedToSetHeightToFalse"]);
-    var _d = useState(true), isOpen = _d[0], setIsOpen = _d[1];
+    var children = _a.children, label = _a.label, _b = _a.isOpenDefault, isOpenDefault = _b === void 0 ? false : _b, _c = _a.needToSetHeight, needToSetHeight = _c === void 0 ? false : _c, _d = _a.setNeedToSetHeightToFalse, setNeedToSetHeightToFalse = _d === void 0 ? function () {
+    } : _d, rest = __rest(_a, ["children", "label", "isOpenDefault", "needToSetHeight", "setNeedToSetHeightToFalse"]);
+    var _e = useState(isOpenDefault), isOpen = _e[0], setIsOpen = _e[1];
+    useEffect(function () {
+        setIsOpen(isOpenDefault);
+    }, [isOpenDefault]);
     var contentRef = useRef(null);
     var buttonText = isOpen ? 'Закрыть' : 'Раскрыть';
     var buttonLabel = label ? label : buttonText;

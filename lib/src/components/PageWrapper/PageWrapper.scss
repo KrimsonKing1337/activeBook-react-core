@@ -19,6 +19,11 @@
   &.inverseColorIsActive {
     filter: invert(1);
   }
+
+  @media screen and (max-width: $appWidth) {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
 }
 
 .mainContent {

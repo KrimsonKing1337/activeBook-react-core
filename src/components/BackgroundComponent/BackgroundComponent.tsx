@@ -9,14 +9,17 @@ type BackgroundComponentProps = React.HTMLAttributes<HTMLDivElement> & {
   withShadow?: boolean;
 }
 
-export const BackgroundComponent = (props: PropsWithChildren<BackgroundComponentProps>) => {
-  const { children, className, withShadow = true } = props;
-
+export const BackgroundComponent = ({
+  children,
+  className,
+  withShadow = true,
+  ...etc
+}: PropsWithChildren<BackgroundComponentProps>) => {
   const wrapperClassName = classnames([styles.wrapper, className]);
 
   return (
-    <div className={wrapperClassName} {...props}>
-      {withShadow && (
+    <div className={wrapperClassName} {...etc}>
+      {children && withShadow && (
         <div className={styles.shadow} />
       )}
 
