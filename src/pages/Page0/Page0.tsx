@@ -11,14 +11,14 @@ import { flashlightInst } from 'utils/effects/flashlight';
 import { useModal } from './hooks';
 
 export type Page0Props = {
-  goCallback?: () => Promise<void> | void;
   header?: string;
-  article?: string;
+  subHeader?: string;
   showButton?: boolean;
   Footer?: React.ElementType;
+  goCallback?: () => Promise<void> | void;
 };
 
-export const Page0 = ({ goCallback, header, article, showButton = true, Footer }: Page0Props) => {
+export const Page0 = ({ goCallback, header, subHeader, showButton = true, Footer }: Page0Props) => {
   const [lastPage, setLastPage] = useState(0);
 
   const { modalIsActive, modalOnClose, setModalIsActive } = useModal();
@@ -104,9 +104,9 @@ export const Page0 = ({ goCallback, header, article, showButton = true, Footer }
         </header>
       )}
 
-      {article && (
+      {subHeader && (
         <article>
-          {article}
+          {subHeader}
         </article>
       )}
 
