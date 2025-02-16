@@ -8,20 +8,28 @@ import { TableOfContents } from 'components/TableOfContents';
 import { Bookmarks } from 'components/Bookmarks';
 import { SideEffects } from 'components/SideEffects';
 import { BackgroundEffects } from 'components/BackgroundEffects';
+import { BackgroundComponent as Background } from 'components/BackgroundComponent';
 
 import { mainSelectors } from 'store/main';
 import { effectsSelectors } from 'store/effects/common';
 import { useSelector } from 'store';
 
 import { Narrative } from './components/Narrative';
+
 import styles from './PageWrapper.scss';
 
 export type PageWrapperProps = {
   withoutToolbar?: boolean;
   sbMode?: boolean;
+  BackgroundComponent?: React.ReactNode;
 };
 
-export const PageWrapper = ({ children, withoutToolbar, sbMode }: PropsWithChildren<PageWrapperProps>) => {
+export const PageWrapper = ({
+  children,
+  BackgroundComponent,
+  withoutToolbar,
+  sbMode,
+}: PropsWithChildren<PageWrapperProps>) => {
   const inverseColorIsActive = useSelector(effectsSelectors.inverseColorIsActive);
   const isLoading = useSelector(mainSelectors.isLoading);
 
@@ -43,19 +51,19 @@ export const PageWrapper = ({ children, withoutToolbar, sbMode }: PropsWithChild
         </Narrative>
 
         <SideEffects />
-
         <BackgroundEffects />
+
+        <Background>
+          {BackgroundComponent}
+        </Background>
 
         {!withoutToolbar && (
           <Toolbar sbMode={sbMode} />
         )}
 
         <Menu />
-
         <TableOfContents />
-
         <Bookmarks />
-
         <AchievementsProgress />
       </div>
     </div>

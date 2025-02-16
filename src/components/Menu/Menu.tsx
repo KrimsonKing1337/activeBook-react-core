@@ -1,14 +1,15 @@
 import { useEffect } from 'react';
 
 import { useLocation } from 'react-router-dom';
+
 import { Overflow } from 'components/Overflow';
 import { Header } from 'components/Header';
 
 import { useDispatch, useSelector } from 'store';
+
 import { mainActions, mainSelectors } from 'store/main';
 import { achievementsSelectors } from 'store/achievements';
 import { bookmarksActions, bookmarksSelectors } from 'store/bookmarks';
-
 
 import { Volume } from './components/Volume';
 import { Themes } from './components/Themes';
@@ -50,19 +51,16 @@ export const Menu = () => {
   return (
     <Overflow isOpen={isOpen}>
       <Header label="Настройки" />
-
       <Volume />
-
       <Themes />
-
       <Vibration />
-
       <Flashlight />
 
-      {allPagesSeen && <AuthorComments />}
+      {allPagesSeen && (
+        <AuthorComments />
+      )}
 
       <LineHeight />
-
       <Footer />
     </Overflow>
   );

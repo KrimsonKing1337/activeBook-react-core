@@ -40,7 +40,7 @@ import { Toggle } from 'components/Toggle';
 import { playAchievement } from 'components/Menu/utils';
 import { Spoiler } from 'components/Spoiler';
 import { useDispatch, useSelector } from 'store';
-import { configActions, configSelectors } from 'store/config';
+import { configActions } from 'store/config';
 import { mainSelectors } from 'store/main';
 import { useFlashlight } from 'hooks/effects/flashlight';
 import { flashlightInst } from 'utils/effects/flashlight';
@@ -48,7 +48,6 @@ import styles from './Flashlight.scss';
 export var Flashlight = function () {
     var dispatch = useDispatch();
     var flashlightOn = useFlashlight().flashlightOn;
-    var flashlightState = useSelector(configSelectors.flashlight);
     var isFlashlightAvailable = useSelector(mainSelectors.isFlashlightAvailable);
     var flashlightProblems = useSelector(mainSelectors.flashlightProblems);
     useEffect(function () {
@@ -74,6 +73,6 @@ export var Flashlight = function () {
             return [2 /*return*/];
         });
     }); };
-    return (_jsxs("div", { className: styles.flashlight, children: [_jsx(Toggle, { label: "\u0412\u0441\u043F\u044B\u0448\u043A\u0430 (\u0442\u0430\u043C, \u0433\u0434\u0435 \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u043E)", isActiveDefault: flashlightState, onClickOn: function () { return toggleClickHandler(true); }, onClickOff: function () { return toggleClickHandler(false); } }), _jsxs(Spoiler, { label: "\u041D\u0435 \u0440\u0430\u0431\u043E\u0442\u0430\u0435\u0442 \u0432\u0441\u043F\u044B\u0448\u043A\u0430?", children: ["\u041F\u0440\u043E\u0432\u0435\u0440\u044C\u0442\u0435, \u0447\u0442\u043E \u0434\u0430\u043D\u043E \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043D\u0438\u0435 \u0434\u043B\u044F \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u044F \u043A\u0430\u043C\u0435\u0440\u044B.", _jsx("br", {}), "(\u0430\u0434\u0440\u0435\u0441\u043D\u0430\u044F \u0441\u0442\u0440\u043E\u043A\u0430 \u0431\u0440\u0430\u0443\u0437\u0435\u0440\u0430 ", '->', " \u0437\u0430\u043C\u043E\u0447\u0435\u043A ", '->', " \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043D\u0438\u044F)", _jsx("br", {}), "\u041D\u043E \u0438\u043D\u043E\u0433\u0434\u0430 \u0431\u044B\u0432\u0430\u0435\u0442, \u0447\u0442\u043E \u0434\u0430\u0436\u0435 \u0435\u0441\u043B\u0438 \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043D\u0438\u044F \u0432\u0441\u0435 \u0435\u0441\u0442\u044C, \u0431\u0440\u0430\u0443\u0437\u0435\u0440 \u043D\u0435 \u043C\u043E\u0436\u0435\u0442 \u0434\u043E\u0441\u0442\u0443\u0447\u0430\u0442\u044C\u0441\u044F \u0434\u043E \u0432\u0441\u043F\u044B\u0448\u043A\u0438. \u041D\u0438\u0436\u0435 \u0431\u0443\u0434\u0435\u0442 \u0432\u044B\u0432\u043E\u0434\u0438\u0442\u0441\u044F, \u0447\u0435\u0433\u043E \u043E\u043D \u043D\u0435 \u0441\u043C\u043E\u0433 \u043D\u0430\u0439\u0442\u0438:", _jsx("br", {}), _jsx("br", {}), flashlightProblems] })] }));
+    return (_jsxs("div", { className: styles.flashlight, children: [_jsx(Toggle, { label: "\u0412\u0441\u043F\u044B\u0448\u043A\u0430 (\u0442\u0430\u043C, \u0433\u0434\u0435 \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u043E)", isActiveDefault: false, onClickOn: function () { return toggleClickHandler(true); }, onClickOff: function () { return toggleClickHandler(false); } }), _jsxs(Spoiler, { label: "\u041D\u0435 \u0440\u0430\u0431\u043E\u0442\u0430\u0435\u0442 \u0432\u0441\u043F\u044B\u0448\u043A\u0430?", children: ["\u041F\u0440\u043E\u0432\u0435\u0440\u044C\u0442\u0435, \u0447\u0442\u043E \u0434\u0430\u043D\u043E \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043D\u0438\u0435 \u0434\u043B\u044F \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u044F \u043A\u0430\u043C\u0435\u0440\u044B.", _jsx("br", {}), "(\u0430\u0434\u0440\u0435\u0441\u043D\u0430\u044F \u0441\u0442\u0440\u043E\u043A\u0430 \u0431\u0440\u0430\u0443\u0437\u0435\u0440\u0430 ", '->', " \u0437\u0430\u043C\u043E\u0447\u0435\u043A ", '->', " \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043D\u0438\u044F)", _jsx("br", {}), "\u041D\u043E \u0438\u043D\u043E\u0433\u0434\u0430 \u0431\u044B\u0432\u0430\u0435\u0442, \u0447\u0442\u043E \u0434\u0430\u0436\u0435 \u0435\u0441\u043B\u0438 \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043D\u0438\u044F \u0432\u0441\u0435 \u0435\u0441\u0442\u044C, \u0431\u0440\u0430\u0443\u0437\u0435\u0440 \u043D\u0435 \u043C\u043E\u0436\u0435\u0442 \u0434\u043E\u0441\u0442\u0443\u0447\u0430\u0442\u044C\u0441\u044F \u0434\u043E \u0432\u0441\u043F\u044B\u0448\u043A\u0438. \u041D\u0438\u0436\u0435 \u0431\u0443\u0434\u0435\u0442 \u0432\u044B\u0432\u043E\u0434\u0438\u0442\u0441\u044F, \u0447\u0435\u0433\u043E \u043E\u043D \u043D\u0435 \u0441\u043C\u043E\u0433 \u043D\u0430\u0439\u0442\u0438:", _jsx("br", {}), _jsx("br", {}), flashlightProblems] })] }));
 };
 //# sourceMappingURL=Flashlight.js.map

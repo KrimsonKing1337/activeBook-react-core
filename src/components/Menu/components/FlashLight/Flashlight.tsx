@@ -5,9 +5,11 @@ import { playAchievement } from 'components/Menu/utils';
 import { Spoiler } from 'components/Spoiler';
 
 import { useDispatch, useSelector } from 'store';
-import { configActions, configSelectors } from 'store/config';
+import { configActions } from 'store/config';
 import { mainSelectors } from 'store/main';
+
 import { useFlashlight } from 'hooks/effects/flashlight';
+
 import { flashlightInst } from 'utils/effects/flashlight';
 
 import styles from './Flashlight.scss';
@@ -17,7 +19,6 @@ export const Flashlight = () => {
 
   const { flashlightOn } = useFlashlight();
 
-  const flashlightState = useSelector(configSelectors.flashlight);
   const isFlashlightAvailable = useSelector(mainSelectors.isFlashlightAvailable);
   const flashlightProblems = useSelector(mainSelectors.flashlightProblems);
 
@@ -53,7 +54,7 @@ export const Flashlight = () => {
     <div className={styles.flashlight}>
       <Toggle
         label="Вспышка (там, где доступно)"
-        isActiveDefault={flashlightState}
+        isActiveDefault={false}
         onClickOn={() => toggleClickHandler(true)}
         onClickOff={() => toggleClickHandler(false)}
       />

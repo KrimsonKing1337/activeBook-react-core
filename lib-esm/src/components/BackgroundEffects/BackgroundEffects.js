@@ -14,6 +14,6 @@ export var BackgroundEffects = function () {
     var backgroundImgSrc = useSelector(backgroundImgEffectSelectors.src);
     var dotsIsActive = useSelector(effectsSelectors.dotsIsActive);
     var oneOfBgIsActive = backgroundVideoIsActive || backgroundImgIsActive;
-    return (_jsxs("div", { className: styles.backgroundEffectsWrapper, children: [dotsIsActive && _jsx(Dots, {}), oneOfBgIsActive && (_jsxs("div", { className: styles.backgroundObjectsWrapper, children: [_jsx("div", { className: styles.backgroundObjectsShadow }), backgroundVideoIsActive && (_jsx("div", { className: styles.backgroundObjectWrapper, children: _jsx(Video, { src: backgroundVideoSrc, autoPlay: true, loop: true, muted: true }) })), backgroundImgIsActive && (_jsx("div", { className: styles.backgroundObjectWrapper, children: _jsx(Img, { src: backgroundImgSrc }) }))] }))] }));
+    return (_jsxs("div", { className: styles.backgroundEffectsWrapper, children: [dotsIsActive && (_jsx(Dots, {})), oneOfBgIsActive && (_jsxs("div", { className: styles.backgroundObjectsWrapper, children: [_jsx("div", { className: styles.backgroundObjectsShadow }), backgroundVideoIsActive && (_jsx("div", { className: styles.backgroundObjectWrapper, children: _jsx(Video, { src: backgroundVideoSrc, autoPlay: true, loop: true, muted: true }) })), backgroundImgIsActive && (_jsx("div", { className: styles.backgroundObjectWrapper, children: _jsx(Img, { src: backgroundImgSrc }) }))] }))] }));
 };
 //# sourceMappingURL=BackgroundEffects.js.map

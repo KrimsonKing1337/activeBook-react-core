@@ -38,6 +38,6 @@ export var Menu = function () {
             }
         }
     }, [location, menuActiveState, bookmarksIsOpen]);
-    return (_jsxs(Overflow, { isOpen: isOpen, children: [_jsx(Header, { label: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438" }), _jsx(Volume, {}), _jsx(Themes, {}), _jsx(Vibration, {}), _jsx(Flashlight, {}), allPagesSeen && _jsx(AuthorComments, {}), _jsx(LineHeight, {}), _jsx(Footer, {})] }));
+    return (_jsxs(Overflow, { isOpen: isOpen, children: [_jsx(Header, { label: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438" }), _jsx(Volume, {}), _jsx(Themes, {}), _jsx(Vibration, {}), _jsx(Flashlight, {}), allPagesSeen && (_jsx(AuthorComments, {})), _jsx(LineHeight, {}), _jsx(Footer, {})] }));
 };
 //# sourceMappingURL=Menu.js.map
