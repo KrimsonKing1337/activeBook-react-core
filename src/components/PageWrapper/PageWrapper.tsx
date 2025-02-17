@@ -21,6 +21,8 @@ import styles from './PageWrapper.scss';
 export type PageWrapperProps = {
   withoutToolbar?: boolean;
   sbMode?: boolean;
+  bgColor?: string;
+  shadowColor?: string;
   backgroundComponent?: {
     Component: React.ReactNode;
     withShadow?: boolean;
@@ -32,6 +34,8 @@ export const PageWrapper = ({
   backgroundComponent,
   withoutToolbar,
   sbMode,
+  bgColor,
+  shadowColor,
 }: PropsWithChildren<PageWrapperProps>) => {
   const inverseColorIsActive = useSelector(effectsSelectors.inverseColorIsActive);
   const isLoading = useSelector(mainSelectors.isLoading);
@@ -47,16 +51,16 @@ export const PageWrapper = ({
   });
 
   return (
-    <div className={pageWrapperClassNames}>
+    <div className={pageWrapperClassNames} style={{ backgroundColor: bgColor }}>
       <div className={mainContendClassNames}>
         <Narrative>
           {children}
         </Narrative>
 
         <SideEffects />
-        <BackgroundEffects />
+        <BackgroundEffects shadowColor={shadowColor} />
 
-        <Background withShadow={backgroundComponent?.withShadow}>
+        <Background withShadow={backgroundComponent?.withShadow} shadowColor={shadowColor}>
           {backgroundComponent?.Component}
         </Background>
 

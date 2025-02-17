@@ -1,1 +1,5 @@
-export declare const BackgroundEffects: () => import("react/jsx-runtime").JSX.Element;
+type BackgroundEffectsProps = {
+    shadowColor?: string;
+};
+export declare const BackgroundEffects: ({ shadowColor }: BackgroundEffectsProps) => import("react/jsx-runtime").JSX.Element;
+export {};

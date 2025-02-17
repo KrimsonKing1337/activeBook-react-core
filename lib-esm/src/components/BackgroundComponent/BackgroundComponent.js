@@ -24,8 +24,8 @@ import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import classnames from 'classnames';
 import styles from './BackgroundComponent.scss';
 export var BackgroundComponent = function (_a) {
-    var children = _a.children, className = _a.className, _b = _a.withShadow, withShadow = _b === void 0 ? true : _b, etc = __rest(_a, ["children", "className", "withShadow"]);
+    var children = _a.children, className = _a.className, _b = _a.withShadow, withShadow = _b === void 0 ? true : _b, shadowColor = _a.shadowColor, etc = __rest(_a, ["children", "className", "withShadow", "shadowColor"]);
     var wrapperClassName = classnames([styles.wrapper, className]);
-    return (_jsxs("div", __assign({ className: wrapperClassName }, etc, { children: [children && withShadow && (_jsx("div", { className: styles.shadow })), children] })));
+    return (_jsxs("div", __assign({ className: wrapperClassName }, etc, { style: { backgroundColor: shadowColor }, children: [children && withShadow && (_jsx("div", { className: styles.shadow })), children] })));
 };
 //# sourceMappingURL=BackgroundComponent.js.map

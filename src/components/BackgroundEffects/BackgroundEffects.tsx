@@ -11,7 +11,11 @@ import { Dots } from './components/Dots';
 
 import styles from './BackgroundEffects.scss';
 
-export const BackgroundEffects = () => {
+type BackgroundEffectsProps = {
+  shadowColor?: string;
+}
+
+export const BackgroundEffects = ({ shadowColor }: BackgroundEffectsProps) => {
   const backgroundVideoIsActive = useSelector(backgroundVideoEffectSelectors.isActive);
   const backgroundVideoSrc = useSelector(backgroundVideoEffectSelectors.src);
   const backgroundImgIsActive = useSelector(backgroundImgEffectSelectors.isActive);
@@ -28,7 +32,7 @@ export const BackgroundEffects = () => {
 
       {oneOfBgIsActive && (
         <div className={styles.backgroundObjectsWrapper}>
-          <div className={styles.backgroundObjectsShadow} />
+          <div className={styles.backgroundObjectsShadow} style={{ backgroundImage: shadowColor }} />
 
           {backgroundVideoIsActive && (
             <div className={styles.backgroundObjectWrapper}>
