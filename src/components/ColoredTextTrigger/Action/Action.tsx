@@ -4,10 +4,9 @@ import classNames from 'classnames';
 
 import styles from './Action.scss';
 
-export type ActionProps = {
-  onClick?: () => void;
+export type ActionProps = React.HTMLAttributes<HTMLDivElement> & {
   fullWidth?: boolean;
-  [name: string]: any;
+  onClick?: () => void;
 };
 
 export const Action = ({
