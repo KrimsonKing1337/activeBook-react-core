@@ -1,26 +1,39 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { put, select, takeLatest } from 'redux-saga/effects';
 
-import { HowlInst, LastInstIndex } from './@types';
+import { HowlInst, HowlInstances } from './@types';
+
 import { actions } from './slice';
 import { selectors } from './selectors';
 
-export function* watchSetMusic(action: PayloadAction<HowlInst>) {
+export function* watchSetMusicInstance(action: PayloadAction<HowlInst>) {
   const { payload } = action;
 
-  const lastInstIndex: LastInstIndex = yield select(selectors.lastInstIndex);
+  const musicInstances: HowlInstances = yield select(selectors.musicInstances);
 
-  if (lastInstIndex === 1) {
-    yield put(actions.setHowlInst2(payload));
-    yield put(actions.setHowlInst1(null));
-    yield put(actions.setLastInstIndex(2));
-  } else {
-    yield put(actions.setHowlInst1(payload));
-    yield put(actions.setHowlInst2(null));
-    yield put(actions.setLastInstIndex(1));
-  }
+  const newValue = {
+    ...musicInstances,
+    payload,
+  };
+
+  yield put(actions.setMusicInstances(newValue));
+}
+
+export function* watchDeleteMusicInstance(action: PayloadAction<string>) {
+  const { payload } = action;
+
+  const musicInstances: HowlInstances = yield select(selectors.musicInstances);
+
+  const newValue = {
+    ...musicInstances,
+  };
+
+  delete newValue[payload];
+
+  yield put(actions.setMusicInstances(newValue));
 }
 
 export function* watchActions() {
-  yield takeLatest(actions.setMusic, watchSetMusic);
+  yield takeLatest(actions.setMusicInstance, watchSetMusicInstance);
+  yield takeLatest(actions.deleteMusicInstance, watchDeleteMusicInstance);
 }

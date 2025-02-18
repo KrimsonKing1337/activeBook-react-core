@@ -63,7 +63,7 @@ export function useSound({
 
     setSoundId(uuid);
 
-    dispatch(soundEffectsActions.setSound(howlInst));
+    dispatch(soundEffectsActions.setSoundInstance(howlInst));
 
     return () => {
       onUnmount();
@@ -105,7 +105,7 @@ export function useSound({
 
         await soundInst.unload(fadeOutWhenUnload);
 
-        dispatch(soundEffectsActions.deleteSound(soundId));
+        dispatch(soundEffectsActions.deleteSoundInstance(soundId));
 
         if (timer) {
           clearTimeout(timer);

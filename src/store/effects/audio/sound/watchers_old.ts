@@ -22,5 +22,5 @@ export function* watchSetSound(action: PayloadAction<HowlInst>) {
 }
 
 export function* watchActions() {
-  yield takeLatest(actions.setSound, watchSetSound);
+  yield takeLatest(actions.setSoundInstance, watchSetSound);
 }

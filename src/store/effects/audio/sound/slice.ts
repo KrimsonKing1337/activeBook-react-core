@@ -15,9 +15,9 @@ const slice = createSlice({
   initialState,
   reducers: {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    setSound(_state, _action: PayloadAction<HowlInst>) {},
+    setSoundInstance(_state, _action: PayloadAction<HowlInst>) {},
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    deleteSound(_state, _action: PayloadAction<string>) {},
+    deleteSoundInstance(_state, _action: PayloadAction<string>) {},
 
     setSoundInstances(state, action: PayloadAction<HowlInstances>) {
       state.soundInstances = action.payload;
