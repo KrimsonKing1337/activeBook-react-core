@@ -1,12 +1,16 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-import { Timer } from '@types';
+import { nanoid } from 'nanoid';
 
-import { useDispatch, useSelector } from 'store';
+import type { Timer } from '@types';
+
+import { useSelector, useDispatch } from 'store';
 import { soundEffectsActions, soundEffectsSelectors } from 'store/effects/audio/sound';
-import { HowlWrapper, HowlWrapperOptions } from 'utils/effects/audio/HowlWrapper';
+
+import { HowlWrapper, type HowlWrapperOptions } from 'utils/effects/audio/HowlWrapper';
 
 type UseSoundProps = {
+  id?: string;
   src: string;
   fadeOutWhenUnload?: boolean;
   bg?: boolean;
@@ -20,6 +24,7 @@ type UseSoundProps = {
 };
 
 export function useSound({
+  id = '',
   src,
   fadeOutWhenUnload = true,
   bg = false,
@@ -35,10 +40,15 @@ export function useSound({
 }: UseSoundProps) {
   const dispatch = useDispatch();
 
-  const soundInst = useSelector(soundEffectsSelectors.soundInst);
+  const soundsInstances = useSelector(soundEffectsSelectors.soundsInstances);
+
+  const [soundId, setSoundId] = useState<string>(id);
 
   useEffect(() => {
+    const uuid = id || nanoid();
+
     const opt: HowlWrapperOptions = {
+      id: uuid,
       src: [src],
       loop,
       screamer,
@@ -51,6 +61,8 @@ export function useSound({
 
     const howlInst = new HowlWrapper(opt);
 
+    setSoundId(uuid);
+
     dispatch(soundEffectsActions.setSound(howlInst));
 
     return () => {
@@ -59,11 +71,13 @@ export function useSound({
   }, []);
 
   useEffect(() => {
-    let timer: Timer = null;
+    const soundInst = soundsInstances[soundId];
 
     if (!soundInst || soundInst.isUnloading) {
       return;
     }
+
+    let timer: Timer = null;
 
     if (playOnLoad) {
       timer = setTimeout(() => {
@@ -89,14 +103,16 @@ export function useSound({
           await soundInst.waitTillTheEnd();
         }
 
-        soundInst.unload(fadeOutWhenUnload);
+        await soundInst.unload(fadeOutWhenUnload);
+
+        dispatch(soundEffectsActions.deleteSound(soundId));
 
         if (timer) {
           clearTimeout(timer);
         }
       })();
     };
-  }, [soundInst]);
+  }, [soundsInstances]);
 
-  return soundInst;
+  return soundsInstances[soundId];
 }

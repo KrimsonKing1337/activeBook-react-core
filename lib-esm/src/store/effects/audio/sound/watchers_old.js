@@ -1,14 +1,3 @@
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __generator = (this && this.__generator) || function (thisArg, body) {
     var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
     return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
@@ -40,37 +29,36 @@ import { put, select, takeLatest } from 'redux-saga/effects';
 import { actions } from './slice';
 import { selectors } from './selectors';
 export function watchSetSound(action) {
-    var payload, howlInstances, newValue;
+    var payload, lastInstIndex;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 payload = action.payload;
-                return [4 /*yield*/, select(selectors.howlInstances)];
+                return [4 /*yield*/, select(selectors.lastInstIndex)];
             case 1:
-                howlInstances = _a.sent();
-                newValue = __assign(__assign({}, howlInstances), { payload: payload });
-                return [4 /*yield*/, put(actions.setHowlInstances(newValue))];
+                lastInstIndex = _a.sent();
+                if (!(lastInstIndex === 1)) return [3 /*break*/, 5];
+                return [4 /*yield*/, put(actions.setHowlInst2(payload))];
             case 2:
                 _a.sent();
-                return [2 /*return*/];
-        }
-    });
-}
-export function watchDeleteSound(action) {
-    var payload, howlInstances, newValue;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                payload = action.payload;
-                return [4 /*yield*/, select(selectors.howlInstances)];
-            case 1:
-                howlInstances = _a.sent();
-                newValue = __assign({}, howlInstances);
-                delete newValue[payload];
-                return [4 /*yield*/, put(actions.setHowlInstances(newValue))];
-            case 2:
+                return [4 /*yield*/, put(actions.setHowlInst1(null))];
+            case 3:
                 _a.sent();
-                return [2 /*return*/];
+                return [4 /*yield*/, put(actions.setLastInstIndex(2))];
+            case 4:
+                _a.sent();
+                return [3 /*break*/, 9];
+            case 5: return [4 /*yield*/, put(actions.setHowlInst1(payload))];
+            case 6:
+                _a.sent();
+                return [4 /*yield*/, put(actions.setHowlInst2(null))];
+            case 7:
+                _a.sent();
+                return [4 /*yield*/, put(actions.setLastInstIndex(1))];
+            case 8:
+                _a.sent();
+                _a.label = 9;
+            case 9: return [2 /*return*/];
         }
     });
 }
@@ -80,11 +68,8 @@ export function watchActions() {
             case 0: return [4 /*yield*/, takeLatest(actions.setSound, watchSetSound)];
             case 1:
                 _a.sent();
-                return [4 /*yield*/, takeLatest(actions.deleteSound, watchDeleteSound)];
-            case 2:
-                _a.sent();
                 return [2 /*return*/];
         }
     });
 }
-//# sourceMappingURL=watchers.js.map
+//# sourceMappingURL=watchers_old.js.map

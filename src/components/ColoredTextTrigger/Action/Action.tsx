@@ -6,12 +6,14 @@ import styles from './Action.scss';
 
 export type ActionProps = React.HTMLAttributes<HTMLDivElement> & {
   fullWidth?: boolean;
+  withSpaces?: boolean;
   onClick?: () => void;
 };
 
 export const Action = ({
   children,
   fullWidth = false,
+  withSpaces = true,
   onClick = () => {
   },
   ...props
@@ -23,8 +25,9 @@ export const Action = ({
 
   return (
     <div className={actionClassNames} onClick={onClick} {...props}>
-      {' '}
+      { withSpaces && ' ' }
       {children}
+      { withSpaces && ' ' }
     </div>
   );
 };

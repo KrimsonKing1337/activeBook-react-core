@@ -25,12 +25,12 @@ import classNames from 'classnames';
 import styles from './Action.scss';
 export var Action = function (_a) {
     var _b;
-    var children = _a.children, _c = _a.fullWidth, fullWidth = _c === void 0 ? false : _c, _d = _a.onClick, onClick = _d === void 0 ? function () {
-    } : _d, props = __rest(_a, ["children", "fullWidth", "onClick"]);
+    var children = _a.children, _c = _a.fullWidth, fullWidth = _c === void 0 ? false : _c, _d = _a.withSpaces, withSpaces = _d === void 0 ? true : _d, _e = _a.onClick, onClick = _e === void 0 ? function () {
+    } : _e, props = __rest(_a, ["children", "fullWidth", "withSpaces", "onClick"]);
     var actionClassNames = classNames((_b = {},
         _b[styles.action] = true,
         _b[styles.isFullWidth] = fullWidth,
         _b));
-    return (_jsxs("div", __assign({ className: actionClassNames, onClick: onClick }, props, { children: [' ', children] })));
+    return (_jsxs("div", __assign({ className: actionClassNames, onClick: onClick }, props, { children: [withSpaces && ' ', children, withSpaces && ' '] })));
 };
 //# sourceMappingURL=Action.js.map

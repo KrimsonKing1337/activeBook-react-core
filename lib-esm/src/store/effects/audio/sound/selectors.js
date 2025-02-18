@@ -1,4 +1,5 @@
 export var selectors = {
+    howlInstances: function (state) { return state.soundEffects.howlInstances; },
     howlInst1: function (state) { return state.soundEffects.howlInst1; },
     howlInst2: function (state) { return state.soundEffects.howlInst2; },
     lastInstIndex: function (state) { return state.soundEffects.lastInstIndex; },

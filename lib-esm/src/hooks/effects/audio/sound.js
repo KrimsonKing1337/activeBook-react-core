@@ -34,8 +34,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'store';
+import { useEffect, useState } from 'react';
+import { nanoid } from 'nanoid';
+import { useSelector, useDispatch } from 'store';
 import { soundEffectsActions, soundEffectsSelectors } from 'store/effects/audio/sound';
 import { HowlWrapper } from 'utils/effects/audio/HowlWrapper';
 export function useSound(_a) {
@@ -44,9 +45,12 @@ export function useSound(_a) {
     } : _j, _k = _a.onUnmount, onUnmount = _k === void 0 ? function () {
     } : _k;
     var dispatch = useDispatch();
-    var soundInst = useSelector(soundEffectsSelectors.soundInst);
+    var howlInstances = useSelector(soundEffectsSelectors.howlInstances);
+    var _l = useState(''), id = _l[0], setId = _l[1];
     useEffect(function () {
+        var uuid = nanoid();
         var opt = {
+            id: uuid,
             src: [src],
             loop: loop,
             screamer: screamer,
@@ -56,16 +60,18 @@ export function useSound(_a) {
             opt.type = 'bg';
         }
         var howlInst = new HowlWrapper(opt);
+        setId(uuid);
         dispatch(soundEffectsActions.setSound(howlInst));
         return function () {
             onUnmount();
         };
     }, []);
     useEffect(function () {
-        var timer = null;
+        var soundInst = howlInstances[id];
         if (!soundInst || soundInst.isUnloading) {
             return;
         }
+        var timer = null;
         if (playOnLoad) {
             timer = setTimeout(function () {
                 soundInst.play();
@@ -91,8 +97,10 @@ export function useSound(_a) {
                         case 1:
                             _a.sent();
                             _a.label = 2;
-                        case 2:
-                            soundInst.unload(fadeOutWhenUnload);
+                        case 2: return [4 /*yield*/, soundInst.unload(fadeOutWhenUnload)];
+                        case 3:
+                            _a.sent();
+                            dispatch(soundEffectsActions.deleteSound(id));
                             if (timer) {
                                 clearTimeout(timer);
                             }
@@ -101,7 +109,7 @@ export function useSound(_a) {
                 });
             }); })();
         };
-    }, [soundInst]);
-    return soundInst;
+    }, [howlInstances]);
+    return howlInstances[id];
 }
 //# sourceMappingURL=sound.js.map
