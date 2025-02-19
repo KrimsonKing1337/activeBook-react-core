@@ -9,7 +9,7 @@ export const initialState: State = {
 };
 
 const slice = createSlice({
-  name: '@effects/audio',
+  name: '@effects/audioBg',
   initialState,
   reducers: {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

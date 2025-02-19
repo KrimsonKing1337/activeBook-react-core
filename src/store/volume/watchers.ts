@@ -1,10 +1,16 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { call, put, select, takeLatest } from 'redux-saga/effects';
+
 import { Howler } from 'howler';
+
+import { AudioType } from '@types';
+
+import type { HowlInstances } from '@types';
 
 import { getAudioInstances } from 'utils/effects/audio/getAudioInstances';
 
-import { State } from './@types';
+import type { State } from './@types';
+
 import { actions } from './slice';
 import { selectors } from './selectors';
 
@@ -41,15 +47,30 @@ export function* watchSetGlobal(action: PayloadAction<State['global']>) {
   yield call(saveInLocalStorage);
 }
 
+function setVolumeByType(type: AudioType, volume: number) {
+  const setVolume = (audioInstances: HowlInstances) => {
+    Object.values(audioInstances).forEach((audioInstanceCur) => {
+      if (!audioInstanceCur) {
+        return;
+      }
+
+      if (audioInstanceCur.type === type) {
+        audioInstanceCur.volume(volume / 100);
+      }
+    });
+  };
+
+  const { audioInstances, audioBgInstances } = getAudioInstances();
+
+  setVolume(audioInstances);
+  setVolume(audioBgInstances);
+}
+
 export function* watchSetBg(action: PayloadAction<State['bg']>) {
   const { payload } = action;
 
   yield call(() => {
-    const { soundInst } = getAudioInstances();
-
-    if (soundInst && soundInst.type === 'bg') {
-      soundInst.volume(payload / 100);
-    }
+    setVolumeByType('bg', payload / 100);
   });
 
   yield call(saveInLocalStorage);
@@ -59,11 +80,7 @@ export function* watchSetSfx(action: PayloadAction<State['sfx']>) {
   const { payload } = action;
 
   yield call(() => {
-    const { soundInst } = getAudioInstances();
-
-    if (soundInst && soundInst.type === 'sfx') {
-      soundInst.volume(payload / 100);
-    }
+    setVolumeByType('sfx', payload / 100);
   });
 
   yield call(saveInLocalStorage);
@@ -73,11 +90,7 @@ export function* watchSetMusic(action: PayloadAction<State['music']>) {
   const { payload } = action;
 
   yield call(() => {
-    const { musicInst } = getAudioInstances();
-
-    if (musicInst) {
-      musicInst.volume(payload / 100);
-    }
+    setVolumeByType('music', payload / 100);
   });
 
   yield call(saveInLocalStorage);

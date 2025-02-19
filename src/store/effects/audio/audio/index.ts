@@ -1,3 +1,3 @@
-export { reducer as soundEffectsReducer, actions as soundEffectsActions } from './slice';
-export { watchActions as watchSoundEffectsActions } from './watchers';
-export { selectors as soundEffectsSelectors } from './selectors';
+export { reducer as audioEffectsReducer, actions as audioEffectsActions } from './slice';
+export { watchActions as watchAudioEffectsActions } from './watchers';
+export { selectors as audioEffectsSelectors } from './selectors';

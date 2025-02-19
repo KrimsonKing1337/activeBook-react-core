@@ -5,7 +5,7 @@ import { DotsRangeEffect, RangeEffectsJson } from '@types';
 import { useDispatch, useSelector } from 'store';
 import { effectsActions } from 'store/effects/common';
 import { mainSelectors } from 'store/main';
-import { getEffectInRange } from 'utils/effects/rangeEffects';
+import { getEffectsInRange } from 'utils/effects/rangeEffects';
 
 export function useDotsInRange(effects: RangeEffectsJson) {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ export function useDotsInRange(effects: RangeEffectsJson) {
   const page = useSelector(mainSelectors.page);
 
   useEffect(() => {
-    const dotsInRange = getEffectInRange(effects, page, 'dots') as DotsRangeEffect;
+    const dotsInRange = getEffectsInRange(effects, page, 'dots') as DotsRangeEffect;
 
     if (!dotsInRange) {
       dispatch(effectsActions.setDotsActiveState(false));

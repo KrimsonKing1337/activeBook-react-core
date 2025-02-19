@@ -10,7 +10,10 @@ export type HowlWrapperOptions = {
   loop?: HowlOptions['loop'];
   type?: AudioType;
   screamer?: boolean;
+  fadeOutWhenUnload?: boolean;
+
   onPlay?: () => void;
+  onUnload?: () => void;
 };
 
 type HowlerOptions = {
@@ -27,7 +30,10 @@ export class HowlWrapper {
   public src: HowlOptions['src'] = '';
   public isUnloading = false;
   public type: AudioType = 'sfx';
+  public fadeOutWhenUnload = true;
+
   public onPlay: () => void;
+  public onUnload: () => void;
 
   constructor({
     id,
@@ -35,8 +41,11 @@ export class HowlWrapper {
     loop,
     type = 'sfx',
     screamer = false,
+    fadeOutWhenUnload = true,
+
     onPlay = () => {
     },
+    onUnload = () => {},
   }: HowlWrapperOptions) {
     const volume = this.getVolume();
 
@@ -66,7 +75,10 @@ export class HowlWrapper {
     this.id = id;
     this.src = src;
     this.type = type;
+    this.fadeOutWhenUnload = fadeOutWhenUnload;
+
     this.onPlay = onPlay;
+    this.onUnload = onUnload;
   }
 
   volume(n: number) {
@@ -126,14 +138,15 @@ export class HowlWrapper {
     this.howlInst.stop();
   }
 
-  async unload(withFadeOut = false) {
+  async unload() {
     this.isUnloading = true;
 
-    if (withFadeOut) {
+    if (this.fadeOutWhenUnload) {
       await this.fadeOut();
     }
 
     this.howlInst.unload();
+    this.onUnload();
   }
 
   fade(from: number, to: number, dur: number) {

@@ -2,44 +2,31 @@ import { useEffect, useState } from 'react';
 
 import { nanoid } from 'nanoid';
 
-import type { Timer, AudioType } from '@types';
-
-import { soundEffectsActions, soundEffectsSelectors } from 'src/store/effects/audio/audio';
+import type { Timer, AudioEffectOptions } from '@types';
 
 import { useSelector, useDispatch } from 'store';
 
-import { HowlWrapper, type HowlWrapperOptions } from 'utils/effects/audio/HowlWrapper';
+import { audioEffectsActions, audioEffectsSelectors } from 'store/effects/audio/audio';
 
-type UseAudioProps = {
-  id?: string;
-  src: string;
-  fadeOutWhenUnload?: boolean;
-  type?: AudioType;
-  loop?: boolean;
-  playOnLoad?: boolean;
-  stopBy?: number;
-  delay?: number;
-  screamer?: boolean;
-  onPlay?: () => void;
-  onUnmount?: () => void;
-};
+import { HowlWrapper, type HowlWrapperOptions } from 'utils/effects/audio/HowlWrapper';
+import { waitTillTheEndIfAudioIsTooShort } from 'utils/effects/audio/waitTillTheEndIfAudioIsTooShort';
 
 export function useAudio({
   id = '',
   src,
-  fadeOutWhenUnload = true,
   type = 'sfx',
   loop = false,
   playOnLoad = false,
   stopBy = 0,
   delay = 0,
   screamer = false,
+  fadeOutWhenUnload = true,
   onPlay = () => {},
-  onUnmount = () => {},
-}: UseAudioProps) {
+  onUnload = () => {},
+}: AudioEffectOptions) {
   const dispatch = useDispatch();
 
-  const audioInstances = useSelector(soundEffectsSelectors.audioInstances);
+  const audioInstances = useSelector(audioEffectsSelectors.audioInstances);
 
   const [audioId, setAudioId] = useState<string>(id);
 
@@ -52,18 +39,16 @@ export function useAudio({
       type,
       loop,
       screamer,
+      fadeOutWhenUnload,
       onPlay,
+      onUnload,
     };
 
     const howlInst = new HowlWrapper(opt);
 
     setAudioId(uuid);
 
-    dispatch(soundEffectsActions.setAudioInstance(howlInst));
-
-    return () => {
-      onUnmount();
-    };
+    dispatch(audioEffectsActions.setAudioInstance(howlInst));
   }, []);
 
   useEffect(() => {
@@ -93,20 +78,14 @@ export function useAudio({
       }
 
       (async () => {
-        const dur = parseFloat(audioInstance.howlInst.duration().toFixed(1));
-
-        if (dur < 1.2) {
-          await audioInstance.waitTillTheEnd();
-        }
-
-        await audioInstance.unload(fadeOutWhenUnload);
-
-        dispatch(soundEffectsActions.deleteAudioInstance(audioId));
-
-        if (timer) {
-          clearTimeout(timer);
-        }
+        await waitTillTheEndIfAudioIsTooShort(audioInstance);
       })();
+
+      dispatch(audioEffectsActions.deleteAudioInstance(audioId));
+
+      if (timer) {
+        clearTimeout(timer);
+      }
     };
   }, [audioInstances]);
 

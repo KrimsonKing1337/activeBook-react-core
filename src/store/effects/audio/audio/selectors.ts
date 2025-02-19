@@ -1,14 +1,14 @@
 import type { RootState } from 'store';
 
 export const selectors = {
-  audioInstances: (state: RootState) => state.soundEffects.audioInstances,
+  audioInstances: (state: RootState) => state.audioEffects.audioInstances,
 
-  howlInst1: (state: RootState) => state.soundEffects.howlInst1,
-  howlInst2: (state: RootState) => state.soundEffects.howlInst2,
-  lastInstIndex: (state: RootState) => state.soundEffects.lastInstIndex,
+  howlInst1: (state: RootState) => state.audioEffects.howlInst1,
+  howlInst2: (state: RootState) => state.audioEffects.howlInst2,
+  lastInstIndex: (state: RootState) => state.audioEffects.lastInstIndex,
 
   soundInst: (state: RootState) => {
-    const { howlInst1, howlInst2, lastInstIndex } = state.soundEffects;
+    const { howlInst1, howlInst2, lastInstIndex } = state.audioEffects;
 
     if (lastInstIndex === 1) {
       return howlInst1;

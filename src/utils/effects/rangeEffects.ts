@@ -1,4 +1,4 @@
-import { RangeEffectsJson, Range, RangeEffect } from '@types';
+import type { RangeEffectsJson, Range, RangeEffect } from '@types';
 
 export function isPageInRange(pageNumberCurrent: number, range: Range[]) {
   return range.some((rangeCur) => {
@@ -6,10 +6,10 @@ export function isPageInRange(pageNumberCurrent: number, range: Range[]) {
   });
 }
 
-export function getEffectInRange(effects: RangeEffectsJson, pageNumberCurrent: number, type: string) {
+export function getEffectsInRange(effects: RangeEffectsJson, pageNumberCurrent: number, type: string) {
   const arr = effects.effects as RangeEffect[];
 
-  let objInRange;
+  const result = [];
 
   for (let i = 0; i < arr.length; i++) {
     const cur = arr[i];
@@ -18,12 +18,10 @@ export function getEffectInRange(effects: RangeEffectsJson, pageNumberCurrent: n
 
     if (isInRange) {
       if (cur.type === type) {
-        objInRange = cur;
+        result.push(cur);
       }
-
-      break;
     }
   }
 
-  return objInRange;
+  return result;
 }
