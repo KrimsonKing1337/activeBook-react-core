@@ -4,8 +4,9 @@ import { nanoid } from 'nanoid';
 
 import type { Timer, AudioType } from '@types';
 
+import { soundEffectsActions, soundEffectsSelectors } from 'src/store/effects/audio/audio';
+
 import { useSelector, useDispatch } from 'store';
-import { soundEffectsActions, soundEffectsSelectors } from 'store/effects/audio/sound';
 
 import { HowlWrapper, type HowlWrapperOptions } from 'utils/effects/audio/HowlWrapper';
 

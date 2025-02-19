@@ -17,7 +17,7 @@ import { volumeReducer, watchVolumeActions } from './volume';
 import { effectsReducer } from './effects/common';
 import { backgroundVideoEffectReducer } from './effects/background/video';
 import { backgroundImgEffectReducer } from './effects/background/img';
-import { soundEffectsReducer, watchSoundEffectsActions } from './effects/audio/sound';
+import { soundEffectsReducer, watchSoundEffectsActions } from './effects/audio/audio';
 import { soundBgEffectsReducer, watchSoundBgEffectsActions } from './effects/audio/soundBg';
 import { musicEffectsReducer, watchMusicEffectsActions } from './effects/audio/music';
 import { sideShadowReducer, watchSideShadowActions } from './effects/side/shadow';
