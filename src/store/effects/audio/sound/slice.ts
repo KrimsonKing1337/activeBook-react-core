@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { HowlInst, HowlInstances, LastInstIndex, State } from './@types';
 
 export const initialState: State = {
-  soundInstances: {},
+  audioInstances: {},
 
   howlInst1: null,
   howlInst2: null,
@@ -15,12 +15,12 @@ const slice = createSlice({
   initialState,
   reducers: {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    setSoundInstance(_state, _action: PayloadAction<HowlInst>) {},
+    setAudioInstance(_state, _action: PayloadAction<HowlInst>) {},
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    deleteSoundInstance(_state, _action: PayloadAction<string>) {},
+    deleteAudioInstance(_state, _action: PayloadAction<string>) {},
 
-    setSoundInstances(state, action: PayloadAction<HowlInstances>) {
-      state.soundInstances = action.payload;
+    setAudioInstances(state, action: PayloadAction<HowlInstances>) {
+      state.audioInstances = action.payload;
     },
 
     setHowlInst1(state, action: PayloadAction<HowlInst>) {

@@ -1,7 +1,7 @@
 import type { RootState } from 'store';
 
 export const selectors = {
-  soundsInstances: (state: RootState) => state.soundEffects.soundInstances,
+  audioInstances: (state: RootState) => state.soundEffects.audioInstances,
 
   howlInst1: (state: RootState) => state.soundEffects.howlInst1,
   howlInst2: (state: RootState) => state.soundEffects.howlInst2,

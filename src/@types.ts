@@ -32,3 +32,4 @@ export type HowlExtended = Howl & {
   _howls: Howl[];
 };
 
+export type AudioType = 'bg' | 'music' | 'sfx';

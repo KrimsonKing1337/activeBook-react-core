@@ -6,7 +6,7 @@ export type HowlInstances = Record<string, HowlInst>;
 export type LastInstIndex = 1 | 2;
 
 export interface State {
-  soundInstances: HowlInstances;
+  audioInstances: HowlInstances;
 
   howlInst1: HowlInst,
   howlInst2: HowlInst,

@@ -6,23 +6,23 @@ import { HowlInst, HowlInstances } from './@types';
 import { actions } from './slice';
 import { selectors } from './selectors';
 
-export function* watchSetSoundInstance(action: PayloadAction<HowlInst>) {
+export function* watchSetAudioInstance(action: PayloadAction<HowlInst>) {
   const { payload } = action;
 
-  const howlInstances: HowlInstances = yield select(selectors.soundsInstances);
+  const howlInstances: HowlInstances = yield select(selectors.audioInstances);
 
   const newValue = {
     ...howlInstances,
     payload,
   };
 
-  yield put(actions.setSoundInstances(newValue));
+  yield put(actions.setAudioInstances(newValue));
 }
 
-export function* watchDeleteSoundInstance(action: PayloadAction<string>) {
+export function* watchDeleteAudioInstance(action: PayloadAction<string>) {
   const { payload } = action;
 
-  const howlInstances: HowlInstances = yield select(selectors.soundsInstances);
+  const howlInstances: HowlInstances = yield select(selectors.audioInstances);
 
   const newValue = {
     ...howlInstances,
@@ -30,10 +30,10 @@ export function* watchDeleteSoundInstance(action: PayloadAction<string>) {
 
   delete newValue[payload];
 
-  yield put(actions.setSoundInstances(newValue));
+  yield put(actions.setAudioInstances(newValue));
 }
 
 export function* watchActions() {
-  yield takeLatest(actions.setSoundInstance, watchSetSoundInstance);
-  yield takeLatest(actions.deleteSoundInstance, watchDeleteSoundInstance);
+  yield takeLatest(actions.setAudioInstance, watchSetAudioInstance);
+  yield takeLatest(actions.deleteAudioInstance, watchDeleteAudioInstance);
 }

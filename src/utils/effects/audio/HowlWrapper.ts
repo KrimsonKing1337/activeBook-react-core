@@ -1,8 +1,8 @@
-import { Howl, HowlOptions } from 'howler';
+import { Howl, type HowlOptions } from 'howler';
+
+import type { AudioType } from '@types';
 
 import { store } from 'store';
-
-type AudioType = 'bg' | 'music' | 'sfx';
 
 export type HowlWrapperOptions = {
   id?: string;

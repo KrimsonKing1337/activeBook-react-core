@@ -2,18 +2,18 @@ import { useEffect, useState } from 'react';
 
 import { nanoid } from 'nanoid';
 
-import type { Timer } from '@types';
+import type { Timer, AudioType } from '@types';
 
 import { useSelector, useDispatch } from 'store';
 import { soundEffectsActions, soundEffectsSelectors } from 'store/effects/audio/sound';
 
 import { HowlWrapper, type HowlWrapperOptions } from 'utils/effects/audio/HowlWrapper';
 
-type UseSoundProps = {
+type UseAudioProps = {
   id?: string;
   src: string;
   fadeOutWhenUnload?: boolean;
-  bg?: boolean;
+  type?: AudioType;
   loop?: boolean;
   playOnLoad?: boolean;
   stopBy?: number;
@@ -23,26 +23,24 @@ type UseSoundProps = {
   onUnmount?: () => void;
 };
 
-export function useSound({
+export function useAudio({
   id = '',
   src,
   fadeOutWhenUnload = true,
-  bg = false,
+  type = 'sfx',
   loop = false,
   playOnLoad = false,
   stopBy = 0,
   delay = 0,
   screamer = false,
-  onPlay = () => {
-  },
-  onUnmount = () => {
-  },
-}: UseSoundProps) {
+  onPlay = () => {},
+  onUnmount = () => {},
+}: UseAudioProps) {
   const dispatch = useDispatch();
 
-  const soundsInstances = useSelector(soundEffectsSelectors.soundsInstances);
+  const audioInstances = useSelector(soundEffectsSelectors.audioInstances);
 
-  const [soundId, setSoundId] = useState<string>(id);
+  const [audioId, setAudioId] = useState<string>(id);
 
   useEffect(() => {
     const uuid = id || nanoid();
@@ -50,20 +48,17 @@ export function useSound({
     const opt: HowlWrapperOptions = {
       id: uuid,
       src: [src],
+      type,
       loop,
       screamer,
       onPlay,
     };
 
-    if (bg) {
-      opt.type = 'bg';
-    }
-
     const howlInst = new HowlWrapper(opt);
 
-    setSoundId(uuid);
+    setAudioId(uuid);
 
-    dispatch(soundEffectsActions.setSoundInstance(howlInst));
+    dispatch(soundEffectsActions.setAudioInstance(howlInst));
 
     return () => {
       onUnmount();
@@ -71,9 +66,9 @@ export function useSound({
   }, []);
 
   useEffect(() => {
-    const soundInst = soundsInstances[soundId];
+    const audioInstance = audioInstances[audioId];
 
-    if (!soundInst || soundInst.isUnloading) {
+    if (!audioInstance || audioInstance.isUnloading) {
       return;
     }
 
@@ -81,38 +76,38 @@ export function useSound({
 
     if (playOnLoad) {
       timer = setTimeout(() => {
-        soundInst.play();
+        audioInstance.play();
       }, delay);
     }
 
     if (stopBy) {
       timer = setTimeout(() => {
-        soundInst.stop();
+        audioInstance.stop();
       }, stopBy);
     }
 
     return () => {
-      if (!soundInst || soundInst.isUnloading) {
+      if (!audioInstance || audioInstance.isUnloading) {
         return;
       }
 
       (async () => {
-        const dur = parseFloat(soundInst.howlInst.duration().toFixed(1));
+        const dur = parseFloat(audioInstance.howlInst.duration().toFixed(1));
 
         if (dur < 1.2) {
-          await soundInst.waitTillTheEnd();
+          await audioInstance.waitTillTheEnd();
         }
 
-        await soundInst.unload(fadeOutWhenUnload);
+        await audioInstance.unload(fadeOutWhenUnload);
 
-        dispatch(soundEffectsActions.deleteSoundInstance(soundId));
+        dispatch(soundEffectsActions.deleteAudioInstance(audioId));
 
         if (timer) {
           clearTimeout(timer);
         }
       })();
     };
-  }, [soundsInstances]);
+  }, [audioInstances]);
 
-  return soundsInstances[soundId];
+  return audioInstances[audioId];
 }
