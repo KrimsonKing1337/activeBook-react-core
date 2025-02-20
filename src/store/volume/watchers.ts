@@ -70,7 +70,7 @@ export function* watchSetBg(action: PayloadAction<State['bg']>) {
   const { payload } = action;
 
   yield call(() => {
-    setVolumeByType('bg', payload / 100);
+    setVolumeByType('bg', payload);
   });
 
   yield call(saveInLocalStorage);
@@ -80,7 +80,7 @@ export function* watchSetSfx(action: PayloadAction<State['sfx']>) {
   const { payload } = action;
 
   yield call(() => {
-    setVolumeByType('sfx', payload / 100);
+    setVolumeByType('sfx', payload);
   });
 
   yield call(saveInLocalStorage);
@@ -90,7 +90,7 @@ export function* watchSetMusic(action: PayloadAction<State['music']>) {
   const { payload } = action;
 
   yield call(() => {
-    setVolumeByType('music', payload / 100);
+    setVolumeByType('music', payload);
   });
 
   yield call(saveInLocalStorage);

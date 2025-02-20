@@ -112,7 +112,7 @@ export function watchSetBg(action) {
             case 0:
                 payload = action.payload;
                 return [4 /*yield*/, call(function () {
-                        setVolumeByType('bg', payload / 100);
+                        setVolumeByType('bg', payload);
                     })];
             case 1:
                 _a.sent();
@@ -130,7 +130,7 @@ export function watchSetSfx(action) {
             case 0:
                 payload = action.payload;
                 return [4 /*yield*/, call(function () {
-                        setVolumeByType('sfx', payload / 100);
+                        setVolumeByType('sfx', payload);
                     })];
             case 1:
                 _a.sent();
@@ -148,7 +148,7 @@ export function watchSetMusic(action) {
             case 0:
                 payload = action.payload;
                 return [4 /*yield*/, call(function () {
-                        setVolumeByType('music', payload / 100);
+                        setVolumeByType('music', payload);
                     })];
             case 1:
                 _a.sent();
