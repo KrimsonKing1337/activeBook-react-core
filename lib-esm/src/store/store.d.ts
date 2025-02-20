@@ -6,9 +6,8 @@ export declare const store: import("@reduxjs/toolkit/dist/configureStore").Toolk
     config: import("./config/@types").State;
     volume: import("./volume/@types").State;
     effects: import("./effects/common/@types").State;
-    soundEffects: import("./effects/audio/sound/@types").State;
-    soundBgEffects: import("./effects/audio/soundBg/@types").State;
-    musicEffects: import("./effects/audio/music/@types").State;
+    audioEffects: import("./effects/audio/audio/@types").State;
+    audioBgEffects: import("./effects/audio/audioBg/@types").State;
     sideShadowEffect: import("./effects/side/shadow/@types").State;
     sideTextEffect: import("./effects/side/text/@types").State;
     backgroundVideoEffect: import("./effects/background/video/@types").State;

@@ -90,6 +90,21 @@ export function watchSetGlobal(action) {
         }
     });
 }
+function setVolumeByType(type, volume) {
+    var setVolume = function (audioInstances) {
+        Object.values(audioInstances).forEach(function (audioInstanceCur) {
+            if (!audioInstanceCur) {
+                return;
+            }
+            if (audioInstanceCur.type === type) {
+                audioInstanceCur.volume(volume / 100);
+            }
+        });
+    };
+    var _a = getAudioInstances(), audioInstances = _a.audioInstances, audioBgInstances = _a.audioBgInstances;
+    setVolume(audioInstances);
+    setVolume(audioBgInstances);
+}
 export function watchSetBg(action) {
     var payload;
     return __generator(this, function (_a) {
@@ -97,10 +112,7 @@ export function watchSetBg(action) {
             case 0:
                 payload = action.payload;
                 return [4 /*yield*/, call(function () {
-                        var soundInst = getAudioInstances().soundInst;
-                        if (soundInst && soundInst.type === 'bg') {
-                            soundInst.volume(payload / 100);
-                        }
+                        setVolumeByType('bg', payload / 100);
                     })];
             case 1:
                 _a.sent();
@@ -118,10 +130,7 @@ export function watchSetSfx(action) {
             case 0:
                 payload = action.payload;
                 return [4 /*yield*/, call(function () {
-                        var soundInst = getAudioInstances().soundInst;
-                        if (soundInst && soundInst.type === 'sfx') {
-                            soundInst.volume(payload / 100);
-                        }
+                        setVolumeByType('sfx', payload / 100);
                     })];
             case 1:
                 _a.sent();
@@ -139,10 +148,7 @@ export function watchSetMusic(action) {
             case 0:
                 payload = action.payload;
                 return [4 /*yield*/, call(function () {
-                        var musicInst = getAudioInstances().musicInst;
-                        if (musicInst) {
-                            musicInst.volume(payload / 100);
-                        }
+                        setVolumeByType('music', payload / 100);
                     })];
             case 1:
                 _a.sent();

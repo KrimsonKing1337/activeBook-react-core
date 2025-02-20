@@ -104,6 +104,7 @@ export const voc: Record<Flags, VocItem> = {
 };
 
 const howlInst = new HowlWrapper({
+  id: 'achievement-unlocked',
   src: ['/assets/book_data/audios/sounds/achievement-unlocked.mp3'],
 });
 

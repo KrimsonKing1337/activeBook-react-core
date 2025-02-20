@@ -109,6 +109,7 @@ export var voc = (_a = {},
     },
     _a);
 var howlInst = new HowlWrapper({
+    id: 'achievement-unlocked',
     src: ['/assets/book_data/audios/sounds/achievement-unlocked.mp3'],
 });
 export var show = function (text) {

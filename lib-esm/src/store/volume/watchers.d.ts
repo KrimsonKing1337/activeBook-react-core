@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { State } from './@types';
+import type { State } from './@types';
 export declare function watchSetAll(action: PayloadAction<State>): Generator<import("redux-saga/effects").CallEffect<void> | import("redux-saga/effects").PutEffect<{
     payload: number;
     type: "@volume/setGlobal";

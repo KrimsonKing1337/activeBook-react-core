@@ -15,7 +15,7 @@ export function useDotsInRange(effects: RangeEffectsJson) {
   useEffect(() => {
     const dotsInRange = getEffectsInRange(effects, page, 'dots') as DotsRangeEffect[];
 
-    if (!dotsInRange) {
+    if (dotsInRange.length === 0) {
       dispatch(effectsActions.setDotsActiveState(false));
 
       return;

@@ -5,7 +5,7 @@ import type { AudioType } from '@types';
 import { store } from 'store';
 
 export type HowlWrapperOptions = {
-  id?: string;
+  id: string;
   src: HowlOptions['src'];
   loop?: HowlOptions['loop'];
   type?: AudioType;
@@ -26,7 +26,7 @@ export class HowlWrapper {
   private static fadeDurationDefault = 1000;
 
   public readonly howlInst: Howl;
-  public id: HowlWrapperOptions['id'] = undefined;
+  public id: HowlWrapperOptions['id'];
   public src: HowlOptions['src'] = '';
   public isUnloading = false;
   public type: AudioType = 'sfx';

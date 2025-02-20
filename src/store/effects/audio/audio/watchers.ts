@@ -9,11 +9,17 @@ import { selectors } from './selectors';
 export function* watchSetAudioInstance(action: PayloadAction<HowlInst>) {
   const { payload } = action;
 
+  if (!payload) {
+    return;
+  }
+
+  const { id } = payload;
+
   const howlInstances: HowlInstances = yield select(selectors.audioInstances);
 
   const newValue = {
     ...howlInstances,
-    payload,
+    [id]: payload,
   };
 
   yield put(actions.setAudioInstances(newValue));

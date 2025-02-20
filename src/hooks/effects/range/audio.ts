@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 
-import { RangeEffectsJson, AudioEffectOptions, Timer, RangeEffect } from '@types';
+import type { RangeEffectsJson, Timer, RangeEffect, AudioEffectRangeOptions } from '@types';
 
-import { useDispatch, useSelector } from 'store';
+import { store, useDispatch, useSelector } from 'store';
 
 import { mainSelectors } from 'store/main';
-import { audioBgEffectsActions, audioBgEffectsSelectors } from 'store/effects/audio/audioBg';
+import { audioBgEffectsActions } from 'store/effects/audio/audioBg';
 
 import { HowlWrapper } from 'utils/effects/audio/HowlWrapper';
 import { getEffectsInRange } from 'utils/effects/rangeEffects';
@@ -17,7 +17,7 @@ export function useAudioInRange(effects: RangeEffectsJson) {
   const page = useSelector(mainSelectors.page);
 
   useEffect(() => {
-    const audioInstances = useSelector(audioBgEffectsSelectors.audioInstances);
+    const audioInstances = store.getState().audioBgEffects.audioInstances;
 
     const audiosOnPage = getEffectsInRange(effects, page, 'audio');
 
@@ -47,9 +47,12 @@ export function useAudioInRange(effects: RangeEffectsJson) {
   }, [page]);
 
   useEffect(() => {
-    const audioInstances = useSelector(audioBgEffectsSelectors.audioInstances);
+    const audioInstances = store.getState().audioBgEffects.audioInstances;
 
     const audiosOnPage = getEffectsInRange(effects, page, 'audio') as RangeEffect[];
+
+    console.log('___ audioInstances', audioInstances);
+    console.log('___ audiosOnPage', audiosOnPage);
 
     const timers: Timer[] = [];
 
@@ -66,9 +69,9 @@ export function useAudioInRange(effects: RangeEffectsJson) {
         fadeOutWhenUnload,
         onPlay,
         onUnload,
-      } = audioOnPageCur.options as AudioEffectOptions;
+      } = audioOnPageCur.options as AudioEffectRangeOptions;
 
-      const audioInstance = audioInstances[id as string];
+      const audioInstance = audioInstances[id];
 
       if (audioInstance?.id === id) {
         return;
@@ -89,13 +92,13 @@ export function useAudioInRange(effects: RangeEffectsJson) {
 
       if (playOnLoad) {
         timer = setTimeout(() => {
-          audioInstance?.play();
+          howlInst.play();
         }, delay);
       }
 
       if (stopBy) {
         timer = setTimeout(() => {
-          audioInstance?.stop();
+          howlInst.stop();
         }, stopBy);
       }
 

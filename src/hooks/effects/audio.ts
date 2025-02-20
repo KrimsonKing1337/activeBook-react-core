@@ -87,7 +87,7 @@ export function useAudio({
         clearTimeout(timer);
       }
     };
-  }, [audioInstances]);
+  }, [audioInstances, audioId]);
 
   return audioInstances[audioId];
 }

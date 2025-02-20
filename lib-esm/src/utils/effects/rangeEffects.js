@@ -3,19 +3,18 @@ export function isPageInRange(pageNumberCurrent, range) {
         return pageNumberCurrent >= rangeCur.from && pageNumberCurrent <= rangeCur.to;
     });
 }
-export function getEffectInRange(effects, pageNumberCurrent, type) {
+export function getEffectsInRange(effects, pageNumberCurrent, type) {
     var arr = effects.effects;
-    var objInRange;
+    var result = [];
     for (var i = 0; i < arr.length; i++) {
         var cur = arr[i];
         var isInRange = isPageInRange(pageNumberCurrent, cur.range);
         if (isInRange) {
             if (cur.type === type) {
-                objInRange = cur;
+                result.push(cur);
             }
-            break;
         }
     }
-    return objInRange;
+    return result;
 }
 //# sourceMappingURL=rangeEffects.js.map

@@ -1,8 +1,6 @@
-import { useMusicInRange } from './audio/music';
-import { useAudioInRange } from './audio/sound';
+import { useAudioInRange } from './audio';
 import { useDotsInRange } from './dots';
 export function useEffectsInRange(effects) {
-    useMusicInRange(effects);
     useAudioInRange(effects);
     useDotsInRange(effects);
 }
