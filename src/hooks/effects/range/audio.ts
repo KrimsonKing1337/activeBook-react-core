@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import type { RangeEffectsJson, AudioEffectOptions, Timer } from '@types';
+import { RangeEffectsJson, AudioEffectOptions, Timer, RangeEffect } from '@types';
 
 import { useDispatch, useSelector } from 'store';
 
@@ -49,7 +49,7 @@ export function useAudioInRange(effects: RangeEffectsJson) {
   useEffect(() => {
     const audioInstances = useSelector(audioBgEffectsSelectors.audioInstances);
 
-    const audiosOnPage = getEffectsInRange(effects, page, 'audio');
+    const audiosOnPage = getEffectsInRange(effects, page, 'audio') as RangeEffect[];
 
     const timers: Timer[] = [];
 

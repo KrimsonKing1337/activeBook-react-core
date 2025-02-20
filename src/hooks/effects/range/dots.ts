@@ -13,7 +13,7 @@ export function useDotsInRange(effects: RangeEffectsJson) {
   const page = useSelector(mainSelectors.page);
 
   useEffect(() => {
-    const dotsInRange = getEffectsInRange(effects, page, 'dots') as DotsRangeEffect;
+    const dotsInRange = getEffectsInRange(effects, page, 'dots') as DotsRangeEffect[];
 
     if (!dotsInRange) {
       dispatch(effectsActions.setDotsActiveState(false));
