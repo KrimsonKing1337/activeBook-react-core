@@ -4,10 +4,17 @@ import { Flags } from 'utils/effects/achievements/utils';
 import { play } from 'utils/effects/achievements';
 import { achievements } from 'utils/localStorage/achievements';
 
+import { useSelector } from 'store';
+
+import { effectsSelectors } from 'store/effects/common';
+
 import { createDotsAsArray, getPlaceInLineByLocationStyles, orderDefaultState } from './utils';
+
 import styles from './Dots.scss';
 
 export const Dots = () => {
+  const dotsIsActive = useSelector(effectsSelectors.dotsIsActive);
+
   const [order, setOrder] = useState<Record<number, number>>(orderDefaultState);
 
   useEffect(() => {
@@ -108,11 +115,17 @@ export const Dots = () => {
     };
   }, [order]);
 
+  if (!dotsIsActive) {
+    return null;
+  }
+
   const dots = createDotsAsArray();
 
   return (
     <div className={styles.dotsWrapper}>
-      {dots.map((key) => <div key={key} className={styles.dot} />)}
+      {dots.map((key) => (
+        <div key={key} className={styles.dot} />
+      ))}
     </div>
   );
 };

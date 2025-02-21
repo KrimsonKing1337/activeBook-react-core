@@ -5,6 +5,7 @@ import { State } from './@types';
 export const initialState: State = {
   inverseColorIsActive: false,
   dotsIsActive: false,
+  fontColor: 'var(--secondary)',
 };
 
 const slice = createSlice({
@@ -16,6 +17,9 @@ const slice = createSlice({
     },
     setDotsActiveState(state, action: PayloadAction<State['dotsIsActive']>) {
       state.dotsIsActive = action.payload;
+    },
+    setFontColor(state, action: PayloadAction<State['fontColor']>) {
+      state.fontColor = action.payload;
     },
   },
 });

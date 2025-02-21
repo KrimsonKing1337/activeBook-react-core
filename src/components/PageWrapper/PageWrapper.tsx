@@ -1,6 +1,7 @@
-import { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 
 import classNames from 'classnames';
+
 import { Toolbar } from 'components/Toolbar';
 import { Menu } from 'components/Menu';
 import { AchievementsProgress } from 'components/AchievementsProgress';
@@ -21,21 +22,12 @@ import styles from './PageWrapper.scss';
 export type PageWrapperProps = {
   withoutToolbar?: boolean;
   sbMode?: boolean;
-  bgColor?: string;
-  shadowColor?: string;
-  backgroundComponent?: {
-    Component: React.ReactNode;
-    withShadow?: boolean;
-  };
 };
 
 export const PageWrapper = ({
   children,
-  backgroundComponent,
   withoutToolbar,
   sbMode,
-  bgColor,
-  shadowColor,
 }: PropsWithChildren<PageWrapperProps>) => {
   const inverseColorIsActive = useSelector(effectsSelectors.inverseColorIsActive);
   const isLoading = useSelector(mainSelectors.isLoading);
@@ -51,18 +43,16 @@ export const PageWrapper = ({
   });
 
   return (
-    <div className={pageWrapperClassNames} style={{ backgroundColor: bgColor }}>
+    <div className={pageWrapperClassNames}>
       <div className={mainContendClassNames}>
         <Narrative>
           {children}
         </Narrative>
 
         <SideEffects />
-        <BackgroundEffects shadowColor={shadowColor} />
+        <BackgroundEffects />
 
-        <Background withShadow={backgroundComponent?.withShadow} shadowColor={shadowColor}>
-          {backgroundComponent?.Component}
-        </Background>
+        <Background />
 
         {!withoutToolbar && (
           <Toolbar sbMode={sbMode} />
