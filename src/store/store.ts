@@ -17,7 +17,8 @@ import { mainReducer, watchMainActions } from './main';
 import { configReducer, watchConfigActions } from './config';
 import { volumeReducer, watchVolumeActions } from './volume';
 import { effectsReducer } from './effects/common';
-import { backgroundEffectReducer } from './effects/background';
+import { backgroundEffectsReducer } from './effects/background';
+import { fontEffectsReducer } from './effects/font';
 import { audioEffectsReducer, watchAudioEffectsActions } from './effects/audio/audio';
 import { audioBgEffectsReducer, watchAudioBgEffectsActions } from './effects/audio/audioBg';
 import { sideShadowReducer, watchSideShadowActions } from './effects/side/shadow';
@@ -44,7 +45,8 @@ const reducer = {
   audioBgEffects: audioBgEffectsReducer,
   sideShadowEffect: sideShadowReducer,
   sideTextEffect: sideTextReducer,
-  backgroundEffect: backgroundEffectReducer,
+  backgroundEffects: backgroundEffectsReducer,
+  fontEffects: fontEffectsReducer,
   bookmarks: bookmarksReducer,
   achievements: achievementsReducer,
 

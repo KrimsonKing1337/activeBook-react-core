@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-import { State } from './@types';
+import type { State } from './@types';
 
 export const initialState: State = {
   style: undefined,

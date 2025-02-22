@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import { Video as DefaultVideo } from 'components/Video';
 
 import { useSelector } from 'store';
-import { backgroundEffectSelectors } from 'store/effects/background';
+import { backgroundEffectsSelectors } from 'store/effects/background';
 
 import { Wrapper } from '../Wrapper';
 
@@ -12,7 +12,7 @@ import styles from './Video.scss';
 export const Video = () => {
   const ref = useRef<HTMLVideoElement>(null);
 
-  const video = useSelector(backgroundEffectSelectors.video);
+  const video = useSelector(backgroundEffectsSelectors.video);
 
   if (!video) {
     return null;

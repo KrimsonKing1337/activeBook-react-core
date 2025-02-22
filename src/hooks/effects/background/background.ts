@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import { useDispatch } from 'store';
-import { backgroundEffectActions } from 'store/effects/background';
+import { backgroundEffectsActions } from 'store/effects/background';
 
 export type UseBackgroundMediaPosition =
   'center'
@@ -50,14 +50,14 @@ export const useBackground = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(backgroundEffectActions.setStyle(style));
-    dispatch(backgroundEffectActions.setImg(img));
-    dispatch(backgroundEffectActions.setVideo(video));
-    dispatch(backgroundEffectActions.setShadow(shadow));
-    dispatch(backgroundEffectActions.setComponent(Component));
+    dispatch(backgroundEffectsActions.setStyle(style));
+    dispatch(backgroundEffectsActions.setImg(img));
+    dispatch(backgroundEffectsActions.setVideo(video));
+    dispatch(backgroundEffectsActions.setShadow(shadow));
+    dispatch(backgroundEffectsActions.setComponent(Component));
 
     return () => {
-      dispatch(backgroundEffectActions.reset());
+      dispatch(backgroundEffectsActions.reset());
     };
   }, []);
 };

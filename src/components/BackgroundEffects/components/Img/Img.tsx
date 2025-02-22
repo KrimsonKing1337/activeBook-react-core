@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import { Img as DefaultImg } from 'components/Img';
 
 import { useSelector } from 'store';
-import { backgroundEffectSelectors } from 'store/effects/background';
+import { backgroundEffectsSelectors } from 'store/effects/background';
 
 import { Wrapper } from '../Wrapper';
 
@@ -12,7 +12,7 @@ import styles from './Img.scss';
 export const Img = () => {
   const ref = useRef<HTMLImageElement>(null);
 
-  const img = useSelector(backgroundEffectSelectors.img);
+  const img = useSelector(backgroundEffectsSelectors.img);
 
   if (!img) {
     return null;

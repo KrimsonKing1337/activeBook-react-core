@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import { useDispatch } from 'store';
-import { effectsActions } from 'store/effects/common';
+import { fontEffectsActions } from 'store/effects/font';
 
 export type UseFontOptions = Pick<React.CSSProperties, 'color'
   | 'fontFamily'
@@ -17,11 +17,11 @@ export const useFont = ({ color = 'var(--secondary)', ...style }: UseFontOptions
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(effectsActions.setFontColor(color));
-    dispatch(effectsActions.setFontStyle(style));
+    dispatch(fontEffectsActions.setColor(color));
+    dispatch(fontEffectsActions.setStyle(style));
 
     return () => {
-      dispatch(effectsActions.resetFont());
+      dispatch(fontEffectsActions.reset());
     };
   }, [color, style]);
 };

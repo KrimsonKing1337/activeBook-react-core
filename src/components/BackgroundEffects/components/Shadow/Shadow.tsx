@@ -1,10 +1,10 @@
 import { useSelector } from 'store';
-import { backgroundEffectSelectors } from 'store/effects/background';
+import { backgroundEffectsSelectors } from 'store/effects/background';
 
 import styles from './Shadow.scss';
 
 export const Shadow = () => {
-  const shadow = useSelector(backgroundEffectSelectors.shadow);
+  const shadow = useSelector(backgroundEffectsSelectors.shadow);
 
   if (!shadow) {
     return null;
