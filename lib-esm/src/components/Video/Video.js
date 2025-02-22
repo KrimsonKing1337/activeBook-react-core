@@ -22,7 +22,7 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 import { jsx as _jsx } from "react/jsx-runtime";
 export var Video = function (_a) {
-    var _b = _a.className, className = _b === void 0 ? '' : _b, src = _a.src, etc = __rest(_a, ["className", "src"]);
-    return (_jsx("video", __assign({ className: className, src: src, preload: "auto", poster: "/assets/img/poster-default.png" }, etc)));
+    var passedRef = _a.passedRef, _b = _a.className, className = _b === void 0 ? '' : _b, src = _a.src, etc = __rest(_a, ["passedRef", "className", "src"]);
+    return (_jsx("video", __assign({ ref: passedRef, className: className, src: src, preload: "auto", poster: "/assets/img/poster-default.png" }, etc)));
 };
 //# sourceMappingURL=Video.js.map

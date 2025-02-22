@@ -1,11 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 import { Img as DefaultImg } from 'components/Img';
 
 import { useSelector } from 'store';
 import { backgroundEffectSelectors } from 'store/effects/background';
-
-import { getCssPositionByValue } from 'components/BackgroundEffects/utils';
 
 import { Wrapper } from '../Wrapper';
 
@@ -16,31 +14,17 @@ export const Img = () => {
 
   const img = useSelector(backgroundEffectSelectors.img);
 
-  useEffect(() => {
-    if (img && ref.current) {
-      const { css = '', position = 'center' } = img;
-
-      const positionCss = getCssPositionByValue(position);
-
-      ref.current.setAttribute('style', positionCss);
-
-      if (css) {
-        ref.current.setAttribute('style', css);
-      }
-    }
-  }, [img]);
-
   if (!img) {
     return null;
   }
 
-  const { src, stretch = 'cover' } = img;
+  const { src, style, wrapperStyle } = img;
 
   return (
-    <Wrapper>
+    <Wrapper style={wrapperStyle}>
       <DefaultImg
-        ref={ref}
-        style={{ objectFit: stretch }}
+        passedRef={ref}
+        style={style}
         className={styles.img}
         src={src}
       />

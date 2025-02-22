@@ -9,7 +9,6 @@ import { TableOfContents } from 'components/TableOfContents';
 import { Bookmarks } from 'components/Bookmarks';
 import { SideEffects } from 'components/SideEffects';
 import { BackgroundEffects } from 'components/BackgroundEffects';
-import { BackgroundComponent as Background } from 'components/BackgroundComponent';
 
 import { mainSelectors } from 'store/main';
 import { effectsSelectors } from 'store/effects/common';
@@ -51,8 +50,6 @@ export const PageWrapper = ({
 
         <SideEffects />
         <BackgroundEffects />
-
-        <Background />
 
         {!withoutToolbar && (
           <Toolbar sbMode={sbMode} />

@@ -8,8 +8,7 @@ import { mainReducer, watchMainActions } from './main';
 import { configReducer, watchConfigActions } from './config';
 import { volumeReducer, watchVolumeActions } from './volume';
 import { effectsReducer } from './effects/common';
-import { backgroundVideoEffectReducer } from './effects/background/video';
-import { backgroundImgEffectReducer } from './effects/background/img';
+import { backgroundEffectReducer } from './effects/background';
 import { audioEffectsReducer, watchAudioEffectsActions } from './effects/audio/audio';
 import { audioBgEffectsReducer, watchAudioBgEffectsActions } from './effects/audio/audioBg';
 import { sideShadowReducer, watchSideShadowActions } from './effects/side/shadow';
@@ -32,8 +31,7 @@ var reducer = {
     audioBgEffects: audioBgEffectsReducer,
     sideShadowEffect: sideShadowReducer,
     sideTextEffect: sideTextReducer,
-    backgroundVideoEffect: backgroundVideoEffectReducer,
-    backgroundImgEffect: backgroundImgEffectReducer,
+    backgroundEffect: backgroundEffectReducer,
     bookmarks: bookmarksReducer,
     achievements: achievementsReducer,
     counter: counterReducer,

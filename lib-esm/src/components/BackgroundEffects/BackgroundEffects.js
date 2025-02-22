@@ -1,20 +1,14 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { Video } from 'components/Video';
-import { Img } from 'components/Img';
 import { useSelector } from 'store';
-import { effectsSelectors } from 'store/effects/common';
-import { backgroundVideoEffectSelectors } from 'store/effects/background/video';
-import { backgroundImgEffectSelectors } from 'store/effects/background/img';
-import { Dots } from './components/Dots';
+import { backgroundEffectSelectors } from 'store/effects/background';
+import { Video, Img, Shadow, Dots } from './components';
 import styles from './BackgroundEffects.scss';
-export var BackgroundEffects = function (_a) {
-    var shadowColor = _a.shadowColor;
-    var backgroundVideoIsActive = useSelector(backgroundVideoEffectSelectors.isActive);
-    var backgroundVideoSrc = useSelector(backgroundVideoEffectSelectors.src);
-    var backgroundImgIsActive = useSelector(backgroundImgEffectSelectors.isActive);
-    var backgroundImgSrc = useSelector(backgroundImgEffectSelectors.src);
-    var dotsIsActive = useSelector(effectsSelectors.dotsIsActive);
-    var oneOfBgIsActive = backgroundVideoIsActive || backgroundImgIsActive;
-    return (_jsxs("div", { className: styles.backgroundEffectsWrapper, children: [dotsIsActive && (_jsx(Dots, {})), oneOfBgIsActive && (_jsxs("div", { className: styles.backgroundObjectsWrapper, children: [_jsx("div", { className: styles.backgroundObjectsShadow, style: { backgroundImage: shadowColor } }), backgroundVideoIsActive && (_jsx("div", { className: styles.backgroundObjectWrapper, children: _jsx(Video, { src: backgroundVideoSrc, autoPlay: true, loop: true, muted: true }) })), backgroundImgIsActive && (_jsx("div", { className: styles.backgroundObjectWrapper, children: _jsx(Img, { src: backgroundImgSrc }) }))] }))] }));
+export var BackgroundEffects = function () {
+    var style = useSelector(backgroundEffectSelectors.style);
+    var video = useSelector(backgroundEffectSelectors.img);
+    var img = useSelector(backgroundEffectSelectors.img);
+    var Component = useSelector(backgroundEffectSelectors.Component);
+    var oneOfBgIsActive = video || img || Component;
+    return (_jsxs("div", { style: style, className: styles.backgroundEffectsWrapper, children: [_jsx(Dots, {}), oneOfBgIsActive && (_jsxs("div", { className: styles.backgroundObjectsWrapper, children: [_jsx(Shadow, {}), Component, _jsx(Video, {}), _jsx(Img, {})] }))] }));
 };
 //# sourceMappingURL=BackgroundEffects.js.map

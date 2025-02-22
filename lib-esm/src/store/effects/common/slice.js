@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export var initialState = {
     inverseColorIsActive: false,
     dotsIsActive: false,
+    fontColor: 'var(--secondary)',
 };
 var slice = createSlice({
     name: '@effects/common',
@@ -12,6 +13,9 @@ var slice = createSlice({
         },
         setDotsActiveState: function (state, action) {
             state.dotsIsActive = action.payload;
+        },
+        setFontColor: function (state, action) {
+            state.fontColor = action.payload;
         },
     },
 });

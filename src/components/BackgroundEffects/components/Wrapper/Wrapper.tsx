@@ -2,9 +2,11 @@ import type { PropsWithChildren } from 'react';
 
 import styles from './Wrapper.scss';
 
-export const Wrapper = ({ children }: PropsWithChildren) => {
+export type WrapperProps = React.HTMLAttributes<HTMLDivElement> & PropsWithChildren;
+
+export const Wrapper = ({ children, style }: WrapperProps) => {
   return (
-    <div className={styles.wrapper}>
+    <div style={style} className={styles.wrapper}>
       {children}
     </div>
   );

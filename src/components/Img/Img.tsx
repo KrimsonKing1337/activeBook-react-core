@@ -1,13 +1,13 @@
 type ImgProps = React.HTMLAttributes<HTMLImageElement> & {
-  ref?: React.RefObject<HTMLImageElement>
+  passedRef?: React.RefObject<HTMLImageElement>
   className?: string;
   src: string;
 };
 
-export const Img = ({ ref, className = '', src, ...etc }: ImgProps) => {
+export const Img = ({ passedRef, className = '', src, ...etc }: ImgProps) => {
   return (
     <img
-      ref={ref}
+      ref={passedRef}
       className={className}
       src={src}
       alt=""

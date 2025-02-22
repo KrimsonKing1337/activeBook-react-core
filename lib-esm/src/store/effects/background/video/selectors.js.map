@@ -1,1 +1,0 @@
-{"version":3,"file":"selectors.js","sourceRoot":"","sources":["../../../../../../src/store/effects/background/video/selectors.ts"],"names":[],"mappings":"AAEA,MAAM,CAAC,IAAM,SAAS,GAAG;IACvB,QAAQ,EAAE,UAAC,KAAgB,IAAK,OAAA,KAAK,CAAC,qBAAqB,CAAC,QAAQ,EAApC,CAAoC;IACpE,GAAG,EAAE,UAAC,KAAgB,IAAK,OAAA,KAAK,CAAC,qBAAqB,CAAC,GAAG,EAA/B,CAA+B;CAC3D,CAAC"}

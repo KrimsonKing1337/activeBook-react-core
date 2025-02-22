@@ -1,13 +1,13 @@
 type VideoProps = React.MediaHTMLAttributes<HTMLVideoElement> & {
-  ref?: React.RefObject<HTMLVideoElement>
+  passedRef?: React.RefObject<HTMLVideoElement>
   className?: string;
   src: string;
 };
 
-export const Video = ({ ref, className = '', src, ...etc }: VideoProps) => {
+export const Video = ({ passedRef, className = '', src, ...etc }: VideoProps) => {
   return (
     <video
-      ref={ref}
+      ref={passedRef}
       className={className}
       src={src}
       preload="auto"

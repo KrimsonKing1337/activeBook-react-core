@@ -14,9 +14,12 @@ import { useEffect, useState } from 'react';
 import { Flags } from 'utils/effects/achievements/utils';
 import { play } from 'utils/effects/achievements';
 import { achievements } from 'utils/localStorage/achievements';
+import { useSelector } from 'store';
+import { effectsSelectors } from 'store/effects/common';
 import { createDotsAsArray, getPlaceInLineByLocationStyles, orderDefaultState } from './utils';
 import styles from './Dots.scss';
 export var Dots = function () {
+    var dotsIsActive = useSelector(effectsSelectors.dotsIsActive);
     var _a = useState(orderDefaultState), order = _a[0], setOrder = _a[1];
     useEffect(function () {
         var wasFound = achievements.get(Flags.superEasterEggFound);
@@ -87,7 +90,10 @@ export var Dots = function () {
             setOrder(orderDefaultState);
         };
     }, [order]);
+    if (!dotsIsActive) {
+        return null;
+    }
     var dots = createDotsAsArray();
-    return (_jsx("div", { className: styles.dotsWrapper, children: dots.map(function (key) { return _jsx("div", { className: styles.dot }, key); }) }));
+    return (_jsx("div", { className: styles.dotsWrapper, children: dots.map(function (key) { return (_jsx("div", { className: styles.dot }, key)); }) }));
 };
 //# sourceMappingURL=Dots.js.map
