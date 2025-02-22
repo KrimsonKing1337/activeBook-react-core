@@ -4,6 +4,8 @@ import Hammer from 'hammerjs';
 
 import { useSelector } from 'store';
 import { configSelectors } from 'store/config';
+import { effectsSelectors } from 'store/effects/common';
+
 import { goNextPage, goPrevPage } from 'utils/control/goToPage';
 
 import styles from './Narrative.scss';
@@ -12,22 +14,32 @@ export const Narrative = ({ children }: PropsWithChildren) => {
   const fontSize = useSelector(configSelectors.fontSize);
   const lineHeight = useSelector(configSelectors.lineHeight);
 
-  const narrativeStyle = { fontSize: `${fontSize}%` };
-  const textStyle = { lineHeight: `${lineHeight}%` };
+  const fontColor = useSelector(effectsSelectors.fontColor);
+  const fontStyle = useSelector(effectsSelectors.fontStyle);
 
-  const narrativeRef = useRef<HTMLDivElement>(null);
+  const narrativeStyle = {
+    fontSize: `${fontSize}%`,
+    color: fontColor,
+  };
+
+  const textStyle = {
+    lineHeight: `${lineHeight}%`,
+    ...fontStyle,
+  };
+
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // переводим фокус на прокручиваемый элемент для возможности прокрутки с помощью стрелок вверх и вниз
-    narrativeRef.current?.focus();
+    ref.current?.focus();
   }, []);
 
   useEffect(() => {
-    if (!narrativeRef.current) {
+    if (!ref.current) {
       return;
     }
 
-    const hammertime = new Hammer(narrativeRef.current, { domEvents: true });
+    const hammertime = new Hammer(ref.current, { domEvents: true });
 
     hammertime.get('swipe').set({
       direction: Hammer.DIRECTION_HORIZONTAL,
@@ -50,7 +62,7 @@ export const Narrative = ({ children }: PropsWithChildren) => {
 
   return (
     <div
-      ref={narrativeRef}
+      ref={ref}
       className={styles.narrative}
       style={narrativeStyle}
       tabIndex={0}

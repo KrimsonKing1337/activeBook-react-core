@@ -3,19 +3,25 @@ import { useEffect } from 'react';
 import { useDispatch } from 'store';
 import { effectsActions } from 'store/effects/common';
 
-// todo: добавить размер, изменение шрифта и т.д.
-export type UseFontOptions = {
-  color?: string;
-};
+export type UseFontOptions = Pick<React.CSSProperties, 'color'
+  | 'fontFamily'
+  | 'fontSize'
+  | 'fontSizeAdjust'
+  | 'fontStretch'
+  | 'fontStyle'
+  | 'fontVariant'
+  | 'fontWeight'
+>;
 
-export const useFont = ({ color = 'var(--secondary)' }: UseFontOptions) => {
+export const useFont = ({ color = 'var(--secondary)', ...style }: UseFontOptions) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(effectsActions.setFontColor(color));
+    dispatch(effectsActions.setFontStyle(style));
 
     return () => {
-      dispatch(effectsActions.setFontColor('var(--secondary)'));
+      dispatch(effectsActions.resetFont());
     };
-  }, []);
+  }, [color, style]);
 };
