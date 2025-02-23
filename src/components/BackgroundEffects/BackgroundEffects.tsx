@@ -9,7 +9,7 @@ import styles from './BackgroundEffects.scss';
 export const BackgroundEffects = () => {
   const effects = useSelector(backgroundEffectsSelectors.effects);
 
-  Object.keys(effects).map((keyCur) => {
+  return Object.keys(effects).map((keyCur) => {
     const effectCur = effects[keyCur];
 
     const {
