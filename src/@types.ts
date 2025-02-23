@@ -30,16 +30,6 @@ export type AudioEffectRangeOptions = Omit<AudioEffectOptions, 'id'> & {
   id: string;
 };
 
-// json does not support non-simple types
-export type AudioEffectRangeOptionsJson = Omit<AudioEffectOptions, 'id' | 'type'> & {
-  id: string;
-  type: string;
-};
-
-export type BackgroundEffectsRangeOptions = Omit<BackgroundEffect, 'id'> & {
-  id: string;
-};
-
 export type Range = {
   from: number;
   to: number;
@@ -48,9 +38,10 @@ export type Range = {
 export type RangeType = 'audio' | 'dots' | 'background';
 
 export type RangeEffect = {
+  id: string;
   type: RangeType;
   range: Range[];
-  options?: AudioEffectRangeOptionsJson | BackgroundEffectsRangeOptions;
+  options?: AudioEffectOptions | BackgroundEffect;
 };
 
 export type DotsRangeEffect = RangeEffect;

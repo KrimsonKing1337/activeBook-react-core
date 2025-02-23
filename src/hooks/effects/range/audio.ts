@@ -5,7 +5,6 @@ import type {
   Timer,
   RangeEffect,
   AudioEffectRangeOptions,
-  AudioEffectRangeOptionsJson,
 } from '@types';
 
 import { store, useDispatch, useSelector } from 'store';
@@ -36,9 +35,7 @@ export function useAudioInRange(effects: RangeEffects) {
       const { id } = audioInstanceCur;
 
       const idIsInRange = audiosForPage.some((cur) => {
-        const options = cur.options as AudioEffectRangeOptionsJson;
-
-        return options?.id === id;
+        return cur.id === id;
       });
 
       if (idIsInRange) {
@@ -60,9 +57,11 @@ export function useAudioInRange(effects: RangeEffects) {
     const timers: Timer[] = [];
 
     audiosForPage.forEach((audioOnPageCur) => {
+      const { id: idFromRange } = audioOnPageCur;
+
       const {
+        id = idFromRange,
         src,
-        id,
         type,
         loop,
         playOnLoad,

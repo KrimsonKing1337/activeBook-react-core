@@ -1,12 +1,15 @@
 import { useEffect } from 'react';
 
-import type { BackgroundEffectsRangeOptions, RangeEffects } from '@types';
+import type { RangeEffects } from '@types';
 
 import { store, useDispatch, useSelector } from 'store';
+
 import { mainSelectors } from 'store/main';
+import { backgroundEffectsActions } from 'store/effects/background';
+
+import type { BackgroundEffect } from 'hooks/effects/background/@types';
 
 import { getEffectsInRange } from 'utils/effects/rangeEffects';
-import { backgroundEffectsActions } from 'store/effects/background';
 
 export function useBackgroundInRange(effects: RangeEffects) {
   const dispatch = useDispatch();
@@ -23,9 +26,7 @@ export function useBackgroundInRange(effects: RangeEffects) {
       const { id } = effectCur;
 
       const idIsInRange = backgroundEffectsForPage.some((cur) => {
-        const options = cur.options as BackgroundEffectsRangeOptions;
-
-        return options.id === id;
+        return cur.id === id;
       });
 
       if (idIsInRange) {
@@ -41,9 +42,12 @@ export function useBackgroundInRange(effects: RangeEffects) {
     const backgroundEffectsInStore = store.getState().backgroundEffects.effects;
 
     backgroundEffectsForPage.forEach((backgroundEffectOnPageCur) => {
-      const backgroundEffectOnPageCurOptions = backgroundEffectOnPageCur.options as BackgroundEffectsRangeOptions;
+      const { id } = backgroundEffectOnPageCur;
 
-      const { id } = backgroundEffectOnPageCurOptions;
+      const backgroundEffectOnPageCurOptions = {
+        ...backgroundEffectOnPageCur.options,
+        id,
+      } as BackgroundEffect;
 
       const backgroundEffectInStore = backgroundEffectsInStore[id];
 

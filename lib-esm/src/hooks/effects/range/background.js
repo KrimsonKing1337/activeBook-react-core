@@ -1,3 +1,14 @@
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 import { useEffect } from 'react';
 import { store, useDispatch, useSelector } from 'store';
 import { mainSelectors } from 'store/main';
@@ -13,8 +24,7 @@ export function useBackgroundInRange(effects) {
             var effectCur = backgroundEffectsInStore[keyCur];
             var id = effectCur.id;
             var idIsInRange = backgroundEffectsForPage.some(function (cur) {
-                var options = cur.options;
-                return options.id === id;
+                return cur.id === id;
             });
             if (idIsInRange) {
                 return;
@@ -26,8 +36,8 @@ export function useBackgroundInRange(effects) {
         var backgroundEffectsForPage = getEffectsInRange(effects, page, 'background');
         var backgroundEffectsInStore = store.getState().backgroundEffects.effects;
         backgroundEffectsForPage.forEach(function (backgroundEffectOnPageCur) {
-            var backgroundEffectOnPageCurOptions = backgroundEffectOnPageCur.options;
-            var id = backgroundEffectOnPageCurOptions.id;
+            var id = backgroundEffectOnPageCur.id;
+            var backgroundEffectOnPageCurOptions = __assign(__assign({}, backgroundEffectOnPageCur.options), { id: id });
             var backgroundEffectInStore = backgroundEffectsInStore[id];
             if (backgroundEffectInStore) {
                 return;
