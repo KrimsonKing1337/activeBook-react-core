@@ -51,9 +51,6 @@ export function useAudioInRange(effects: RangeEffectsJson) {
 
     const audiosOnPage = getEffectsInRange(effects, page, 'audio') as RangeEffect[];
 
-    console.log('___ audioInstances', audioInstances);
-    console.log('___ audiosOnPage', audiosOnPage);
-
     const timers: Timer[] = [];
 
     audiosOnPage.forEach((audioOnPageCur) => {
