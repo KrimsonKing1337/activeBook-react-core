@@ -1,4 +1,4 @@
-import type { BackgroundEffectMediaPosition } from './background';
+import type { BackgroundEffectMediaPosition } from './@types';
 
 export const getPositionByPreset = (value: BackgroundEffectMediaPosition): React.CSSProperties => {
   switch (value) {
