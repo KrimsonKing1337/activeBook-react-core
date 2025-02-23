@@ -1,2 +1,2 @@
-export { reducer as backgroundEffectReducer, actions as backgroundEffectActions } from './slice';
-export { selectors as backgroundEffectSelectors } from './selectors';
+export { reducer as backgroundEffectsReducer, actions as backgroundEffectsActions } from './slice';
+export { selectors as backgroundEffectsSelectors } from './selectors';

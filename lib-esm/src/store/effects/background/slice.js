@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 export var initialState = {
-    style: undefined,
-    video: undefined,
-    img: undefined,
-    shadow: undefined,
-    Component: undefined,
+    style: {},
+    videos: [],
+    images: [],
+    shadow: {},
+    Component: null,
 };
 var slice = createSlice({
     name: '@effects/background',
@@ -13,17 +13,17 @@ var slice = createSlice({
         setStyle: function (state, action) {
             state.style = action.payload;
         },
-        setVideo: function (state, action) {
-            state.video = action.payload;
+        setVideos: function (state, action) {
+            state.videos = action.payload;
         },
-        setImg: function (state, action) {
-            state.img = action.payload;
-        },
-        setShadow: function (state, action) {
-            state.shadow = action.payload;
+        setImages: function (state, action) {
+            state.images = action.payload;
         },
         setComponent: function (state, action) {
             state.Component = action.payload;
+        },
+        setShadow: function (state, action) {
+            state.shadow = action.payload;
         },
         reset: function () {
             return initialState;

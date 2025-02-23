@@ -77,8 +77,6 @@ export function useAudioInRange(effects) {
     useEffect(function () {
         var audioInstances = store.getState().audioBgEffects.audioInstances;
         var audiosOnPage = getEffectsInRange(effects, page, 'audio');
-        console.log('___ audioInstances', audioInstances);
-        console.log('___ audiosOnPage', audiosOnPage);
         var timers = [];
         audiosOnPage.forEach(function (audioOnPageCur) {
             var _a = audioOnPageCur.options, src = _a.src, id = _a.id, type = _a.type, loop = _a.loop, playOnLoad = _a.playOnLoad, delay = _a.delay, stopBy = _a.stopBy, screamer = _a.screamer, fadeOutWhenUnload = _a.fadeOutWhenUnload, onPlay = _a.onPlay, onUnload = _a.onUnload;

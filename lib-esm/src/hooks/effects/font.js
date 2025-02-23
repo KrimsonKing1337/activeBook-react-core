@@ -11,15 +11,15 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 import { useEffect } from 'react';
 import { useDispatch } from 'store';
-import { effectsActions } from 'store/effects/common';
+import { fontEffectsActions } from 'store/effects/font';
 export var useFont = function (_a) {
     var _b = _a.color, color = _b === void 0 ? 'var(--secondary)' : _b, style = __rest(_a, ["color"]);
     var dispatch = useDispatch();
     useEffect(function () {
-        dispatch(effectsActions.setFontColor(color));
-        dispatch(effectsActions.setFontStyle(style));
+        dispatch(fontEffectsActions.setColor(color));
+        dispatch(fontEffectsActions.setStyle(style));
         return function () {
-            dispatch(effectsActions.resetFont());
+            dispatch(fontEffectsActions.reset());
         };
     }, [color, style]);
 };

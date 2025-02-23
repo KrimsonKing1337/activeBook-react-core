@@ -1,6 +1,6 @@
 export * from './Dots';
-export * from './Video';
-export * from './Img';
+export * from './Videos';
+export * from './Images';
 export * from './Shadow';
 export * from './Wrapper';
 //# sourceMappingURL=index.js.map

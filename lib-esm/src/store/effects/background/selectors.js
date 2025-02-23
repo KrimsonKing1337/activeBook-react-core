@@ -1,8 +1,8 @@
 export var selectors = {
-    style: function (state) { return state.backgroundEffect.style; },
-    video: function (state) { return state.backgroundEffect.video; },
-    img: function (state) { return state.backgroundEffect.img; },
-    shadow: function (state) { return state.backgroundEffect.shadow; },
-    Component: function (state) { return state.backgroundEffect.Component; },
+    style: function (state) { return state.backgroundEffects.style; },
+    videos: function (state) { return state.backgroundEffects.videos; },
+    images: function (state) { return state.backgroundEffects.images; },
+    Component: function (state) { return state.backgroundEffects.Component; },
+    shadow: function (state) { return state.backgroundEffects.shadow; },
 };
 //# sourceMappingURL=selectors.js.map

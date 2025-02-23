@@ -4,7 +4,7 @@ import Hammer from 'hammerjs';
 
 import { useSelector } from 'store';
 import { configSelectors } from 'store/config';
-import { effectsSelectors } from 'store/effects/common';
+import { fontEffectsSelectors } from 'store/effects/font';
 
 import { goNextPage, goPrevPage } from 'utils/control/goToPage';
 
@@ -14,8 +14,8 @@ export const Narrative = ({ children }: PropsWithChildren) => {
   const fontSize = useSelector(configSelectors.fontSize);
   const lineHeight = useSelector(configSelectors.lineHeight);
 
-  const fontColor = useSelector(effectsSelectors.fontColor);
-  const fontStyle = useSelector(effectsSelectors.fontStyle);
+  const fontColor = useSelector(fontEffectsSelectors.color);
+  const fontStyle = useSelector(fontEffectsSelectors.style);
 
   const narrativeStyle = {
     fontSize: `${fontSize}%`,

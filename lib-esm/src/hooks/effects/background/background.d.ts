@@ -16,9 +16,9 @@ export type UseBackgroundShadowOptions = {
 };
 export type UseBackgroundOptions = {
     style?: React.CSSProperties;
-    img?: UseBackgroundImgOptions;
-    video?: UseBackgroundVideoOptions;
-    shadow?: UseBackgroundShadowOptions;
+    images?: UseBackgroundImgOptions[];
+    videos?: UseBackgroundVideoOptions[];
     Component?: React.ReactNode;
+    shadow?: UseBackgroundShadowOptions;
 };
-export declare const useBackground: ({ style, img, video, shadow, Component, }: UseBackgroundOptions) => void;
+export declare const useBackground: ({ style, images, videos, Component, shadow, }: UseBackgroundOptions) => void;

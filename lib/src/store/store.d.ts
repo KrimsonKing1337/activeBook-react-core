@@ -10,7 +10,8 @@ export declare const store: import("@reduxjs/toolkit/dist/configureStore").Toolk
     audioBgEffects: import("./effects/audio/audioBg/@types").State;
     sideShadowEffect: import("./effects/side/shadow/@types").State;
     sideTextEffect: import("./effects/side/text/@types").State;
-    backgroundEffect: import("./effects/background/@types").State;
+    backgroundEffects: import("./effects/background/@types").State;
+    fontEffects: import("./effects/font/@types").State;
     bookmarks: import("./bookmarks/@types").State;
     achievements: import("./achievements/@types").State;
     counter: import("./counter/@types").State;

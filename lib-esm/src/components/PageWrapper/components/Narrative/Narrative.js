@@ -14,31 +14,31 @@ import { useEffect, useRef } from 'react';
 import Hammer from 'hammerjs';
 import { useSelector } from 'store';
 import { configSelectors } from 'store/config';
-import { effectsSelectors } from 'store/effects/common';
+import { fontEffectsSelectors } from 'store/effects/font';
 import { goNextPage, goPrevPage } from 'utils/control/goToPage';
 import styles from './Narrative.scss';
 export var Narrative = function (_a) {
     var children = _a.children;
     var fontSize = useSelector(configSelectors.fontSize);
     var lineHeight = useSelector(configSelectors.lineHeight);
-    var fontColor = useSelector(effectsSelectors.fontColor);
-    var fontStyle = useSelector(effectsSelectors.fontStyle);
+    var fontColor = useSelector(fontEffectsSelectors.color);
+    var fontStyle = useSelector(fontEffectsSelectors.style);
     var narrativeStyle = {
         fontSize: "".concat(fontSize, "%"),
         color: fontColor,
     };
     var textStyle = __assign({ lineHeight: "".concat(lineHeight, "%") }, fontStyle);
-    var narrativeRef = useRef(null);
+    var ref = useRef(null);
     useEffect(function () {
         var _a;
         // переводим фокус на прокручиваемый элемент для возможности прокрутки с помощью стрелок вверх и вниз
-        (_a = narrativeRef.current) === null || _a === void 0 ? void 0 : _a.focus();
+        (_a = ref.current) === null || _a === void 0 ? void 0 : _a.focus();
     }, []);
     useEffect(function () {
-        if (!narrativeRef.current) {
+        if (!ref.current) {
             return;
         }
-        var hammertime = new Hammer(narrativeRef.current, { domEvents: true });
+        var hammertime = new Hammer(ref.current, { domEvents: true });
         hammertime.get('swipe').set({
             direction: Hammer.DIRECTION_HORIZONTAL,
             threshold: 50,
@@ -53,6 +53,6 @@ export var Narrative = function (_a) {
             hammertime.destroy();
         };
     }, []);
-    return (_jsx("div", { ref: narrativeRef, className: styles.narrative, style: narrativeStyle, tabIndex: 0, children: _jsx("div", { className: styles.text, style: textStyle, children: children }) }));
+    return (_jsx("div", { ref: ref, className: styles.narrative, style: narrativeStyle, tabIndex: 0, children: _jsx("div", { className: styles.text, style: textStyle, children: children }) }));
 };
 //# sourceMappingURL=Narrative.js.map
