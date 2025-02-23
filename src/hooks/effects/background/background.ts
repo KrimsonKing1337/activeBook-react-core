@@ -1,63 +1,28 @@
 import { useEffect } from 'react';
 
+import { nanoid } from 'nanoid';
+
 import { useDispatch } from 'store';
 import { backgroundEffectsActions } from 'store/effects/background';
 
-export type UseBackgroundMediaPosition =
-  'center'
-  | 'left'
-  | 'right'
-  | 'top'
-  | 'bottom'
-  | 'top-left'
-  | 'top-right'
-  | 'bottom-left'
-  | 'bottom-right';
+import type { BackgroundEffect } from './@types';
 
-export type UseBackgroundMediaOptions = {
-  src: string;
-  style?: React.CSSProperties;
-  wrapperStyle?: React.CSSProperties;
-};
-
-export type UseBackgroundImgOptions = UseBackgroundMediaOptions;
-
-export type UseBackgroundVideoOptions = UseBackgroundMediaOptions & {
-  loop?: boolean;
-  autoPlay?: boolean;
-  muted?: boolean;
-}
-
-export type UseBackgroundShadowOptions = {
-  style?: React.CSSProperties;
-};
-
-export type UseBackgroundOptions = {
-  style?: React.CSSProperties;
-  images?: UseBackgroundImgOptions[];
-  videos?: UseBackgroundVideoOptions[];
-  Component?: React.ReactNode;
-  shadow?: UseBackgroundShadowOptions;
-};
-
-export const useBackground = ({
-  style = {},
-  images = [],
-  videos = [],
-  Component = null,
-  shadow = {},
-}: UseBackgroundOptions) => {
+export const useBackground = (effect: BackgroundEffect) => {
   const dispatch = useDispatch();
 
+  const effectWithId = {
+    ...effect,
+  };
+
+  if (!effect.id) {
+    effectWithId.id = nanoid();
+  }
+
   useEffect(() => {
-    dispatch(backgroundEffectsActions.setStyle(style));
-    dispatch(backgroundEffectsActions.setImages(images));
-    dispatch(backgroundEffectsActions.setVideos(videos));
-    dispatch(backgroundEffectsActions.setComponent(Component));
-    dispatch(backgroundEffectsActions.setShadow(shadow));
+    dispatch(backgroundEffectsActions.setEffect(effectWithId));
 
     return () => {
-      dispatch(backgroundEffectsActions.reset());
+      dispatch(backgroundEffectsActions.setEffects({}));
     };
   }, []);
 };

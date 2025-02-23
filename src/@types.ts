@@ -2,6 +2,8 @@ import { Howl } from 'howler';
 
 import { HowlWrapper } from 'utils/effects/audio/HowlWrapper';
 
+import type { BackgroundEffect } from 'hooks/effects/background';
+
 export type Timer = ReturnType<typeof setTimeout> | null;
 export type Interval = ReturnType<typeof setInterval> | null;
 
@@ -34,17 +36,21 @@ export type AudioEffectRangeOptionsJson = Omit<AudioEffectOptions, 'id' | 'type'
   type: string;
 };
 
+export type BackgroundEffectsRangeOptions = Omit<BackgroundEffect, 'id'> & {
+  id: string;
+};
+
 export type Range = {
   from: number;
   to: number;
 };
 
-export type RangeType = 'audio' | 'dots';
+export type RangeType = 'audio' | 'dots' | 'background';
 
 export type RangeEffect = {
   type: string;
   range: Range[];
-  options?: AudioEffectRangeOptionsJson;
+  options?: AudioEffectRangeOptionsJson | BackgroundEffectsRangeOptions;
 };
 
 export type DotsRangeEffect = RangeEffect;

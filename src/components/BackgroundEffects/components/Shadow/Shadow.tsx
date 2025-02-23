@@ -1,16 +1,19 @@
-import { useSelector } from 'store';
-import { backgroundEffectsSelectors } from 'store/effects/background';
+import type { BackgroundEffectShadowOptions } from 'hooks/effects/background/@types';
 
 import styles from './Shadow.scss';
 
-export const Shadow = () => {
-  const shadow = useSelector(backgroundEffectsSelectors.shadow);
+export type ShadowProps = {
+  options: BackgroundEffectShadowOptions;
+};
 
-  if (!shadow) {
+export const Shadow = ({ options }: ShadowProps) => {
+  const { style } = options;
+
+  if (!style) {
     return null;
   }
 
   return (
-    <div style={shadow.style} className={styles.shadow} />
+    <div style={style} className={styles.shadow} />
   );
 };

@@ -1,6 +1,6 @@
-import type { UseBackgroundMediaPosition } from './background';
+import type { BackgroundEffectMediaPosition } from './background';
 
-export const getPositionByPreset = (value: UseBackgroundMediaPosition): React.CSSProperties => {
+export const getPositionByPreset = (value: BackgroundEffectMediaPosition): React.CSSProperties => {
   switch (value) {
   case 'center':
     return {

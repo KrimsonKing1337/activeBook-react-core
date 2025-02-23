@@ -1,6 +1,12 @@
 import { useEffect } from 'react';
 
-import type { RangeEffectsJson, Timer, RangeEffect, AudioEffectRangeOptions } from '@types';
+import type {
+  RangeEffectsJson,
+  Timer,
+  RangeEffect,
+  AudioEffectRangeOptions,
+  AudioEffectRangeOptionsJson,
+} from '@types';
 
 import { store, useDispatch, useSelector } from 'store';
 
@@ -18,8 +24,7 @@ export function useAudioInRange(effects: RangeEffectsJson) {
 
   useEffect(() => {
     const audioInstances = store.getState().audioBgEffects.audioInstances;
-
-    const audiosOnPage = getEffectsInRange(effects, page, 'audio');
+    const audiosForPage = getEffectsInRange(effects, page, 'audio');
 
     Object.keys(audioInstances).forEach((keyCur) => {
       const audioInstanceCur = audioInstances[keyCur];
@@ -30,8 +35,10 @@ export function useAudioInRange(effects: RangeEffectsJson) {
 
       const { id } = audioInstanceCur;
 
-      const idIsInRange = audiosOnPage.some((cur) => {
-        return cur.options?.id === id;
+      const idIsInRange = audiosForPage.some((cur) => {
+        const options = cur.options as AudioEffectRangeOptionsJson;
+
+        return options?.id === id;
       });
 
       if (idIsInRange) {
@@ -47,13 +54,12 @@ export function useAudioInRange(effects: RangeEffectsJson) {
   }, [page]);
 
   useEffect(() => {
-    const audioInstances = store.getState().audioBgEffects.audioInstances;
-
-    const audiosOnPage = getEffectsInRange(effects, page, 'audio') as RangeEffect[];
+    const audioInstancesInStore = store.getState().audioBgEffects.audioInstances;
+    const audiosForPage = getEffectsInRange(effects, page, 'audio') as RangeEffect[];
 
     const timers: Timer[] = [];
 
-    audiosOnPage.forEach((audioOnPageCur) => {
+    audiosForPage.forEach((audioOnPageCur) => {
       const {
         src,
         id,
@@ -68,9 +74,9 @@ export function useAudioInRange(effects: RangeEffectsJson) {
         onUnload,
       } = audioOnPageCur.options as AudioEffectRangeOptions;
 
-      const audioInstance = audioInstances[id];
+      const audioInstanceInStore = audioInstancesInStore[id];
 
-      if (audioInstance?.id === id) {
+      if (audioInstanceInStore) {
         return;
       }
 

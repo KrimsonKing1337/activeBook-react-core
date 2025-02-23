@@ -17,7 +17,7 @@ import { mainReducer, watchMainActions } from './main';
 import { configReducer, watchConfigActions } from './config';
 import { volumeReducer, watchVolumeActions } from './volume';
 import { effectsReducer } from './effects/common';
-import { backgroundEffectsReducer } from './effects/background';
+import { backgroundEffectsReducer, watchBackgroundEffectsActions } from './effects/background';
 import { fontEffectsReducer } from './effects/font';
 import { audioEffectsReducer, watchAudioEffectsActions } from './effects/audio/audio';
 import { audioBgEffectsReducer, watchAudioBgEffectsActions } from './effects/audio/audioBg';
@@ -73,6 +73,7 @@ sagaMiddleware.run(watchBookmarksActions);
 sagaMiddleware.run(watchSideShadowActions);
 sagaMiddleware.run(watchSideTextActions);
 sagaMiddleware.run(watchVolumeActions);
+sagaMiddleware.run(watchBackgroundEffectsActions);
 
 sagaMiddleware.run(watchCounterActions);
 

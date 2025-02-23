@@ -2,17 +2,18 @@ import { useRef } from 'react';
 
 import { Video as DefaultVideo } from 'components/Video';
 
-import { useSelector } from 'store';
-import { backgroundEffectsSelectors } from 'store/effects/background';
+import type { BackgroundEffectVideoOptions } from 'hooks/effects/background/@types';
 
 import { Wrapper } from '../Wrapper';
 
 import styles from './Videos.scss';
 
-export const Videos = () => {
-  const ref = useRef<HTMLVideoElement>(null);
+export type VideosProps = {
+  videos: BackgroundEffectVideoOptions[];
+};
 
-  const videos = useSelector(backgroundEffectsSelectors.videos);
+export const Videos = ({ videos }: VideosProps) => {
+  const ref = useRef<HTMLVideoElement>(null);
 
   if (videos.length === 0) {
     return null;

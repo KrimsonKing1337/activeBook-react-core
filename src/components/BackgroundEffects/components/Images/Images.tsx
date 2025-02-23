@@ -2,17 +2,18 @@ import { useRef } from 'react';
 
 import { Img } from 'components/Img';
 
-import { useSelector } from 'store';
-import { backgroundEffectsSelectors } from 'store/effects/background';
+import { UseBackgroundEffectImageOptions } from 'hooks/effects/background/@types';
 
 import { Wrapper } from '../Wrapper';
 
 import styles from './Images.scss';
 
-export const Images = () => {
-  const ref = useRef<HTMLImageElement>(null);
+export type ImagesProps = {
+  images: UseBackgroundEffectImageOptions[]
+};
 
-  const images = useSelector(backgroundEffectsSelectors.images);
+export const Images = ({ images }: ImagesProps) => {
+  const ref = useRef<HTMLImageElement>(null);
 
   if (images.length === 0) {
     return null;

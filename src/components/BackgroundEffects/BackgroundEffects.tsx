@@ -7,27 +7,36 @@ import { Videos, Images, Shadow, Dots } from './components';
 import styles from './BackgroundEffects.scss';
 
 export const BackgroundEffects = () => {
-  const style = useSelector(backgroundEffectsSelectors.style);
-  const videos = useSelector(backgroundEffectsSelectors.images);
-  const images = useSelector(backgroundEffectsSelectors.images);
-  const Component = useSelector(backgroundEffectsSelectors.Component);
+  const effects = useSelector(backgroundEffectsSelectors.effects);
 
-  const oneOfBgIsActive = videos.length || images.length || Component;
+  Object.keys(effects).map((keyCur) => {
+    const effectCur = effects[keyCur];
 
-  return (
-    <div style={style} className={styles.backgroundEffectsWrapper}>
-      <Dots />
+    const {
+      videos = [],
+      images = [],
+      Component = null,
+      shadow = {},
+      style = {},
+    } = effectCur;
 
-      {oneOfBgIsActive && (
-        <div className={styles.backgroundObjectsWrapper}>
-          <Shadow />
+    const oneOfBgIsActive = !!videos.length || !!images.length || !!Component;
 
-          {Component}
+    return (
+      <div style={style} className={styles.backgroundEffectsWrapper}>
+        <Dots />
 
-          <Videos />
-          <Images />
-        </div>
-      )}
-    </div>
-  );
+        {oneOfBgIsActive && (
+          <div className={styles.backgroundObjectsWrapper}>
+            <Shadow options={shadow} />
+
+            {Component}
+
+            <Videos videos={videos} />
+            <Images images={images} />
+          </div>
+        )}
+      </div>
+    );
+  });
 };
