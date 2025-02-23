@@ -48,16 +48,14 @@ export type Range = {
 export type RangeType = 'audio' | 'dots' | 'background';
 
 export type RangeEffect = {
-  type: string;
+  type: RangeType;
   range: Range[];
   options?: AudioEffectRangeOptionsJson | BackgroundEffectsRangeOptions;
 };
 
 export type DotsRangeEffect = RangeEffect;
 
-export type RangeEffectsJson = {
-  effects: RangeEffect[];
-};
+export type RangeEffects = RangeEffect[];
 
 export type Theme = 'dark' | 'darkBlue' | 'orange' | 'black';
 

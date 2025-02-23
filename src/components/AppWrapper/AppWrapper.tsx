@@ -3,18 +3,21 @@ import { PropsWithChildren, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 import { Howler } from 'howler';
-import { RangeEffectsJson } from '@types';
-import { Achievement } from 'components/Achievement';
+
+import type { RangeEffects } from '@types';
 
 import { useDispatch, useSelector } from 'store';
+
 import { volumeActions } from 'store/volume';
 import { initialState as volumeInitialState } from 'store/volume/slice';
 import { configActions } from 'store/config';
 import { initialState as configInitialState } from 'store/config/slice';
 import { mainActions, mainSelectors } from 'store/main';
 import { achievementsActions } from 'store/achievements';
+
 import { useEffectsInRange } from 'hooks/effects/range';
 import { useVibration } from 'hooks/effects/vibration';
+
 import { seenPages } from 'utils/localStorage/seenPages';
 import { play as achievementPlay } from 'utils/effects/achievements';
 import { achievements as achievementsUtils } from 'utils/localStorage/achievements';
@@ -22,13 +25,15 @@ import { Flags as AchievementsFlags, getInitValues } from 'utils/effects/achieve
 import { removeCssHover } from 'utils/touch/removeCssHover';
 import { flashlightInst } from 'utils/effects/flashlight';
 
+import { Achievement } from 'components/Achievement';
+
 import styles from './AppWrapper.scss';
 
 export type AppWrapperProps = {
-  rangeEffectsJson: RangeEffectsJson;
+  rangeEffects: RangeEffects;
 };
 
-export const AppWrapper = ({ children, rangeEffectsJson }: PropsWithChildren<AppWrapperProps>) => {
+export const AppWrapper = ({ children, rangeEffects }: PropsWithChildren<AppWrapperProps>) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -125,7 +130,7 @@ export const AppWrapper = ({ children, rangeEffectsJson }: PropsWithChildren<App
     };
   }, [page]);
 
-  useEffectsInRange(rangeEffectsJson);
+  useEffectsInRange(rangeEffects);
 
   const appWrapperClassNames = classNames({
     [styles.appWrapper]: true,

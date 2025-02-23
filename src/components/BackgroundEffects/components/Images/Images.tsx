@@ -1,5 +1,7 @@
 import { useRef } from 'react';
 
+import { nanoid } from 'nanoid';
+
 import { Img } from 'components/Img';
 
 import { UseBackgroundEffectImageOptions } from 'hooks/effects/background/@types';
@@ -22,8 +24,10 @@ export const Images = ({ images }: ImagesProps) => {
   return images.map((imageCur) => {
     const { src, style, wrapperStyle } = imageCur;
 
+    const uuid = nanoid();
+
     return (
-      <Wrapper style={wrapperStyle}>
+      <Wrapper key={uuid} style={wrapperStyle}>
         <Img
           passedRef={ref}
           style={style}

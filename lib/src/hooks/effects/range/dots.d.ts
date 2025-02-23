@@ -1,2 +1,2 @@
-import { RangeEffectsJson } from '../../../@types.js';
-export declare function useDotsInRange(effects: RangeEffectsJson): void;
+import type { RangeEffects } from '../../../@types.js';
+export declare function useDotsInRange(effects: RangeEffects): void;

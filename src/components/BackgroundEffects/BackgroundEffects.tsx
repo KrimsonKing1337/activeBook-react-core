@@ -1,3 +1,5 @@
+import { nanoid } from 'nanoid';
+
 import { useSelector } from 'store';
 
 import { backgroundEffectsSelectors } from 'store/effects/background';
@@ -22,8 +24,10 @@ export const BackgroundEffects = () => {
 
     const oneOfBgIsActive = !!videos.length || !!images.length || !!Component;
 
+    const uuid = nanoid();
+
     return (
-      <div style={style} className={styles.backgroundEffectsWrapper}>
+      <div key={uuid} style={style} className={styles.backgroundEffectsWrapper}>
         <Dots />
 
         {oneOfBgIsActive && (

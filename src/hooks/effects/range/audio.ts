@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import type {
-  RangeEffectsJson,
+  RangeEffects,
   Timer,
   RangeEffect,
   AudioEffectRangeOptions,
@@ -17,7 +17,7 @@ import { HowlWrapper } from 'utils/effects/audio/HowlWrapper';
 import { getEffectsInRange } from 'utils/effects/rangeEffects';
 import { waitTillTheEndIfAudioIsTooShort } from 'utils/effects/audio/waitTillTheEndIfAudioIsTooShort';
 
-export function useAudioInRange(effects: RangeEffectsJson) {
+export function useAudioInRange(effects: RangeEffects) {
   const dispatch = useDispatch();
 
   const page = useSelector(mainSelectors.page);

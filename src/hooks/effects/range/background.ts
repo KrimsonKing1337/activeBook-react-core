@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import type { BackgroundEffectsRangeOptions, RangeEffectsJson } from '@types';
+import type { BackgroundEffectsRangeOptions, RangeEffects } from '@types';
 
 import { store, useDispatch, useSelector } from 'store';
 import { mainSelectors } from 'store/main';
@@ -8,7 +8,7 @@ import { mainSelectors } from 'store/main';
 import { getEffectsInRange } from 'utils/effects/rangeEffects';
 import { backgroundEffectsActions } from 'store/effects/background';
 
-export function useBackgroundInRange(effects: RangeEffectsJson) {
+export function useBackgroundInRange(effects: RangeEffects) {
   const dispatch = useDispatch();
 
   const page = useSelector(mainSelectors.page);

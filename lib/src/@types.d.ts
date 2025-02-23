@@ -1,5 +1,6 @@
 import { Howl } from 'howler';
 import { HowlWrapper } from './utils/effects/audio/HowlWrapper';
+import type { BackgroundEffect } from './hooks/effects/background/@types';
 export type Timer = ReturnType<typeof setTimeout> | null;
 export type Interval = ReturnType<typeof setInterval> | null;
 export type HowlInst = HowlWrapper | null;
@@ -25,20 +26,21 @@ export type AudioEffectRangeOptionsJson = Omit<AudioEffectOptions, 'id' | 'type'
     id: string;
     type: string;
 };
+export type BackgroundEffectsRangeOptions = Omit<BackgroundEffect, 'id'> & {
+    id: string;
+};
 export type Range = {
     from: number;
     to: number;
 };
-export type RangeType = 'audio' | 'dots';
+export type RangeType = 'audio' | 'dots' | 'background';
 export type RangeEffect = {
-    type: string;
+    type: RangeType;
     range: Range[];
-    options?: AudioEffectRangeOptionsJson;
+    options?: AudioEffectRangeOptionsJson | BackgroundEffectsRangeOptions;
 };
 export type DotsRangeEffect = RangeEffect;
-export type RangeEffectsJson = {
-    effects: RangeEffect[];
-};
+export type RangeEffects = RangeEffect[];
 export type Theme = 'dark' | 'darkBlue' | 'orange' | 'black';
 export type HowlExtended = Howl & {
     _howls: Howl[];

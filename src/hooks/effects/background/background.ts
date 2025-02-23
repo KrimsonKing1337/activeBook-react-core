@@ -22,7 +22,7 @@ export const useBackground = (effect: BackgroundEffect) => {
     dispatch(backgroundEffectsActions.setEffect(effectWithId));
 
     return () => {
-      dispatch(backgroundEffectsActions.setEffects({}));
+      dispatch(backgroundEffectsActions.deleteEffect(effectWithId.id as string));
     };
   }, []);
 };

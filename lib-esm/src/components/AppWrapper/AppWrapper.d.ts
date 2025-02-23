@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
-import { RangeEffectsJson } from '@types';
+import type { RangeEffects } from '@types';
 export type AppWrapperProps = {
-    rangeEffectsJson: RangeEffectsJson;
+    rangeEffects: RangeEffects;
 };
-export declare const AppWrapper: ({ children, rangeEffectsJson }: PropsWithChildren<AppWrapperProps>) => import("react/jsx-runtime").JSX.Element;
+export declare const AppWrapper: ({ children, rangeEffects }: PropsWithChildren<AppWrapperProps>) => import("react/jsx-runtime").JSX.Element;

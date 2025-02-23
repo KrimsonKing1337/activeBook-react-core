@@ -47,16 +47,16 @@ export function useAudioInRange(effects) {
     var page = useSelector(mainSelectors.page);
     useEffect(function () {
         var audioInstances = store.getState().audioBgEffects.audioInstances;
-        var audiosOnPage = getEffectsInRange(effects, page, 'audio');
+        var audiosForPage = getEffectsInRange(effects, page, 'audio');
         Object.keys(audioInstances).forEach(function (keyCur) {
             var audioInstanceCur = audioInstances[keyCur];
             if (!audioInstanceCur || audioInstanceCur.isUnloading) {
                 return;
             }
             var id = audioInstanceCur.id;
-            var idIsInRange = audiosOnPage.some(function (cur) {
-                var _a;
-                return ((_a = cur.options) === null || _a === void 0 ? void 0 : _a.id) === id;
+            var idIsInRange = audiosForPage.some(function (cur) {
+                var options = cur.options;
+                return (options === null || options === void 0 ? void 0 : options.id) === id;
             });
             if (idIsInRange) {
                 return;
@@ -75,13 +75,13 @@ export function useAudioInRange(effects) {
         });
     }, [page]);
     useEffect(function () {
-        var audioInstances = store.getState().audioBgEffects.audioInstances;
-        var audiosOnPage = getEffectsInRange(effects, page, 'audio');
+        var audioInstancesInStore = store.getState().audioBgEffects.audioInstances;
+        var audiosForPage = getEffectsInRange(effects, page, 'audio');
         var timers = [];
-        audiosOnPage.forEach(function (audioOnPageCur) {
+        audiosForPage.forEach(function (audioOnPageCur) {
             var _a = audioOnPageCur.options, src = _a.src, id = _a.id, type = _a.type, loop = _a.loop, playOnLoad = _a.playOnLoad, delay = _a.delay, stopBy = _a.stopBy, screamer = _a.screamer, fadeOutWhenUnload = _a.fadeOutWhenUnload, onPlay = _a.onPlay, onUnload = _a.onUnload;
-            var audioInstance = audioInstances[id];
-            if ((audioInstance === null || audioInstance === void 0 ? void 0 : audioInstance.id) === id) {
+            var audioInstanceInStore = audioInstancesInStore[id];
+            if (audioInstanceInStore) {
                 return;
             }
             var howlInst = new HowlWrapper({

@@ -4,7 +4,7 @@ export function isPageInRange(pageNumberCurrent, range) {
     });
 }
 export function getEffectsInRange(effects, pageNumberCurrent, type) {
-    var arr = effects.effects;
+    var arr = effects;
     var result = [];
     for (var i = 0; i < arr.length; i++) {
         var cur = arr[i];

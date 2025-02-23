@@ -1,3 +1,3 @@
-import type { RangeEffectsJson, Range, RangeEffect } from '../../@types.js';
+import type { RangeEffects, Range, RangeEffect } from '../../@types.js';
 export declare function isPageInRange(pageNumberCurrent: number, range: Range[]): boolean;
-export declare function getEffectsInRange(effects: RangeEffectsJson, pageNumberCurrent: number, type: string): RangeEffect[];
+export declare function getEffectsInRange(effects: RangeEffects, pageNumberCurrent: number, type: string): RangeEffect[];

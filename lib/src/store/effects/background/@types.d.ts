@@ -1,3 +1,5 @@
-import type { UseBackgroundOptions } from '../../../hooks/effects/background/background';
-export interface State extends Required<UseBackgroundOptions> {
+import type { BackgroundEffect } from '../../../hooks/effects/background/@types';
+export type BackgroundEffects = Record<string, BackgroundEffect>;
+export interface State {
+    effects: BackgroundEffects;
 }

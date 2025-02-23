@@ -1,2 +1,2 @@
-import type { RangeEffectsJson } from '../../../@types.js';
-export declare function useAudioInRange(effects: RangeEffectsJson): void;
+import type { RangeEffects } from '../../../@types.js';
+export declare function useAudioInRange(effects: RangeEffects): void;

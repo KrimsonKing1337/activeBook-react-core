@@ -1,12 +1,11 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-import { useSelector } from 'store';
-import { backgroundEffectsSelectors } from 'store/effects/background';
 import styles from './Shadow.scss';
-export var Shadow = function () {
-    var shadow = useSelector(backgroundEffectsSelectors.shadow);
-    if (!shadow) {
+export var Shadow = function (_a) {
+    var options = _a.options;
+    var style = options.style;
+    if (!style) {
         return null;
     }
-    return (_jsx("div", { style: shadow.style, className: styles.shadow }));
+    return (_jsx("div", { style: style, className: styles.shadow }));
 };
 //# sourceMappingURL=Shadow.js.map

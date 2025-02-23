@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 import { Howler } from 'howler';
-import { Achievement } from 'components/Achievement';
 import { useDispatch, useSelector } from 'store';
 import { volumeActions } from 'store/volume';
 import { initialState as volumeInitialState } from 'store/volume/slice';
@@ -19,10 +18,11 @@ import { achievements as achievementsUtils } from 'utils/localStorage/achievemen
 import { Flags as AchievementsFlags, getInitValues } from 'utils/effects/achievements/utils';
 import { removeCssHover } from 'utils/touch/removeCssHover';
 import { flashlightInst } from 'utils/effects/flashlight';
+import { Achievement } from 'components/Achievement';
 import styles from './AppWrapper.scss';
 export var AppWrapper = function (_a) {
     var _b;
-    var children = _a.children, rangeEffectsJson = _a.rangeEffectsJson;
+    var children = _a.children, rangeEffects = _a.rangeEffects;
     var dispatch = useDispatch();
     var navigate = useNavigate();
     var isLoading = useSelector(mainSelectors.isLoading);
@@ -95,7 +95,7 @@ export var AppWrapper = function (_a) {
             window.removeEventListener('beforeunload', listener);
         };
     }, [page]);
-    useEffectsInRange(rangeEffectsJson);
+    useEffectsInRange(rangeEffects);
     var appWrapperClassNames = classNames((_b = {},
         _b[styles.appWrapper] = true,
         _b[styles.isLoading] = isLoading,

@@ -1,2 +1,2 @@
-import type { UseBackgroundMediaPosition } from './background';
-export declare const getPositionByPreset: (value: UseBackgroundMediaPosition) => React.CSSProperties;
+import type { BackgroundEffectMediaPosition } from './@types';
+export declare const getPositionByPreset: (value: BackgroundEffectMediaPosition) => React.CSSProperties;

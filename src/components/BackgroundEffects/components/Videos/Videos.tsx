@@ -1,5 +1,7 @@
 import { useRef } from 'react';
 
+import { nanoid } from 'nanoid';
+
 import { Video as DefaultVideo } from 'components/Video';
 
 import type { BackgroundEffectVideoOptions } from 'hooks/effects/background/@types';
@@ -29,8 +31,10 @@ export const Videos = ({ videos }: VideosProps) => {
       muted = true,
     } = videoCur;
 
+    const uuid = nanoid();
+
     return (
-      <Wrapper style={wrapperStyle}>
+      <Wrapper key={uuid} style={wrapperStyle}>
         <DefaultVideo
           passedRef={ref}
           style={style}
