@@ -34,27 +34,27 @@ export type UseBackgroundShadowOptions = {
 
 export type UseBackgroundOptions = {
   style?: React.CSSProperties;
-  img?: UseBackgroundImgOptions;
-  video?: UseBackgroundVideoOptions;
-  shadow?: UseBackgroundShadowOptions;
+  images?: UseBackgroundImgOptions[];
+  videos?: UseBackgroundVideoOptions[];
   Component?: React.ReactNode;
+  shadow?: UseBackgroundShadowOptions;
 };
 
 export const useBackground = ({
-  style,
-  img,
-  video,
-  shadow,
-  Component,
+  style = {},
+  images = [],
+  videos = [],
+  Component = null,
+  shadow = {},
 }: UseBackgroundOptions) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(backgroundEffectsActions.setStyle(style));
-    dispatch(backgroundEffectsActions.setImg(img));
-    dispatch(backgroundEffectsActions.setVideo(video));
-    dispatch(backgroundEffectsActions.setShadow(shadow));
+    dispatch(backgroundEffectsActions.setImages(images));
+    dispatch(backgroundEffectsActions.setVideos(videos));
     dispatch(backgroundEffectsActions.setComponent(Component));
+    dispatch(backgroundEffectsActions.setShadow(shadow));
 
     return () => {
       dispatch(backgroundEffectsActions.reset());

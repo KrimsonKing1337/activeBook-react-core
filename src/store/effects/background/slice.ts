@@ -3,11 +3,11 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type { State } from './@types';
 
 export const initialState: State = {
-  style: undefined,
-  video: undefined,
-  img: undefined,
-  shadow: undefined,
-  Component: undefined,
+  style: {},
+  videos: [],
+  images: [],
+  shadow: {},
+  Component: null,
 };
 
 const slice = createSlice({
@@ -17,17 +17,17 @@ const slice = createSlice({
     setStyle(state, action: PayloadAction<State['style']>) {
       state.style = action.payload;
     },
-    setVideo(state, action: PayloadAction<State['video']>) {
-      state.video = action.payload;
+    setVideos(state, action: PayloadAction<State['videos']>) {
+      state.videos = action.payload;
     },
-    setImg(state, action: PayloadAction<State['img']>) {
-      state.img = action.payload;
-    },
-    setShadow(state, action: PayloadAction<State['shadow']>) {
-      state.shadow = action.payload;
+    setImages(state, action: PayloadAction<State['images']>) {
+      state.images = action.payload;
     },
     setComponent(state, action: PayloadAction<State['Component']>) {
       state.Component = action.payload;
+    },
+    setShadow(state, action: PayloadAction<State['shadow']>) {
+      state.shadow = action.payload;
     },
 
     reset() {
