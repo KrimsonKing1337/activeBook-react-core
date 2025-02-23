@@ -2,7 +2,7 @@ import { Howl } from 'howler';
 
 import { HowlWrapper } from 'utils/effects/audio/HowlWrapper';
 
-import type { BackgroundEffect } from 'hooks/effects/background';
+import type { BackgroundEffect } from 'hooks/effects/background/@types';
 
 export type Timer = ReturnType<typeof setTimeout> | null;
 export type Interval = ReturnType<typeof setInterval> | null;
