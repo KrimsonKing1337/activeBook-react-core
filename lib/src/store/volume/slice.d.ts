@@ -7,4 +7,5 @@ export declare const reducer: import("redux").Reducer<State>, actions: import("@
     setBg(state: import("immer/dist/internal").WritableDraft<State>, action: PayloadAction<State['bg']>): void;
     setSfx(state: import("immer/dist/internal").WritableDraft<State>, action: PayloadAction<State['sfx']>): void;
     setMusic(state: import("immer/dist/internal").WritableDraft<State>, action: PayloadAction<State['music']>): void;
+    setVideos(state: import("immer/dist/internal").WritableDraft<State>, action: PayloadAction<State['videos']>): void;
 }, "@volume">;

@@ -84,8 +84,8 @@ export function* watchVideosMusic(action: PayloadAction<State['videos']>) {
   yield call(() => {
     const videos = document.querySelectorAll('video');
 
-    videos.forEach(video => {
-      video.volume = payload / 100;
+    videos.forEach(videoCur => {
+      videoCur.volume = payload / 100;
     });
   });
 }

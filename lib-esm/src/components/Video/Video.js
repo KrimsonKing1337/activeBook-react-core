@@ -21,8 +21,15 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 import { jsx as _jsx } from "react/jsx-runtime";
+import { useEffect, useRef } from 'react';
 export var Video = function (_a) {
-    var passedRef = _a.passedRef, _b = _a.className, className = _b === void 0 ? '' : _b, src = _a.src, etc = __rest(_a, ["passedRef", "className", "src"]);
-    return (_jsx("video", __assign({ ref: passedRef, className: className, src: src, preload: "auto", poster: "/assets/img/poster-default.png" }, etc)));
+    var _b = _a.className, className = _b === void 0 ? '' : _b, src = _a.src, _c = _a.defaultVolume, defaultVolume = _c === void 0 ? 100 : _c, etc = __rest(_a, ["className", "src", "defaultVolume"]);
+    var ref = useRef(null);
+    useEffect(function () {
+        if (ref.current) {
+            ref.current.volume = defaultVolume / 100;
+        }
+    }, []);
+    return (_jsx("video", __assign({ ref: ref, className: className, src: src, preload: "auto", poster: "/assets/img/poster-default.png" }, etc)));
 };
 //# sourceMappingURL=Video.js.map

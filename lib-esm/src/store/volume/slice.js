@@ -4,6 +4,7 @@ export var initialState = {
     bg: 100,
     sfx: 100,
     music: 100,
+    videos: 100,
 };
 var slice = createSlice({
     name: '@volume',
@@ -23,6 +24,9 @@ var slice = createSlice({
         },
         setMusic: function (state, action) {
             state.music = action.payload;
+        },
+        setVideos: function (state, action) {
+            state.videos = action.payload;
         },
     },
 });

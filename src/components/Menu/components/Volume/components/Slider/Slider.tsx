@@ -5,7 +5,7 @@ import styles from './Slider.scss';
 type SliderProps = {
   value: number;
   onChange?: (value: number) => void;
-  onAfterChange?: () => void;
+  onAfterChange?: (value: number) => void;
 };
 
 export const Slider = ({ value, onChange, onAfterChange }: SliderProps) => {
@@ -17,7 +17,7 @@ export const Slider = ({ value, onChange, onAfterChange }: SliderProps) => {
 
   const afterChangeHandler = () => {
     if (onAfterChange) {
-      onAfterChange();
+      onAfterChange(value);
     }
   };
 

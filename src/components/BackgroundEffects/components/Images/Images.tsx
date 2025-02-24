@@ -1,5 +1,3 @@
-import { useRef } from 'react';
-
 import { nanoid } from 'nanoid';
 
 import { Img } from 'components/Img';
@@ -15,8 +13,6 @@ export type ImagesProps = {
 };
 
 export const Images = ({ images }: ImagesProps) => {
-  const ref = useRef<HTMLImageElement>(null);
-
   if (images.length === 0) {
     return null;
   }
@@ -29,7 +25,6 @@ export const Images = ({ images }: ImagesProps) => {
     return (
       <Wrapper key={uuid} style={wrapperStyle}>
         <Img
-          passedRef={ref}
           style={style}
           className={styles.img}
           src={src}

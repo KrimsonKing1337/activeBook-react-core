@@ -5,4 +5,5 @@ export declare const selectors: {
     bg: (state: RootState) => number;
     sfx: (state: RootState) => number;
     music: (state: RootState) => number;
+    videos: (state: RootState) => number;
 };

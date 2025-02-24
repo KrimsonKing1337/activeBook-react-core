@@ -10,6 +10,7 @@ export type BackgroundEffectVideoOptions = BackgroundEffectMediaOptions & {
     loop?: boolean;
     autoPlay?: boolean;
     muted?: boolean;
+    defaultVolume?: number;
 };
 export type BackgroundEffectShadowOptions = {
     style?: React.CSSProperties;

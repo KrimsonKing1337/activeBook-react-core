@@ -1,11 +1,6 @@
-import { useRef } from 'react';
-
 import { nanoid } from 'nanoid';
 
-import { useSelector } from 'store';
-import { volumeSelectors } from 'store/volume';
-
-import { Video as DefaultVideo } from 'components/Video';
+import { Video } from 'components/Video';
 
 import type { BackgroundEffectVideoOptions } from 'hooks/effects/background/@types';
 
@@ -18,10 +13,6 @@ export type VideosProps = {
 };
 
 export const Videos = ({ videos }: VideosProps) => {
-  const videosVolume = useSelector(volumeSelectors.videos);
-
-  const ref = useRef<HTMLVideoElement>(null);
-
   if (videos.length === 0) {
     return null;
   }
@@ -34,22 +25,21 @@ export const Videos = ({ videos }: VideosProps) => {
       autoPlay = true,
       loop = true,
       muted = true,
-      volume = videosVolume,
+      defaultVolume = 100,
     } = videoCur;
 
     const uuid = nanoid();
 
     return (
       <Wrapper key={uuid} style={wrapperStyle}>
-        <DefaultVideo
-          passedRef={ref}
+        <Video
           style={style}
           className={styles.video}
           src={src}
           autoPlay={autoPlay}
           loop={loop}
           muted={muted}
-          volume={volume}
+          defaultVolume={defaultVolume}
         />
       </Wrapper>
     );

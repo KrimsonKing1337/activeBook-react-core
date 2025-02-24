@@ -1,22 +1,23 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 type VideoProps = React.MediaHTMLAttributes<HTMLVideoElement> & {
-  passedRef?: React.RefObject<HTMLVideoElement>
   className?: string;
   src: string;
-  volume?: number;
+  defaultVolume?: number;
 };
 
-export const Video = ({ passedRef, className = '', src, volume = 100, ...etc }: VideoProps) => {
+export const Video = ({ className = '', src, defaultVolume = 100, ...etc }: VideoProps) => {
+  const ref = useRef<HTMLVideoElement>(null);
+
   useEffect(() => {
-    if (passedRef?.current) {
-      passedRef.current.volume = volume / 100;
+    if (ref.current) {
+      ref.current.volume = defaultVolume / 100;
     }
-  }, [passedRef]);
+  }, []);
 
   return (
     <video
-      ref={passedRef}
+      ref={ref}
       className={className}
       src={src}
       preload="auto"

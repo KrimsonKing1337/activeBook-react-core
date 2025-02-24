@@ -12,8 +12,8 @@ var __assign = (this && this.__assign) || function () {
 import { useEffect } from 'react';
 import { store, useDispatch, useSelector } from 'store';
 import { mainSelectors } from 'store/main';
-import { getEffectsInRange } from 'utils/effects/rangeEffects';
 import { backgroundEffectsActions } from 'store/effects/background';
+import { getEffectsInRange } from 'utils/effects/rangeEffects';
 export function useBackgroundInRange(effects) {
     var dispatch = useDispatch();
     var page = useSelector(mainSelectors.page);

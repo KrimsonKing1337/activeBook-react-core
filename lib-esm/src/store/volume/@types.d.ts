@@ -3,4 +3,5 @@ export interface State {
     music: number;
     sfx: number;
     bg: number;
+    videos: number;
 }

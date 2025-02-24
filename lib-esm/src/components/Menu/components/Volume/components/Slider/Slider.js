@@ -10,7 +10,7 @@ export var Slider = function (_a) {
     };
     var afterChangeHandler = function () {
         if (onAfterChange) {
-            onAfterChange();
+            onAfterChange(value);
         }
     };
     return (_jsx(ReactSlider, { value: value, className: styles.slider, thumbClassName: styles.thumb, trackClassName: styles.track, onChange: changeHandler, onAfterChange: afterChangeHandler }));

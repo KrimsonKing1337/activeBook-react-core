@@ -25,24 +25,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import { call, put, select, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import { Howler } from 'howler';
 import { getAudioInstances } from 'utils/effects/audio/getAudioInstances';
 import { actions } from './slice';
-import { selectors } from './selectors';
-function saveInLocalStorage() {
-    var volume, volumeAsJson;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, select(selectors.all)];
-            case 1:
-                volume = _a.sent();
-                volumeAsJson = JSON.stringify(volume);
-                localStorage.setItem('volume', volumeAsJson);
-                return [2 /*return*/];
-        }
-    });
-}
 export function watchSetAll(action) {
     var payload, global, bg, music, sfx;
     return __generator(this, function (_a) {
@@ -78,13 +64,9 @@ export function watchSetGlobal(action) {
             case 0:
                 payload = action.payload;
                 return [4 /*yield*/, call(function () {
-                        // todo: video volume also need to be changed
                         Howler.volume(payload / 100);
                     })];
             case 1:
-                _a.sent();
-                return [4 /*yield*/, call(saveInLocalStorage)];
-            case 2:
                 _a.sent();
                 return [2 /*return*/];
         }
@@ -116,9 +98,6 @@ export function watchSetBg(action) {
                     })];
             case 1:
                 _a.sent();
-                return [4 /*yield*/, call(saveInLocalStorage)];
-            case 2:
-                _a.sent();
                 return [2 /*return*/];
         }
     });
@@ -133,9 +112,6 @@ export function watchSetSfx(action) {
                         setVolumeByType('sfx', payload);
                     })];
             case 1:
-                _a.sent();
-                return [4 /*yield*/, call(saveInLocalStorage)];
-            case 2:
                 _a.sent();
                 return [2 /*return*/];
         }
@@ -152,8 +128,23 @@ export function watchSetMusic(action) {
                     })];
             case 1:
                 _a.sent();
-                return [4 /*yield*/, call(saveInLocalStorage)];
-            case 2:
+                return [2 /*return*/];
+        }
+    });
+}
+export function watchVideosMusic(action) {
+    var payload;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                payload = action.payload;
+                return [4 /*yield*/, call(function () {
+                        var videos = document.querySelectorAll('video');
+                        videos.forEach(function (videoCur) {
+                            videoCur.volume = payload / 100;
+                        });
+                    })];
+            case 1:
                 _a.sent();
                 return [2 /*return*/];
         }
@@ -176,6 +167,9 @@ export function watchActions() {
                 _a.sent();
                 return [4 /*yield*/, takeLatest(actions.setMusic, watchSetMusic)];
             case 5:
+                _a.sent();
+                return [4 /*yield*/, takeLatest(actions.setVideos, watchVideosMusic)];
+            case 6:
                 _a.sent();
                 return [2 /*return*/];
         }
