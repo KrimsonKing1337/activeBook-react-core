@@ -7,6 +7,7 @@ export const initialState: State = {
   bg: 100,
   sfx: 100,
   music: 100,
+  videos: 100,
 };
 
 const slice = createSlice({
@@ -27,6 +28,9 @@ const slice = createSlice({
     },
     setMusic(state, action: PayloadAction<State['music']>) {
       state.music = action.payload;
+    },
+    setVideos(state, action: PayloadAction<State['videos']>) {
+      state.videos = action.payload;
     },
   },
 });

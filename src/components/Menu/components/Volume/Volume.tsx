@@ -3,23 +3,29 @@ import { Label } from 'components/Label';
 import { useDispatch, useSelector } from 'store';
 import { volumeActions, volumeSelectors } from 'store/volume';
 
-
 import { Slider } from './components/Slider';
+
 import { playAchievement } from './utils';
+
 import styles from './Volume.scss';
 
 export const Volume = () => {
   const dispatch = useDispatch();
 
+  const allVolume = useSelector(volumeSelectors.all);
   const globalVolume = useSelector(volumeSelectors.global);
   const bgVolume = useSelector(volumeSelectors.bg);
   const sfxVolume = useSelector(volumeSelectors.sfx);
   const musicVolume = useSelector(volumeSelectors.music);
-
-  // todo: мб слишком часто запись в local storage происходит. мб на onAfterChange переделать
+  const videosVolume = useSelector(volumeSelectors.videos);
 
   const afterChangeHandler = () => {
     playAchievement();
+
+    // сохраняем значения в localstorage
+    const volumeAsJson = JSON.stringify(allVolume);
+
+    localStorage.setItem('volume', volumeAsJson);
   };
 
   const globalChangeHandler = (value: number) => {
@@ -36,6 +42,10 @@ export const Volume = () => {
 
   const musicChangeHandler = (value: number) => {
     dispatch(volumeActions.setMusic(value));
+  };
+
+  const videosChangeHandler = (value: number) => {
+    dispatch(volumeActions.setVideos(value));
   };
 
   /*
@@ -66,6 +76,12 @@ export const Volume = () => {
         <Label label="Фоновые звуки" />
 
         <Slider value={bgVolume} onChange={bgChangeHandler} onAfterChange={afterChangeHandler} />
+      </div>
+
+      <div className={styles.item}>
+        <Label label="Громкость видео" />
+
+        <Slider value={videosVolume} onChange={videosChangeHandler} onAfterChange={afterChangeHandler} />
       </div>
     </div>
   );

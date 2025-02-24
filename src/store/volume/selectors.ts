@@ -6,4 +6,5 @@ export const selectors = {
   bg: (state: RootState) => state.volume.bg,
   sfx: (state: RootState) => state.volume.sfx,
   music: (state: RootState) => state.volume.music,
+  videos: (state: RootState) => state.volume.videos,
 };

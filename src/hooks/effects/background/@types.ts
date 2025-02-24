@@ -21,6 +21,7 @@ export type BackgroundEffectVideoOptions = BackgroundEffectMediaOptions & {
   loop?: boolean;
   autoPlay?: boolean;
   muted?: boolean;
+  volume?: number;
 }
 
 export type BackgroundEffectShadowOptions = {
