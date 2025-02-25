@@ -20,7 +20,9 @@ export const useBackground = (effect: BackgroundEffect) => {
 
   useEffect(() => {
     dispatch(backgroundEffectsActions.setEffect(effectWithId));
+  }, [effectWithId]);
 
+  useEffect(() => {
     return () => {
       dispatch(backgroundEffectsActions.deleteEffect(effectWithId.id as string));
     };
