@@ -18,6 +18,8 @@ export type AudioEffectOptions = {
     screamer?: boolean;
     onPlay?: () => void;
     onUnload?: () => void;
+    onPause?: () => void;
+    onStop?: () => void;
 };
 export type AudioEffectRangeOptions = Omit<AudioEffectOptions, 'id'> & {
     id: string;

@@ -9,7 +9,7 @@ import { segmentsActions, segmentsSelectors } from 'store/segments';
 import styles from './Segment.scss';
 export var Segment = function (_a) {
     var _b;
-    var children = _a.children, defaultId = _a.id, _c = _a.isActive, isActiveDefault = _c === void 0 ? false : _c, _d = _a.onActive, onActive = _d === void 0 ? function () { } : _d, _e = _a.onExit, onExit = _e === void 0 ? function () { } : _e;
+    var children = _a.children, defaultId = _a.id, _c = _a.isActive, isActiveDefault = _c === void 0 ? false : _c, _d = _a.onEnter, onEnter = _d === void 0 ? function () { } : _d, _e = _a.onExit, onExit = _e === void 0 ? function () { } : _e;
     var dispatch = useDispatch();
     var _f = useState(''), id = _f[0], setId = _f[1];
     var segments = useSelector(segmentsSelectors.segments);
@@ -18,7 +18,7 @@ export var Segment = function (_a) {
     var segmentsLength = Object.keys(segments).length;
     useEffect(function () {
         if (activeId === id) {
-            onActive();
+            onEnter();
         }
         if (lastActiveId && lastActiveId === id) {
             onExit();

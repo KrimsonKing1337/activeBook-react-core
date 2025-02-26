@@ -13,6 +13,8 @@ export type HowlWrapperOptions = {
   fadeOutWhenUnload?: boolean;
 
   onPlay?: () => void;
+  onPause?: () => void;
+  onStop?: () => void;
   onUnload?: () => void;
 };
 
@@ -33,6 +35,8 @@ export class HowlWrapper {
   public fadeOutWhenUnload = true;
 
   public onPlay: () => void;
+  public onPause: () => void;
+  public onStop: () => void;
   public onUnload: () => void;
 
   constructor({
@@ -46,6 +50,8 @@ export class HowlWrapper {
     onPlay = () => {
     },
     onUnload = () => {},
+    onPause = () => {},
+    onStop = () => {},
   }: HowlWrapperOptions) {
     const volume = this.getVolume();
 
@@ -78,6 +84,8 @@ export class HowlWrapper {
     this.fadeOutWhenUnload = fadeOutWhenUnload;
 
     this.onPlay = onPlay;
+    this.onPause = onPause;
+    this.onStop = onStop;
     this.onUnload = onUnload;
   }
 
@@ -128,14 +136,16 @@ export class HowlWrapper {
     }
 
     this.howlInst.pause();
+    this.onPause();
   }
 
-  async stop(withFadeOut = false) {
+  async stop(withFadeOut = true) {
     if (withFadeOut) {
       await this.fadeOut();
     }
 
     this.howlInst.stop();
+    this.onStop();
   }
 
   async unload() {

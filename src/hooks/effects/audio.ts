@@ -22,6 +22,8 @@ export function useAudio({
   screamer = false,
   fadeOutWhenUnload = true,
   onPlay = () => {},
+  onPause = () => {},
+  onStop = () => {},
   onUnload = () => {},
 }: AudioEffectOptions) {
   const dispatch = useDispatch();
@@ -41,6 +43,8 @@ export function useAudio({
       screamer,
       fadeOutWhenUnload,
       onPlay,
+      onPause,
+      onStop,
       onUnload,
     };
 
@@ -59,6 +63,8 @@ export function useAudio({
     }
 
     let timer: Timer = null;
+
+    // todo: delay и stopBy передавать в Howler в параметре onPlay
 
     if (playOnLoad) {
       timer = setTimeout(() => {
