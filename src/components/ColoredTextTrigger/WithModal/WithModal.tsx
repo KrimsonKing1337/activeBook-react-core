@@ -79,7 +79,7 @@ export const WithModal = ({
   const trigger = getTrigger();
 
   return (
-    <div className={styles.wrapper} ref={wrapperRef}>
+    <span className={styles.wrapper} ref={wrapperRef}>
       <ModalComponent
         isOpen={isActive}
         onClose={() => setIsActive(false)}
@@ -92,6 +92,6 @@ export const WithModal = ({
       </ModalComponent>
 
       {trigger}
-    </div>
+    </span>
   );
 };

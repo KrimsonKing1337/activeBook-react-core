@@ -44,10 +44,10 @@ export const AuthorComment = ({
   const showComment = (allPagesSeen && authorCommentsIsOn) || isDemoMode;
 
   return showComment ? (
-    <div className={styles.authorComment} onClick={clickHandler} {...props}>
+    <span className={styles.authorComment} onClick={clickHandler} {...props}>
       {' '}
       {children}
-    </div>
+    </span>
   ) :
     <>
       {children}

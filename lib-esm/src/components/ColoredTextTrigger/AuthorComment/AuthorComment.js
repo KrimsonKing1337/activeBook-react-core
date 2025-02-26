@@ -48,7 +48,7 @@ export var AuthorComment = function (_a) {
     };
     var allPagesSeen = achievements === null || achievements === void 0 ? void 0 : achievements.allPagesSeen;
     var showComment = (allPagesSeen && authorCommentsIsOn) || isDemoMode;
-    return showComment ? (_jsxs("div", __assign({ className: styles.authorComment, onClick: clickHandler }, props, { children: [' ', children] }))) :
+    return showComment ? (_jsxs("span", __assign({ className: styles.authorComment, onClick: clickHandler }, props, { children: [' ', children] }))) :
         _jsx(_Fragment, { children: children });
 };
 //# sourceMappingURL=AuthorComment.js.map

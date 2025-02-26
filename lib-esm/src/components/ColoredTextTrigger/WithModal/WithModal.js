@@ -39,6 +39,6 @@ export var WithModal = function (_a) {
         }
     }, [isActive]);
     var trigger = getTrigger();
-    return (_jsxs("div", { className: styles.wrapper, ref: wrapperRef, children: [_jsx(ModalComponent, { isOpen: isActive, onClose: function () { return setIsActive(false); }, mode: mode, canCrop: true, cropDefault: false, canFullScreen: true, children: children }), trigger] }));
+    return (_jsxs("span", { className: styles.wrapper, ref: wrapperRef, children: [_jsx(ModalComponent, { isOpen: isActive, onClose: function () { return setIsActive(false); }, mode: mode, canCrop: true, cropDefault: false, canFullScreen: true, children: children }), trigger] }));
 };
 //# sourceMappingURL=WithModal.js.map

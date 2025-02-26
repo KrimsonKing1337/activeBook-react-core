@@ -24,10 +24,10 @@ export const Action = ({
   });
 
   return (
-    <div className={actionClassNames} onClick={onClick} {...props}>
+    <span className={actionClassNames} onClick={onClick} {...props}>
       { withSpaces && ' ' }
       {children}
       { withSpaces && ' ' }
-    </div>
+    </span>
   );
 };

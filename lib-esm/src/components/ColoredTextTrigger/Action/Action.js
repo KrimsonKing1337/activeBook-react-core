@@ -31,6 +31,6 @@ export var Action = function (_a) {
         _b[styles.action] = true,
         _b[styles.isFullWidth] = fullWidth,
         _b));
-    return (_jsxs("div", __assign({ className: actionClassNames, onClick: onClick }, props, { children: [withSpaces && ' ', children, withSpaces && ' '] })));
+    return (_jsxs("span", __assign({ className: actionClassNames, onClick: onClick }, props, { children: [withSpaces && ' ', children, withSpaces && ' '] })));
 };
 //# sourceMappingURL=Action.js.map
