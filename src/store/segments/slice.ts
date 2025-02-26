@@ -4,6 +4,7 @@ import { State, Segment, Segments } from './@types';
 
 export const initialState: State = {
   segments: {},
+  lastActiveId: '',
   // сколько компонентов Segment на странице было проинициализировано
   count: 0,
 };
@@ -14,6 +15,9 @@ const slice = createSlice({
   reducers: {
     setSegments(state, action: PayloadAction<Segments>) {
       state.segments = action.payload;
+    },
+    setLastActiveId(state, action: PayloadAction<string>) {
+      state.lastActiveId = action.payload;
     },
     setSegmentsCount(state, action: PayloadAction<number>) {
       state.count = action.payload;

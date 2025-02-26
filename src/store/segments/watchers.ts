@@ -26,6 +26,8 @@ export function* watchSetSegment(action: PayloadAction<Segment>) {
     const activeSegmentId: string = yield select(selectors.activeId);
 
     if (activeSegmentId) {
+      yield put(actions.setLastActiveId(activeSegmentId));
+
       newValue[activeSegmentId] = false;
     }
   }

@@ -16,14 +16,16 @@ import styles from './Segment.scss';
 export type SegmentProps = PropsWithChildren & {
   isActive?: boolean;
   id?: string;
-  onActive?: () => void;
+  onEnter?: () => void;
+  onExit?: () => void;
 };
 
 export const Segment = ({
   children,
   id: defaultId,
   isActive: isActiveDefault = false,
-  onActive = () => {},
+  onEnter = () => {},
+  onExit = () => {},
 }: SegmentProps) => {
   const dispatch = useDispatch();
 
@@ -31,14 +33,19 @@ export const Segment = ({
 
   const segments = useSelector(segmentsSelectors.segments);
   const activeId = useSelector(segmentsSelectors.activeId);
+  const lastActiveId = useSelector(segmentsSelectors.lastActiveId);
 
   const segmentsLength = Object.keys(segments).length;
 
   useEffect(() => {
     if (activeId === id) {
-      onActive();
+      onEnter();
     }
-  }, [id, activeId]);
+
+    if (lastActiveId && lastActiveId === id) {
+      onExit();
+    }
+  }, [id, activeId, lastActiveId]);
 
   useEffect(() => {
     const uuid = defaultId ? defaultId : nanoid();

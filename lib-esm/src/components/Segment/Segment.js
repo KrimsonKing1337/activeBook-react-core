@@ -9,11 +9,21 @@ import { segmentsActions, segmentsSelectors } from 'store/segments';
 import styles from './Segment.scss';
 export var Segment = function (_a) {
     var _b;
-    var defaultId = _a.id, _c = _a.isActive, isActiveDefault = _c === void 0 ? false : _c, children = _a.children;
+    var children = _a.children, defaultId = _a.id, _c = _a.isActive, isActiveDefault = _c === void 0 ? false : _c, _d = _a.onActive, onActive = _d === void 0 ? function () { } : _d, _e = _a.onExit, onExit = _e === void 0 ? function () { } : _e;
     var dispatch = useDispatch();
-    var _d = useState(''), id = _d[0], setId = _d[1];
+    var _f = useState(''), id = _f[0], setId = _f[1];
     var segments = useSelector(segmentsSelectors.segments);
+    var activeId = useSelector(segmentsSelectors.activeId);
+    var lastActiveId = useSelector(segmentsSelectors.lastActiveId);
     var segmentsLength = Object.keys(segments).length;
+    useEffect(function () {
+        if (activeId === id) {
+            onActive();
+        }
+        if (lastActiveId && lastActiveId === id) {
+            onExit();
+        }
+    }, [id, activeId, lastActiveId]);
     useEffect(function () {
         var uuid = defaultId ? defaultId : nanoid();
         setId(uuid);

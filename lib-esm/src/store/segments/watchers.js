@@ -40,7 +40,7 @@ import { put, takeLatest, select } from 'redux-saga/effects';
 import { actions } from './slice';
 import { selectors } from './selectors';
 export function watchSetSegment(action) {
-    var payload, id, isActive, segments, newValue;
+    var payload, id, isActive, segments, newValue, activeSegmentId;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -53,18 +53,20 @@ export function watchSetSegment(action) {
             case 1:
                 segments = _a.sent();
                 newValue = __assign({}, segments);
-                // только один сегмент может быть активным за единицу времени
-                if (isActive) {
-                    Object.keys(newValue).forEach(function (keyCur) {
-                        var value = newValue[keyCur];
-                        if (value) {
-                            newValue[keyCur] = false;
-                        }
-                    });
-                }
+                if (!isActive) return [3 /*break*/, 4];
+                return [4 /*yield*/, select(selectors.activeId)];
+            case 2:
+                activeSegmentId = _a.sent();
+                if (!activeSegmentId) return [3 /*break*/, 4];
+                return [4 /*yield*/, put(actions.setLastActiveId(activeSegmentId))];
+            case 3:
+                _a.sent();
+                newValue[activeSegmentId] = false;
+                _a.label = 4;
+            case 4:
                 newValue[id] = isActive;
                 return [4 /*yield*/, put(actions.setSegments(newValue))];
-            case 2:
+            case 5:
                 _a.sent();
                 return [2 /*return*/];
         }

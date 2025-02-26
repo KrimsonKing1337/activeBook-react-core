@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 export var initialState = {
     segments: {},
+    lastActiveId: '',
     // сколько компонентов Segment на странице было проинициализировано
     count: 0,
 };
@@ -10,6 +11,9 @@ var slice = createSlice({
     reducers: {
         setSegments: function (state, action) {
             state.segments = action.payload;
+        },
+        setLastActiveId: function (state, action) {
+            state.lastActiveId = action.payload;
         },
         setSegmentsCount: function (state, action) {
             state.count = action.payload;
