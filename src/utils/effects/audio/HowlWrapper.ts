@@ -119,15 +119,8 @@ export class HowlWrapper {
       await this.fadeIn();
     }
 
-    return new Promise<void>((resolve) => {
-      this.howlInst.once('end', () => {
-        resolve();
-      });
-
-      this.howlInst.once('play', this.onPlay);
-
-      this.howlInst.play();
-    });
+    this.howlInst.on('play', this.onPlay);
+    this.howlInst.play();
   }
 
   async pause(withFadeOut = false) {
@@ -135,8 +128,12 @@ export class HowlWrapper {
       await this.fadeOut();
     }
 
+    this.howlInst.on('pause', this.onPause);
     this.howlInst.pause();
-    this.onPause();
+
+    // после остановки возвращаем громкость, иначе воспроизведение начнётся без звука, если withFadeOut = true
+    const volume = this.getVolumeByType() / 100;
+    this.volume(volume);
   }
 
   async stop(withFadeOut = true) {
@@ -144,8 +141,12 @@ export class HowlWrapper {
       await this.fadeOut();
     }
 
+    this.howlInst.on('stop', this.onStop);
     this.howlInst.stop();
-    this.onStop();
+
+    // после остановки возвращаем громкость, иначе воспроизведение начнётся без звука, если withFadeOut = true
+    const volume = this.getVolumeByType() / 100;
+    this.volume(volume);
   }
 
   async unload() {

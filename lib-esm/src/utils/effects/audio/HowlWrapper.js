@@ -92,7 +92,6 @@ var HowlWrapper = /** @class */ (function () {
     HowlWrapper.prototype.play = function (withFadeIn) {
         if (withFadeIn === void 0) { withFadeIn = false; }
         return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -101,13 +100,10 @@ var HowlWrapper = /** @class */ (function () {
                     case 1:
                         _a.sent();
                         _a.label = 2;
-                    case 2: return [2 /*return*/, new Promise(function (resolve) {
-                            _this.howlInst.once('end', function () {
-                                resolve();
-                            });
-                            _this.howlInst.once('play', _this.onPlay);
-                            _this.howlInst.play();
-                        })];
+                    case 2:
+                        this.howlInst.on('play', this.onPlay);
+                        this.howlInst.play();
+                        return [2 /*return*/];
                 }
             });
         });
@@ -115,6 +111,7 @@ var HowlWrapper = /** @class */ (function () {
     HowlWrapper.prototype.pause = function (withFadeOut) {
         if (withFadeOut === void 0) { withFadeOut = false; }
         return __awaiter(this, void 0, void 0, function () {
+            var volume;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -124,8 +121,10 @@ var HowlWrapper = /** @class */ (function () {
                         _a.sent();
                         _a.label = 2;
                     case 2:
+                        this.howlInst.on('pause', this.onPause);
                         this.howlInst.pause();
-                        this.onPause();
+                        volume = this.getVolumeByType() / 100;
+                        this.volume(volume);
                         return [2 /*return*/];
                 }
             });
@@ -134,6 +133,7 @@ var HowlWrapper = /** @class */ (function () {
     HowlWrapper.prototype.stop = function (withFadeOut) {
         if (withFadeOut === void 0) { withFadeOut = true; }
         return __awaiter(this, void 0, void 0, function () {
+            var volume;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -143,8 +143,10 @@ var HowlWrapper = /** @class */ (function () {
                         _a.sent();
                         _a.label = 2;
                     case 2:
+                        this.howlInst.on('stop', this.onStop);
                         this.howlInst.stop();
-                        this.onStop();
+                        volume = this.getVolumeByType() / 100;
+                        this.volume(volume);
                         return [2 /*return*/];
                 }
             });
