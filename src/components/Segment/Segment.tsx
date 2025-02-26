@@ -16,15 +16,29 @@ import styles from './Segment.scss';
 export type SegmentProps = PropsWithChildren & {
   isActive?: boolean;
   id?: string;
+  onActive?: () => void;
 };
 
-export const Segment = ({ id: defaultId, isActive: isActiveDefault = false, children }: SegmentProps) => {
+export const Segment = ({
+  children,
+  id: defaultId,
+  isActive: isActiveDefault = false,
+  onActive = () => {},
+}: SegmentProps) => {
   const dispatch = useDispatch();
 
   const [id, setId] = useState('');
 
   const segments = useSelector(segmentsSelectors.segments);
+  const activeId = useSelector(segmentsSelectors.activeId);
+
   const segmentsLength = Object.keys(segments).length;
+
+  useEffect(() => {
+    if (activeId === id) {
+      onActive();
+    }
+  }, [id, activeId]);
 
   useEffect(() => {
     const uuid = defaultId ? defaultId : nanoid();

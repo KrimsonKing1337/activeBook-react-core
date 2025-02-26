@@ -23,13 +23,11 @@ export function* watchSetSegment(action: PayloadAction<Segment>) {
 
   // только один сегмент может быть активным за единицу времени
   if (isActive) {
-    Object.keys(newValue).forEach((keyCur) => {
-      const value = newValue[keyCur];
+    const activeSegmentId: string = yield select(selectors.activeId);
 
-      if (value) {
-        newValue[keyCur] = false;
-      }
-    });
+    if (activeSegmentId) {
+      newValue[activeSegmentId] = false;
+    }
   }
 
   newValue[id] = isActive;

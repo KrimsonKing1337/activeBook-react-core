@@ -1,0 +1,58 @@
+.segment {
+  position: relative;
+
+  margin-top: 15px;
+  padding: 5px;
+
+  border: 1px transparent solid;
+  box-shadow: 1px 1px 5px 0 rgb(0 0 0 / 75%);
+  cursor: pointer;
+
+  transition: border-color 0.3s 0s linear, box-shadow 0.3s 0s linear;
+
+  &.isActive {
+    border-color: red;
+    box-shadow: 1px 1px 5px 0 rgb(100 0 0 / 75%);
+  }
+
+  &.withButton {
+    padding-bottom: 35px;
+  }
+
+  &:nth-child(1) {
+    margin-top: 0;
+  }
+}
+
+.segmentButton {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  // не уверен, что эта кнопка вообще нужна
+  display: none;
+  // display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 30px;
+
+  background-color: red;
+  cursor: pointer;
+
+  &:hover {
+    .segmentButtonIconWrapper {
+      transform: translateY(10px) scale(1.1);
+    }
+  }
+}
+
+.segmentButtonIconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 100%;
+
+  transition: transform 0.15s 0s ease-in-out;
+}
