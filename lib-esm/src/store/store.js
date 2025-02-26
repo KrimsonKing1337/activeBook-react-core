@@ -16,6 +16,7 @@ import { sideShadowReducer, watchSideShadowActions } from './effects/side/shadow
 import { sideTextReducer, watchSideTextActions } from './effects/side/text';
 import { bookmarksReducer, watchBookmarksActions } from './bookmarks';
 import { achievementsReducer } from './achievements';
+import { segmentsReducer, watchSegmentsActions } from './segments';
 import { counterReducer, watchCounterActions } from './counter';
 var sagaMiddleware = createSagaMiddleware();
 var reduxHistoryContextMiddleware = createReduxHistoryContext({
@@ -36,6 +37,7 @@ var reducer = {
     fontEffects: fontEffectsReducer,
     bookmarks: bookmarksReducer,
     achievements: achievementsReducer,
+    segments: segmentsReducer,
     counter: counterReducer,
 };
 var middleware = [
@@ -56,6 +58,7 @@ sagaMiddleware.run(watchSideShadowActions);
 sagaMiddleware.run(watchSideTextActions);
 sagaMiddleware.run(watchVolumeActions);
 sagaMiddleware.run(watchBackgroundEffectsActions);
+sagaMiddleware.run(watchSegmentsActions);
 sagaMiddleware.run(watchCounterActions);
 export var storeContext = createContext({
     store: store,

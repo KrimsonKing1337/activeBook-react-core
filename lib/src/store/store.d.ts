@@ -14,6 +14,7 @@ export declare const store: import("@reduxjs/toolkit/dist/configureStore").Toolk
     fontEffects: import("./effects/font/@types").State;
     bookmarks: import("./bookmarks/@types").State;
     achievements: import("./achievements/@types").State;
+    segments: import("./segments/@types").State;
     counter: import("./counter/@types").State;
 }, import("redux").AnyAction, import("redux").Middleware<{}, any, import("redux").Dispatch<import("redux").AnyAction>>[]>;
 export declare const history: import("history").History & {

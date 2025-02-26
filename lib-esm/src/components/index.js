@@ -25,4 +25,5 @@ export * from './TableOfContents';
 export * from './Toggle';
 export * from './Toolbar';
 export * from './Video';
+export * from './Segment';
 //# sourceMappingURL=index.js.map

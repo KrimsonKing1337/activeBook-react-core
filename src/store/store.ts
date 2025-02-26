@@ -25,6 +25,8 @@ import { sideShadowReducer, watchSideShadowActions } from './effects/side/shadow
 import { sideTextReducer, watchSideTextActions } from './effects/side/text';
 import { bookmarksReducer, watchBookmarksActions } from './bookmarks';
 import { achievementsReducer } from './achievements';
+import { segmentsReducer, watchSegmentsActions } from './segments';
+
 import { counterReducer, watchCounterActions } from './counter';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -49,6 +51,7 @@ const reducer = {
   fontEffects: fontEffectsReducer,
   bookmarks: bookmarksReducer,
   achievements: achievementsReducer,
+  segments: segmentsReducer,
 
   counter: counterReducer,
 };
@@ -74,6 +77,7 @@ sagaMiddleware.run(watchSideShadowActions);
 sagaMiddleware.run(watchSideTextActions);
 sagaMiddleware.run(watchVolumeActions);
 sagaMiddleware.run(watchBackgroundEffectsActions);
+sagaMiddleware.run(watchSegmentsActions);
 
 sagaMiddleware.run(watchCounterActions);
 
