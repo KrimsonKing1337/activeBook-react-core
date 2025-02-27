@@ -20,7 +20,7 @@ export const useBackground = (effect: BackgroundEffect) => {
 
   useEffect(() => {
     dispatch(backgroundEffectsActions.setEffect(effectWithId));
-  }, [effectWithId]);
+  }, []);
 
   useEffect(() => {
     return () => {

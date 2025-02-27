@@ -47,6 +47,9 @@ export var Segment = function (_a) {
         return null;
     }
     var segmentClickHandler = function () {
+        if (activeId === id) {
+            return;
+        }
         dispatch(segmentsActions.setSegment({
             id: id,
             isActive: true,

@@ -17,9 +17,10 @@ export declare class HowlWrapper {
     readonly howlInst: Howl;
     id: HowlWrapperOptions['id'];
     src: HowlOptions['src'];
-    isUnloading: boolean;
     type: AudioType;
     fadeOutWhenUnload: boolean;
+    isUnloading: boolean;
+    isFading: boolean;
     onPlay: () => void;
     onPause: () => void;
     onStop: () => void;

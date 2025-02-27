@@ -122,10 +122,14 @@ export class HowlWrapper {
         await this.fadeIn();
       } else {
         this.howlInst.stop();
+        this.isFading = false;
       }
+    } else if (this.isFading) {
+      this.howlInst.stop();
+      this.isFading = false;
     }
 
-    this.howlInst.on('play', this.onPlay);
+    this.howlInst.once('play', this.onPlay);
     this.howlInst.play();
   }
 
@@ -134,21 +138,26 @@ export class HowlWrapper {
       await this.fadeOut();
     }
 
-    this.howlInst.on('pause', this.onPause);
+    this.howlInst.once('pause', this.onPause);
     this.howlInst.pause();
+
+    this.isFading = false;
 
     // после остановки возвращаем громкость, иначе воспроизведение начнётся без звука, если withFadeOut = true
     const volume = this.getVolumeByType() / 100;
     this.volume(volume);
   }
 
+  // не смог добиться быстрой остановки, всё равно ловлю баги. для сегментов лучше использовать без фэйда
   async stop(withFadeOut = false) {
     if (withFadeOut && !this.isFading) {
       await this.fadeOut();
     }
 
-    this.howlInst.on('stop', this.onStop);
+    this.howlInst.once('stop', this.onStop);
     this.howlInst.stop();
+
+    this.isFading = false;
 
     // после остановки возвращаем громкость, иначе воспроизведение начнётся без звука, если withFadeOut = true
     const volume = this.getVolumeByType() / 100;

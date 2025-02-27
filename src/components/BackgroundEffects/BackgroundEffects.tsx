@@ -1,3 +1,5 @@
+import { Fragment } from 'react';
+
 import { nanoid } from 'nanoid';
 
 import { useSelector } from 'store';
@@ -11,7 +13,7 @@ import styles from './BackgroundEffects.scss';
 export const BackgroundEffects = () => {
   const effects = useSelector(backgroundEffectsSelectors.effects);
 
-  return Object.keys(effects).map((keyCur) => {
+  const BackgroundObjectsWrappers = Object.keys(effects).map((keyCur) => {
     const effectCur = effects[keyCur];
 
     const {
@@ -27,11 +29,9 @@ export const BackgroundEffects = () => {
     const uuid = nanoid();
 
     return (
-      <div key={uuid} style={style} className={styles.backgroundEffectsWrapper}>
-        <Dots />
-
+      <Fragment key={uuid}>
         {oneOfBgIsActive && (
-          <div className={styles.backgroundObjectsWrapper}>
+          <div style={style} className={styles.backgroundObjectsWrapper}>
             <Shadow options={shadow} />
 
             {Component}
@@ -40,7 +40,15 @@ export const BackgroundEffects = () => {
             <Images images={images} />
           </div>
         )}
-      </div>
+      </Fragment>
     );
   });
+
+  return (
+    <div className={styles.backgroundEffectsWrapper}>
+      <Dots />
+
+      {BackgroundObjectsWrappers.map((cur) => cur)}
+    </div>
+  );
 };

@@ -41,9 +41,10 @@ var HowlWrapper = /** @class */ (function () {
         var id = _a.id, src = _a.src, loop = _a.loop, _b = _a.type, type = _b === void 0 ? 'sfx' : _b, _c = _a.screamer, screamer = _c === void 0 ? false : _c, _d = _a.fadeOutWhenUnload, fadeOutWhenUnload = _d === void 0 ? true : _d, _e = _a.onPlay, onPlay = _e === void 0 ? function () {
         } : _e, _f = _a.onUnload, onUnload = _f === void 0 ? function () { } : _f, _g = _a.onPause, onPause = _g === void 0 ? function () { } : _g, _h = _a.onStop, onStop = _h === void 0 ? function () { } : _h;
         this.src = '';
-        this.isUnloading = false;
         this.type = 'sfx';
         this.fadeOutWhenUnload = true;
+        this.isUnloading = false;
+        this.isFading = false;
         var volume = this.getVolume();
         var volumeValue = volume.sfx / 100;
         var options = {
@@ -95,13 +96,25 @@ var HowlWrapper = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        if (!withFadeIn) return [3 /*break*/, 2];
+                        if (!withFadeIn) return [3 /*break*/, 4];
+                        if (!!this.isFading) return [3 /*break*/, 2];
                         return [4 /*yield*/, this.fadeIn()];
                     case 1:
                         _a.sent();
-                        _a.label = 2;
+                        return [3 /*break*/, 3];
                     case 2:
-                        this.howlInst.on('play', this.onPlay);
+                        this.howlInst.stop();
+                        this.isFading = false;
+                        _a.label = 3;
+                    case 3: return [3 /*break*/, 5];
+                    case 4:
+                        if (this.isFading) {
+                            this.howlInst.stop();
+                            this.isFading = false;
+                        }
+                        _a.label = 5;
+                    case 5:
+                        this.howlInst.once('play', this.onPlay);
                         this.howlInst.play();
                         return [2 /*return*/];
                 }
@@ -115,14 +128,15 @@ var HowlWrapper = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        if (!withFadeOut) return [3 /*break*/, 2];
+                        if (!(withFadeOut && !this.isFading)) return [3 /*break*/, 2];
                         return [4 /*yield*/, this.fadeOut()];
                     case 1:
                         _a.sent();
                         _a.label = 2;
                     case 2:
-                        this.howlInst.on('pause', this.onPause);
+                        this.howlInst.once('pause', this.onPause);
                         this.howlInst.pause();
+                        this.isFading = false;
                         volume = this.getVolumeByType() / 100;
                         this.volume(volume);
                         return [2 /*return*/];
@@ -130,21 +144,23 @@ var HowlWrapper = /** @class */ (function () {
             });
         });
     };
+    // не смог добиться быстрой остановки, всё равно ловлю баги. для сегментов лучше использовать без фэйда
     HowlWrapper.prototype.stop = function (withFadeOut) {
-        if (withFadeOut === void 0) { withFadeOut = true; }
+        if (withFadeOut === void 0) { withFadeOut = false; }
         return __awaiter(this, void 0, void 0, function () {
             var volume;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        if (!withFadeOut) return [3 /*break*/, 2];
+                        if (!(withFadeOut && !this.isFading)) return [3 /*break*/, 2];
                         return [4 /*yield*/, this.fadeOut()];
                     case 1:
                         _a.sent();
                         _a.label = 2;
                     case 2:
-                        this.howlInst.on('stop', this.onStop);
+                        this.howlInst.once('stop', this.onStop);
                         this.howlInst.stop();
+                        this.isFading = false;
                         volume = this.getVolumeByType() / 100;
                         this.volume(volume);
                         return [2 /*return*/];
@@ -186,10 +202,12 @@ var HowlWrapper = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        this.isFading = true;
                         volume = this.getVolumeByType() / 100;
                         return [4 /*yield*/, this.fade(0, volume, HowlWrapper.fadeDurationDefault)];
                     case 1:
                         _a.sent();
+                        this.isFading = false;
                         return [2 /*return*/, this.howlInst];
                 }
             });
@@ -201,10 +219,12 @@ var HowlWrapper = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        this.isFading = true;
                         volume = this.getVolumeByType() / 100;
                         return [4 /*yield*/, this.fade(volume, 0, HowlWrapper.fadeDurationDefault)];
                     case 1:
                         _a.sent();
+                        this.isFading = false;
                         return [2 /*return*/, this.howlInst];
                 }
             });

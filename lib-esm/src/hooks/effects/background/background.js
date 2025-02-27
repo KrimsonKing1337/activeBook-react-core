@@ -21,7 +21,7 @@ export var useBackground = function (effect) {
     }
     useEffect(function () {
         dispatch(backgroundEffectsActions.setEffect(effectWithId));
-    }, [effectWithId]);
+    }, []);
     useEffect(function () {
         return function () {
             dispatch(backgroundEffectsActions.deleteEffect(effectWithId.id));

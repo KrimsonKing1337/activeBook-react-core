@@ -7,9 +7,9 @@ export type ShadowProps = {
 };
 
 export const Shadow = ({ options }: ShadowProps) => {
-  const { style } = options;
+  const { style, show = false } = options;
 
-  if (!style) {
+  if (!show) {
     return null;
   }
 

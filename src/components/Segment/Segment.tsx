@@ -77,6 +77,10 @@ export const Segment = ({
   }
 
   const segmentClickHandler = () => {
+    if (activeId === id) {
+      return;
+    }
+
     dispatch(segmentsActions.setSegment({
       id,
       isActive: true,

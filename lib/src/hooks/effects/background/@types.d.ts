@@ -14,6 +14,7 @@ export type BackgroundEffectVideoOptions = BackgroundEffectMediaOptions & {
 };
 export type BackgroundEffectShadowOptions = {
     style?: React.CSSProperties;
+    show?: boolean;
 };
 export type BackgroundEffect = {
     id?: string;
