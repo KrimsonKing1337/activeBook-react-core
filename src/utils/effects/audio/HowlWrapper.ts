@@ -30,9 +30,11 @@ export class HowlWrapper {
   public readonly howlInst: Howl;
   public id: HowlWrapperOptions['id'];
   public src: HowlOptions['src'] = '';
-  public isUnloading = false;
   public type: AudioType = 'sfx';
   public fadeOutWhenUnload = true;
+
+  public isUnloading = false;
+  public isFading = false;
 
   public onPlay: () => void;
   public onPause: () => void;
@@ -116,7 +118,11 @@ export class HowlWrapper {
 
   async play(withFadeIn = false) {
     if (withFadeIn) {
-      await this.fadeIn();
+      if (!this.isFading) {
+        await this.fadeIn();
+      } else {
+        this.howlInst.stop();
+      }
     }
 
     this.howlInst.on('play', this.onPlay);
@@ -124,7 +130,7 @@ export class HowlWrapper {
   }
 
   async pause(withFadeOut = false) {
-    if (withFadeOut) {
+    if (withFadeOut && !this.isFading) {
       await this.fadeOut();
     }
 
@@ -136,8 +142,8 @@ export class HowlWrapper {
     this.volume(volume);
   }
 
-  async stop(withFadeOut = true) {
-    if (withFadeOut) {
+  async stop(withFadeOut = false) {
+    if (withFadeOut && !this.isFading) {
       await this.fadeOut();
     }
 
@@ -171,17 +177,25 @@ export class HowlWrapper {
   }
 
   async fadeIn() {
+    this.isFading = true;
+
     const volume = this.getVolumeByType() / 100;
 
     await this.fade(0, volume, HowlWrapper.fadeDurationDefault);
+
+    this.isFading = false;
 
     return this.howlInst;
   }
 
   async fadeOut() {
+    this.isFading = true;
+
     const volume = this.getVolumeByType() / 100;
 
     await this.fade(volume, 0, HowlWrapper.fadeDurationDefault);
+
+    this.isFading = false;
 
     return this.howlInst;
   }
