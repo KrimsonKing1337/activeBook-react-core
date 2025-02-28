@@ -96,7 +96,9 @@ export class HowlWrapper {
   }
 
   volume(n: number) {
-    this.howlInst.volume(n);
+    const newValue = n * (this.relativeVolume / 100);
+
+    this.howlInst.volume(newValue);
   }
 
   getVolume() {
@@ -117,7 +119,7 @@ export class HowlWrapper {
       volumeValue = volume.music;
     }
 
-    return volumeValue * (this.relativeVolume / 100);
+    return volumeValue;
   }
 
   async play(withFadeIn = false) {
