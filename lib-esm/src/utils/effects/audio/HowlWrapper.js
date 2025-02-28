@@ -45,17 +45,20 @@ var HowlWrapper = /** @class */ (function () {
         this.fadeOutWhenUnload = true;
         this.isUnloading = false;
         this.isFading = false;
-        var volume = this.getVolume();
-        var volumeValue = volume.sfx / 100;
+        var _k = this.getVolume(), sfx = _k.sfx, bg = _k.bg, music = _k.music, global = _k.global;
+        var getInitialVolume = function (volume) {
+            return (volume / 100) * (relativeVolume / 100) * (global / 100);
+        };
+        var volumeValue = getInitialVolume(sfx);
         var options = {
             src: src,
             loop: loop,
         };
         if (type === 'bg') {
-            volumeValue = volume.bg / 100;
+            volumeValue = getInitialVolume(bg);
         }
         if (type === 'music') {
-            volumeValue = volume.music / 100;
+            volumeValue = getInitialVolume(music);
         }
         options.volume = volumeValue;
         if (screamer) {
@@ -73,7 +76,8 @@ var HowlWrapper = /** @class */ (function () {
         this.onUnload = onUnload;
     }
     HowlWrapper.prototype.volume = function (n) {
-        var newValue = n * (this.relativeVolume / 100);
+        var globalVolume = this.getVolume().global;
+        var newValue = n * (this.relativeVolume / 100) * (globalVolume / 100);
         this.howlInst.volume(newValue);
     };
     HowlWrapper.prototype.getVolume = function () {
@@ -200,12 +204,13 @@ var HowlWrapper = /** @class */ (function () {
     };
     HowlWrapper.prototype.fadeIn = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var volume;
+            var globalVolume, volume;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         this.isFading = true;
-                        volume = this.getVolumeByType() / 100;
+                        globalVolume = this.getVolume().global;
+                        volume = (this.getVolumeByType() / 100) * (this.relativeVolume / 100) * (globalVolume / 100);
                         return [4 /*yield*/, this.fade(0, volume, HowlWrapper.fadeDurationDefault)];
                     case 1:
                         _a.sent();
@@ -217,12 +222,13 @@ var HowlWrapper = /** @class */ (function () {
     };
     HowlWrapper.prototype.fadeOut = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var volume;
+            var globalVolume, volume;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         this.isFading = true;
-                        volume = this.getVolumeByType() / 100;
+                        globalVolume = this.getVolume().global;
+                        volume = (this.getVolumeByType() / 100) * (this.relativeVolume / 100) * (globalVolume / 100);
                         return [4 /*yield*/, this.fade(volume, 0, HowlWrapper.fadeDurationDefault)];
                     case 1:
                         _a.sent();

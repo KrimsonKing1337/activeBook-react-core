@@ -11,6 +11,10 @@ export var Videos = function (_a) {
     return videos.map(function (videoCur) {
         var src = videoCur.src, wrapperStyle = videoCur.wrapperStyle, style = videoCur.style, _a = videoCur.autoPlay, autoPlay = _a === void 0 ? true : _a, _b = videoCur.loop, loop = _b === void 0 ? true : _b, _c = videoCur.muted, muted = _c === void 0 ? true : _c, _d = videoCur.relativeVolume, relativeVolume = _d === void 0 ? 100 : _d;
         var uuid = nanoid();
+        /*
+          todo: возможно, стоит autoPlay убрать из параметров.
+           есть подозрение, что видео начинает воспроизведение до отображения страницы (PageWrapper и Narrative)
+        */
         return (_jsx(Wrapper, { style: wrapperStyle, children: _jsx(Video, { style: style, className: styles.video, src: src, autoPlay: autoPlay, loop: loop, muted: muted, relativeVolume: relativeVolume }) }, uuid));
     });
 };

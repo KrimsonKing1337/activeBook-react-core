@@ -25,56 +25,62 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import { call, put, takeLatest } from 'redux-saga/effects';
-import { Howler } from 'howler';
+import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { getAudioInstances } from 'utils/effects/audio/getAudioInstances';
 import { actions } from './slice';
+import { selectors } from './selectors';
+import { setVideosVolume } from './utils';
 export function watchSetAll(action) {
-    var payload, global, bg, music, sfx;
+    var payload, global, bg, music, sfx, videos;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 payload = action.payload;
-                global = payload.global, bg = payload.bg, music = payload.music, sfx = payload.sfx;
-                return [4 /*yield*/, call(function () {
-                        Howler.volume(global / 100);
-                    })];
+                global = payload.global, bg = payload.bg, music = payload.music, sfx = payload.sfx, videos = payload.videos;
+                return [4 /*yield*/, put(actions.setSfx(sfx))];
             case 1:
                 _a.sent();
-                return [4 /*yield*/, put(actions.setGlobal(global))];
+                return [4 /*yield*/, put(actions.setMusic(music))];
             case 2:
                 _a.sent();
-                return [4 /*yield*/, put(actions.setSfx(sfx))];
+                return [4 /*yield*/, put(actions.setBg(bg))];
             case 3:
                 _a.sent();
-                return [4 /*yield*/, put(actions.setMusic(music))];
+                return [4 /*yield*/, put(actions.setVideos(videos))];
             case 4:
                 _a.sent();
-                return [4 /*yield*/, put(actions.setBg(bg))];
+                // сначала устанавливаем значения для каждой категории отдельно, затем применяем к ним громкость от global
+                return [4 /*yield*/, put(actions.setGlobal(global))];
             case 5:
+                // сначала устанавливаем значения для каждой категории отдельно, затем применяем к ним громкость от global
                 _a.sent();
                 return [2 /*return*/];
         }
     });
 }
 export function watchSetGlobal(action) {
-    var payload;
+    var payload, volumeAll, sfx, bg, music, videos;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 payload = action.payload;
-                // todo: заменить на проход по каждому отдельно (setSfc, setMusic, etc.) для учёта относительной громкости
-                return [4 /*yield*/, call(function () {
-                        Howler.volume(payload / 100);
-                    })];
+                return [4 /*yield*/, select(selectors.all)];
             case 1:
-                // todo: заменить на проход по каждому отдельно (setSfc, setMusic, etc.) для учёта относительной громкости
+                volumeAll = _a.sent();
+                sfx = volumeAll.sfx, bg = volumeAll.bg, music = volumeAll.music, videos = volumeAll.videos;
+                return [4 /*yield*/, call(function () {
+                        setAudioVolumeByType('sfx', sfx * (payload / 100));
+                        setAudioVolumeByType('bg', bg * (payload / 100));
+                        setAudioVolumeByType('music', music * (payload / 100));
+                        setVideosVolume(videos * (payload / 100));
+                    })];
+            case 2:
                 _a.sent();
                 return [2 /*return*/];
         }
     });
 }
-function setVolumeByType(type, volume) {
+function setAudioVolumeByType(type, volume) {
     var setVolume = function (audioInstances) {
         Object.values(audioInstances).forEach(function (audioInstanceCur) {
             if (!audioInstanceCur) {
@@ -96,7 +102,7 @@ export function watchSetBg(action) {
             case 0:
                 payload = action.payload;
                 return [4 /*yield*/, call(function () {
-                        setVolumeByType('bg', payload);
+                        setAudioVolumeByType('bg', payload);
                     })];
             case 1:
                 _a.sent();
@@ -111,7 +117,7 @@ export function watchSetSfx(action) {
             case 0:
                 payload = action.payload;
                 return [4 /*yield*/, call(function () {
-                        setVolumeByType('sfx', payload);
+                        setAudioVolumeByType('sfx', payload);
                     })];
             case 1:
                 _a.sent();
@@ -126,7 +132,7 @@ export function watchSetMusic(action) {
             case 0:
                 payload = action.payload;
                 return [4 /*yield*/, call(function () {
-                        setVolumeByType('music', payload);
+                        setAudioVolumeByType('music', payload);
                     })];
             case 1:
                 _a.sent();
@@ -141,12 +147,7 @@ export function watchSetVideos(action) {
             case 0:
                 payload = action.payload;
                 return [4 /*yield*/, call(function () {
-                        var videos = document.querySelectorAll('video');
-                        videos.forEach(function (videoCur) {
-                            var relativeVolumeStr = videoCur.getAttribute('data-relativeVolume');
-                            var relativeVolume = Number(relativeVolumeStr) || 100;
-                            videoCur.volume = (payload / 100) * (relativeVolume / 100);
-                        });
+                        setVideosVolume(payload);
                     })];
             case 1:
                 _a.sent();

@@ -1,9 +1,7 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, select, takeLatest } from 'redux-saga/effects';
 
-import { Howler } from 'howler';
-
-import { AudioType } from '@types';
+import type { AudioType } from '@types';
 
 import type { HowlInstances } from '@types';
 
@@ -12,31 +10,40 @@ import { getAudioInstances } from 'utils/effects/audio/getAudioInstances';
 import type { State } from './@types';
 
 import { actions } from './slice';
+import { selectors } from './selectors';
+
+import { setVideosVolume } from './utils';
 
 export function* watchSetAll(action: PayloadAction<State>) {
   const { payload } = action;
-  const { global, bg, music, sfx } = payload;
+  const { global, bg, music, sfx, videos } = payload;
 
-  yield call(() => {
-    Howler.volume(global / 100);
-  });
-
-  yield put(actions.setGlobal(global));
   yield put(actions.setSfx(sfx));
   yield put(actions.setMusic(music));
   yield put(actions.setBg(bg));
+  yield put(actions.setVideos(videos));
+
+  // сначала устанавливаем значения для каждой категории отдельно, затем применяем к ним громкость от global
+  yield put(actions.setGlobal(global));
 }
 
 export function* watchSetGlobal(action: PayloadAction<State['global']>) {
   const { payload } = action;
 
-  // todo: заменить на проход по каждому отдельно (setSfc, setMusic, etc.) для учёта относительной громкости
+  const volumeAll: State = yield select(selectors.all);
+
+  const { sfx, bg, music, videos } = volumeAll;
+
   yield call(() => {
-    Howler.volume(payload / 100);
+    setAudioVolumeByType('sfx', sfx * (payload / 100));
+    setAudioVolumeByType('bg', bg * (payload / 100));
+    setAudioVolumeByType('music', music * (payload / 100));
+
+    setVideosVolume(videos * (payload / 100));
   });
 }
 
-function setVolumeByType(type: AudioType, volume: number) {
+function setAudioVolumeByType(type: AudioType, volume: number) {
   const setVolume = (audioInstances: HowlInstances) => {
     Object.values(audioInstances).forEach((audioInstanceCur) => {
       if (!audioInstanceCur) {
@@ -59,7 +66,7 @@ export function* watchSetBg(action: PayloadAction<State['bg']>) {
   const { payload } = action;
 
   yield call(() => {
-    setVolumeByType('bg', payload);
+    setAudioVolumeByType('bg', payload);
   });
 }
 
@@ -67,7 +74,7 @@ export function* watchSetSfx(action: PayloadAction<State['sfx']>) {
   const { payload } = action;
 
   yield call(() => {
-    setVolumeByType('sfx', payload);
+    setAudioVolumeByType('sfx', payload);
   });
 }
 
@@ -75,7 +82,7 @@ export function* watchSetMusic(action: PayloadAction<State['music']>) {
   const { payload } = action;
 
   yield call(() => {
-    setVolumeByType('music', payload);
+    setAudioVolumeByType('music', payload);
   });
 }
 
@@ -83,14 +90,7 @@ export function* watchSetVideos(action: PayloadAction<State['videos']>) {
   const { payload } = action;
 
   yield call(() => {
-    const videos = document.querySelectorAll('video');
-
-    videos.forEach(videoCur => {
-      const relativeVolumeStr = videoCur.getAttribute('data-relativeVolume');
-      const relativeVolume = Number(relativeVolumeStr) || 100;
-
-      videoCur.volume = (payload / 100) * (relativeVolume / 100);
-    });
+    setVideosVolume(payload);
   });
 }
 

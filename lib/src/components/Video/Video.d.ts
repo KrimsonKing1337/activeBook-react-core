@@ -4,5 +4,5 @@ type VideoProps = React.MediaHTMLAttributes<HTMLVideoElement> & {
     src: string;
     relativeVolume?: number;
 };
-export declare const Video: ({ className, src, relativeVolume, ...etc }: VideoProps) => import("react/jsx-runtime").JSX.Element;
+export declare const Video: ({ className, src, relativeVolume, muted, autoPlay, ...etc }: VideoProps) => import("react/jsx-runtime").JSX.Element;
 export {};

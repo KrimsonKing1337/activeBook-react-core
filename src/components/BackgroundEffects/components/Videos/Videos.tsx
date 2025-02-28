@@ -30,6 +30,11 @@ export const Videos = ({ videos }: VideosProps) => {
 
     const uuid = nanoid();
 
+    /*
+      todo: возможно, стоит autoPlay убрать из параметров.
+       есть подозрение, что видео начинает воспроизведение до отображения страницы (PageWrapper и Narrative)
+    */
+
     return (
       <Wrapper key={uuid} style={wrapperStyle}>
         <Video

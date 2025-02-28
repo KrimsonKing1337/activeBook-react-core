@@ -58,9 +58,13 @@ export class HowlWrapper {
     onPause = () => {},
     onStop = () => {},
   }: HowlWrapperOptions) {
-    const volume = this.getVolume();
+    const { sfx, bg, music, global } = this.getVolume();
 
-    let volumeValue = volume.sfx / 100;
+    const getInitialVolume = (volume: number) => {
+      return (volume / 100) * (relativeVolume / 100) * (global / 100);
+    };
+
+    let volumeValue = getInitialVolume(sfx);
 
     const options: HowlerOptions = {
       src,
@@ -68,11 +72,11 @@ export class HowlWrapper {
     };
 
     if (type === 'bg') {
-      volumeValue = volume.bg / 100;
+      volumeValue = getInitialVolume(bg);
     }
 
     if (type === 'music') {
-      volumeValue = volume.music / 100;
+      volumeValue = getInitialVolume(music);
     }
 
     options.volume = volumeValue;
@@ -96,7 +100,8 @@ export class HowlWrapper {
   }
 
   volume(n: number) {
-    const newValue = n * (this.relativeVolume / 100);
+    const globalVolume = this.getVolume().global;
+    const newValue = n * (this.relativeVolume / 100) * (globalVolume / 100);
 
     this.howlInst.volume(newValue);
   }
@@ -194,7 +199,9 @@ export class HowlWrapper {
   async fadeIn() {
     this.isFading = true;
 
-    const volume = this.getVolumeByType() / 100;
+    const globalVolume = this.getVolume().global;
+
+    const volume = (this.getVolumeByType() / 100) * (this.relativeVolume / 100) * (globalVolume / 100);
 
     await this.fade(0, volume, HowlWrapper.fadeDurationDefault);
 
@@ -206,7 +213,9 @@ export class HowlWrapper {
   async fadeOut() {
     this.isFading = true;
 
-    const volume = this.getVolumeByType() / 100;
+    const globalVolume = this.getVolume().global;
+
+    const volume = (this.getVolumeByType() / 100) * (this.relativeVolume / 100) * (globalVolume / 100);
 
     await this.fade(volume, 0, HowlWrapper.fadeDurationDefault);
 
