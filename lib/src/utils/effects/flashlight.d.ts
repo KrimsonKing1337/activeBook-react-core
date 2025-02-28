@@ -1,6 +1,6 @@
 export declare class Flashlight {
     private track;
-    static getIsFlashlightAvailable(): import("../../store/main/@types").FlashlightState;
+    static getIsFlashlightAvailable(): import("../../store/main/@types").FlashlightState | null;
     static getIsTorchSupported(capabilities: any): any;
     static getNavigatorCameraPermission(): Promise<PermissionStatus>;
     static getIsCordovaFlashlight(): boolean;
@@ -14,7 +14,7 @@ export declare class Flashlight {
      * в кордове этой проблемы нет
      */
     torchInit(): Promise<void>;
-    init(): Promise<void>;
+    init(): Promise<void> | undefined;
     on(): void;
     off(): void;
 }

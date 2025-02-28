@@ -8,7 +8,7 @@ export declare const selectors: {
     route: (state: RootState) => string;
     menuActiveState: (state: RootState) => import("./@types").MenuActiveState;
     isLoading: (state: RootState) => boolean;
-    isVibrationAvailable: (state: RootState) => boolean;
-    isFlashlightAvailable: (state: RootState) => import("./@types").FlashlightState;
+    isVibrationAvailable: (state: RootState) => boolean | null;
+    isFlashlightAvailable: (state: RootState) => import("./@types").FlashlightState | null;
     flashlightProblems: (state: RootState) => string;
 };

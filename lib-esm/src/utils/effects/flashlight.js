@@ -97,6 +97,7 @@ var Flashlight = /** @class */ (function () {
                         cameras = devices.filter(function (device) { return device.kind === 'videoinput'; });
                         if (cameras.length === 0) {
                             console.log('no camera found on this device');
+                            store.dispatch(mainActions.setIsFlashlightAvailable(false));
                             store.dispatch(mainActions.setFlashlightProblems('Камера не найдена'));
                             return [2 /*return*/, Promise.resolve()];
                         }
@@ -118,6 +119,7 @@ var Flashlight = /** @class */ (function () {
                         torchSupported = Flashlight.getIsTorchSupported(capabilities);
                         if (!torchSupported) {
                             console.log('no torch found');
+                            store.dispatch(mainActions.setIsFlashlightAvailable(false));
                             store.dispatch(mainActions.setFlashlightProblems('Вспышка не найдена'));
                             this.mediaStreamTrackStop();
                             return [2 /*return*/, Promise.resolve()];
@@ -129,6 +131,10 @@ var Flashlight = /** @class */ (function () {
         });
     };
     Flashlight.prototype.init = function () {
+        var flashLightAvailableState = Flashlight.getIsFlashlightAvailable();
+        if (flashLightAvailableState === false) {
+            return;
+        }
         var cordovaFlashlight = Flashlight.getIsCordovaFlashlight();
         if (cordovaFlashlight) {
             Flashlight.initCordovaFlashlight(cordovaFlashlight);

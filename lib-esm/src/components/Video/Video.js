@@ -26,13 +26,8 @@ import { useSelector } from 'store';
 import { volumeSelectors } from 'store/volume';
 export var Video = function (_a) {
     var _b = _a.className, className = _b === void 0 ? '' : _b, src = _a.src, _c = _a.relativeVolume, relativeVolume = _c === void 0 ? 100 : _c, _d = _a.muted, muted = _d === void 0 ? true : _d, _e = _a.autoPlay, autoPlay = _e === void 0 ? true : _e, etc = __rest(_a, ["className", "src", "relativeVolume", "muted", "autoPlay"]);
-    var _f = useSelector(volumeSelectors.all), videosVolume = _f.videos, globalVolume = _f.global;
     var ref = useRef(null);
-    /*
-      по умолчанию всегда ставлю muted,
-      чтобы видео до применения громкости не начинало звучать на 100% громкости при запуске.
-      пока useRef и useEffect сработают - успевает пройти какое-то время. и видео будет играть на максимальной громкости
-    */
+    var _f = useSelector(volumeSelectors.all), videosVolume = _f.videos, globalVolume = _f.global;
     useEffect(function () {
         if (!ref.current) {
             return;
