@@ -78,7 +78,7 @@ export function* watchSetMusic(action: PayloadAction<State['music']>) {
   });
 }
 
-export function* watchVideosMusic(action: PayloadAction<State['videos']>) {
+export function* watchSetVideos(action: PayloadAction<State['videos']>) {
   const { payload } = action;
 
   yield call(() => {
@@ -96,5 +96,5 @@ export function* watchActions() {
   yield takeLatest(actions.setBg, watchSetBg);
   yield takeLatest(actions.setSfx, watchSetSfx);
   yield takeLatest(actions.setMusic, watchSetMusic);
-  yield takeLatest(actions.setVideos, watchVideosMusic);
+  yield takeLatest(actions.setVideos, watchSetVideos);
 }

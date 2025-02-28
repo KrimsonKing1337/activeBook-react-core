@@ -25,7 +25,7 @@ export const Videos = ({ videos }: VideosProps) => {
       autoPlay = true,
       loop = true,
       muted = true,
-      defaultVolume = 100,
+      relativeVolume = 100,
     } = videoCur;
 
     const uuid = nanoid();
@@ -39,7 +39,7 @@ export const Videos = ({ videos }: VideosProps) => {
           autoPlay={autoPlay}
           loop={loop}
           muted={muted}
-          defaultVolume={defaultVolume}
+          relativeVolume={relativeVolume}
         />
       </Wrapper>
     );
