@@ -30,6 +30,7 @@ export function* watchSetAll(action: PayloadAction<State>) {
 export function* watchSetGlobal(action: PayloadAction<State['global']>) {
   const { payload } = action;
 
+  // todo: заменить на проход по каждому отдельно (setSfc, setMusic, etc.) для учёта относительной громкости
   yield call(() => {
     Howler.volume(payload / 100);
   });
@@ -85,7 +86,10 @@ export function* watchSetVideos(action: PayloadAction<State['videos']>) {
     const videos = document.querySelectorAll('video');
 
     videos.forEach(videoCur => {
-      videoCur.volume = payload / 100;
+      const relativeVolumeStr = videoCur.getAttribute('data-relativeVolume');
+      const relativeVolume = Number(relativeVolumeStr) || 100;
+
+      videoCur.volume = (payload / 100) * (relativeVolume / 100);
     });
   });
 }

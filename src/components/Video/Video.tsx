@@ -12,6 +12,8 @@ export const Video = ({ className = '', src, relativeVolume = 100, ...etc }: Vid
   useEffect(() => {
     if (ref.current) {
       ref.current.volume = relativeVolume / 100;
+
+      ref.current.setAttribute('data-relativeVolume', relativeVolume.toString());
     }
   }, []);
 
