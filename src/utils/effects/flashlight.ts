@@ -73,6 +73,7 @@ export class Flashlight {
     if (cameras.length === 0) {
       console.log('no camera found on this device');
 
+      store.dispatch(mainActions.setIsFlashlightAvailable(false));
       store.dispatch(mainActions.setFlashlightProblems('Камера не найдена'));
 
       return Promise.resolve();
@@ -99,6 +100,7 @@ export class Flashlight {
     if (!torchSupported) {
       console.log('no torch found');
 
+      store.dispatch(mainActions.setIsFlashlightAvailable(false));
       store.dispatch(mainActions.setFlashlightProblems('Вспышка не найдена'));
 
       this.mediaStreamTrackStop();
@@ -110,6 +112,12 @@ export class Flashlight {
   }
 
   init() {
+    const flashLightAvailableState = Flashlight.getIsFlashlightAvailable();
+
+    if (flashLightAvailableState === false) {
+      return;
+    }
+
     const cordovaFlashlight = Flashlight.getIsCordovaFlashlight();
 
     if (cordovaFlashlight) {

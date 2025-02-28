@@ -10,7 +10,7 @@ export interface State {
   authorComments: number;
   menuActiveState: MenuActiveState;
   isLoading: boolean;
-  isVibrationAvailable: boolean;
-  isFlashlightAvailable: FlashlightState;
+  isVibrationAvailable: boolean | null;
+  isFlashlightAvailable: FlashlightState | null;
   flashlightProblems: string;
 }

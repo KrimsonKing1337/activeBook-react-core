@@ -14,8 +14,8 @@ export const initialState: State = {
   authorComments,
   menuActiveState: null,
   isLoading: false,
-  isVibrationAvailable: false,
-  isFlashlightAvailable: false,
+  isVibrationAvailable: null,
+  isFlashlightAvailable: null,
   flashlightProblems: '',
 };
 
