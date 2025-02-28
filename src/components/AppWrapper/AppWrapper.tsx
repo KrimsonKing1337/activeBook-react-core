@@ -27,6 +27,8 @@ import { flashlightInst } from 'utils/effects/flashlight';
 
 import { Achievement } from 'components/Achievement';
 
+import { setMuteToAllVideos } from './utils';
+
 import styles from './AppWrapper.scss';
 
 export type AppWrapperProps = {
@@ -48,12 +50,14 @@ export const AppWrapper = ({ children, rangeEffects }: PropsWithChildren<AppWrap
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
         Howler.mute(true);
+        setMuteToAllVideos(true);
 
         vibrationOff();
 
         flashlightInst.mediaStreamTrackStop();
       } else {
         Howler.mute(false);
+        setMuteToAllVideos(false);
 
         flashlightInst.init();
       }
