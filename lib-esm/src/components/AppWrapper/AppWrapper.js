@@ -19,6 +19,7 @@ import { Flags as AchievementsFlags, getInitValues } from 'utils/effects/achieve
 import { removeCssHover } from 'utils/touch/removeCssHover';
 import { flashlightInst } from 'utils/effects/flashlight';
 import { Achievement } from 'components/Achievement';
+import { setMuteToAllVideos } from './utils';
 import styles from './AppWrapper.scss';
 export var AppWrapper = function (_a) {
     var _b;
@@ -34,11 +35,13 @@ export var AppWrapper = function (_a) {
         document.addEventListener('visibilitychange', function () {
             if (document.hidden) {
                 Howler.mute(true);
+                setMuteToAllVideos(true);
                 vibrationOff();
                 flashlightInst.mediaStreamTrackStop();
             }
             else {
                 Howler.mute(false);
+                setMuteToAllVideos(false);
                 flashlightInst.init();
             }
         });

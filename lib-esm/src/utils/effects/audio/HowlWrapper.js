@@ -38,8 +38,8 @@ import { Howl } from 'howler';
 import { store } from 'store';
 var HowlWrapper = /** @class */ (function () {
     function HowlWrapper(_a) {
-        var id = _a.id, src = _a.src, loop = _a.loop, _b = _a.type, type = _b === void 0 ? 'sfx' : _b, _c = _a.screamer, screamer = _c === void 0 ? false : _c, _d = _a.fadeOutWhenUnload, fadeOutWhenUnload = _d === void 0 ? true : _d, _e = _a.onPlay, onPlay = _e === void 0 ? function () {
-        } : _e, _f = _a.onUnload, onUnload = _f === void 0 ? function () { } : _f, _g = _a.onPause, onPause = _g === void 0 ? function () { } : _g, _h = _a.onStop, onStop = _h === void 0 ? function () { } : _h;
+        var id = _a.id, src = _a.src, loop = _a.loop, _b = _a.type, type = _b === void 0 ? 'sfx' : _b, _c = _a.relativeVolume, relativeVolume = _c === void 0 ? 100 : _c, _d = _a.screamer, screamer = _d === void 0 ? false : _d, _e = _a.fadeOutWhenUnload, fadeOutWhenUnload = _e === void 0 ? true : _e, _f = _a.onPlay, onPlay = _f === void 0 ? function () {
+        } : _f, _g = _a.onUnload, onUnload = _g === void 0 ? function () { } : _g, _h = _a.onPause, onPause = _h === void 0 ? function () { } : _h, _j = _a.onStop, onStop = _j === void 0 ? function () { } : _j;
         this.src = '';
         this.type = 'sfx';
         this.fadeOutWhenUnload = true;
@@ -65,6 +65,7 @@ var HowlWrapper = /** @class */ (function () {
         this.id = id;
         this.src = src;
         this.type = type;
+        this.relativeVolume = relativeVolume;
         this.fadeOutWhenUnload = fadeOutWhenUnload;
         this.onPlay = onPlay;
         this.onPause = onPause;
@@ -72,7 +73,8 @@ var HowlWrapper = /** @class */ (function () {
         this.onUnload = onUnload;
     }
     HowlWrapper.prototype.volume = function (n) {
-        this.howlInst.volume(n);
+        var newValue = n * (this.relativeVolume / 100);
+        this.howlInst.volume(newValue);
     };
     HowlWrapper.prototype.getVolume = function () {
         var storeState = store.getState();

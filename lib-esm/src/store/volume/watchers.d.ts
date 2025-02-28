@@ -17,5 +17,5 @@ export declare function watchSetGlobal(action: PayloadAction<State['global']>): 
 export declare function watchSetBg(action: PayloadAction<State['bg']>): Generator<import("redux-saga/effects").CallEffect<void>, void, unknown>;
 export declare function watchSetSfx(action: PayloadAction<State['sfx']>): Generator<import("redux-saga/effects").CallEffect<void>, void, unknown>;
 export declare function watchSetMusic(action: PayloadAction<State['music']>): Generator<import("redux-saga/effects").CallEffect<void>, void, unknown>;
-export declare function watchVideosMusic(action: PayloadAction<State['videos']>): Generator<import("redux-saga/effects").CallEffect<void>, void, unknown>;
+export declare function watchSetVideos(action: PayloadAction<State['videos']>): Generator<import("redux-saga/effects").CallEffect<void>, void, unknown>;
 export declare function watchActions(): Generator<import("redux-saga/effects").ForkEffect<never>, void, unknown>;

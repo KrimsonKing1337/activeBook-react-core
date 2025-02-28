@@ -10,5 +10,5 @@ export type LocationStyles = {
     bottom: string;
     left: string;
 };
-export declare function getPlaceInLineByLocationStyles(styles: LocationStyles): 0 | 1 | 2 | 3 | 4;
+export declare function getPlaceInLineByLocationStyles(styles: LocationStyles): 0 | 4 | 1 | 2 | 3;
 export declare function createDotsAsArray(): string[];

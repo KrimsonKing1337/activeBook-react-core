@@ -15,6 +15,7 @@ export type AudioEffectOptions = {
     playOnLoad?: boolean;
     stopBy?: number;
     delay?: number;
+    relativeVolume?: number;
     screamer?: boolean;
     onPlay?: () => void;
     onUnload?: () => void;

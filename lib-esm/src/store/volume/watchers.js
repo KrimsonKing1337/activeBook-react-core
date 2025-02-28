@@ -63,10 +63,12 @@ export function watchSetGlobal(action) {
         switch (_a.label) {
             case 0:
                 payload = action.payload;
+                // todo: заменить на проход по каждому отдельно (setSfc, setMusic, etc.) для учёта относительной громкости
                 return [4 /*yield*/, call(function () {
                         Howler.volume(payload / 100);
                     })];
             case 1:
+                // todo: заменить на проход по каждому отдельно (setSfc, setMusic, etc.) для учёта относительной громкости
                 _a.sent();
                 return [2 /*return*/];
         }
@@ -132,7 +134,7 @@ export function watchSetMusic(action) {
         }
     });
 }
-export function watchVideosMusic(action) {
+export function watchSetVideos(action) {
     var payload;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -141,7 +143,9 @@ export function watchVideosMusic(action) {
                 return [4 /*yield*/, call(function () {
                         var videos = document.querySelectorAll('video');
                         videos.forEach(function (videoCur) {
-                            videoCur.volume = payload / 100;
+                            var relativeVolumeStr = videoCur.getAttribute('data-relativeVolume');
+                            var relativeVolume = Number(relativeVolumeStr) || 100;
+                            videoCur.volume = (payload / 100) * (relativeVolume / 100);
                         });
                     })];
             case 1:
@@ -168,7 +172,7 @@ export function watchActions() {
                 return [4 /*yield*/, takeLatest(actions.setMusic, watchSetMusic)];
             case 5:
                 _a.sent();
-                return [4 /*yield*/, takeLatest(actions.setVideos, watchVideosMusic)];
+                return [4 /*yield*/, takeLatest(actions.setVideos, watchSetVideos)];
             case 6:
                 _a.sent();
                 return [2 /*return*/];

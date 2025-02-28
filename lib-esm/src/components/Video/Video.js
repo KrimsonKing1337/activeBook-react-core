@@ -23,11 +23,12 @@ var __rest = (this && this.__rest) || function (s, e) {
 import { jsx as _jsx } from "react/jsx-runtime";
 import { useEffect, useRef } from 'react';
 export var Video = function (_a) {
-    var _b = _a.className, className = _b === void 0 ? '' : _b, src = _a.src, _c = _a.defaultVolume, defaultVolume = _c === void 0 ? 100 : _c, etc = __rest(_a, ["className", "src", "defaultVolume"]);
+    var _b = _a.className, className = _b === void 0 ? '' : _b, src = _a.src, _c = _a.relativeVolume, relativeVolume = _c === void 0 ? 100 : _c, etc = __rest(_a, ["className", "src", "relativeVolume"]);
     var ref = useRef(null);
     useEffect(function () {
         if (ref.current) {
-            ref.current.volume = defaultVolume / 100;
+            ref.current.volume = relativeVolume / 100;
+            ref.current.setAttribute('data-relativeVolume', relativeVolume.toString());
         }
     }, []);
     return (_jsx("video", __assign({ ref: ref, className: className, src: src, preload: "auto", poster: "/assets/img/poster-default.png" }, etc)));

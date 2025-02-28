@@ -26,10 +26,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import { push } from 'redux-first-history';
-import { call, put, select, takeLatest } from 'redux-saga/effects';
-import { Howler } from 'howler';
+import { put, select, takeLatest } from 'redux-saga/effects';
 import { actions } from './slice';
 import { selectors } from './selectors';
+import { waitForHowlerLoad, waitForMediaLoad } from './utils';
 export function watchSetMenuActiveState(action) {
     var payload, location, path;
     return __generator(this, function (_a) {
@@ -73,7 +73,7 @@ export function watchSetRoute(action) {
     });
 }
 export function watchSetPage(action) {
-    var payload, path, promises, Howl, awaitPromises;
+    var payload, path;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -82,29 +82,17 @@ export function watchSetPage(action) {
                 return [4 /*yield*/, put(actions.setIsLoading(true))];
             case 1:
                 _a.sent();
-                promises = [];
-                Howl = Howler;
-                Howl._howls.forEach(function (howlCur) {
-                    if (howlCur.state() === 'loaded') {
-                        promises.push(Promise.resolve());
-                        return;
-                    }
-                    var promise = new Promise(function (resolve) {
-                        howlCur.on('load', function () {
-                            resolve();
-                        });
-                    });
-                    promises.push(promise);
-                });
-                awaitPromises = function () { return Promise.all(promises); };
-                return [4 /*yield*/, call(awaitPromises)];
+                return [4 /*yield*/, waitForHowlerLoad()];
             case 2:
                 _a.sent();
-                return [4 /*yield*/, put(actions.setIsLoading(false))];
+                return [4 /*yield*/, waitForMediaLoad()];
             case 3:
                 _a.sent();
-                return [4 /*yield*/, put(push(path))];
+                return [4 /*yield*/, put(actions.setIsLoading(false))];
             case 4:
+                _a.sent();
+                return [4 /*yield*/, put(push(path))];
+            case 5:
                 _a.sent();
                 return [2 /*return*/];
         }
