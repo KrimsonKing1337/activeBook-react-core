@@ -1,13 +1,15 @@
-import { PayloadAction } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 import { push } from 'redux-first-history';
-import { call, put, select, takeLatest } from 'redux-saga/effects';
-import { Location } from 'history';
-import { Howl, Howler } from 'howler';
-import { HowlExtended } from '@types';
+import { put, select, takeLatest } from 'redux-saga/effects';
 
-import { State } from './@types';
+import { Location } from 'history';
+
+import type { State } from './@types';
+
 import { actions } from './slice';
 import { selectors } from './selectors';
+
+import { waitForHowlerLoad, waitForMediaLoad } from './utils';
 
 export function* watchSetMenuActiveState(action: PayloadAction<State['menuActiveState']>) {
   const { payload } = action;
@@ -44,29 +46,8 @@ export function* watchSetPage(action: PayloadAction<State['page']>) {
 
   yield put(actions.setIsLoading(true));
 
-  const promises: Promise<void>[] = [];
-
-  const Howl = Howler as unknown as HowlExtended;
-
-  Howl._howls.forEach((howlCur: Howl) => {
-    if (howlCur.state() === 'loaded') {
-      promises.push(Promise.resolve());
-
-      return;
-    }
-
-    const promise = new Promise<void>((resolve) => {
-      howlCur.on('load', () => {
-        resolve();
-      });
-    });
-
-    promises.push(promise);
-  });
-
-  const awaitPromises = () => Promise.all(promises);
-
-  yield call(awaitPromises);
+  yield waitForHowlerLoad();
+  yield waitForMediaLoad();
 
   yield put(actions.setIsLoading(false));
 

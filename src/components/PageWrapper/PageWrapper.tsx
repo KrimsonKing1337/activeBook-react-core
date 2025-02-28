@@ -10,9 +10,10 @@ import { Bookmarks } from 'components/Bookmarks';
 import { SideEffects } from 'components/SideEffects';
 import { BackgroundEffects } from 'components/BackgroundEffects';
 
+import { useSelector } from 'store';
+
 import { mainSelectors } from 'store/main';
 import { effectsSelectors } from 'store/effects/common';
-import { useSelector } from 'store';
 
 import { Narrative } from './components/Narrative';
 
