@@ -1,5 +1,7 @@
 import { PropsWithChildren } from 'react';
 
+import classNames from 'classnames';
+
 import { useSelector } from 'store';
 import { mainSelectors } from 'store/main';
 import { foundEasterEggs } from 'utils/localStorage/foundEasterEggs';
@@ -8,15 +10,19 @@ import { play } from 'utils/effects/achievements';
 
 import styles from './EasterEgg.scss';
 
-export type EasterEggProps = {
-  [key: string]: any;
+export type EasterEggProps = React.HTMLAttributes<HTMLSpanElement> & {
   id: string;
+  className?: string;
   onClick?: () => void;
 };
 
 export const EasterEgg = ({
-  id, children, onClick = () => {
-  }, ...rest
+  children,
+  id,
+  className = '',
+  onClick = () => {},
+
+  ...etc
 }: PropsWithChildren<EasterEggProps>) => {
   const easterEggsLength = useSelector(mainSelectors.easterEggs);
 
@@ -37,8 +43,13 @@ export const EasterEgg = ({
     onClick();
   };
 
+  const easterEggClassNames = classNames({
+    [styles.easterEgg]: true,
+    [className]: !!className,
+  });
+
   return (
-    <span className={styles.easterEgg} onClick={clickHandler} {...rest}>
+    <span className={easterEggClassNames} onClick={clickHandler} {...etc}>
       {children}
     </span>
   );

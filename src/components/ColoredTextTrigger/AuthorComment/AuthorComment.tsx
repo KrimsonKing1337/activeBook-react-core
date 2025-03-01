@@ -1,5 +1,7 @@
 import { PropsWithChildren } from 'react';
 
+import classNames from 'classnames';
+
 import { useSelector } from 'store';
 import { achievementsSelectors } from 'store/achievements';
 import { configSelectors } from 'store/config';
@@ -10,15 +12,16 @@ import { Flags as AchievementsFlags } from 'utils/effects/achievements/utils';
 
 import styles from './AuthorComment.scss';
 
-export type ActionProps = {
-  [name: string]: any;
+export type ActionProps = React.HTMLAttributes<HTMLSpanElement> & {
+  className?: string;
   onClick?: () => void;
 };
 
 export const AuthorComment = ({
-  onClick = () => {},
   children,
-  ...props
+  className = '',
+  onClick = () => {},
+  ...etc
 }: PropsWithChildren<ActionProps>) => {
   const achievements = useSelector(achievementsSelectors.achievements);
   const authorCommentsIsOn = useSelector(configSelectors.authorComments);
@@ -43,8 +46,13 @@ export const AuthorComment = ({
   const allPagesSeen = achievements?.allPagesSeen;
   const showComment = (allPagesSeen && authorCommentsIsOn) || isDemoMode;
 
+  const authorCommentClassNames = classNames({
+    [styles.authorComment]: true,
+    [className]: !!className,
+  });
+
   return showComment ? (
-    <span className={styles.authorComment} onClick={clickHandler} {...props}>
+    <span className={authorCommentClassNames} onClick={clickHandler} {...etc}>
       {' '}
       {children}
     </span>
