@@ -25,12 +25,13 @@ import classNames from 'classnames';
 import styles from './Action.scss';
 export var Action = function (_a) {
     var _b;
-    var children = _a.children, _c = _a.fullWidth, fullWidth = _c === void 0 ? false : _c, _d = _a.withSpaces, withSpaces = _d === void 0 ? true : _d, _e = _a.onClick, onClick = _e === void 0 ? function () {
-    } : _e, props = __rest(_a, ["children", "fullWidth", "withSpaces", "onClick"]);
+    var children = _a.children, _c = _a.className, className = _c === void 0 ? '' : _c, _d = _a.fullWidth, fullWidth = _d === void 0 ? false : _d, _e = _a.withSpaces, withSpaces = _e === void 0 ? true : _e, _f = _a.onClick, onClick = _f === void 0 ? function () {
+    } : _f, etc = __rest(_a, ["children", "className", "fullWidth", "withSpaces", "onClick"]);
     var actionClassNames = classNames((_b = {},
         _b[styles.action] = true,
         _b[styles.isFullWidth] = fullWidth,
+        _b[className] = !!className,
         _b));
-    return (_jsxs("span", __assign({ className: actionClassNames, onClick: onClick }, props, { children: [withSpaces && ' ', children, withSpaces && ' '] })));
+    return (_jsxs("span", __assign({ className: actionClassNames, onClick: onClick }, etc, { children: [withSpaces && ' ', children, withSpaces && ' '] })));
 };
 //# sourceMappingURL=Action.js.map

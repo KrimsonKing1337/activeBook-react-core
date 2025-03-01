@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
-export type EasterEggProps = {
-    [key: string]: any;
+export type EasterEggProps = React.HTMLAttributes<HTMLSpanElement> & {
     id: string;
+    className?: string;
     onClick?: () => void;
 };
-export declare const EasterEgg: ({ id, children, onClick, ...rest }: PropsWithChildren<EasterEggProps>) => import("react/jsx-runtime").JSX.Element;
+export declare const EasterEgg: ({ children, id, className, onClick, ...etc }: PropsWithChildren<EasterEggProps>) => import("react/jsx-runtime").JSX.Element;

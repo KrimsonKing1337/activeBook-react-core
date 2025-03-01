@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
-export type ActionProps = {
-    [name: string]: any;
+export type ActionProps = React.HTMLAttributes<HTMLSpanElement> & {
+    className?: string;
     onClick?: () => void;
 };
-export declare const AuthorComment: ({ onClick, children, ...props }: PropsWithChildren<ActionProps>) => import("react/jsx-runtime").JSX.Element;
+export declare const AuthorComment: ({ children, className, onClick, ...etc }: PropsWithChildren<ActionProps>) => import("react/jsx-runtime").JSX.Element;

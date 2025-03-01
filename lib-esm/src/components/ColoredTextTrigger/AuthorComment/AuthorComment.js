@@ -21,6 +21,7 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 import { jsxs as _jsxs, Fragment as _Fragment, jsx as _jsx } from "react/jsx-runtime";
+import classNames from 'classnames';
 import { useSelector } from 'store';
 import { achievementsSelectors } from 'store/achievements';
 import { configSelectors } from 'store/config';
@@ -30,7 +31,8 @@ import { play } from 'utils/effects/achievements';
 import { Flags as AchievementsFlags } from 'utils/effects/achievements/utils';
 import styles from './AuthorComment.scss';
 export var AuthorComment = function (_a) {
-    var _b = _a.onClick, onClick = _b === void 0 ? function () { } : _b, children = _a.children, props = __rest(_a, ["onClick", "children"]);
+    var _b;
+    var children = _a.children, _c = _a.className, className = _c === void 0 ? '' : _c, _d = _a.onClick, onClick = _d === void 0 ? function () { } : _d, etc = __rest(_a, ["children", "className", "onClick"]);
     var achievements = useSelector(achievementsSelectors.achievements);
     var authorCommentsIsOn = useSelector(configSelectors.authorComments);
     var authorCommentsLength = useSelector(mainSelectors.authorComments);
@@ -48,7 +50,11 @@ export var AuthorComment = function (_a) {
     };
     var allPagesSeen = achievements === null || achievements === void 0 ? void 0 : achievements.allPagesSeen;
     var showComment = (allPagesSeen && authorCommentsIsOn) || isDemoMode;
-    return showComment ? (_jsxs("span", __assign({ className: styles.authorComment, onClick: clickHandler }, props, { children: [' ', children] }))) :
+    var authorCommentClassNames = classNames((_b = {},
+        _b[styles.authorComment] = true,
+        _b[className] = !!className,
+        _b));
+    return showComment ? (_jsxs("span", __assign({ className: authorCommentClassNames, onClick: clickHandler }, etc, { children: [' ', children] }))) :
         _jsx(_Fragment, { children: children });
 };
 //# sourceMappingURL=AuthorComment.js.map

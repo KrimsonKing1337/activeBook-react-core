@@ -21,6 +21,7 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 import { jsx as _jsx } from "react/jsx-runtime";
+import classNames from 'classnames';
 import { useSelector } from 'store';
 import { mainSelectors } from 'store/main';
 import { foundEasterEggs } from 'utils/localStorage/foundEasterEggs';
@@ -28,8 +29,8 @@ import { Flags } from 'utils/effects/achievements/utils';
 import { play } from 'utils/effects/achievements';
 import styles from './EasterEgg.scss';
 export var EasterEgg = function (_a) {
-    var id = _a.id, children = _a.children, _b = _a.onClick, onClick = _b === void 0 ? function () {
-    } : _b, rest = __rest(_a, ["id", "children", "onClick"]);
+    var _b;
+    var children = _a.children, id = _a.id, _c = _a.className, className = _c === void 0 ? '' : _c, _d = _a.onClick, onClick = _d === void 0 ? function () { } : _d, etc = __rest(_a, ["children", "id", "className", "onClick"]);
     var easterEggsLength = useSelector(mainSelectors.easterEggs);
     var clickHandler = function () {
         foundEasterEggs.set(id);
@@ -44,6 +45,10 @@ export var EasterEgg = function (_a) {
         }
         onClick();
     };
-    return (_jsx("span", __assign({ className: styles.easterEgg, onClick: clickHandler }, rest, { children: children })));
+    var easterEggClassNames = classNames((_b = {},
+        _b[styles.easterEgg] = true,
+        _b[className] = !!className,
+        _b));
+    return (_jsx("span", __assign({ className: easterEggClassNames, onClick: clickHandler }, etc, { children: children })));
 };
 //# sourceMappingURL=EasterEgg.js.map
