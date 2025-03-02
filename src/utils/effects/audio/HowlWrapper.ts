@@ -1,6 +1,6 @@
 import { Howl, type HowlOptions } from 'howler';
 
-import type { AudioType } from '@types';
+import type { AudioType, Timer } from '@types';
 
 import { store } from 'store';
 
@@ -9,9 +9,12 @@ export type HowlWrapperOptions = {
   src: HowlOptions['src'];
   loop?: HowlOptions['loop'];
   type?: AudioType;
+  playOnLoad?: boolean;
   relativeVolume?: number;
   screamer?: boolean;
   fadeOutWhenUnload?: boolean;
+  delay?: number;
+  stopBy?: number;
 
   onPlay?: () => void;
   onPause?: () => void;
@@ -32,11 +35,17 @@ export class HowlWrapper {
   public id: HowlWrapperOptions['id'];
   public src: HowlOptions['src'] = '';
   public type: AudioType = 'sfx';
+  public playOnLoad = false;
   public relativeVolume: number;
   public fadeOutWhenUnload = true;
 
+  public delay: number = 0;
+  public stopBy: number = 0;
+
   public isUnloading = false;
   public isFading = false;
+
+  public timers: Record<string, Timer>;
 
   public onPlay: () => void;
   public onPause: () => void;
@@ -48,9 +57,12 @@ export class HowlWrapper {
     src,
     loop,
     type = 'sfx',
+    playOnLoad = false,
     relativeVolume = 100,
     screamer = false,
     fadeOutWhenUnload = true,
+    delay = 0,
+    stopBy = 0,
 
     onPlay = () => {
     },
@@ -92,11 +104,23 @@ export class HowlWrapper {
     this.type = type;
     this.relativeVolume = relativeVolume;
     this.fadeOutWhenUnload = fadeOutWhenUnload;
+    this.delay = delay;
+    this.stopBy = stopBy;
+    this.playOnLoad = playOnLoad;
+
+    this.timers = {
+      delay: null,
+      stopBy: null,
+    };
 
     this.onPlay = onPlay;
     this.onPause = onPause;
     this.onStop = onStop;
     this.onUnload = onUnload;
+
+    if (playOnLoad) {
+      this.play();
+    }
   }
 
   volume(n: number) {
@@ -141,7 +165,24 @@ export class HowlWrapper {
     }
 
     this.howlInst.once('play', this.onPlay);
-    this.howlInst.play();
+
+    if (this.delay > 0) {
+      this.timers.delay = setTimeout(() => {
+        this.howlInst.play();
+
+        this.timers.delay = null;
+      }, this.delay);
+    } else {
+      this.howlInst.play();
+    }
+
+    if (this.stopBy > 0) {
+      this.timers.stopBy = setTimeout(() => {
+        this.howlInst.stop();
+
+        this.timers.stopBy = null;
+      }, this.stopBy);
+    }
   }
 
   async pause(withFadeOut = false) {

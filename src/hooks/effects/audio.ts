@@ -2,14 +2,13 @@ import { useEffect, useState } from 'react';
 
 import { nanoid } from 'nanoid';
 
-import type { Timer, AudioEffectOptions } from '@types';
+import type { AudioEffectOptions } from '@types';
 
 import { useSelector, useDispatch } from 'store';
 
 import { audioEffectsActions, audioEffectsSelectors } from 'store/effects/audio/audio';
 
 import { HowlWrapper, type HowlWrapperOptions } from 'utils/effects/audio/HowlWrapper';
-import { waitTillTheEndIfAudioIsTooShort } from 'utils/effects/audio/waitTillTheEndIfAudioIsTooShort';
 
 export function useAudio({
   id = '',
@@ -41,9 +40,12 @@ export function useAudio({
       src: [src],
       type,
       loop,
+      playOnLoad,
       relativeVolume,
       screamer,
       fadeOutWhenUnload,
+      stopBy,
+      delay,
       onPlay,
       onPause,
       onStop,
@@ -55,47 +57,11 @@ export function useAudio({
     setAudioId(uuid);
 
     dispatch(audioEffectsActions.setAudioInstance(howlInst));
-  }, []);
-
-  useEffect(() => {
-    const audioInstance = audioInstances[audioId];
-
-    if (!audioInstance || audioInstance.isUnloading) {
-      return;
-    }
-
-    let timer: Timer = null;
-
-    // todo: delay и stopBy передавать в Howler в параметре onPlay
-
-    if (playOnLoad) {
-      timer = setTimeout(() => {
-        audioInstance.play();
-      }, delay);
-    }
-
-    if (stopBy) {
-      timer = setTimeout(() => {
-        audioInstance.stop();
-      }, stopBy);
-    }
 
     return () => {
-      if (!audioInstance || audioInstance.isUnloading) {
-        return;
-      }
-
-      (async () => {
-        await waitTillTheEndIfAudioIsTooShort(audioInstance);
-      })();
-
-      dispatch(audioEffectsActions.deleteAudioInstance(audioId));
-
-      if (timer) {
-        clearTimeout(timer);
-      }
+      dispatch(audioEffectsActions.deleteAudioInstance(uuid));
     };
-  }, [audioInstances, audioId]);
+  }, []);
 
   return audioInstances[audioId];
 }
