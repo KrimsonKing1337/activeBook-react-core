@@ -37,7 +37,6 @@ export function useAudio(_a) {
     useEffect(function () {
         return function () {
             dispatch(audioEffectsActions.deleteAudioInstance(audioIdRef.current));
-            console.log('___ deleting audio instance', audioIdRef.current);
         };
     }, []);
     return audioInstances[audioIdRef.current];

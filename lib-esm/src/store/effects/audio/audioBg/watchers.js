@@ -37,6 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import { put, select, takeLatest } from 'redux-saga/effects';
+import { unloadAudio } from 'utils/effects/audio/unloadAudio';
 import { actions } from './slice';
 import { selectors } from './selectors';
 export function watchSetAudioInstance(action) {
@@ -62,7 +63,7 @@ export function watchSetAudioInstance(action) {
     });
 }
 export function watchDeleteAudioInstance(action) {
-    var payload, howlInstances, newValue;
+    var payload, howlInstances, howlInstance, newValue;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -70,10 +71,28 @@ export function watchDeleteAudioInstance(action) {
                 return [4 /*yield*/, select(selectors.audioInstances)];
             case 1:
                 howlInstances = _a.sent();
+                howlInstance = howlInstances[payload];
+                if (!howlInstance) {
+                    return [2 /*return*/];
+                }
+                return [4 /*yield*/, put(actions.setIsDeleting(true))];
+            case 2:
+                _a.sent();
+                Object.values(howlInstance.timers).forEach(function (timerCur) {
+                    if (timerCur) {
+                        clearTimeout(timerCur);
+                    }
+                });
+                if (!howlInstance.isUnloading) {
+                    unloadAudio(howlInstance);
+                }
                 newValue = __assign({}, howlInstances);
                 delete newValue[payload];
                 return [4 /*yield*/, put(actions.setAudioInstances(newValue))];
-            case 2:
+            case 3:
+                _a.sent();
+                return [4 /*yield*/, put(actions.setIsDeleting(false))];
+            case 4:
                 _a.sent();
                 return [2 /*return*/];
         }

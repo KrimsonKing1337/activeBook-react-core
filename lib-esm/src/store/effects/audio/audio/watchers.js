@@ -88,7 +88,6 @@ export function watchDeleteAudioInstance(action) {
                 }
                 newValue = __assign({}, howlInstances);
                 delete newValue[payload];
-                console.log('___ newValue', newValue);
                 return [4 /*yield*/, put(actions.setAudioInstances(newValue))];
             case 3:
                 _a.sent();

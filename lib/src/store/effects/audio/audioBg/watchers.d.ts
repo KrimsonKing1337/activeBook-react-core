@@ -7,5 +7,8 @@ export declare function watchSetAudioInstance(action: PayloadAction<HowlInst>): 
 export declare function watchDeleteAudioInstance(action: PayloadAction<string>): Generator<import("redux-saga/effects").SelectEffect | import("redux-saga/effects").PutEffect<{
     payload: HowlInstances;
     type: "@effects/audioBg/setAudioInstances";
+}> | import("redux-saga/effects").PutEffect<{
+    payload: boolean;
+    type: "@effects/audioBg/setIsDeleting";
 }>, void, HowlInstances>;
 export declare function watchActions(): Generator<import("redux-saga/effects").ForkEffect<never>, void, unknown>;

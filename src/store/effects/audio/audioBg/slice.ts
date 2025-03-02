@@ -6,6 +6,7 @@ import type { State } from './@types';
 
 export const initialState: State = {
   audioInstances: {},
+  isDeleting: false,
 };
 
 const slice = createSlice({
@@ -19,6 +20,9 @@ const slice = createSlice({
 
     setAudioInstances(state, action: PayloadAction<HowlInstances>) {
       state.audioInstances = action.payload;
+    },
+    setIsDeleting(state, action: PayloadAction<boolean>) {
+      state.isDeleting = action.payload;
     },
   },
 });
