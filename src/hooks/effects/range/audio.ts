@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 
 import type {
   RangeEffects,
-  Timer,
   RangeEffect,
   AudioEffectRangeOptions,
 } from '@types';
@@ -14,7 +13,6 @@ import { audioBgEffectsActions } from 'store/effects/audio/audioBg';
 
 import { HowlWrapper } from 'utils/effects/audio/HowlWrapper';
 import { getEffectsInRange } from 'utils/effects/rangeEffects';
-import { waitTillTheEndIfAudioIsTooShort } from 'utils/effects/audio/waitTillTheEndIfAudioIsTooShort';
 
 export function useAudioInRange(effects: RangeEffects) {
   const dispatch = useDispatch();
@@ -42,10 +40,6 @@ export function useAudioInRange(effects: RangeEffects) {
         return;
       }
 
-      (async () => {
-        await waitTillTheEndIfAudioIsTooShort(audioInstanceCur);
-      })();
-
       dispatch(audioBgEffectsActions.deleteAudioInstance(id as string));
     });
   }, [page]);
@@ -53,8 +47,6 @@ export function useAudioInRange(effects: RangeEffects) {
   useEffect(() => {
     const audioInstancesInStore = store.getState().audioBgEffects.audioInstances;
     const audiosForPage = getEffectsInRange(effects, page, 'audio') as RangeEffect[];
-
-    const timers: Timer[] = [];
 
     audiosForPage.forEach((audioOnPageCur) => {
       const { id: idFromRange } = audioOnPageCur;
@@ -83,6 +75,9 @@ export function useAudioInRange(effects: RangeEffects) {
         id,
         src: [src],
         type,
+        playOnLoad,
+        stopBy,
+        delay,
         loop,
         screamer,
         fadeOutWhenUnload,
@@ -90,34 +85,7 @@ export function useAudioInRange(effects: RangeEffects) {
         onUnload,
       });
 
-      let timer: Timer = null;
-
-      if (playOnLoad) {
-        timer = setTimeout(() => {
-          howlInst.play();
-        }, delay);
-      }
-
-      if (stopBy) {
-        timer = setTimeout(() => {
-          howlInst.stop();
-        }, stopBy);
-      }
-
-      timers.push(timer);
-
       dispatch(audioBgEffectsActions.setAudioInstance(howlInst));
     });
-
-    // мне кажется, это не нужно. т.к. необходимо ждать выполнения таймеров, а не сбрасывать их при смене страницы.
-    // эффект может звучать на несколько страниц, а не только на одну
-
-    /*return () => {
-      timers.forEach((timerCur) => {
-        if (timerCur) {
-          clearTimeout(timerCur);
-        }
-      });
-    };*/
   }, [page]);
 }
