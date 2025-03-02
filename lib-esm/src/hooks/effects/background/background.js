@@ -9,22 +9,24 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { nanoid } from 'nanoid';
 import { useDispatch } from 'store';
 import { backgroundEffectsActions } from 'store/effects/background';
 export var useBackground = function (effect) {
     var dispatch = useDispatch();
-    var effectWithId = __assign({}, effect);
-    if (!effect.id) {
-        effectWithId.id = nanoid();
-    }
+    var effectRef = useRef('');
     useEffect(function () {
+        var effectWithId = __assign({}, effect);
+        if (!effect.id) {
+            effectWithId.id = nanoid();
+        }
         dispatch(backgroundEffectsActions.setEffect(effectWithId));
-    }, []);
+        effectRef.current = effectWithId.id;
+    }, [effect]);
     useEffect(function () {
         return function () {
-            dispatch(backgroundEffectsActions.deleteEffect(effectWithId.id));
+            dispatch(backgroundEffectsActions.deleteEffect(effectRef.current));
         };
     }, []);
 };

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { nanoid } from 'nanoid';
 
@@ -10,21 +10,25 @@ import type { BackgroundEffect } from './@types';
 export const useBackground = (effect: BackgroundEffect) => {
   const dispatch = useDispatch();
 
-  const effectWithId = {
-    ...effect,
-  };
-
-  if (!effect.id) {
-    effectWithId.id = nanoid();
-  }
+  const effectRef = useRef<string>('');
 
   useEffect(() => {
+    const effectWithId = {
+      ...effect,
+    };
+
+    if (!effect.id) {
+      effectWithId.id = nanoid();
+    }
+
+    effectRef.current = effectWithId.id as string;
+
     dispatch(backgroundEffectsActions.setEffect(effectWithId));
-  }, []);
+  }, [effect]);
 
   useEffect(() => {
     return () => {
-      dispatch(backgroundEffectsActions.deleteEffect(effectWithId.id as string));
+      dispatch(backgroundEffectsActions.deleteEffect(effectRef.current as string));
     };
   }, []);
 };

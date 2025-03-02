@@ -22,9 +22,6 @@ export type AudioEffectOptions = {
     onPause?: () => void;
     onStop?: () => void;
 };
-export type AudioEffectRangeOptions = Omit<AudioEffectOptions, 'id'> & {
-    id: string;
-};
 export type Range = {
     from: number;
     to: number;
