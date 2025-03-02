@@ -34,7 +34,7 @@ export function* watchDeleteAudioInstance(action: PayloadAction<string>) {
 
   const howlInstance = howlInstances[payload];
 
-  if (!howlInstance || howlInstance.isUnloading) {
+  if (!howlInstance) {
     return;
   }
 
@@ -44,7 +44,9 @@ export function* watchDeleteAudioInstance(action: PayloadAction<string>) {
     }
   });
 
-  yield waitTillTheEndIfAudioIsTooShort(howlInstance);
+  if (!howlInstance.isUnloading) {
+    yield waitTillTheEndIfAudioIsTooShort(howlInstance);
+  }
 
   const newValue = {
     ...howlInstances,

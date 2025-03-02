@@ -38,14 +38,17 @@ import { Howl } from 'howler';
 import { store } from 'store';
 var HowlWrapper = /** @class */ (function () {
     function HowlWrapper(_a) {
-        var id = _a.id, src = _a.src, loop = _a.loop, _b = _a.type, type = _b === void 0 ? 'sfx' : _b, _c = _a.relativeVolume, relativeVolume = _c === void 0 ? 100 : _c, _d = _a.screamer, screamer = _d === void 0 ? false : _d, _e = _a.fadeOutWhenUnload, fadeOutWhenUnload = _e === void 0 ? true : _e, _f = _a.onPlay, onPlay = _f === void 0 ? function () {
-        } : _f, _g = _a.onUnload, onUnload = _g === void 0 ? function () { } : _g, _h = _a.onPause, onPause = _h === void 0 ? function () { } : _h, _j = _a.onStop, onStop = _j === void 0 ? function () { } : _j;
+        var id = _a.id, src = _a.src, loop = _a.loop, _b = _a.type, type = _b === void 0 ? 'sfx' : _b, _c = _a.playOnLoad, playOnLoad = _c === void 0 ? false : _c, _d = _a.relativeVolume, relativeVolume = _d === void 0 ? 100 : _d, _e = _a.screamer, screamer = _e === void 0 ? false : _e, _f = _a.fadeOutWhenUnload, fadeOutWhenUnload = _f === void 0 ? true : _f, _g = _a.delay, delay = _g === void 0 ? 0 : _g, _h = _a.stopBy, stopBy = _h === void 0 ? 0 : _h, _j = _a.onPlay, onPlay = _j === void 0 ? function () {
+        } : _j, _k = _a.onUnload, onUnload = _k === void 0 ? function () { } : _k, _l = _a.onPause, onPause = _l === void 0 ? function () { } : _l, _m = _a.onStop, onStop = _m === void 0 ? function () { } : _m;
         this.src = '';
         this.type = 'sfx';
+        this.playOnLoad = false;
         this.fadeOutWhenUnload = true;
+        this.delay = 0;
+        this.stopBy = 0;
         this.isUnloading = false;
         this.isFading = false;
-        var _k = this.getVolume(), sfx = _k.sfx, bg = _k.bg, music = _k.music, global = _k.global;
+        var _o = this.getVolume(), sfx = _o.sfx, bg = _o.bg, music = _o.music, global = _o.global;
         var getInitialVolume = function (volume) {
             return (volume / 100) * (relativeVolume / 100) * (global / 100);
         };
@@ -70,10 +73,20 @@ var HowlWrapper = /** @class */ (function () {
         this.type = type;
         this.relativeVolume = relativeVolume;
         this.fadeOutWhenUnload = fadeOutWhenUnload;
+        this.delay = delay;
+        this.stopBy = stopBy;
+        this.playOnLoad = playOnLoad;
+        this.timers = {
+            delay: null,
+            stopBy: null,
+        };
         this.onPlay = onPlay;
         this.onPause = onPause;
         this.onStop = onStop;
         this.onUnload = onUnload;
+        if (playOnLoad) {
+            this.play();
+        }
     }
     HowlWrapper.prototype.volume = function (n) {
         var globalVolume = this.getVolume().global;
@@ -99,6 +112,7 @@ var HowlWrapper = /** @class */ (function () {
     HowlWrapper.prototype.play = function (withFadeIn) {
         if (withFadeIn === void 0) { withFadeIn = false; }
         return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -121,7 +135,21 @@ var HowlWrapper = /** @class */ (function () {
                         _a.label = 5;
                     case 5:
                         this.howlInst.once('play', this.onPlay);
-                        this.howlInst.play();
+                        if (this.delay > 0) {
+                            this.timers.delay = setTimeout(function () {
+                                _this.howlInst.play();
+                                _this.timers.delay = null;
+                            }, this.delay);
+                        }
+                        else {
+                            this.howlInst.play();
+                        }
+                        if (this.stopBy > 0) {
+                            this.timers.stopBy = setTimeout(function () {
+                                _this.howlInst.stop();
+                                _this.timers.stopBy = null;
+                            }, this.stopBy);
+                        }
                         return [2 /*return*/];
                 }
             });
