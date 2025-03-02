@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -35,9 +34,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.waitTillTheEndIfAudioIsTooShort = void 0;
-function waitTillTheEndIfAudioIsTooShort(audioInstance) {
+/*
+  если аудио слишком короткое (до 1.2 секунды) - сначала ждём пока оно доиграет, затем производим unload
+*/
+export function unloadAudio(audioInstance) {
     return __awaiter(this, void 0, void 0, function () {
         var dur;
         return __generator(this, function (_a) {
@@ -57,5 +57,4 @@ function waitTillTheEndIfAudioIsTooShort(audioInstance) {
         });
     });
 }
-exports.waitTillTheEndIfAudioIsTooShort = waitTillTheEndIfAudioIsTooShort;
-//# sourceMappingURL=waitTillTheEndIfAudioIsTooShort.js.map
+//# sourceMappingURL=unloadAudio.js.map

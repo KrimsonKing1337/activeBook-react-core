@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { nanoid } from 'nanoid';
 
@@ -29,10 +29,15 @@ export function useAudio({
   const dispatch = useDispatch();
 
   const audioInstances = useSelector(audioEffectsSelectors.audioInstances);
+  const isDeleting = useSelector(audioEffectsSelectors.isDeleting);
 
-  const [audioId, setAudioId] = useState<string>(id);
+  const audioIdRef = useRef(id);
 
   useEffect(() => {
+    if (isDeleting) {
+      return;
+    }
+
     const uuid = id || nanoid();
 
     const opt: HowlWrapperOptions = {
@@ -54,14 +59,16 @@ export function useAudio({
 
     const howlInst = new HowlWrapper(opt);
 
-    setAudioId(uuid);
+    audioIdRef.current = uuid;
 
     dispatch(audioEffectsActions.setAudioInstance(howlInst));
+  }, [isDeleting]);
 
+  useEffect(() => {
     return () => {
-      dispatch(audioEffectsActions.deleteAudioInstance(uuid));
+      dispatch(audioEffectsActions.deleteAudioInstance(audioIdRef.current));
     };
   }, []);
 
-  return audioInstances[audioId];
+  return audioInstances[audioIdRef.current];
 }

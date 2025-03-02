@@ -3,7 +3,7 @@ import { put, select, takeLatest } from 'redux-saga/effects';
 
 import type { HowlInst, HowlInstances } from '@types';
 
-import { waitTillTheEndIfAudioIsTooShort } from 'utils/effects/audio/waitTillTheEndIfAudioIsTooShort';
+import { unloadAudio } from 'utils/effects/audio/unloadAudio';
 
 import { actions } from './slice';
 import { selectors } from './selectors';
@@ -38,6 +38,8 @@ export function* watchDeleteAudioInstance(action: PayloadAction<string>) {
     return;
   }
 
+  yield put(actions.setIsDeleting(true));
+
   Object.values(howlInstance.timers).forEach((timerCur) => {
     if (timerCur) {
       clearTimeout(timerCur);
@@ -45,7 +47,7 @@ export function* watchDeleteAudioInstance(action: PayloadAction<string>) {
   });
 
   if (!howlInstance.isUnloading) {
-    yield waitTillTheEndIfAudioIsTooShort(howlInstance);
+    unloadAudio(howlInstance);
   }
 
   const newValue = {
@@ -55,6 +57,7 @@ export function* watchDeleteAudioInstance(action: PayloadAction<string>) {
   delete newValue[payload];
 
   yield put(actions.setAudioInstances(newValue));
+  yield put(actions.setIsDeleting(false));
 }
 
 export function* watchActions() {

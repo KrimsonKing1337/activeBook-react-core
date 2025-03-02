@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { nanoid } from 'nanoid';
 import { useSelector, useDispatch } from 'store';
 import { audioEffectsActions, audioEffectsSelectors } from 'store/effects/audio/audio';
@@ -7,8 +7,12 @@ export function useAudio(_a) {
     var _b = _a.id, id = _b === void 0 ? '' : _b, src = _a.src, _c = _a.type, type = _c === void 0 ? 'sfx' : _c, _d = _a.loop, loop = _d === void 0 ? false : _d, _e = _a.playOnLoad, playOnLoad = _e === void 0 ? false : _e, _f = _a.stopBy, stopBy = _f === void 0 ? 0 : _f, _g = _a.delay, delay = _g === void 0 ? 0 : _g, _h = _a.relativeVolume, relativeVolume = _h === void 0 ? 100 : _h, _j = _a.screamer, screamer = _j === void 0 ? false : _j, _k = _a.fadeOutWhenUnload, fadeOutWhenUnload = _k === void 0 ? true : _k, _l = _a.onPlay, onPlay = _l === void 0 ? function () { } : _l, _m = _a.onPause, onPause = _m === void 0 ? function () { } : _m, _o = _a.onStop, onStop = _o === void 0 ? function () { } : _o, _p = _a.onUnload, onUnload = _p === void 0 ? function () { } : _p;
     var dispatch = useDispatch();
     var audioInstances = useSelector(audioEffectsSelectors.audioInstances);
-    var _q = useState(id), audioId = _q[0], setAudioId = _q[1];
+    var isDeleting = useSelector(audioEffectsSelectors.isDeleting);
+    var audioIdRef = useRef(id);
     useEffect(function () {
+        if (isDeleting) {
+            return;
+        }
         var uuid = id || nanoid();
         var opt = {
             id: uuid,
@@ -27,13 +31,15 @@ export function useAudio(_a) {
             onUnload: onUnload,
         };
         var howlInst = new HowlWrapper(opt);
-        setAudioId(uuid);
+        audioIdRef.current = uuid;
         dispatch(audioEffectsActions.setAudioInstance(howlInst));
+    }, [isDeleting]);
+    useEffect(function () {
         return function () {
-            console.log('___ deleting instance', uuid);
-            dispatch(audioEffectsActions.deleteAudioInstance(uuid));
+            dispatch(audioEffectsActions.deleteAudioInstance(audioIdRef.current));
+            console.log('___ deleting audio instance', audioIdRef.current);
         };
     }, []);
-    return audioInstances[audioId];
+    return audioInstances[audioIdRef.current];
 }
 //# sourceMappingURL=audio.js.map

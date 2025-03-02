@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 export var initialState = {
     audioInstances: {},
+    isDeleting: false,
 };
 var slice = createSlice({
     name: '@effects/audio',
@@ -12,6 +13,9 @@ var slice = createSlice({
         deleteAudioInstance: function (_state, _action) { },
         setAudioInstances: function (state, action) {
             state.audioInstances = action.payload;
+        },
+        setIsDeleting: function (state, action) {
+            state.isDeleting = action.payload;
         },
     },
 });
