@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import type {
   RangeEffects,
   RangeEffect,
-  AudioEffectOptions,
+  AudioEffectOptionsRange,
 } from '@types';
 
 import { store, useDispatch, useSelector } from 'store';
@@ -51,7 +51,7 @@ export function useAudioInRange(effects: RangeEffects) {
     audiosForPage.forEach((audioOnPageCur) => {
       const { id } = audioOnPageCur;
 
-      // id, который указан в options игнорируется, берётся id на верхнем уровне
+      // в audio range id передаётся только на верхнем уровне, в options его нет
       const {
         src,
         type,
@@ -63,7 +63,7 @@ export function useAudioInRange(effects: RangeEffects) {
         fadeOutWhenUnload,
         onPlay,
         onUnload,
-      } = audioOnPageCur.options as AudioEffectOptions;
+      } = audioOnPageCur.options as AudioEffectOptionsRange;
 
       const audioInstanceInStore = audioInstancesInStore[id];
 

@@ -13,7 +13,7 @@ export type HowlInstances = Record<string, HowlInst>;
 export type AudioType = 'bg' | 'music' | 'sfx';
 
 export type AudioEffectOptions = {
-  id?: string;
+  id: string;
   src: string;
   fadeOutWhenUnload?: boolean;
   type?: AudioType;
@@ -36,11 +36,13 @@ export type Range = {
 
 export type RangeType = 'audio' | 'dots' | 'background';
 
+export type AudioEffectOptionsRange = Omit<AudioEffectOptions, 'id'>;
+
 export type RangeEffect = {
   id: string;
   type: RangeType;
   range: Range[];
-  options?: AudioEffectOptions | BackgroundEffect;
+  options?: AudioEffectOptionsRange | BackgroundEffect;
 };
 
 export type DotsRangeEffect = RangeEffect;

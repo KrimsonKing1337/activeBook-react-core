@@ -1,7 +1,5 @@
 import { useEffect, useRef } from 'react';
 
-import { nanoid } from 'nanoid';
-
 import { useDispatch } from 'store';
 import { backgroundEffectsActions } from 'store/effects/background';
 
@@ -13,22 +11,14 @@ export const useBackground = (effect: BackgroundEffect) => {
   const effectRef = useRef<string>('');
 
   useEffect(() => {
-    const effectWithId = {
-      ...effect,
-    };
+    effectRef.current = effect.id;
 
-    if (!effect.id) {
-      effectWithId.id = nanoid();
-    }
-
-    effectRef.current = effectWithId.id as string;
-
-    dispatch(backgroundEffectsActions.setEffect(effectWithId));
+    dispatch(backgroundEffectsActions.setEffect(effect));
   }, [effect]);
 
   useEffect(() => {
     return () => {
-      dispatch(backgroundEffectsActions.deleteEffect(effectRef.current as string));
+      dispatch(backgroundEffectsActions.deleteEffect(effectRef.current));
     };
   }, []);
 };

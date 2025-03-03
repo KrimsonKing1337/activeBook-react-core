@@ -30,7 +30,7 @@ export type BackgroundEffectShadowOptions = {
 };
 
 export type BackgroundEffect = {
-  id?: string;
+  id: string;
   style?: React.CSSProperties;
   images?: UseBackgroundEffectImageOptions[];
   videos?: BackgroundEffectVideoOptions[];

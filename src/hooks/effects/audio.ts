@@ -1,7 +1,5 @@
 import { useEffect, useRef } from 'react';
 
-import { nanoid } from 'nanoid';
-
 import type { AudioEffectOptions } from '@types';
 
 import { useSelector, useDispatch } from 'store';
@@ -11,7 +9,7 @@ import { audioEffectsActions, audioEffectsSelectors } from 'store/effects/audio/
 import { HowlWrapper, type HowlWrapperOptions } from 'utils/effects/audio/HowlWrapper';
 
 export function useAudio({
-  id = '',
+  id,
   src,
   type = 'sfx',
   loop = false,
@@ -38,10 +36,8 @@ export function useAudio({
       return;
     }
 
-    const uuid = id || nanoid();
-
     const opt: HowlWrapperOptions = {
-      id: uuid,
+      id,
       src: [src],
       type,
       loop,
@@ -59,7 +55,7 @@ export function useAudio({
 
     const howlInst = new HowlWrapper(opt);
 
-    audioIdRef.current = uuid;
+    audioIdRef.current = id;
 
     dispatch(audioEffectsActions.setAudioInstance(howlInst));
   }, [isDeleting]);
