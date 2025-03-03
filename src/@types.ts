@@ -37,12 +37,13 @@ export type Range = {
 export type RangeType = 'audio' | 'dots' | 'background';
 
 export type AudioEffectOptionsRange = Omit<AudioEffectOptions, 'id'>;
+export type BackgroundEffectOptionsRange = Omit<BackgroundEffect, 'id'>;
 
 export type RangeEffect = {
   id: string;
   type: RangeType;
   range: Range[];
-  options?: AudioEffectOptionsRange | BackgroundEffect;
+  options?: AudioEffectOptionsRange | BackgroundEffectOptionsRange;
 };
 
 export type DotsRangeEffect = RangeEffect;
