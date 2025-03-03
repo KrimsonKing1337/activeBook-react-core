@@ -30,7 +30,7 @@ export function useAudioInRange(effects) {
         var audiosForPage = getEffectsInRange(effects, page, 'audio');
         audiosForPage.forEach(function (audioOnPageCur) {
             var id = audioOnPageCur.id;
-            // id, который указан в options игнорируется, берётся id на верхнем уровне
+            // в audio range id передаётся только на верхнем уровне, в options его нет
             var _a = audioOnPageCur.options, src = _a.src, type = _a.type, loop = _a.loop, playOnLoad = _a.playOnLoad, delay = _a.delay, stopBy = _a.stopBy, screamer = _a.screamer, fadeOutWhenUnload = _a.fadeOutWhenUnload, onPlay = _a.onPlay, onUnload = _a.onUnload;
             var audioInstanceInStore = audioInstancesInStore[id];
             if (audioInstanceInStore) {

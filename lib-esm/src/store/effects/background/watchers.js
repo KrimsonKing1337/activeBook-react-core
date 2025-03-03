@@ -46,7 +46,6 @@ export function watchSetEffect(action) {
         switch (_b.label) {
             case 0:
                 payload = action.payload;
-                console.log('___ watchSetEffect', payload);
                 if (!payload) {
                     return [2 /*return*/];
                 }
