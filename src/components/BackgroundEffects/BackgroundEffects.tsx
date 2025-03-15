@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, memo } from 'react';
 
 import { nanoid } from 'nanoid';
 
@@ -10,7 +10,7 @@ import { Videos, Images, Shadow, Dots } from './components';
 
 import styles from './BackgroundEffects.scss';
 
-export const BackgroundEffects = () => {
+export const BackgroundEffects = memo(() => {
   const effects = useSelector(backgroundEffectsSelectors.effects);
 
   const BackgroundObjectsWrappers = Object.keys(effects).map((keyCur) => {
@@ -51,4 +51,4 @@ export const BackgroundEffects = () => {
       {BackgroundObjectsWrappers.map((cur) => cur)}
     </div>
   );
-};
+});

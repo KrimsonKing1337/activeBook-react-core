@@ -8,17 +8,22 @@ import type { BackgroundEffect } from './@types';
 export const useBackground = (effect: BackgroundEffect) => {
   const dispatch = useDispatch();
 
-  const effectRef = useRef<string>('');
+  const refId = useRef('');
 
   useEffect(() => {
-    effectRef.current = effect.id;
+    // если id уже есть - значит эффект не нужно инициализировать заново
+    if (refId.current) {
+      return;
+    }
+
+    refId.current = effect.id;
 
     dispatch(backgroundEffectsActions.setEffect(effect));
   }, [effect]);
 
   useEffect(() => {
     return () => {
-      dispatch(backgroundEffectsActions.deleteEffect(effectRef.current));
+      dispatch(backgroundEffectsActions.deleteEffect(refId.current));
     };
   }, []);
 };

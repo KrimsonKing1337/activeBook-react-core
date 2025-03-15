@@ -1,11 +1,11 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { Fragment } from 'react';
+import { Fragment, memo } from 'react';
 import { nanoid } from 'nanoid';
 import { useSelector } from 'store';
 import { backgroundEffectsSelectors } from 'store/effects/background';
 import { Videos, Images, Shadow, Dots } from './components';
 import styles from './BackgroundEffects.scss';
-export var BackgroundEffects = function () {
+export var BackgroundEffects = memo(function () {
     var effects = useSelector(backgroundEffectsSelectors.effects);
     var BackgroundObjectsWrappers = Object.keys(effects).map(function (keyCur) {
         var effectCur = effects[keyCur];
@@ -15,5 +15,5 @@ export var BackgroundEffects = function () {
         return (_jsx(Fragment, { children: oneOfBgIsActive && (_jsxs("div", { style: style, className: styles.backgroundObjectsWrapper, children: [_jsx(Shadow, { options: shadow }), Component, _jsx(Videos, { videos: videos }), _jsx(Images, { images: images })] })) }, uuid));
     });
     return (_jsxs("div", { className: styles.backgroundEffectsWrapper, children: [_jsx(Dots, {}), BackgroundObjectsWrappers.map(function (cur) { return cur; })] }));
-};
+});
 //# sourceMappingURL=BackgroundEffects.js.map

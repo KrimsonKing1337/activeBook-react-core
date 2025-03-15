@@ -29,10 +29,11 @@ export function useAudio({
   const audioInstances = useSelector(audioEffectsSelectors.audioInstances);
   const isDeleting = useSelector(audioEffectsSelectors.isDeleting);
 
-  const audioIdRef = useRef(id);
+  const refId = useRef('');
 
   useEffect(() => {
-    if (isDeleting) {
+    // если удаляется или id уже есть - значит эффект не нужно инициализировать заново
+    if (isDeleting || refId.current) {
       return;
     }
 
@@ -55,16 +56,16 @@ export function useAudio({
 
     const howlInst = new HowlWrapper(opt);
 
-    audioIdRef.current = id;
+    refId.current = id;
 
     dispatch(audioEffectsActions.setAudioInstance(howlInst));
   }, [isDeleting]);
 
   useEffect(() => {
     return () => {
-      dispatch(audioEffectsActions.deleteAudioInstance(audioIdRef.current));
+      dispatch(audioEffectsActions.deleteAudioInstance(refId.current));
     };
   }, []);
 
-  return audioInstances[audioIdRef.current];
+  return audioInstances[refId.current];
 }

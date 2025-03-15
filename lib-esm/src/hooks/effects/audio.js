@@ -7,9 +7,10 @@ export function useAudio(_a) {
     var dispatch = useDispatch();
     var audioInstances = useSelector(audioEffectsSelectors.audioInstances);
     var isDeleting = useSelector(audioEffectsSelectors.isDeleting);
-    var audioIdRef = useRef(id);
+    var refId = useRef('');
     useEffect(function () {
-        if (isDeleting) {
+        // если удаляется или id уже есть - значит эффект не нужно инициализировать заново
+        if (isDeleting || refId.current) {
             return;
         }
         var opt = {
@@ -29,14 +30,14 @@ export function useAudio(_a) {
             onUnload: onUnload,
         };
         var howlInst = new HowlWrapper(opt);
-        audioIdRef.current = id;
+        refId.current = id;
         dispatch(audioEffectsActions.setAudioInstance(howlInst));
     }, [isDeleting]);
     useEffect(function () {
         return function () {
-            dispatch(audioEffectsActions.deleteAudioInstance(audioIdRef.current));
+            dispatch(audioEffectsActions.deleteAudioInstance(refId.current));
         };
     }, []);
-    return audioInstances[audioIdRef.current];
+    return audioInstances[refId.current];
 }
 //# sourceMappingURL=audio.js.map
