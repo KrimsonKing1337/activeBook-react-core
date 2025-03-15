@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { push } from 'redux-first-history';
-import { put, select, takeLatest } from 'redux-saga/effects';
+import { call, put, select, takeLatest } from 'redux-saga/effects';
 
 import { Location } from 'history';
 
@@ -46,12 +46,20 @@ export function* watchSetPage(action: PayloadAction<State['page']>) {
 
   yield put(actions.setIsLoading(true));
 
-  yield waitForHowlerLoad();
-  yield waitForMediaLoad();
+  yield put(push(path));
+
+  yield call(() => {
+    return new Promise<void>(resolve => {
+      setTimeout(async () => {
+        await waitForHowlerLoad();
+        await waitForMediaLoad();
+
+        resolve();
+      }, 0);
+    });
+  });
 
   yield put(actions.setIsLoading(false));
-
-  yield put(push(path));
 }
 
 export function* watchPrevPage() {

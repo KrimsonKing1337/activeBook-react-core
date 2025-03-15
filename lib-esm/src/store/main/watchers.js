@@ -1,3 +1,12 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __generator = (this && this.__generator) || function (thisArg, body) {
     var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
     return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
@@ -26,7 +35,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import { push } from 'redux-first-history';
-import { put, select, takeLatest } from 'redux-saga/effects';
+import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { actions } from './slice';
 import { selectors } from './selectors';
 import { waitForHowlerLoad, waitForMediaLoad } from './utils';
@@ -74,6 +83,7 @@ export function watchSetRoute(action) {
 }
 export function watchSetPage(action) {
     var payload, path;
+    var _this = this;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -82,17 +92,31 @@ export function watchSetPage(action) {
                 return [4 /*yield*/, put(actions.setIsLoading(true))];
             case 1:
                 _a.sent();
-                return [4 /*yield*/, waitForHowlerLoad()];
+                return [4 /*yield*/, put(push(path))];
             case 2:
                 _a.sent();
-                return [4 /*yield*/, waitForMediaLoad()];
+                return [4 /*yield*/, call(function () {
+                        return new Promise(function (resolve) {
+                            setTimeout(function () { return __awaiter(_this, void 0, void 0, function () {
+                                return __generator(this, function (_a) {
+                                    switch (_a.label) {
+                                        case 0: return [4 /*yield*/, waitForHowlerLoad()];
+                                        case 1:
+                                            _a.sent();
+                                            return [4 /*yield*/, waitForMediaLoad()];
+                                        case 2:
+                                            _a.sent();
+                                            resolve();
+                                            return [2 /*return*/];
+                                    }
+                                });
+                            }); }, 0);
+                        });
+                    })];
             case 3:
                 _a.sent();
                 return [4 /*yield*/, put(actions.setIsLoading(false))];
             case 4:
-                _a.sent();
-                return [4 /*yield*/, put(push(path))];
-            case 5:
                 _a.sent();
                 return [2 /*return*/];
         }
