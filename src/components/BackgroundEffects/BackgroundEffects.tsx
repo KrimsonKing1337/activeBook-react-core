@@ -1,4 +1,4 @@
-import { Fragment, memo } from 'react';
+import { Fragment, memo, useMemo } from 'react';
 
 import { nanoid } from 'nanoid';
 
@@ -13,36 +13,38 @@ import styles from './BackgroundEffects.scss';
 export const BackgroundEffects = memo(() => {
   const effects = useSelector(backgroundEffectsSelectors.effects);
 
-  const BackgroundObjectsWrappers = Object.keys(effects).map((keyCur) => {
-    const effectCur = effects[keyCur];
+  const BackgroundObjectsWrappers = useMemo(() => {
+    return Object.keys(effects).map((keyCur) => {
+      const effectCur = effects[keyCur];
 
-    const {
-      videos = [],
-      images = [],
-      Component = null,
-      shadow = {},
-      style = {},
-    } = effectCur;
+      const {
+        videos = [],
+        images = [],
+        Component = null,
+        shadow = {},
+        style = {},
+      } = effectCur;
 
-    const oneOfBgIsActive = !!videos.length || !!images.length || !!Component;
+      const oneOfBgIsActive = !!videos.length || !!images.length || !!Component;
 
-    const uuid = nanoid();
+      const uuid = nanoid();
 
-    return (
-      <Fragment key={uuid}>
-        {oneOfBgIsActive && (
-          <div style={style} className={styles.backgroundObjectsWrapper}>
-            <Shadow options={shadow} />
+      return (
+        <Fragment key={uuid}>
+          {oneOfBgIsActive && (
+            <div style={style} className={styles.backgroundObjectsWrapper}>
+              <Shadow options={shadow} />
 
-            {Component}
+              {Component}
 
-            <Videos videos={videos} />
-            <Images images={images} />
-          </div>
-        )}
-      </Fragment>
-    );
-  });
+              <Videos videos={videos} />
+              <Images images={images} />
+            </div>
+          )}
+        </Fragment>
+      );
+    });
+  }, [effects]);
 
   return (
     <div className={styles.backgroundEffectsWrapper}>

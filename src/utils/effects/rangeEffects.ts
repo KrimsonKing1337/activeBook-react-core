@@ -9,7 +9,7 @@ export function isPageInRange(pageNumberCurrent: number, range: Range[]) {
 export function getEffectsInRange(effects: RangeEffects, pageNumberCurrent: number, type: string) {
   const arr = effects as RangeEffect[];
 
-  const result = [];
+  const result: RangeEffect[] = [];
 
   for (let i = 0; i < arr.length; i++) {
     const cur = arr[i];
@@ -18,7 +18,12 @@ export function getEffectsInRange(effects: RangeEffects, pageNumberCurrent: numb
 
     if (isInRange) {
       if (cur.type === type) {
-        result.push(cur);
+        const newItem = {
+          ...cur,
+          inRange: true,
+        };
+
+        result.push(newItem);
       }
     }
   }

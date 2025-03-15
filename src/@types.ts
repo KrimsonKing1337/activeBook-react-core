@@ -14,6 +14,7 @@ export type AudioType = 'bg' | 'music' | 'sfx';
 
 export type AudioEffectOptions = {
   id: string;
+  inRange?: boolean;
   src: string;
   fadeOutWhenUnload?: boolean;
   type?: AudioType;

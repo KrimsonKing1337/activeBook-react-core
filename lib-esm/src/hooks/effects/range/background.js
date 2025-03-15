@@ -22,7 +22,10 @@ export function useBackgroundInRange(effects) {
         var backgroundEffectsInStore = store.getState().backgroundEffects.effects;
         Object.keys(backgroundEffectsInStore).forEach(function (keyCur) {
             var effectCur = backgroundEffectsInStore[keyCur];
-            var id = effectCur.id;
+            var id = effectCur.id, inRange = effectCur.inRange;
+            if (!inRange) {
+                return;
+            }
             var idIsInRange = backgroundEffectsForPage.some(function (cur) {
                 return cur.id === id;
             });
@@ -37,7 +40,7 @@ export function useBackgroundInRange(effects) {
         var backgroundEffectsInStore = store.getState().backgroundEffects.effects;
         backgroundEffectsForPage.forEach(function (backgroundEffectOnPageCur) {
             var id = backgroundEffectOnPageCur.id;
-            var backgroundEffectOnPageCurOptions = __assign(__assign({}, backgroundEffectOnPageCur.options), { id: id });
+            var backgroundEffectOnPageCurOptions = __assign(__assign({}, backgroundEffectOnPageCur.options), { id: id, inRange: true });
             var backgroundEffectInStore = backgroundEffectsInStore[id];
             if (backgroundEffectInStore) {
                 return;

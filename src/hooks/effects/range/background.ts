@@ -23,7 +23,11 @@ export function useBackgroundInRange(effects: RangeEffects) {
     Object.keys(backgroundEffectsInStore).forEach((keyCur) => {
       const effectCur = backgroundEffectsInStore[keyCur];
 
-      const { id } = effectCur;
+      const { id, inRange } = effectCur;
+
+      if (!inRange) {
+        return;
+      }
 
       const idIsInRange = backgroundEffectsForPage.some((cur) => {
         return cur.id === id;
@@ -47,6 +51,7 @@ export function useBackgroundInRange(effects: RangeEffects) {
       const backgroundEffectOnPageCurOptions = {
         ...backgroundEffectOnPageCur.options,
         id,
+        inRange: true,
       } as BackgroundEffect;
 
       const backgroundEffectInStore = backgroundEffectsInStore[id];

@@ -18,6 +18,7 @@ export type BackgroundEffectShadowOptions = {
 };
 export type BackgroundEffect = {
     id: string;
+    inRange?: boolean;
     style?: React.CSSProperties;
     images?: UseBackgroundEffectImageOptions[];
     videos?: BackgroundEffectVideoOptions[];

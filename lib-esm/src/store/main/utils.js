@@ -2,7 +2,6 @@ import { Howler } from 'howler';
 export function waitForMediaLoad() {
     var images = Array.from(document.querySelectorAll('img'));
     var videos = Array.from(document.querySelectorAll('video'));
-    console.log('___ Narrative', document.querySelector('[class^=Narrative]'));
     var promises = [];
     images.forEach(function (imageCur) {
         if (!imageCur.complete) {
