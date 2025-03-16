@@ -1,8 +1,9 @@
 import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import classNames from 'classnames';
 import { Howler } from 'howler';
+import { setWasmUrl } from '@lottiefiles/dotlottie-react';
+import classNames from 'classnames';
 import { useDispatch, useSelector } from 'store';
 import { volumeActions } from 'store/volume';
 import { initialState as volumeInitialState } from 'store/volume/slice';
@@ -73,6 +74,13 @@ export var AppWrapper = function (_a) {
             achievements = getInitValues();
         }
         dispatch(achievementsActions.setAll(achievements));
+    }, []);
+    useEffect(function () {
+        /*
+          в эту директорию в dist-е клиента с помощью webpack нужно копировать этот файлик,
+          иначе он будет загружаться с cdn
+        */
+        setWasmUrl('/vendors/dotlottie-player.wasm');
     }, []);
     useEffect(function () {
         seenPages.set(page);

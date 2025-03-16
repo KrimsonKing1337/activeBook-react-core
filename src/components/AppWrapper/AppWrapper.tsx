@@ -1,8 +1,11 @@
 import { PropsWithChildren, useEffect } from 'react';
 
 import { useNavigate } from 'react-router-dom';
-import classNames from 'classnames';
+
 import { Howler } from 'howler';
+import { setWasmUrl } from '@lottiefiles/dotlottie-react';
+
+import classNames from 'classnames';
 
 import type { RangeEffects } from '@types';
 
@@ -101,6 +104,14 @@ export const AppWrapper = ({ children, rangeEffects }: PropsWithChildren<AppWrap
     }
 
     dispatch(achievementsActions.setAll(achievements));
+  }, []);
+
+  useEffect(() => {
+    /*
+      в эту директорию в dist-е клиента с помощью webpack нужно копировать этот файлик,
+      иначе он будет загружаться с cdn
+    */
+    setWasmUrl('/vendors/dotlottie-player.wasm');
   }, []);
 
   useEffect(() => {
