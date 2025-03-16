@@ -17,6 +17,7 @@ import { configActions } from 'store/config';
 import { initialState as configInitialState } from 'store/config/slice';
 import { mainActions, mainSelectors } from 'store/main';
 import { achievementsActions } from 'store/achievements';
+import { effectsSelectors } from 'store/effects/common';
 
 import { useEffectsInRange } from 'hooks/effects/range';
 import { useVibration } from 'hooks/effects/vibration';
@@ -43,6 +44,8 @@ export const AppWrapper = ({ children, rangeEffects }: PropsWithChildren<AppWrap
   const navigate = useNavigate();
 
   const isLoading = useSelector(mainSelectors.isLoading);
+  const isDotLottieLoading = useSelector(effectsSelectors.isDotLottieLoading);
+
   const page = useSelector(mainSelectors.page);
   const pages = useSelector(mainSelectors.pages);
 
@@ -149,7 +152,7 @@ export const AppWrapper = ({ children, rangeEffects }: PropsWithChildren<AppWrap
 
   const appWrapperClassNames = classNames({
     [styles.appWrapper]: true,
-    [styles.isLoading]: isLoading,
+    [styles.isLoading]: isLoading || isDotLottieLoading,
   });
 
   return (

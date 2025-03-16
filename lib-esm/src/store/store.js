@@ -7,7 +7,7 @@ import { createBrowserHistory } from 'history';
 import { mainReducer, watchMainActions } from './main';
 import { configReducer, watchConfigActions } from './config';
 import { volumeReducer, watchVolumeActions } from './volume';
-import { effectsReducer } from './effects/common';
+import { effectsReducer, watchEffectsActions } from './effects/common';
 import { backgroundEffectsReducer, watchBackgroundEffectsActions } from './effects/background';
 import { fontEffectsReducer } from './effects/font';
 import { audioEffectsReducer, watchAudioEffectsActions } from './effects/audio/audio';
@@ -51,6 +51,7 @@ export var store = configureStore({
 export var history = createReduxHistory(store);
 sagaMiddleware.run(watchConfigActions);
 sagaMiddleware.run(watchMainActions);
+sagaMiddleware.run(watchEffectsActions);
 sagaMiddleware.run(watchAudioEffectsActions);
 sagaMiddleware.run(watchAudioBgEffectsActions);
 sagaMiddleware.run(watchBookmarksActions);

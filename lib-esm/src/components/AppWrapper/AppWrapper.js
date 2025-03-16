@@ -11,6 +11,7 @@ import { configActions } from 'store/config';
 import { initialState as configInitialState } from 'store/config/slice';
 import { mainActions, mainSelectors } from 'store/main';
 import { achievementsActions } from 'store/achievements';
+import { effectsSelectors } from 'store/effects/common';
 import { useEffectsInRange } from 'hooks/effects/range';
 import { useVibration } from 'hooks/effects/vibration';
 import { seenPages } from 'utils/localStorage/seenPages';
@@ -28,6 +29,7 @@ export var AppWrapper = function (_a) {
     var dispatch = useDispatch();
     var navigate = useNavigate();
     var isLoading = useSelector(mainSelectors.isLoading);
+    var isDotLottieLoading = useSelector(effectsSelectors.isDotLottieLoading);
     var page = useSelector(mainSelectors.page);
     var pages = useSelector(mainSelectors.pages);
     var vibrationOff = useVibration().vibrationOff;
@@ -109,7 +111,7 @@ export var AppWrapper = function (_a) {
     useEffectsInRange(rangeEffects);
     var appWrapperClassNames = classNames((_b = {},
         _b[styles.appWrapper] = true,
-        _b[styles.isLoading] = isLoading,
+        _b[styles.isLoading] = isLoading || isDotLottieLoading,
         _b));
     return (_jsxs(_Fragment, { children: [_jsx("div", { className: appWrapperClassNames, children: children }), _jsx(Achievement, {})] }));
 };

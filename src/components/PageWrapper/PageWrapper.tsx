@@ -30,7 +30,9 @@ export const PageWrapper = ({
   sbMode,
 }: PropsWithChildren<PageWrapperProps>) => {
   const inverseColorIsActive = useSelector(effectsSelectors.inverseColorIsActive);
+
   const isLoading = useSelector(mainSelectors.isLoading);
+  const isDotLottieLoading = useSelector(effectsSelectors.isDotLottieLoading);
 
   const pageWrapperClassNames = classNames({
     [styles.pageWrapper]: true,
@@ -39,7 +41,7 @@ export const PageWrapper = ({
 
   const mainContendClassNames = classNames({
     [styles.mainContent]: true,
-    [styles.isLoading]: isLoading,
+    [styles.isLoading]: isLoading || isDotLottieLoading,
   });
 
   return (
