@@ -7,4 +7,6 @@ export const selectors = {
   dotLottieAmount: (state: RootState) => state.effects.dotLottieAmount,
   dotLottieReadyAmount: (state: RootState) => state.effects.dotLottieReadyAmount,
   isDotLottieLoading: (state: RootState) => state.effects.dotLottieAmount !== state.effects.dotLottieReadyAmount,
+
+  videosCurrentTime: (state: RootState) => state.effects.videosCurrentTime,
 };

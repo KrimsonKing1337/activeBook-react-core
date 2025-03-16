@@ -5,4 +5,5 @@ export declare const selectors: {
     dotLottieAmount: (state: RootState) => number;
     dotLottieReadyAmount: (state: RootState) => number;
     isDotLottieLoading: (state: RootState) => boolean;
+    videosCurrentTime: (state: RootState) => Record<string, number>;
 };

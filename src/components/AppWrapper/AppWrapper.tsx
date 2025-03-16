@@ -9,7 +9,7 @@ import classNames from 'classnames';
 
 import type { RangeEffects } from '@types';
 
-import { useDispatch, useSelector } from 'store';
+import { store, useDispatch, useSelector } from 'store';
 
 import { volumeActions } from 'store/volume';
 import { initialState as volumeInitialState } from 'store/volume/slice';
@@ -17,7 +17,7 @@ import { configActions } from 'store/config';
 import { initialState as configInitialState } from 'store/config/slice';
 import { mainActions, mainSelectors } from 'store/main';
 import { achievementsActions } from 'store/achievements';
-import { effectsSelectors } from 'store/effects/common';
+import { effectsActions, effectsSelectors } from 'store/effects/common';
 
 import { useEffectsInRange } from 'hooks/effects/range';
 import { useVibration } from 'hooks/effects/vibration';
@@ -116,6 +116,24 @@ export const AppWrapper = ({ children, rangeEffects }: PropsWithChildren<AppWrap
     */
     setWasmUrl('/vendors/dotlottie-player.wasm');
   }, []);
+
+  // удаляю id видео из списка currentTime, если видео с data-id на странице нет
+  useEffect(() => {
+    const videosCurrentTime = store.getState().effects.videosCurrentTime;
+    const videos = Array.from(document.querySelectorAll('video'));
+
+    const videosCurrentTimeNewValue: typeof videosCurrentTime = {};
+
+    videos.forEach((videoCur) => {
+      const id = videoCur.getAttribute('data-id');
+
+      if (id && videosCurrentTime[id]) {
+        videosCurrentTimeNewValue[id] = videosCurrentTime[id];
+      }
+    });
+
+    dispatch(effectsActions.setVideosCurrentTime(videosCurrentTimeNewValue));
+  }, [page]);
 
   useEffect(() => {
     seenPages.set(page);

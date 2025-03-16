@@ -4,14 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import { Howler } from 'howler';
 import { setWasmUrl } from '@lottiefiles/dotlottie-react';
 import classNames from 'classnames';
-import { useDispatch, useSelector } from 'store';
+import { store, useDispatch, useSelector } from 'store';
 import { volumeActions } from 'store/volume';
 import { initialState as volumeInitialState } from 'store/volume/slice';
 import { configActions } from 'store/config';
 import { initialState as configInitialState } from 'store/config/slice';
 import { mainActions, mainSelectors } from 'store/main';
 import { achievementsActions } from 'store/achievements';
-import { effectsSelectors } from 'store/effects/common';
+import { effectsActions, effectsSelectors } from 'store/effects/common';
 import { useEffectsInRange } from 'hooks/effects/range';
 import { useVibration } from 'hooks/effects/vibration';
 import { seenPages } from 'utils/localStorage/seenPages';
@@ -84,6 +84,20 @@ export var AppWrapper = function (_a) {
         */
         setWasmUrl('/vendors/dotlottie-player.wasm');
     }, []);
+    // удаляю id видео из списка currentTime, если видео с data-id на странице нет
+    useEffect(function () {
+        var videosCurrentTime = store.getState().effects.videosCurrentTime;
+        var videos = Array.from(document.querySelectorAll('video'));
+        var videosCurrentTimeNewValue = {};
+        videos.forEach(function (videoCur) {
+            var id = videoCur.getAttribute('data-id');
+            if (id && videosCurrentTime[id]) {
+                videosCurrentTimeNewValue[id] = videosCurrentTime[id];
+            }
+        });
+        console.log('___ videosCurrentTimeNewValue', videosCurrentTimeNewValue);
+        dispatch(effectsActions.setVideosCurrentTime(videosCurrentTimeNewValue));
+    }, [page]);
     useEffect(function () {
         seenPages.set(page);
         var seenPagesFromLocalStorage = seenPages.get();

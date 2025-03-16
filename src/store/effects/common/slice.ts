@@ -1,12 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { State } from './@types';
+import { State, VideoCurrentTime } from './@types';
 
 export const initialState: State = {
   inverseColorIsActive: false,
   dotsIsActive: false,
+
   dotLottieAmount: 0,
   dotLottieReadyAmount: 0,
+
+  videosCurrentTime: {},
 };
 
 const slice = createSlice({
@@ -27,6 +30,18 @@ const slice = createSlice({
       state.dotLottieReadyAmount = action.payload;
     },
     setDotLottieReady() {},
+
+    setVideoCurrentTime(state, action: PayloadAction<VideoCurrentTime>) {
+      const { id, currentTime } = action.payload;
+
+      state.videosCurrentTime = {
+        ...state.videosCurrentTime,
+        [id]: currentTime,
+      };
+    },
+    setVideosCurrentTime(state, action: PayloadAction<State['videosCurrentTime']>) {
+      state.videosCurrentTime = action.payload;
+    },
   },
 });
 

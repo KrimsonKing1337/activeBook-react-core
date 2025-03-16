@@ -18,6 +18,7 @@ export type BackgroundEffectMediaOptions = {
 export type UseBackgroundEffectImageOptions = BackgroundEffectMediaOptions;
 
 export type BackgroundEffectVideoOptions = BackgroundEffectMediaOptions & {
+  id: string;
   loop?: boolean;
   autoPlay?: boolean;
   muted?: boolean;

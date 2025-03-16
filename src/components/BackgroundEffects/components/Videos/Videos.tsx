@@ -1,5 +1,3 @@
-import { nanoid } from 'nanoid';
-
 import { Video } from 'components/Video';
 
 import type { BackgroundEffectVideoOptions } from 'hooks/effects/background/@types';
@@ -19,6 +17,7 @@ export const Videos = ({ videos }: VideosProps) => {
 
   return videos.map((videoCur) => {
     const {
+      id,
       src,
       wrapperStyle,
       style,
@@ -28,16 +27,15 @@ export const Videos = ({ videos }: VideosProps) => {
       relativeVolume = 100,
     } = videoCur;
 
-    const uuid = nanoid();
-
     /*
       todo: возможно, стоит autoPlay убрать из параметров.
        есть подозрение, что видео начинает воспроизведение до отображения страницы (PageWrapper и Narrative)
     */
 
     return (
-      <Wrapper key={uuid} style={wrapperStyle}>
+      <Wrapper key={id} style={wrapperStyle}>
         <Video
+          id={id}
           style={style}
           className={styles.video}
           src={src}

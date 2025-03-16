@@ -4,5 +4,6 @@ export var selectors = {
     dotLottieAmount: function (state) { return state.effects.dotLottieAmount; },
     dotLottieReadyAmount: function (state) { return state.effects.dotLottieReadyAmount; },
     isDotLottieLoading: function (state) { return state.effects.dotLottieAmount !== state.effects.dotLottieReadyAmount; },
+    videosCurrentTime: function (state) { return state.effects.videosCurrentTime; },
 };
 //# sourceMappingURL=selectors.js.map
