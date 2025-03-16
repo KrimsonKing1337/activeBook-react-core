@@ -26,7 +26,7 @@ import { DotLottieReact as DotLottieReactOriginal, } from '@lottiefiles/dotlotti
 import { useDispatch } from 'store';
 import { effectsActions } from 'store/effects/common';
 export var DotLottieReact = function (_a) {
-    var _b = _a.eventListeners, eventListeners = _b === void 0 ? [] : _b, etc = __rest(_a, ["eventListeners"]);
+    var refCallback = _a.refCallback, _b = _a.eventListeners, eventListeners = _b === void 0 ? [] : _b, etc = __rest(_a, ["refCallback", "eventListeners"]);
     var dispatch = useDispatch();
     var _c = useState(null), dotLottie = _c[0], setDotLottie = _c[1];
     useEffect(function () {
@@ -54,6 +54,9 @@ export var DotLottieReact = function (_a) {
     }, [dotLottie]);
     var dotLottieRefCallback = function (dotLottieItem) {
         setDotLottie(dotLottieItem);
+        if (refCallback) {
+            refCallback(dotLottieItem);
+        }
     };
     return (_jsx(DotLottieReactOriginal, __assign({ dotLottieRefCallback: dotLottieRefCallback }, etc)));
 };
