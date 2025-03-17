@@ -17,7 +17,10 @@ export type PlayProps = {
   type?: Color;
 };
 
+// временно скрываю всё, что связано с ачивками
 export function play({ text, id, save = true, type = 'regular' }: PlayProps) {
+  return;
+
   const saveIfNeeded = () => {
     if (save) {
       achievementsUtils.set(id, true);
@@ -61,7 +64,10 @@ export function play({ text, id, save = true, type = 'regular' }: PlayProps) {
   playAllAchievementsRewardWhenReady();
 }
 
+// временно скрываю всё, что связано с ачивками
 function playAllAchievementsRewardWhenReady() {
+  return;
+
   const achievementsLength = getLength();
   const achievementsRewardedLength = getRewardedLengthWithoutUnnecessary();
 

@@ -1,6 +1,5 @@
 import { PropsWithChildren } from 'react';
-export type ItemProps = {
+export type ItemProps = React.HTMLAttributes<HTMLImageElement> & {
     className?: string;
-    [key: string]: any;
 };
-export declare const Item: ({ children, className, ...rest }: PropsWithChildren<ItemProps>) => import("react/jsx-runtime").JSX.Element;
+export declare const Item: ({ children, className, ...etc }: PropsWithChildren<ItemProps>) => import("react/jsx-runtime").JSX.Element;

@@ -24,6 +24,10 @@
   background: transparent;
 }
 
-.fontBig {
-  margin-left: 10px;
+.fontSizeControlWrapper {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-start;
+  margin-left: auto;
 }

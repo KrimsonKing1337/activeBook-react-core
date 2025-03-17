@@ -24,11 +24,11 @@ import { jsx as _jsx } from "react/jsx-runtime";
 import classNames from 'classnames';
 import styles from './Item.scss';
 export var Item = function (_a) {
-    var children = _a.children, className = _a.className, rest = __rest(_a, ["children", "className"]);
+    var children = _a.children, className = _a.className, etc = __rest(_a, ["children", "className"]);
     var itemClassNames = classNames([
         styles.item,
         className,
     ]);
-    return (_jsx("div", __assign({ className: itemClassNames }, rest, { children: children })));
+    return (_jsx("div", __assign({ className: itemClassNames }, etc, { children: children })));
 };
 //# sourceMappingURL=Item.js.map

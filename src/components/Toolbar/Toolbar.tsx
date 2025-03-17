@@ -54,25 +54,27 @@ export const Toolbar = ({ sbMode }: ToolbarProps) => {
       <div className={styles.toolbar}>
         {!sbMode && (
           <>
-            <Item onClick={bookmarkClickHandler}>
+            <Item data-welcome-tour-id="bookmarks" onClick={bookmarkClickHandler}>
               <BookmarkIcon />
             </Item>
 
-            <Item>
+            <Item data-welcome-tour-id="navigation">
               <Nav />
             </Item>
           </>
         )}
 
-        <Item onClick={fontSmallClickHandler}>
-          <FontSmallIcon />
-        </Item>
+        <div data-welcome-tour-id="font" className={styles.fontSizeControlWrapper}>
+          <Item onClick={fontSmallClickHandler}>
+            <FontSmallIcon />
+          </Item>
 
-        <Item className={styles.fontBig} onClick={fontBigClickHandler}>
-          <FontBigIcon />
-        </Item>
+          <Item onClick={fontBigClickHandler}>
+            <FontBigIcon />
+          </Item>
+        </div>
 
-        <Item onClick={etcIconClickHandler}>
+        <Item data-welcome-tour-id="config" onClick={etcIconClickHandler}>
           <EtcIcon />
         </Item>
       </div>

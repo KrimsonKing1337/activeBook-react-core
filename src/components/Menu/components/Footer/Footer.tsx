@@ -19,9 +19,9 @@ export const Footer = () => {
     dispatch(mainActions.setMenuActiveState('tableOfContents'));
   };
 
-  const achievementsProgressClickHandler = () => {
+  /*const achievementsProgressClickHandler = () => {
     dispatch(mainActions.setMenuActiveState('achievementsProgress'));
-  };
+  };*/
 
   const closeButtonClickHandler = () => {
     dispatch(mainActions.setMenuActiveState(null));
@@ -33,9 +33,10 @@ export const Footer = () => {
         Оглавление
       </button>
 
-      <button className={getClassNames(styles.isAchievementsProgress)} onClick={achievementsProgressClickHandler}>
+      {/* временно скрываю всё, что связано с ачивками */}
+      {/*<button className={getClassNames(styles.isAchievementsProgress)} onClick={achievementsProgressClickHandler}>
         Прогресс достижений
-      </button>
+      </button>*/}
 
       <button className={getClassNames(styles.isClose)} onClick={closeButtonClickHandler}>
         Закрыть

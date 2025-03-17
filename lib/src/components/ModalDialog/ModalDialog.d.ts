@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { type PropsWithChildren } from 'react';
 import { ModalProps } from '../Modal';
 type Func = () => void;
 export type ModalDialogProps = ModalProps & {

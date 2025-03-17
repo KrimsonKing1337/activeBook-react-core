@@ -1,5 +1,6 @@
 import { type PropsWithChildren } from 'react';
 import type { Config, RangeEffects } from '../../@types.js';
+import '../../styles/common.scss';
 export type AppWrapperProps = {
     config: Config;
     rangeEffects: RangeEffects;

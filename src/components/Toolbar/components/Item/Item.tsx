@@ -4,19 +4,18 @@ import classNames from 'classnames';
 
 import styles from './Item.scss';
 
-export type ItemProps = {
+export type ItemProps = React.HTMLAttributes<HTMLImageElement> & {
   className?: string;
-  [key: string]: any;
 };
 
-export const Item = ({ children, className, ...rest }: PropsWithChildren<ItemProps>) => {
+export const Item = ({ children, className, ...etc }: PropsWithChildren<ItemProps>) => {
   const itemClassNames = classNames([
     styles.item,
     className,
   ]);
 
   return (
-    <div className={itemClassNames} {...rest}>
+    <div className={itemClassNames} {...etc}>
       {children}
     </div>
   );

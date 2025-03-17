@@ -21,6 +21,7 @@ import { removeCssHover } from 'utils/touch/removeCssHover';
 import { flashlightInst } from 'utils/effects/flashlight';
 import { Achievement } from 'components/Achievement';
 import { setMuteToAllVideos, startToPlayAllAudiosWithPlayOnLoad } from './utils';
+import 'styles/common.scss';
 import styles from './AppWrapper.scss';
 export var AppWrapper = function (_a) {
     var _b;

@@ -32,6 +32,8 @@ import { Achievement } from 'components/Achievement';
 
 import { setMuteToAllVideos, startToPlayAllAudiosWithPlayOnLoad } from './utils';
 
+import 'styles/common.scss';
+
 import styles from './AppWrapper.scss';
 
 export type AppWrapperProps = {

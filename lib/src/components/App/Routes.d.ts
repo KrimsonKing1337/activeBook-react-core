@@ -1,2 +1,2 @@
-import { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 export declare const Routes: ({ children }: PropsWithChildren<unknown>) => import("react/jsx-runtime").JSX.Element;
