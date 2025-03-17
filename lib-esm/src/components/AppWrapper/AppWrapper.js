@@ -21,7 +21,7 @@ import { Flags as AchievementsFlags, getInitValues } from 'utils/effects/achieve
 import { removeCssHover } from 'utils/touch/removeCssHover';
 import { flashlightInst } from 'utils/effects/flashlight';
 import { Achievement } from 'components/Achievement';
-import { setMuteToAllVideos } from './utils';
+import { setMuteToAllVideos, startToPlayAllAudiosWithPlayOnLoad } from './utils';
 import styles from './AppWrapper.scss';
 export var AppWrapper = function (_a) {
     var _b;
@@ -84,6 +84,19 @@ export var AppWrapper = function (_a) {
         */
         setWasmUrl('/vendors/dotlottie-player.wasm');
     }, []);
+    // воспроизвожу все аудио, у которых playOnLoad = true
+    useEffect(function () {
+        if (isLoading) {
+            return;
+        }
+        console.log('___ page', page);
+        var audioInstances = store.getState().audioEffects.audioInstances;
+        var audioInstancesBg = store.getState().audioBgEffects.audioInstances;
+        console.log('___ audioInstances', audioInstances);
+        console.log('___ audioInstancesBg', audioInstancesBg);
+        startToPlayAllAudiosWithPlayOnLoad(audioInstances);
+        startToPlayAllAudiosWithPlayOnLoad(audioInstancesBg);
+    }, [page, isLoading]);
     // удаляю id видео из списка currentTime, если видео с data-id на странице нет
     useEffect(function () {
         var videosCurrentTime = store.getState().effects.videosCurrentTime;
@@ -95,7 +108,6 @@ export var AppWrapper = function (_a) {
                 videosCurrentTimeNewValue[id] = videosCurrentTime[id];
             }
         });
-        console.log('___ videosCurrentTimeNewValue', videosCurrentTimeNewValue);
         dispatch(effectsActions.setVideosCurrentTime(videosCurrentTimeNewValue));
     }, [page]);
     useEffect(function () {

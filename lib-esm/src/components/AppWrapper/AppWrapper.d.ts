@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { type PropsWithChildren } from 'react';
 import type { RangeEffects } from '@types';
 export type AppWrapperProps = {
     rangeEffects: RangeEffects;

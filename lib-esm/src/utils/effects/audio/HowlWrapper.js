@@ -84,9 +84,6 @@ var HowlWrapper = /** @class */ (function () {
         this.onPause = onPause;
         this.onStop = onStop;
         this.onUnload = onUnload;
-        if (playOnLoad) {
-            this.play();
-        }
     }
     HowlWrapper.prototype.volume = function (n) {
         var globalVolume = this.getVolume().global;

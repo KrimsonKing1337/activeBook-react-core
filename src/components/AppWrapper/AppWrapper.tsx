@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect } from 'react';
+import { type PropsWithChildren, useEffect } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -7,7 +7,7 @@ import { setWasmUrl } from '@lottiefiles/dotlottie-react';
 
 import classNames from 'classnames';
 
-import type { RangeEffects } from '@types';
+import type { HowlInstances, RangeEffects } from '@types';
 
 import { store, useDispatch, useSelector } from 'store';
 
@@ -31,7 +31,7 @@ import { flashlightInst } from 'utils/effects/flashlight';
 
 import { Achievement } from 'components/Achievement';
 
-import { setMuteToAllVideos } from './utils';
+import { setMuteToAllVideos, startToPlayAllAudiosWithPlayOnLoad } from './utils';
 
 import styles from './AppWrapper.scss';
 
@@ -116,6 +116,19 @@ export const AppWrapper = ({ children, rangeEffects }: PropsWithChildren<AppWrap
     */
     setWasmUrl('/vendors/dotlottie-player.wasm');
   }, []);
+
+  // после полной загрузки страницы воспроизвожу все аудио, у которых playOnLoad = true
+  useEffect(() => {
+    if (isLoading) {
+      return;
+    }
+
+    const audioInstances: HowlInstances = store.getState().audioEffects.audioInstances;
+    const audioInstancesBg: HowlInstances = store.getState().audioBgEffects.audioInstances;
+
+    startToPlayAllAudiosWithPlayOnLoad(audioInstances);
+    startToPlayAllAudiosWithPlayOnLoad(audioInstancesBg);
+  }, [page, isLoading]);
 
   // удаляю id видео из списка currentTime, если видео с data-id на странице нет
   useEffect(() => {

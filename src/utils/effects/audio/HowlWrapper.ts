@@ -117,10 +117,6 @@ export class HowlWrapper {
     this.onPause = onPause;
     this.onStop = onStop;
     this.onUnload = onUnload;
-
-    if (playOnLoad) {
-      this.play();
-    }
   }
 
   volume(n: number) {

@@ -1,3 +1,5 @@
+import type { HowlInstances } from '@types';
+
 import { store } from 'store';
 
 export function setMuteToAllVideos(muted: boolean) {
@@ -11,5 +13,17 @@ export function setMuteToAllVideos(muted: boolean) {
     const relativeVolume = Number(relativeVolumeStr) || 100;
 
     videoCur.volume = volume * (relativeVolume / 100) * (globalVolume / 100);
+  });
+}
+
+export function startToPlayAllAudiosWithPlayOnLoad(audioInstances: HowlInstances) {
+  Object.values(audioInstances).forEach((audioInstanceCur) => {
+    if (!audioInstanceCur) {
+      return;
+    }
+
+    if (audioInstanceCur.playOnLoad && !audioInstanceCur.playing()) {
+      audioInstanceCur.play();
+    }
   });
 }

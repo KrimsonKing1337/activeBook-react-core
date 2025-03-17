@@ -9,4 +9,14 @@ export function setMuteToAllVideos(muted) {
         videoCur.volume = volume * (relativeVolume / 100) * (globalVolume / 100);
     });
 }
+export function startToPlayAllAudiosWithPlayOnLoad(audioInstances) {
+    Object.values(audioInstances).forEach(function (audioInstanceCur) {
+        if (!audioInstanceCur) {
+            return;
+        }
+        if (audioInstanceCur.playOnLoad && !audioInstanceCur.playing()) {
+            audioInstanceCur.play();
+        }
+    });
+}
 //# sourceMappingURL=utils.js.map

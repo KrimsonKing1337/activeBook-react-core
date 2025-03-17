@@ -9,7 +9,10 @@ export function useAudio(_a) {
     var isDeleting = useSelector(audioEffectsSelectors.isDeleting);
     var refId = useRef('');
     useEffect(function () {
-        // если удаляется или id уже есть - значит эффект не нужно инициализировать заново
+        /*
+          если удаляется какой-либо audioInstance,
+          или id у этого экземпляра уже есть - значит эффект не нужно инициализировать заново
+        */
         if (isDeleting || refId.current) {
             return;
         }
