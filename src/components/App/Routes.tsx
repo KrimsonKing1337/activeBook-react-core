@@ -1,16 +1,15 @@
-import { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 
 import { Route, Routes as ReactRouterRoutes } from 'react-router-dom';
 
-import { initialState } from 'store/main/slice';
+import { useSelector } from 'store';
+import { mainSelectors } from 'store/main';
 
 // todo: сделать все страницы либо через ленивую загрузку, либо по-обычному
 // todo: в кордове проблемы с подгрузкой компонента через ленивую загрузку
 // const Page1 = React.lazy(() => import('pagesOfBook/Page1'));
 
-const getPageComponents = () => {
-  const { pages } = initialState;
-
+const getPageComponents = (pages: number) => {
   const arr = [];
 
   for (let i = 0; i <= pages; i++) {
@@ -23,7 +22,9 @@ const getPageComponents = () => {
 };
 
 export const Routes = ({ children }: PropsWithChildren<unknown>) => {
-  const pageComponents = getPageComponents();
+  const pages = useSelector(mainSelectors.pages);
+
+  const pageComponents = getPageComponents(pages);
 
   return (
     <ReactRouterRoutes>

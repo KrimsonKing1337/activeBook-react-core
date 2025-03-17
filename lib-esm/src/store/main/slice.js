@@ -1,13 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-var pages = Number(process.env.PAGES);
-var easterEggs = Number(process.env.EASTER_EGGS);
-var authorComments = Number(process.env.AUTHOR_COMMENTS);
 export var initialState = {
     route: '/',
     page: 0,
-    pages: pages,
-    easterEggs: easterEggs,
-    authorComments: authorComments,
+    pages: 0,
+    easterEggs: 0,
+    authorComments: 0,
     menuActiveState: null,
     isLoading: false,
     isVibrationAvailable: null,
@@ -20,6 +17,15 @@ var slice = createSlice({
     reducers: {
         setRoute: function (state, action) {
             state.route = action.payload;
+        },
+        setEasterEggs: function (state, action) {
+            state.easterEggs = action.payload;
+        },
+        setAuthorComments: function (state, action) {
+            state.authorComments = action.payload;
+        },
+        setPages: function (state, action) {
+            state.pages = action.payload;
         },
         setPage: function (state, action) {
             state.page = action.payload;

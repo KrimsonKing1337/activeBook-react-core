@@ -3,6 +3,9 @@ import { State } from './@types';
 export declare const initialState: State;
 export declare const reducer: import("redux").Reducer<State>, actions: import("@reduxjs/toolkit").CaseReducerActions<{
     setRoute(state: import("immer/dist/internal").WritableDraft<State>, action: PayloadAction<State['route']>): void;
+    setEasterEggs(state: import("immer/dist/internal").WritableDraft<State>, action: PayloadAction<State['easterEggs']>): void;
+    setAuthorComments(state: import("immer/dist/internal").WritableDraft<State>, action: PayloadAction<State['authorComments']>): void;
+    setPages(state: import("immer/dist/internal").WritableDraft<State>, action: PayloadAction<State['pages']>): void;
     setPage(state: import("immer/dist/internal").WritableDraft<State>, action: PayloadAction<State['page']>): void;
     prevPage(_state: import("immer/dist/internal").WritableDraft<State>): void;
     nextPage(_state: import("immer/dist/internal").WritableDraft<State>): void;

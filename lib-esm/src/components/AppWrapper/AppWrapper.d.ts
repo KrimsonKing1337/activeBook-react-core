@@ -1,6 +1,7 @@
 import { type PropsWithChildren } from 'react';
-import type { RangeEffects } from '@types';
+import type { Config, RangeEffects } from '@types';
 export type AppWrapperProps = {
+    config: Config;
     rangeEffects: RangeEffects;
 };
-export declare const AppWrapper: ({ children, rangeEffects }: PropsWithChildren<AppWrapperProps>) => import("react/jsx-runtime").JSX.Element;
+export declare const AppWrapper: ({ children, config, rangeEffects }: PropsWithChildren<AppWrapperProps>) => import("react/jsx-runtime").JSX.Element;

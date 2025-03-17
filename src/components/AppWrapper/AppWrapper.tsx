@@ -7,7 +7,7 @@ import { setWasmUrl } from '@lottiefiles/dotlottie-react';
 
 import classNames from 'classnames';
 
-import type { HowlInstances, RangeEffects } from '@types';
+import type { Config, HowlInstances, RangeEffects } from '@types';
 
 import { store, useDispatch, useSelector } from 'store';
 
@@ -23,9 +23,8 @@ import { useEffectsInRange } from 'hooks/effects/range';
 import { useVibration } from 'hooks/effects/vibration';
 
 import { seenPages } from 'utils/localStorage/seenPages';
-import { play as achievementPlay } from 'utils/effects/achievements';
 import { achievements as achievementsUtils } from 'utils/localStorage/achievements';
-import { Flags as AchievementsFlags, getInitValues } from 'utils/effects/achievements/utils';
+import { getInitValues } from 'utils/effects/achievements/utils';
 import { removeCssHover } from 'utils/touch/removeCssHover';
 import { flashlightInst } from 'utils/effects/flashlight';
 
@@ -36,10 +35,11 @@ import { setMuteToAllVideos, startToPlayAllAudiosWithPlayOnLoad } from './utils'
 import styles from './AppWrapper.scss';
 
 export type AppWrapperProps = {
+  config: Config;
   rangeEffects: RangeEffects;
 };
 
-export const AppWrapper = ({ children, rangeEffects }: PropsWithChildren<AppWrapperProps>) => {
+export const AppWrapper = ({ children, config, rangeEffects }: PropsWithChildren<AppWrapperProps>) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -47,9 +47,23 @@ export const AppWrapper = ({ children, rangeEffects }: PropsWithChildren<AppWrap
   const isDotLottieLoading = useSelector(effectsSelectors.isDotLottieLoading);
 
   const page = useSelector(mainSelectors.page);
-  const pages = useSelector(mainSelectors.pages);
 
   const { vibrationOff } = useVibration();
+
+  // применяю конфиг
+  useEffect(() => {
+    const { pages, defaultTheme, easterEggs = 0, authorComments = 0 } = config;
+
+    const configAsJson = localStorage.getItem('config');
+
+    dispatch(mainActions.setPages(pages));
+    dispatch(mainActions.setEasterEggs(easterEggs));
+    dispatch(mainActions.setAuthorComments(authorComments));
+
+    if (!configAsJson) {
+      dispatch(configActions.setTheme(defaultTheme));
+    }
+  }, []);
 
   // приглушаю звук, отключаю вибрацию и вспышку, если приложение скрыто
   useEffect(() => {
@@ -151,7 +165,8 @@ export const AppWrapper = ({ children, rangeEffects }: PropsWithChildren<AppWrap
   useEffect(() => {
     seenPages.set(page);
 
-    const seenPagesFromLocalStorage = seenPages.get();
+    // пока отключаю ачивки
+    /*const seenPagesFromLocalStorage = seenPages.get();
     const seenPagesLength = Object.keys(seenPagesFromLocalStorage).length;
 
     if (seenPagesLength === pages) {
@@ -160,7 +175,7 @@ export const AppWrapper = ({ children, rangeEffects }: PropsWithChildren<AppWrap
         text: 'Все страницы прочитаны! Теперь можно включить авторские комментарии в настройках!',
         type: 'gold',
       });
-    }
+    }*/
   }, [page]);
 
   useEffect(() => {

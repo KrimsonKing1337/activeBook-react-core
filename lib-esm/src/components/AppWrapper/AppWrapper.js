@@ -15,9 +15,8 @@ import { effectsActions, effectsSelectors } from 'store/effects/common';
 import { useEffectsInRange } from 'hooks/effects/range';
 import { useVibration } from 'hooks/effects/vibration';
 import { seenPages } from 'utils/localStorage/seenPages';
-import { play as achievementPlay } from 'utils/effects/achievements';
 import { achievements as achievementsUtils } from 'utils/localStorage/achievements';
-import { Flags as AchievementsFlags, getInitValues } from 'utils/effects/achievements/utils';
+import { getInitValues } from 'utils/effects/achievements/utils';
 import { removeCssHover } from 'utils/touch/removeCssHover';
 import { flashlightInst } from 'utils/effects/flashlight';
 import { Achievement } from 'components/Achievement';
@@ -25,14 +24,24 @@ import { setMuteToAllVideos, startToPlayAllAudiosWithPlayOnLoad } from './utils'
 import styles from './AppWrapper.scss';
 export var AppWrapper = function (_a) {
     var _b;
-    var children = _a.children, rangeEffects = _a.rangeEffects;
+    var children = _a.children, config = _a.config, rangeEffects = _a.rangeEffects;
     var dispatch = useDispatch();
     var navigate = useNavigate();
     var isLoading = useSelector(mainSelectors.isLoading);
     var isDotLottieLoading = useSelector(effectsSelectors.isDotLottieLoading);
     var page = useSelector(mainSelectors.page);
-    var pages = useSelector(mainSelectors.pages);
     var vibrationOff = useVibration().vibrationOff;
+    // применяю конфиг
+    useEffect(function () {
+        var pages = config.pages, defaultTheme = config.defaultTheme, _a = config.easterEggs, easterEggs = _a === void 0 ? 0 : _a, _b = config.authorComments, authorComments = _b === void 0 ? 0 : _b;
+        var configAsJson = localStorage.getItem('config');
+        dispatch(mainActions.setPages(pages));
+        dispatch(mainActions.setEasterEggs(easterEggs));
+        dispatch(mainActions.setAuthorComments(authorComments));
+        if (!configAsJson) {
+            dispatch(configActions.setTheme(defaultTheme));
+        }
+    }, []);
     // приглушаю звук, отключаю вибрацию и вспышку, если приложение скрыто
     useEffect(function () {
         document.addEventListener('visibilitychange', function () {
@@ -84,16 +93,13 @@ export var AppWrapper = function (_a) {
         */
         setWasmUrl('/vendors/dotlottie-player.wasm');
     }, []);
-    // воспроизвожу все аудио, у которых playOnLoad = true
+    // после полной загрузки страницы воспроизвожу все аудио, у которых playOnLoad = true
     useEffect(function () {
         if (isLoading) {
             return;
         }
-        console.log('___ page', page);
         var audioInstances = store.getState().audioEffects.audioInstances;
         var audioInstancesBg = store.getState().audioBgEffects.audioInstances;
-        console.log('___ audioInstances', audioInstances);
-        console.log('___ audioInstancesBg', audioInstancesBg);
         startToPlayAllAudiosWithPlayOnLoad(audioInstances);
         startToPlayAllAudiosWithPlayOnLoad(audioInstancesBg);
     }, [page, isLoading]);
@@ -112,15 +118,17 @@ export var AppWrapper = function (_a) {
     }, [page]);
     useEffect(function () {
         seenPages.set(page);
-        var seenPagesFromLocalStorage = seenPages.get();
-        var seenPagesLength = Object.keys(seenPagesFromLocalStorage).length;
+        // пока отключаю ачивки
+        /*const seenPagesFromLocalStorage = seenPages.get();
+        const seenPagesLength = Object.keys(seenPagesFromLocalStorage).length;
+    
         if (seenPagesLength === pages) {
-            achievementPlay({
-                id: AchievementsFlags.allPagesSeen,
-                text: 'Все страницы прочитаны! Теперь можно включить авторские комментарии в настройках!',
-                type: 'gold',
-            });
-        }
+          achievementPlay({
+            id: AchievementsFlags.allPagesSeen,
+            text: 'Все страницы прочитаны! Теперь можно включить авторские комментарии в настройках!',
+            type: 'gold',
+          });
+        }*/
     }, [page]);
     useEffect(function () {
         var listener = function () {

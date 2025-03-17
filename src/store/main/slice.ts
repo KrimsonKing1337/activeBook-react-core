@@ -2,16 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { State } from './@types';
 
-const pages = Number(process.env.PAGES);
-const easterEggs = Number(process.env.EASTER_EGGS);
-const authorComments = Number(process.env.AUTHOR_COMMENTS);
-
 export const initialState: State = {
   route: '/',
   page: 0,
-  pages,
-  easterEggs,
-  authorComments,
+  pages: 0,
+  easterEggs: 0,
+  authorComments: 0,
   menuActiveState: null,
   isLoading: false,
   isVibrationAvailable: null,
@@ -25,6 +21,16 @@ const slice = createSlice({
   reducers: {
     setRoute(state, action: PayloadAction<State['route']>) {
       state.route = action.payload;
+    },
+    setEasterEggs(state, action: PayloadAction<State['easterEggs']>) {
+      state.easterEggs = action.payload;
+    },
+    setAuthorComments(state, action: PayloadAction<State['authorComments']>) {
+      state.authorComments = action.payload;
+    },
+
+    setPages(state, action: PayloadAction<State['pages']>) {
+      state.pages = action.payload;
     },
     setPage(state, action: PayloadAction<State['page']>) {
       state.page = action.payload;
