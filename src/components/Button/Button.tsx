@@ -15,6 +15,7 @@ export type ButtonProps = React.HTMLAttributes<HTMLButtonElement> & {
 export const Button = ({
   children,
   type = 'primary',
+  className = '',
   disabled = false,
   onClick = () => {},
   ...etc
@@ -23,6 +24,7 @@ export const Button = ({
     [styles.Button]: true,
     [styles[type]]: true,
     [styles.disabled]: disabled,
+    [className]: !!className,
   });
 
   return (

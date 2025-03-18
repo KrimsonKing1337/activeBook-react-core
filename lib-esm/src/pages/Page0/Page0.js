@@ -36,55 +36,27 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
-import { ModalDialog } from 'components/ModalDialog';
-import { PageWrapper } from 'components/PageWrapper';
-import { Action } from 'components/ColoredTextTrigger/Action';
-import { Segment } from 'components/Segment';
-import { Button } from 'components/Button';
+import { PageWrapper, Action, WelcomeTour } from 'components';
 import { goToPage } from 'utils/control/goToPage';
 import { Flags, modalsWereShowed } from 'utils/localStorage/modalsWereShowed';
 import { flashlightInst } from 'utils/effects/flashlight';
-import { useVibration } from 'hooks/effects/vibration';
-import { getWelcomeTourTextById } from './utils';
+import { localStorageId as welcomeTourLocalStorageId } from 'components/WelcomeTour/utils';
+import { Modal } from './components';
 import { useModal } from './hooks';
-var welcomeTourTextIdsArray = [
-    'action',
-    'segments',
-    'bookmarks',
-    'navigation',
-    'font',
-    'config',
-];
 export var Page0 = function (_a) {
     var goCallback = _a.goCallback, header = _a.header, subHeader = _a.subHeader, _b = _a.showButton, showButton = _b === void 0 ? true : _b, Footer = _a.Footer;
     var _c = useState(0), lastPage = _c[0], setLastPage = _c[1];
-    var _d = useState(false), isWelcomeTourModalActive = _d[0], setIsWelcomeTourModalActive = _d[1];
-    var _e = useState(false), showWelcomeTour = _e[0], setShowWelcomeTour = _e[1];
-    var _f = useState(0), welcomeTourIdIndex = _f[0], setWelcomeTourIdIndex = _f[1];
-    var _g = useState('Далее'), welcomeTourNextButtonLabel = _g[0], setWelcomeTourNextButtonLabel = _g[1];
-    var _h = useModal(), modalIsActive = _h.modalIsActive, modalOnClose = _h.modalOnClose, setModalIsActive = _h.setModalIsActive;
-    var _j = useVibration(), vibrationOn = _j.vibrationOn, vibrationOff = _j.vibrationOff;
+    var _d = useState(false), isWelcomeTourActive = _d[0], setIsWelcomeTourActive = _d[1];
+    var _e = useState(false), isWelcomeTourModalActive = _e[0], setIsWelcomeTourModalActive = _e[1];
+    var _f = useModal(), modalIsActive = _f.modalIsActive, modalOnClose = _f.modalOnClose, setModalIsActive = _f.setModalIsActive;
     useEffect(function () {
-        var lastPageAsJSON = localStorage.getItem('lastPage');
-        if (lastPageAsJSON) {
-            var page = JSON.parse(lastPageAsJSON);
-            setLastPage(page);
-        }
-    }, []);
-    useEffect(function () {
-        if (!showWelcomeTour) {
-            var highlightedWelcomeTourElement = document.querySelector('.welcomeTourHighLight');
-            if (highlightedWelcomeTourElement) {
-                highlightedWelcomeTourElement.classList.remove('welcomeTourHighLight');
-            }
+        var lastPageAsJson = localStorage.getItem('lastPage');
+        if (!lastPageAsJson) {
             return;
         }
-        var welcomeTourElement = document.querySelector('[data-welcome-tour-id="action"]');
-        if (welcomeTourElement) {
-            welcomeTourElement.classList.add('welcomeTourHighLight');
-        }
-    }, [showWelcomeTour]);
+        var page = JSON.parse(lastPageAsJson);
+        setLastPage(page);
+    }, []);
     var go = function () { return __awaiter(void 0, void 0, void 0, function () {
         var err_1, pageToGo;
         return __generator(this, function (_a) {
@@ -112,37 +84,13 @@ export var Page0 = function (_a) {
             }
         });
     }); };
-    var modalCloseHandler = function () {
+    var modalConfirmHandler = function () {
         modalOnClose();
         go();
     };
-    var welcomeTourModalCloseHandler = function () {
-        setIsWelcomeTourModalActive(false);
-        setShowWelcomeTour(true);
-    };
-    var welcomeTourNextButtonClickHandler = function () {
-        var highlightedWelcomeTourElement = document.querySelector('.welcomeTourHighLight');
-        if (highlightedWelcomeTourElement) {
-            highlightedWelcomeTourElement.classList.remove('welcomeTourHighLight');
-        }
-        if (welcomeTourIdIndex === welcomeTourTextIdsArray.length - 2) {
-            setWelcomeTourNextButtonLabel('Закончить знакомство');
-        }
-        if (welcomeTourIdIndex === welcomeTourTextIdsArray.length - 1) {
-            setShowWelcomeTour(false);
-            localStorage.setItem('welcomeTourHasBeenSeen', 'true');
-            return;
-        }
-        var newIndex = welcomeTourIdIndex + 1;
-        var newTextId = welcomeTourTextIdsArray[newIndex];
-        setWelcomeTourIdIndex(newIndex);
-        var selector = "[data-welcome-tour-id=\"".concat(newTextId, "\"]");
-        var welcomeTourElement = document.querySelector(selector);
-        welcomeTourElement.classList.add('welcomeTourHighLight');
-    };
-    var clickHandler = function () {
+    var actionClickHandler = function () {
         var isModalWasShowed = modalsWereShowed.get(Flags.usingCamera);
-        var welcomeTourHasBeenSeen = localStorage.getItem('welcomeTourHasBeenSeen');
+        var welcomeTourHasBeenSeen = localStorage.getItem(welcomeTourLocalStorageId);
         if (!welcomeTourHasBeenSeen) {
             setIsWelcomeTourModalActive(true);
             return;
@@ -153,27 +101,7 @@ export var Page0 = function (_a) {
         }
         go();
     };
-    var welcomeTourActionClickHandler = function () {
-        vibrationOn(1000);
-        toast.success('Отлично!');
-    };
-    var segment1EnterHandler = function () {
-        vibrationOn(1000);
-        toast.success('Так держать!');
-    };
-    var segment1ExitHandler = function () {
-        vibrationOff();
-    };
-    var segment2EnterHandler = function () {
-        vibrationOn(1000);
-        toast.success('Супер!');
-    };
-    var segment2ExitHandler = function () {
-        vibrationOff();
-    };
-    var label = lastPage > 0 ? 'Продолжить читать' : 'Начать читать';
-    var welcomeTourTextId = welcomeTourTextIdsArray[welcomeTourIdIndex];
-    var welcomeTourText = getWelcomeTourTextById(welcomeTourTextId);
-    return (_jsxs(PageWrapper, { children: [_jsx(ModalDialog, { isOpen: isWelcomeTourModalActive, onClose: welcomeTourModalCloseHandler, onConfirm: welcomeTourModalCloseHandler, onCancel: welcomeTourModalCloseHandler, canFullScreen: false, showCancelButton: false, cantCloseIn: 2000, children: _jsxs("div", { children: [_jsx("header", { children: "\u041F\u0435\u0440\u0435\u0434 \u0442\u0435\u043C \u043A\u0430\u043A \u043D\u0430\u0447\u043D\u0451\u043C..." }), _jsx("article", { children: _jsx("p", { children: "\u041F\u043E\u0437\u043D\u0430\u043A\u043E\u043C\u044C\u0442\u0435\u0441\u044C \u0441 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044F\u043C\u0438 \u043A\u043D\u0438\u0433\u0438" }) })] }) }), _jsx(ModalDialog, { isOpen: modalIsActive, onClose: modalCloseHandler, onConfirm: modalCloseHandler, onCancel: modalCloseHandler, canFullScreen: true, showCancelButton: false, cantCloseIn: 5000, children: _jsxs("div", { children: [_jsx("header", { children: "\u041E\u0411\u0420\u0410\u0422\u0418\u0422\u0415 \u0412\u041D\u0418\u041C\u0410\u041D\u0418\u0415" }), _jsxs("article", { children: [_jsx("p", { children: "\u0414\u043B\u044F \u0440\u0430\u0431\u043E\u0442\u044B \u044D\u0444\u0444\u0435\u043A\u0442\u043E\u0432 \u043D\u0430 \u043E\u0441\u043D\u043E\u0432\u0435 \u0432\u0441\u043F\u044B\u0448\u043A\u0438, \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u044E \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u043E \u043F\u043E\u043B\u0443\u0447\u0438\u0442\u044C \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043D\u0438\u0435 \u043A \u043A\u0430\u043C\u0435\u0440\u0435 (\u043A \u0441\u043E\u0436\u0430\u043B\u0435\u043D\u0438\u044E, \u043D\u0435\u0442 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u0438 \u0437\u0430\u043F\u0440\u043E\u0441\u0438\u0442\u044C \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043D\u0438\u0435 \u0442\u043E\u043B\u044C\u043A\u043E \u043A\u043E \u0432\u0441\u043F\u044B\u0448\u043A\u0435)." }), _jsx("p", { children: "\u0412\u044B \u0432\u0441\u0435\u0433\u0434\u0430 \u043C\u043E\u0436\u0435\u0442\u0435 \u0437\u0430\u043F\u0440\u043E\u0441\u0438\u0442\u044C \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043D\u0438\u0435 \u0435\u0449\u0451 \u0440\u0430\u0437, \u0432 \u043C\u0435\u043D\u044E \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u044F" })] })] }) }), header && (_jsx("header", { children: header })), subHeader && (_jsx("article", { children: subHeader })), showButton && !showWelcomeTour && (_jsx(Action, { fullWidth: true, onClick: clickHandler, children: label })), showWelcomeTour && (_jsxs("div", { style: { marginTop: '50px', padding: '20px', border: '1px var(--main) solid', borderRadius: '10px' }, children: [_jsxs("div", { style: { marginBottom: '50px', paddingBottom: '10px', borderBottom: '1px #eaeaea solid' }, children: [_jsx("p", { children: _jsx("b", { children: welcomeTourText.header }) }), _jsx("p", { children: welcomeTourText.article }), _jsx(Button, { type: "success", style: { marginTop: '22px' }, onClick: welcomeTourNextButtonClickHandler, children: welcomeTourNextButtonLabel })] }), _jsx("div", { "data-welcome-tour-id": "action", style: { marginBottom: '50px' }, children: _jsx(Action, { fullWidth: true, onClick: welcomeTourActionClickHandler, children: "\u0412\u044B\u0434\u0435\u043B\u0435\u043D\u043D\u044B\u0439 \u0442\u0435\u043A\u0441\u0442" }) }), _jsxs("div", { "data-welcome-tour-id": "segments", children: [_jsx(Segment, { onEnter: segment1EnterHandler, onExit: segment1ExitHandler, children: _jsx("p", { children: "\u041D\u0430\u0436\u043C\u0438 \u043D\u0430 \u043C\u0435\u043D\u044F" }) }), _jsx(Segment, { onEnter: segment2EnterHandler, onExit: segment2ExitHandler, children: _jsx("p", { children: "\u0418 \u043D\u0430 \u043C\u0435\u043D\u044F \u043D\u0430\u0436\u043C\u0438!" }) })] })] })), Footer && (_jsx(Footer, {}))] }));
+    var actionLabel = lastPage > 0 ? 'Продолжить читать' : 'Начать читать';
+    return (_jsxs(PageWrapper, { children: [_jsx(Modal, { isActive: modalIsActive, onConfirm: modalConfirmHandler }), header && (_jsx("header", { children: header })), subHeader && (_jsx("article", { children: subHeader })), showButton && !isWelcomeTourActive && (_jsx(Action, { fullWidth: true, onClick: actionClickHandler, children: actionLabel })), _jsx(WelcomeTour, { isActive: isWelcomeTourActive, setIsActive: setIsWelcomeTourActive, isModalActive: isWelcomeTourModalActive, setIsModalActive: setIsWelcomeTourModalActive }), Footer && (_jsx(Footer, {}))] }));
 };
 //# sourceMappingURL=Page0.js.map

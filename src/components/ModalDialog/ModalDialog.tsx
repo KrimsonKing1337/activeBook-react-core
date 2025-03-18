@@ -12,7 +12,9 @@ type Func = () => void;
 export type ModalDialogProps = ModalProps & {
   cantCloseIn?: number;
   showConfirmButton?: boolean;
+  confirmButtonLabel?: string;
   showCancelButton?: boolean;
+  cancelButtonLabel?: string;
 
   onConfirm?: Func;
   onCancel?: Func;
@@ -28,6 +30,8 @@ export const ModalDialog = ({
   isOpen,
   cantCloseIn = 0,
   showConfirmButton = true,
+  confirmButtonLabel = 'OK',
+  cancelButtonLabel = 'Отмена',
   showCancelButton = true,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onClose = defaultFunc,
@@ -108,8 +112,8 @@ export const ModalDialog = ({
     onCancel();
   };
 
-  const confirmButtonLabel = secondsLeft ? `Ок (${secondsLeft})` : 'Ок';
-  const cancelButtonLabel = secondsLeft ? `Отмена (${secondsLeft})` : 'Отмена';
+  const confirmBtnLabel = secondsLeft ? `${confirmButtonLabel} (${secondsLeft})` : confirmButtonLabel;
+  const cancelBtnLabel = secondsLeft ? `${cancelButtonLabel} (${secondsLeft})` : cancelButtonLabel;
 
   return (
     <Modal
@@ -126,13 +130,13 @@ export const ModalDialog = ({
         <div className={styles.actions}>
           {showConfirmButton && (
             <Button type="success" disabled={!canClose} onClick={confirmButtonClickHandler}>
-              {confirmButtonLabel}
+              {confirmBtnLabel}
             </Button>
           )}
 
           {showCancelButton && (
             <Button type="secondary" disabled={!canClose} onClick={cancelButtonClickHandler}>
-              {cancelButtonLabel}
+              {cancelBtnLabel}
             </Button>
           )}
         </div>

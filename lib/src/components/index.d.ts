@@ -27,3 +27,4 @@ export * from './Toolbar';
 export * from './Video';
 export * from './Segment';
 export * from './DotLottieReact';
+export * from './WelcomeTour';

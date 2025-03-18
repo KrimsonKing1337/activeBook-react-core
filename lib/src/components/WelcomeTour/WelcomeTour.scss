@@ -1,0 +1,27 @@
+.Wrapper {
+  margin-top: 50px;
+  padding: 20px;
+
+  border: 1px var(--main) solid;
+  border-radius: 10px;
+}
+
+.Card {
+  margin-bottom: 50px;
+  padding: 10px;
+
+  border-bottom: 1px #eaeaea solid;
+}
+
+.CardHeader {
+  font-weight: bold;
+}
+
+.CardButton {
+  margin-top: 22px;
+}
+
+.ActionWrapper {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}

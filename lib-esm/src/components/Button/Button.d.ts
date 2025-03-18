@@ -5,4 +5,4 @@ export type ButtonProps = React.HTMLAttributes<HTMLButtonElement> & {
     disabled?: boolean;
     onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
-export declare const Button: ({ children, type, disabled, onClick, ...etc }: PropsWithChildren<ButtonProps>) => import("react/jsx-runtime").JSX.Element;
+export declare const Button: ({ children, type, className, disabled, onClick, ...etc }: PropsWithChildren<ButtonProps>) => import("react/jsx-runtime").JSX.Element;

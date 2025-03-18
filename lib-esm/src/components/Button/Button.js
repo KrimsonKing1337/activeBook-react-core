@@ -25,11 +25,12 @@ import classNames from 'classnames';
 import styles from './Button.scss';
 export var Button = function (_a) {
     var _b;
-    var children = _a.children, _c = _a.type, type = _c === void 0 ? 'primary' : _c, _d = _a.disabled, disabled = _d === void 0 ? false : _d, _e = _a.onClick, onClick = _e === void 0 ? function () { } : _e, etc = __rest(_a, ["children", "type", "disabled", "onClick"]);
+    var children = _a.children, _c = _a.type, type = _c === void 0 ? 'primary' : _c, _d = _a.className, className = _d === void 0 ? '' : _d, _e = _a.disabled, disabled = _e === void 0 ? false : _e, _f = _a.onClick, onClick = _f === void 0 ? function () { } : _f, etc = __rest(_a, ["children", "type", "className", "disabled", "onClick"]);
     var buttonClassNames = classNames((_b = {},
         _b[styles.Button] = true,
         _b[styles[type]] = true,
         _b[styles.disabled] = disabled,
+        _b[className] = !!className,
         _b));
     return (_jsx("button", __assign({ type: "button", className: buttonClassNames, onClick: onClick }, etc, { children: children })));
 };
