@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react';
 
 import { toast } from 'react-toastify';
 
-import { Action, Button, ModalDialog, Segment } from 'components';
+import { Action, Button } from 'components';
 
 import { useVibration } from 'hooks/effects/vibration';
+
+import { Modal, Segments } from './components';
 
 import { localStorageId, getWelcomeTourTextById, removeHighLight, setHighLight } from './utils';
 
@@ -27,7 +29,7 @@ const elementsIdsArray = [
 ];
 
 export const WelcomeTour = ({ isActive, setIsActive, isModalActive, setIsModalActive }: WelcomeTourProps) => {
-  const { vibrationOn, vibrationOff } = useVibration();
+  const { vibrationOn } = useVibration();
 
   const [idIndex, setIdIndex] = useState(0);
   const [nextButtonLabel, setNextButtonLabel] = useState('Далее');
@@ -46,22 +48,6 @@ export const WelcomeTour = ({ isActive, setIsActive, isModalActive, setIsModalAc
     vibrationOn(1000);
 
     toast.success('Отлично!');
-  };
-
-  const segment1EnterHandler = () => {
-    vibrationOn(1000);
-
-    toast.success('Так держать!');
-  };
-
-  const segment2EnterHandler = () => {
-    vibrationOn(1000);
-
-    toast.success('Супер!');
-  };
-
-  const segmentExitHandler = () => {
-    vibrationOff();
   };
 
   const nextButtonClickHandler = () => {
@@ -86,7 +72,7 @@ export const WelcomeTour = ({ isActive, setIsActive, isModalActive, setIsModalAc
     setHighLight(newId);
   };
 
-  const modalCloseHandler = () => {
+  const modalConfirmHandler = () => {
     setIsModalActive(false);
     setIsActive(true);
   };
@@ -97,26 +83,7 @@ export const WelcomeTour = ({ isActive, setIsActive, isModalActive, setIsModalAc
 
   return (
     <>
-      <ModalDialog
-        isOpen={isModalActive}
-        confirmButtonLabel="Хорошо"
-        canFullScreen={false}
-        showCancelButton={false}
-        cantCloseIn={2000}
-        onConfirm={modalCloseHandler}
-      >
-        <div>
-          <header>
-            Перед тем как начнём...
-          </header>
-
-          <article>
-            <p>
-              Познакомьтесь с возможностями книги
-            </p>
-          </article>
-        </div>
-      </ModalDialog>
+      <Modal isActive={isModalActive} onConfirm={modalConfirmHandler} />
 
       {isActive && (
         <div className={styles.Wrapper}>
@@ -140,19 +107,7 @@ export const WelcomeTour = ({ isActive, setIsActive, isModalActive, setIsModalAc
             </Action>
           </div>
 
-          <div data-welcome-tour-id="segments">
-            <Segment onEnter={segment1EnterHandler} onExit={segmentExitHandler}>
-              <p>
-                Нажми на меня
-              </p>
-            </Segment>
-
-            <Segment onEnter={segment2EnterHandler} onExit={segmentExitHandler}>
-              <p>
-                И на меня нажми!
-              </p>
-            </Segment>
-          </div>
+          <Segments />
         </div>
       )}
     </>
