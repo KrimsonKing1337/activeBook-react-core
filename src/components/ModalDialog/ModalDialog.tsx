@@ -1,10 +1,9 @@
 import { type PropsWithChildren, useEffect, useRef, useState } from 'react';
 
-import classNames from 'classnames';
-
 import type { Interval, Timer } from '@types';
 
-import { Modal, ModalProps } from 'components/Modal';
+import { type ModalProps, Modal } from 'components/Modal';
+import { Button } from 'components/Button';
 
 import styles from './ModalDialog.scss';
 
@@ -12,10 +11,11 @@ type Func = () => void;
 
 export type ModalDialogProps = ModalProps & {
   cantCloseIn?: number;
-  showOkButton?: boolean;
+  showConfirmButton?: boolean;
   showCancelButton?: boolean;
-  onConfirm: Func;
-  onCancel: Func;
+
+  onConfirm?: Func;
+  onCancel?: Func;
 }
 
 const defaultFunc = () => {
@@ -27,14 +27,14 @@ let interval: Interval = null;
 export const ModalDialog = ({
   isOpen,
   cantCloseIn = 0,
-  showOkButton = true,
+  showConfirmButton = true,
   showCancelButton = true,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onClose = defaultFunc,
   onConfirm = defaultFunc,
   onCancel = defaultFunc,
   children,
-  ...rest
+  ...etc
 }: PropsWithChildren<ModalDialogProps>) => {
   const [canClose, setCanClose] = useState(false);
   const [secondsLeft, setSecondsLeft] = useState(0);
@@ -94,26 +94,19 @@ export const ModalDialog = ({
     };
   }, [isOpen, cantCloseIn]);
 
-  const buttonOkClickHandler = () => {
+  const confirmButtonClickHandler = () => {
     if (canClose) {
       onConfirm();
     }
   };
 
-  const buttonCancelClickHandler = () => onCancel();
-  const closeHandler = () => {
+  const cancelButtonClickHandler = () => {
     onCancel();
   };
 
-  const buttonConfirmClassNames = classNames({
-    [styles.buttonConfirm]: true,
-    [styles.canClose]: canClose,
-  });
-
-  const buttonCancelClassNames = classNames({
-    [styles.buttonCancel]: true,
-    [styles.canClose]: canClose,
-  });
+  const closeHandler = () => {
+    onCancel();
+  };
 
   const confirmButtonLabel = secondsLeft ? `Ок (${secondsLeft})` : 'Ок';
   const cancelButtonLabel = secondsLeft ? `Отмена (${secondsLeft})` : 'Отмена';
@@ -123,7 +116,7 @@ export const ModalDialog = ({
       isOpen={isOpen}
       canClose={canClose}
       onClose={closeHandler}
-      {...rest}
+      {...etc}
     >
       <div className={styles.wrapper}>
         <div className="ModalDialogDesc">
@@ -131,16 +124,16 @@ export const ModalDialog = ({
         </div>
 
         <div className={styles.actions}>
-          {showOkButton && (
-            <button type="button" className={buttonConfirmClassNames} onClick={buttonOkClickHandler}>
+          {showConfirmButton && (
+            <Button type="success" disabled={!canClose} onClick={confirmButtonClickHandler}>
               {confirmButtonLabel}
-            </button>
+            </Button>
           )}
 
           {showCancelButton && (
-            <button type="button" className={buttonCancelClassNames} onClick={buttonCancelClickHandler}>
+            <Button type="secondary" disabled={!canClose} onClick={cancelButtonClickHandler}>
               {cancelButtonLabel}
-            </button>
+            </Button>
           )}
         </div>
       </div>

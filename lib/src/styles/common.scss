@@ -1,7 +1,7 @@
 @import "~styles/__mixins";
 @import "~styles/__variables";
 
-@keyframes :global(animation) {
+@keyframes :global(welcomeTourHighLightAnim) {
   0%, 100% {
     background-color: transparent;
   }
@@ -29,16 +29,7 @@
       border: 1px var(--main) dashed;
       transform: translate(-50%, -50%);
 
-      animation: animation 0.3s 10 linear;
+      animation: welcomeTourHighLightAnim 0.3s 10 linear;
     }
-  }
-
-  .buttonConfirm {
-    padding: 4px;
-
-    background: #28a745;
-    border-radius: 4px;
-
-    @include hover-default;
   }
 }

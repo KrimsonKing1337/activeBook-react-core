@@ -6,6 +6,7 @@ import { ModalDialog } from 'components/ModalDialog';
 import { PageWrapper } from 'components/PageWrapper';
 import { Action } from 'components/ColoredTextTrigger/Action';
 import { Segment } from 'components/Segment';
+import { Button } from 'components/Button';
 
 import { goToPage } from 'utils/control/goToPage';
 import { Flags, modalsWereShowed } from 'utils/localStorage/modalsWereShowed';
@@ -262,14 +263,9 @@ export const Page0 = ({ goCallback, header, subHeader, showButton = true, Footer
               {welcomeTourText.article}
             </p>
 
-            <button
-              type="button"
-              style={{ marginTop: '22px' }}
-              className="buttonConfirm"
-              onClick={welcomeTourNextButtonClickHandler}
-            >
+            <Button type="success" style={{ marginTop: '22px' }} onClick={welcomeTourNextButtonClickHandler}>
               {welcomeTourNextButtonLabel}
-            </button>
+            </Button>
           </div>
 
           <div data-welcome-tour-id="action" style={{ marginBottom: '50px' }}>
