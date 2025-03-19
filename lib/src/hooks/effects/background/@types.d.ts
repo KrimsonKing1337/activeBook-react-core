@@ -3,7 +3,6 @@ export type BackgroundEffectMediaPosition = 'center' | 'left' | 'right' | 'top' 
 export type BackgroundEffectMediaOptions = {
     src: string;
     style?: React.CSSProperties;
-    wrapperStyle?: React.CSSProperties;
 };
 export type UseBackgroundEffectImageOptions = BackgroundEffectMediaOptions;
 export type BackgroundEffectVideoOptions = BackgroundEffectMediaOptions & {

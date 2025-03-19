@@ -53,6 +53,6 @@ export var Narrative = function (_a) {
             hammertime.destroy();
         };
     }, []);
-    return (_jsx("div", { ref: ref, className: styles.narrative, style: narrativeStyle, tabIndex: 0, children: _jsx("div", { className: styles.text, style: textStyle, children: children }) }));
+    return (_jsx("div", { ref: ref, id: "narrative", className: styles.narrative, style: narrativeStyle, tabIndex: 0, children: _jsx("div", { className: styles.text, style: textStyle, children: children }) }));
 };
 //# sourceMappingURL=Narrative.js.map

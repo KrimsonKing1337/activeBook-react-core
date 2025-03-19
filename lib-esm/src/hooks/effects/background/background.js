@@ -7,7 +7,7 @@ export var useBackground = function (effect) {
     var refEffect = useRef(null);
     useEffect(function () {
         // если эффект уже есть, и он точно такой же, как тот, что приходит - значит эффект не нужно инициализировать заново
-        // todo: сравнивать Component-ы. сейчас сравнивается только на есть он или нет
+        // todo: сравнивать Component-ы. сейчас сравнивается только на то, есть он или нет
         if (refEffect.current && effectsAreEqual(refEffect.current, effect)) {
             return;
         }

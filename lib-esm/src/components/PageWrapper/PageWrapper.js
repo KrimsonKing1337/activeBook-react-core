@@ -26,6 +26,6 @@ export var PageWrapper = function (_a) {
         _c[styles.mainContent] = true,
         _c[styles.isLoading] = isLoading || isDotLottieLoading,
         _c));
-    return (_jsx("div", { className: pageWrapperClassNames, children: _jsxs("div", { className: mainContendClassNames, children: [_jsx(Narrative, { children: children }), _jsx(SideEffects, {}), _jsx(BackgroundEffects, {}), !withoutToolbar && (_jsx(Toolbar, { sbMode: sbMode })), _jsx(Menu, {}), _jsx(TableOfContents, {}), _jsx(Bookmarks, {}), _jsx(AchievementsProgress, {})] }) }));
+    return (_jsx("div", { id: "page-wrapper", className: pageWrapperClassNames, children: _jsxs("div", { id: "main-content-wrapper", className: mainContendClassNames, children: [_jsx(Narrative, { children: children }), _jsx(SideEffects, {}), _jsx(BackgroundEffects, {}), !withoutToolbar && (_jsx(Toolbar, { sbMode: sbMode })), _jsx(Menu, {}), _jsx(TableOfContents, {}), _jsx(Bookmarks, {}), _jsx(AchievementsProgress, {})] }) }));
 };
 //# sourceMappingURL=PageWrapper.js.map

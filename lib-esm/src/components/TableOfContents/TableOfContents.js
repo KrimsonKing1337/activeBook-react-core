@@ -24,6 +24,6 @@ export var TableOfContents = function () {
     var closeButtonClickHandler = function () {
         dispatch(mainActions.setMenuActiveState(null));
     };
-    return (_jsxs(Overflow, { isOpen: isOpen, children: [_jsx(Header, { label: "\u041E\u0433\u043B\u0430\u0432\u043B\u0435\u043D\u0438\u0435" }), _jsx("div", { className: styles.itemsWrapper, children: items.map(function (itemCur, index) { return _jsx(Item, __assign({}, itemCur), index); }) }), _jsx("button", { className: styles.button, onClick: closeButtonClickHandler, children: "\u0417\u0430\u043A\u0440\u044B\u0442\u044C" })] }));
+    return (_jsxs(Overflow, { id: "table-of-contents", isOpen: isOpen, children: [_jsx(Header, { label: "\u041E\u0433\u043B\u0430\u0432\u043B\u0435\u043D\u0438\u0435" }), _jsx("div", { className: styles.itemsWrapper, children: items.map(function (itemCur, index) { return _jsx(Item, __assign({}, itemCur), index); }) }), _jsx("button", { className: styles.button, onClick: closeButtonClickHandler, children: "\u0417\u0430\u043A\u0440\u044B\u0442\u044C" })] }));
 };
 //# sourceMappingURL=TableOfContents.js.map

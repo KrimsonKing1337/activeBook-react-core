@@ -55,6 +55,6 @@ export var Video = function (_a) {
             }));
         };
     }, []);
-    return (_jsx("video", __assign({ ref: ref, "data-id": id, className: className, src: src, preload: "auto", poster: "/assets/img/poster-default.png", muted: muted, autoPlay: autoPlay }, etc)));
+    return (_jsx("video", __assign({ ref: ref, "data-id": id, "data-autoPlay": autoPlay, className: className, src: src, preload: "auto", poster: "/assets/img/poster-default.png", muted: muted }, etc)));
 };
 //# sourceMappingURL=Video.js.map

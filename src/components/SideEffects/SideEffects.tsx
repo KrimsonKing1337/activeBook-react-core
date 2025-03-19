@@ -11,8 +11,11 @@ export const SideEffects = () => {
   const sideShadowTemplate = useSelector(sideTextEffectSelectors.template);
 
   return (
-    <div className={styles.sideEffects}>
-      {sideShadowIsActive && <SideShadow />}
+    <div id="side-effects" className={styles.sideEffects}>
+      {sideShadowIsActive && (
+        <SideShadow />
+      )}
+
       {sideTextIsActive && (
         <>
           {sideShadowTemplate}

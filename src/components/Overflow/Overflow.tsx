@@ -1,19 +1,20 @@
 import { PropsWithChildren, useEffect, useRef } from 'react';
 
 import classNames from 'classnames';
+
 import { getNarrativeElement } from 'components/PageWrapper/components/Narrative/utils';
 
 import { useDispatch } from 'store';
 import { mainActions } from 'store/main';
 
-
 import styles from './Overflow.scss';
 
-export type OverflowProps = {
+export type OverflowProps = React.HTMLAttributes<HTMLDivElement> & PropsWithChildren & {
   isOpen: boolean;
+  className?: string;
 };
 
-export const Overflow = ({ children, isOpen }: PropsWithChildren<OverflowProps>) => {
+export const Overflow = ({ children, isOpen, className = '', ...etc }: OverflowProps) => {
   const dispatch = useDispatch();
 
   const overflowRef = useRef<HTMLDivElement>(null);
@@ -52,10 +53,16 @@ export const Overflow = ({ children, isOpen }: PropsWithChildren<OverflowProps>)
   const overflowClassNames = classNames({
     [styles.overflow]: true,
     [styles.isOpen]: isOpen,
+    [className]: !!className,
   });
 
   return (
-    <div ref={overflowRef} className={overflowClassNames} tabIndex={0}>
+    <div
+      ref={overflowRef}
+      className={overflowClassNames}
+      tabIndex={0}
+      {...etc}
+    >
       {children}
     </div>
   );

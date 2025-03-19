@@ -37,6 +37,6 @@ export var Bookmarks = function () {
         newBookmarks.splice(index, 1);
         setBookmarks(newBookmarks);
     };
-    return (_jsxs(Overflow, { isOpen: isOpen, children: [_jsx(Header, { label: "\u0417\u0430\u043A\u043B\u0430\u0434\u043A\u0438" }), _jsx("div", { className: styles.itemsWrapper, children: bookmarks.map(function (itemCur, index) { return _jsx(Item, { pageNumber: itemCur, onDelete: deleteHandler }, index); }) }), _jsxs("div", { className: styles.footer, children: [_jsx("button", { className: buttonAddClassNames, onClick: addButtonClickHandler, children: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C" }), _jsx("button", { className: styles.button, onClick: closeButtonClickHandler, children: "\u0417\u0430\u043A\u0440\u044B\u0442\u044C" })] })] }));
+    return (_jsxs(Overflow, { id: "bookmarks", isOpen: isOpen, children: [_jsx(Header, { label: "\u0417\u0430\u043A\u043B\u0430\u0434\u043A\u0438" }), _jsx("div", { className: styles.itemsWrapper, children: bookmarks.map(function (itemCur, index) { return _jsx(Item, { pageNumber: itemCur, onDelete: deleteHandler }, index); }) }), _jsxs("div", { className: styles.footer, children: [_jsx("button", { className: buttonAddClassNames, onClick: addButtonClickHandler, children: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C" }), _jsx("button", { className: styles.button, onClick: closeButtonClickHandler, children: "\u0417\u0430\u043A\u0440\u044B\u0442\u044C" })] })] }));
 };
 //# sourceMappingURL=Bookmarks.js.map

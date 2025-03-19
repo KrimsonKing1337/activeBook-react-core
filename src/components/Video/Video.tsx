@@ -60,12 +60,12 @@ export const Video = ({
     <video
       ref={ref}
       data-id={id}
+      data-autoPlay={autoPlay}
       className={className}
       src={src}
       preload="auto"
       poster="/assets/img/poster-default.png"
       muted={muted}
-      autoPlay={autoPlay}
       {...etc}
     />
   );

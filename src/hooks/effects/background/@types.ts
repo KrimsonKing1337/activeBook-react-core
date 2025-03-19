@@ -12,7 +12,6 @@ export type BackgroundEffectMediaPosition =
 export type BackgroundEffectMediaOptions = {
   src: string;
   style?: React.CSSProperties;
-  wrapperStyle?: React.CSSProperties;
 };
 
 export type UseBackgroundEffectImageOptions = BackgroundEffectMediaOptions;

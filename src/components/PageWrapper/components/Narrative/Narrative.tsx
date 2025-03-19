@@ -63,6 +63,7 @@ export const Narrative = ({ children }: PropsWithChildren) => {
   return (
     <div
       ref={ref}
+      id="narrative"
       className={styles.narrative}
       style={narrativeStyle}
       tabIndex={0}

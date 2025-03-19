@@ -8,6 +8,6 @@ export var SideEffects = function () {
     var sideShadowIsActive = useSelector(sideShadowEffectSelectors.isActive);
     var sideTextIsActive = useSelector(sideTextEffectSelectors.isActive);
     var sideShadowTemplate = useSelector(sideTextEffectSelectors.template);
-    return (_jsxs("div", { className: styles.sideEffects, children: [sideShadowIsActive && _jsx(SideShadow, {}), sideTextIsActive && (_jsx(_Fragment, { children: sideShadowTemplate }))] }));
+    return (_jsxs("div", { id: "side-effects", className: styles.sideEffects, children: [sideShadowIsActive && (_jsx(SideShadow, {})), sideTextIsActive && (_jsx(_Fragment, { children: sideShadowTemplate }))] }));
 };
 //# sourceMappingURL=SideEffects.js.map

@@ -21,7 +21,7 @@ export const TableOfContents = () => {
   };
 
   return (
-    <Overflow isOpen={isOpen}>
+    <Overflow id="table-of-contents" isOpen={isOpen}>
       <Header label="Оглавление" />
 
       <div className={styles.itemsWrapper}>

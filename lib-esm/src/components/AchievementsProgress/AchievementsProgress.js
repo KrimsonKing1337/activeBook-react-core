@@ -61,7 +61,7 @@ export var AchievementsProgress = function () {
     var textAboutHidden = hiddenLength.current === 1
         ? '+ одно скрытое достижение'
         : "+ \u0441\u043A\u0440\u044B\u0442\u044B\u0445 \u0434\u043E\u0441\u0442\u0438\u0436\u0435\u043D\u0438\u0439: ".concat(hiddenLength.current, " \u0448\u0442.");
-    return (_jsxs(Overflow, { isOpen: isOpen, children: [_jsx(Header, { label: "\u041F\u0440\u043E\u0433\u0440\u0435\u0441\u0441 \u0434\u043E\u0441\u0442\u0438\u0436\u0435\u043D\u0438\u0439" }), _jsxs("div", { className: styles.itemsWrapper, children: [items.map(function (_a) {
+    return (_jsxs(Overflow, { id: "achievements-progress", isOpen: isOpen, children: [_jsx(Header, { label: "\u041F\u0440\u043E\u0433\u0440\u0435\u0441\u0441 \u0434\u043E\u0441\u0442\u0438\u0436\u0435\u043D\u0438\u0439" }), _jsxs("div", { className: styles.itemsWrapper, children: [items.map(function (_a) {
                         var key = _a.key, title = _a.title, status = _a.status, type = _a.type;
                         return (_jsx(Item, { title: title, status: status, type: type }, key));
                     }), !!hiddenLength.current && (_jsx("div", { className: styles.textAboutHidden, children: textAboutHidden }))] }), _jsx("button", { className: styles.button, onClick: closeButtonClickHandler, children: "\u0417\u0430\u043A\u0440\u044B\u0442\u044C" })] }));

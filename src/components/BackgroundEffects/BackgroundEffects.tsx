@@ -1,24 +1,30 @@
-import { Fragment, memo, useMemo } from 'react';
-
-import { nanoid } from 'nanoid';
+import { type PropsWithChildren, Fragment, memo, useMemo } from 'react';
 
 import { useSelector } from 'store';
 
 import { backgroundEffectsSelectors } from 'store/effects/background';
 
-import { Videos, Images, Shadow, Dots } from './components';
+import { Videos, Images, Shadow, Dots, Wrapper } from './components';
 
 import styles from './BackgroundEffects.scss';
+
+const Child = memo(({ children }: PropsWithChildren) => {
+  return (
+    <Fragment>
+      {children}
+    </Fragment>
+  );
+});
 
 export const BackgroundEffects = memo(() => {
   const effects = useSelector(backgroundEffectsSelectors.effects);
 
-  // todo: при добавлении / удалении эффектов - будет ререндер их всех. в текущей реализации это исправить невозможно
   const BackgroundObjectsWrappers = useMemo(() => {
     return Object.keys(effects).map((keyCur) => {
       const effectCur = effects[keyCur];
 
       const {
+        id,
         videos = [],
         images = [],
         Component = null,
@@ -28,30 +34,26 @@ export const BackgroundEffects = memo(() => {
 
       const oneOfBgIsActive = !!videos.length || !!images.length || !!Component;
 
-      const uuid = nanoid();
+      return oneOfBgIsActive && (
+        <Child key={id}>
+          <div style={style} className={styles.backgroundObjectsWrapper}>
+            <Shadow options={shadow} />
 
-      return (
-        <Fragment key={uuid}>
-          {oneOfBgIsActive && (
-            <div style={style} className={styles.backgroundObjectsWrapper}>
-              <Shadow options={shadow} />
+            {Component}
 
-              {Component}
-
-              <Videos videos={videos} />
-              <Images images={images} />
-            </div>
-          )}
-        </Fragment>
+            <Videos videos={videos} />
+            <Images images={images} />
+          </div>
+        </Child>
       );
     });
   }, [effects]);
 
   return (
-    <div className={styles.backgroundEffectsWrapper}>
+    <Wrapper id="background-effects">
       <Dots />
 
       {BackgroundObjectsWrappers.map((cur) => cur)}
-    </div>
+    </Wrapper>
   );
 });

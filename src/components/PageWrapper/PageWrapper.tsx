@@ -45,8 +45,8 @@ export const PageWrapper = ({
   });
 
   return (
-    <div className={pageWrapperClassNames}>
-      <div className={mainContendClassNames}>
+    <div id="page-wrapper" className={pageWrapperClassNames}>
+      <div id="main-content-wrapper" className={mainContendClassNames}>
         <Narrative>
           {children}
         </Narrative>

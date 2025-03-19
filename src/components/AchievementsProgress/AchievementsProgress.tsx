@@ -75,7 +75,7 @@ export const AchievementsProgress = () => {
     : `+ скрытых достижений: ${hiddenLength.current} шт.`;
 
   return (
-    <Overflow isOpen={isOpen}>
+    <Overflow id="achievements-progress" isOpen={isOpen}>
       <Header label="Прогресс достижений" />
 
       <div className={styles.itemsWrapper}>

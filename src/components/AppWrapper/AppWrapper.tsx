@@ -164,6 +164,26 @@ export const AppWrapper = ({ children, config, rangeEffects }: PropsWithChildren
     dispatch(effectsActions.setVideosCurrentTime(videosCurrentTimeNewValue));
   }, [page]);
 
+  /*
+    начинаю воспроизведение video, у которых autoPlay.
+    делаю это здесь, чтобы воспроизведение начиналось только после полной загрузки страницы
+  */
+  useEffect(() => {
+    if (isLoading || isDotLottieLoading) {
+      return;
+    }
+
+    const videos = Array.from(document.querySelectorAll('video'));
+
+    videos.forEach((videoCur) => {
+      const autoPlay = videoCur.getAttribute('data-autoPlay');
+
+      if (autoPlay === 'true') {
+        videoCur.play();
+      }
+    });
+  }, [page, isLoading, isDotLottieLoading]);
+
   useEffect(() => {
     seenPages.set(page);
 

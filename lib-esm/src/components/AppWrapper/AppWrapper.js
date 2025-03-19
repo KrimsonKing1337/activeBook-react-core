@@ -117,6 +117,22 @@ export var AppWrapper = function (_a) {
         });
         dispatch(effectsActions.setVideosCurrentTime(videosCurrentTimeNewValue));
     }, [page]);
+    /*
+      начинаю воспроизведение video, у которых autoPlay.
+      делаю это здесь, чтобы воспроизведение начиналось только после полной загрузки страницы
+    */
+    useEffect(function () {
+        if (isLoading || isDotLottieLoading) {
+            return;
+        }
+        var videos = Array.from(document.querySelectorAll('video'));
+        videos.forEach(function (videoCur) {
+            var autoPlay = videoCur.getAttribute('data-autoPlay');
+            if (autoPlay === 'true') {
+                videoCur.play();
+            }
+        });
+    }, [page, isLoading, isDotLottieLoading]);
     useEffect(function () {
         seenPages.set(page);
         // пока отключаю ачивки

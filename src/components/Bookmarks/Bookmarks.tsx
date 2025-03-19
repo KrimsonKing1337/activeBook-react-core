@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+
 import { Header } from 'components/Header';
 import { Overflow } from 'components/Overflow';
 
@@ -43,7 +44,7 @@ export const Bookmarks = () => {
   };
 
   return (
-    <Overflow isOpen={isOpen}>
+    <Overflow id="bookmarks" isOpen={isOpen}>
       <Header label="Закладки" />
 
       <div className={styles.itemsWrapper}>

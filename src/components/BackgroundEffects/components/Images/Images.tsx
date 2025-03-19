@@ -4,8 +4,6 @@ import { Img } from 'components/Img';
 
 import { UseBackgroundEffectImageOptions } from 'hooks/effects/background/@types';
 
-import { Wrapper } from '../Wrapper';
-
 import styles from './Images.scss';
 
 export type ImagesProps = {
@@ -18,18 +16,17 @@ export const Images = ({ images }: ImagesProps) => {
   }
 
   return images.map((imageCur) => {
-    const { src, style, wrapperStyle } = imageCur;
+    const { src, style } = imageCur;
 
     const uuid = nanoid();
 
     return (
-      <Wrapper key={uuid} style={wrapperStyle}>
-        <Img
-          style={style}
-          className={styles.img}
-          src={src}
-        />
-      </Wrapper>
+      <Img
+        key={uuid}
+        style={style}
+        className={styles.img}
+        src={src}
+      />
     );
   });
 };
