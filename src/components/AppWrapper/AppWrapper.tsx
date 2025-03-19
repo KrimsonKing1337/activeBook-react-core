@@ -135,7 +135,7 @@ export const AppWrapper = ({ children, config, rangeEffects }: PropsWithChildren
 
   // после полной загрузки страницы воспроизвожу все аудио, у которых playOnLoad = true
   useEffect(() => {
-    if (isLoading) {
+    if (isLoading || isDotLottieLoading) {
       return;
     }
 
@@ -144,7 +144,7 @@ export const AppWrapper = ({ children, config, rangeEffects }: PropsWithChildren
 
     startToPlayAllAudiosWithPlayOnLoad(audioInstances);
     startToPlayAllAudiosWithPlayOnLoad(audioInstancesBg);
-  }, [page, isLoading]);
+  }, [page, isLoading, isDotLottieLoading]);
 
   // удаляю id видео из списка currentTime, если видео с data-id на странице нет
   useEffect(() => {

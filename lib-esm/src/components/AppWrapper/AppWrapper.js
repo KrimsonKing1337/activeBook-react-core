@@ -96,14 +96,14 @@ export var AppWrapper = function (_a) {
     }, []);
     // после полной загрузки страницы воспроизвожу все аудио, у которых playOnLoad = true
     useEffect(function () {
-        if (isLoading) {
+        if (isLoading || isDotLottieLoading) {
             return;
         }
         var audioInstances = store.getState().audioEffects.audioInstances;
         var audioInstancesBg = store.getState().audioBgEffects.audioInstances;
         startToPlayAllAudiosWithPlayOnLoad(audioInstances);
         startToPlayAllAudiosWithPlayOnLoad(audioInstancesBg);
-    }, [page, isLoading]);
+    }, [page, isLoading, isDotLottieLoading]);
     // удаляю id видео из списка currentTime, если видео с data-id на странице нет
     useEffect(function () {
         var videosCurrentTime = store.getState().effects.videosCurrentTime;

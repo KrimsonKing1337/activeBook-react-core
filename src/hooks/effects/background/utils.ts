@@ -1,4 +1,6 @@
-import type { BackgroundEffectMediaPosition } from './@types';
+import { isEqual } from 'lodash-es';
+
+import type { BackgroundEffect, BackgroundEffectMediaPosition } from './@types';
 
 export const getPositionByPreset = (value: BackgroundEffectMediaPosition): React.CSSProperties => {
   switch (value) {
@@ -66,4 +68,26 @@ export const getPositionByPreset = (value: BackgroundEffectMediaPosition): React
       right: '0',
     };
   }
+};
+
+/*
+  сравниваю без Component, потому что его сравнение всегда приводит к false.
+  только если он появился или исчез - только тогда делаем ререндер
+*/
+export const effectsAreEqual = (effect1: BackgroundEffect, effect2: BackgroundEffect) => {
+  if (effect1.Component && !effect2.Component) {
+    return false;
+  }
+
+  if (!effect1.Component && effect2.Component) {
+    return false;
+  }
+
+  const effect1WithoutComponent = { ... effect1 };
+  delete effect1WithoutComponent.Component;
+
+  const effect2WithoutComponent = { ... effect2 };
+  delete effect2WithoutComponent.Component;
+
+  return isEqual(effect1WithoutComponent, effect2WithoutComponent);
 };

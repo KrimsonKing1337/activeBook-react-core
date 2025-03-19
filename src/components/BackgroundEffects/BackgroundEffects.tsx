@@ -13,6 +13,7 @@ import styles from './BackgroundEffects.scss';
 export const BackgroundEffects = memo(() => {
   const effects = useSelector(backgroundEffectsSelectors.effects);
 
+  // todo: при добавлении / удалении эффектов - будет рерндер их всех. в текущей реализации это исправить невозможно
   const BackgroundObjectsWrappers = useMemo(() => {
     return Object.keys(effects).map((keyCur) => {
       const effectCur = effects[keyCur];
