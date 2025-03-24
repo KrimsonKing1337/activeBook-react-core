@@ -61,6 +61,7 @@ export function useAudioInRange(effects: RangeEffects) {
         stopBy,
         screamer,
         fadeOutWhenUnload,
+        relativeVolume,
         onPlay,
         onUnload,
       } = audioOnPageCur.options as AudioEffectOptionsRange;
@@ -81,6 +82,7 @@ export function useAudioInRange(effects: RangeEffects) {
         loop,
         screamer,
         fadeOutWhenUnload,
+        relativeVolume,
         onPlay,
         onUnload,
       });
