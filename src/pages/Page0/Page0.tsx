@@ -79,7 +79,7 @@ export const Page0 = ({ goCallback, header, subHeader, showButton = true, Footer
       return;
     }
 
-    if (!isModalWasShowed && isFlashlightAvailable) {
+    if (!isModalWasShowed && isFlashlightAvailable && !flashlightInst.isInited) {
       setModalIsActive(true);
 
       return;

@@ -101,7 +101,7 @@ export var Page0 = function (_a) {
             setIsWelcomeTourModalActive(true);
             return;
         }
-        if (!isModalWasShowed && isFlashlightAvailable) {
+        if (!isModalWasShowed && isFlashlightAvailable && !flashlightInst.isInited) {
             setModalIsActive(true);
             return;
         }
