@@ -72,11 +72,10 @@ export var Flashlight = function () {
                     if (!value) {
                         return [2 /*return*/];
                     }
-                    if (!!flashlightInst.isInited) return [3 /*break*/, 4];
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, flashlightInst.init()];
+                    return [4 /*yield*/, flashlightInst.init(true)];
                 case 2:
                     _a.sent();
                     return [3 /*break*/, 4];

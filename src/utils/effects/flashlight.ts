@@ -123,7 +123,11 @@ export class Flashlight {
     store.dispatch(mainActions.setIsFlashlightAvailable('js'));
   }
 
-  init() {
+  init(force: boolean = false) {
+    if (force) {
+      this.isInited = false;
+    }
+
     const flashLightAvailableState = Flashlight.getIsFlashlightAvailable();
 
     if (flashLightAvailableState === false) {

@@ -15,7 +15,7 @@ export declare class Flashlight {
      * в кордове этой проблемы нет
      */
     torchInit(): Promise<void>;
-    init(): Promise<void> | undefined;
+    init(force?: boolean): Promise<void> | undefined;
     on(): void;
     off(): void;
 }

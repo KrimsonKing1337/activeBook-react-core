@@ -136,7 +136,11 @@ var Flashlight = /** @class */ (function () {
             });
         });
     };
-    Flashlight.prototype.init = function () {
+    Flashlight.prototype.init = function (force) {
+        if (force === void 0) { force = false; }
+        if (force) {
+            this.isInited = false;
+        }
         var flashLightAvailableState = Flashlight.getIsFlashlightAvailable();
         if (flashLightAvailableState === false) {
             return;

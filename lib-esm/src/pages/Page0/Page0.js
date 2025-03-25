@@ -36,8 +36,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useEffect, useState } from 'react';
-import { useSelector } from 'store';
-import { mainSelectors } from 'store/main';
 import { PageWrapper, Action, WelcomeTour } from 'components';
 import { goToPage } from 'utils/control/goToPage';
 import { Flags, modalsWereShowed } from 'utils/localStorage/modalsWereShowed';
@@ -47,7 +45,6 @@ import { Modal } from './components';
 import { useModal } from './hooks';
 export var Page0 = function (_a) {
     var goCallback = _a.goCallback, header = _a.header, subHeader = _a.subHeader, _b = _a.showButton, showButton = _b === void 0 ? true : _b, Footer = _a.Footer;
-    var isFlashlightAvailable = useSelector(mainSelectors.isFlashlightAvailable);
     var _c = useState(0), lastPage = _c[0], setLastPage = _c[1];
     var _d = useState(false), isWelcomeTourActive = _d[0], setIsWelcomeTourActive = _d[1];
     var _e = useState(false), isWelcomeTourModalActive = _e[0], setIsWelcomeTourModalActive = _e[1];
@@ -101,7 +98,7 @@ export var Page0 = function (_a) {
             setIsWelcomeTourModalActive(true);
             return;
         }
-        if (!isModalWasShowed && isFlashlightAvailable && !flashlightInst.isInited) {
+        if (!isModalWasShowed && !flashlightInst.isInited) {
             setModalIsActive(true);
             return;
         }

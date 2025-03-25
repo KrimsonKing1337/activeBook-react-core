@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { useSelector } from 'store';
-import { mainSelectors } from 'store/main';
-
 import { PageWrapper, Action, WelcomeTour } from 'components';
 
 import { goToPage } from 'utils/control/goToPage';
@@ -24,8 +21,6 @@ export type Page0Props = {
 };
 
 export const Page0 = ({ goCallback, header, subHeader, showButton = true, Footer }: Page0Props) => {
-  const isFlashlightAvailable = useSelector(mainSelectors.isFlashlightAvailable);
-
   const [lastPage, setLastPage] = useState(0);
 
   const [isWelcomeTourActive, setIsWelcomeTourActive] = useState(false);
@@ -79,7 +74,7 @@ export const Page0 = ({ goCallback, header, subHeader, showButton = true, Footer
       return;
     }
 
-    if (!isModalWasShowed && isFlashlightAvailable && !flashlightInst.isInited) {
+    if (!isModalWasShowed && !flashlightInst.isInited) {
       setModalIsActive(true);
 
       return;
