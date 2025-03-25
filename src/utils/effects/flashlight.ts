@@ -3,6 +3,7 @@ import { mainActions } from 'store/main';
 
 export class Flashlight {
   private track: MediaStreamTrack | null;
+  public isInited: boolean;
 
   static getIsFlashlightAvailable() {
     return store.getState().main.isFlashlightAvailable;
@@ -36,6 +37,7 @@ export class Flashlight {
 
   constructor() {
     this.track = null;
+    this.isInited = false;
   }
 
   torchControl(state: boolean) {
@@ -63,6 +65,8 @@ export class Flashlight {
     if (!navigator.mediaDevices) {
       console.log('no navigator.mediaDevices');
 
+      this.isInited = true;
+
       return Promise.resolve();
     }
 
@@ -76,6 +80,8 @@ export class Flashlight {
       store.dispatch(mainActions.setIsFlashlightAvailable(false));
       store.dispatch(mainActions.setFlashlightProblems('Камера не найдена'));
 
+      this.isInited = true;
+
       return Promise.resolve();
     }
 
@@ -88,6 +94,8 @@ export class Flashlight {
     this.track = stream.getVideoTracks()[0];
 
     if (!(window as any).ImageCapture) {
+      this.isInited = true;
+
       return Promise.resolve();
     }
 
@@ -105,8 +113,12 @@ export class Flashlight {
 
       this.mediaStreamTrackStop();
 
+      this.isInited = true;
+
       return Promise.resolve();
     }
+
+    this.isInited = true;
 
     store.dispatch(mainActions.setIsFlashlightAvailable('js'));
   }
@@ -118,14 +130,30 @@ export class Flashlight {
       return;
     }
 
+    if (this.isInited) {
+      return;
+    }
+
     const cordovaFlashlight = Flashlight.getIsCordovaFlashlight();
 
     if (cordovaFlashlight) {
       Flashlight.initCordovaFlashlight(cordovaFlashlight);
 
+      this.isInited = true;
+
       return Promise.resolve();
     } else {
-      return this.torchInit();
+      const { userAgent } = window.navigator;
+
+      if (/android/i.test(userAgent)) {
+        return this.torchInit();
+      }
+
+      store.dispatch(mainActions.setIsFlashlightAvailable(false));
+
+      this.isInited = true;
+
+      return Promise.resolve();
     }
   }
 

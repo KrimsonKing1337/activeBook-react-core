@@ -47,6 +47,14 @@ export const Flashlight = () => {
       return;
     }
 
+    if (!flashlightInst.isInited) {
+      try {
+        await flashlightInst.init();
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
     flashlightOn(100);
   };
 
