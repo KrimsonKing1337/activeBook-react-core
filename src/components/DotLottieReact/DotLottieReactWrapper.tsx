@@ -8,7 +8,12 @@ export type DotLottieReactWrapperProps = PropsWithChildren & React.HTMLAttribute
   amount?: number;
 };
 
-export const DotLottieReactWrapper = ({ children, amount = 1, className = '', ...etc }: DotLottieReactWrapperProps) => {
+export const DotLottieReactWrapper = ({
+  children,
+  amount = 1,
+  className = '',
+  ...etc
+}: DotLottieReactWrapperProps) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
