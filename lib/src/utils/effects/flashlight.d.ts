@@ -1,5 +1,6 @@
 export declare class Flashlight {
     private track;
+    isInited: boolean;
     static getIsFlashlightAvailable(): import("../../store/main/@types").FlashlightState | null;
     static getIsTorchSupported(capabilities: any): any;
     static getNavigatorCameraPermission(): Promise<PermissionStatus>;

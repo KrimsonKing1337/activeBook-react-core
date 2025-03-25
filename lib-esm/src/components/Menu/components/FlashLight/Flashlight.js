@@ -63,14 +63,31 @@ export var Flashlight = function () {
         };
     }, []);
     var toggleClickHandler = function (value) { return __awaiter(void 0, void 0, void 0, function () {
+        var err_1;
         return __generator(this, function (_a) {
-            dispatch(configActions.setFlashlight(value));
-            playAchievement();
-            if (!value) {
-                return [2 /*return*/];
+            switch (_a.label) {
+                case 0:
+                    dispatch(configActions.setFlashlight(value));
+                    playAchievement();
+                    if (!value) {
+                        return [2 /*return*/];
+                    }
+                    if (!!flashlightInst.isInited) return [3 /*break*/, 4];
+                    _a.label = 1;
+                case 1:
+                    _a.trys.push([1, 3, , 4]);
+                    return [4 /*yield*/, flashlightInst.init()];
+                case 2:
+                    _a.sent();
+                    return [3 /*break*/, 4];
+                case 3:
+                    err_1 = _a.sent();
+                    console.error(err_1);
+                    return [3 /*break*/, 4];
+                case 4:
+                    flashlightOn(100);
+                    return [2 /*return*/];
             }
-            flashlightOn(100);
-            return [2 /*return*/];
         });
     }); };
     return (_jsxs("div", { className: styles.flashlight, children: [_jsx(Toggle, { label: "\u0412\u0441\u043F\u044B\u0448\u043A\u0430 (\u0442\u0430\u043C, \u0433\u0434\u0435 \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u043E)", isActiveDefault: true, onClickOn: function () { return toggleClickHandler(true); }, onClickOff: function () { return toggleClickHandler(false); } }), _jsxs(Spoiler, { label: "\u041D\u0435 \u0440\u0430\u0431\u043E\u0442\u0430\u0435\u0442 \u0432\u0441\u043F\u044B\u0448\u043A\u0430?", children: ["\u041F\u0440\u043E\u0432\u0435\u0440\u044C\u0442\u0435, \u0447\u0442\u043E \u0434\u0430\u043D\u043E \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043D\u0438\u0435 \u0434\u043B\u044F \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u044F \u043A\u0430\u043C\u0435\u0440\u044B.", _jsx("br", {}), "(\u0430\u0434\u0440\u0435\u0441\u043D\u0430\u044F \u0441\u0442\u0440\u043E\u043A\u0430 \u0431\u0440\u0430\u0443\u0437\u0435\u0440\u0430 ", '->', " \u0437\u0430\u043C\u043E\u0447\u0435\u043A ", '->', " \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043D\u0438\u044F)", _jsx("br", {}), "\u041D\u043E \u0438\u043D\u043E\u0433\u0434\u0430 \u0431\u044B\u0432\u0430\u0435\u0442, \u0447\u0442\u043E \u0434\u0430\u0436\u0435 \u0435\u0441\u043B\u0438 \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043D\u0438\u044F \u0432\u0441\u0435 \u0435\u0441\u0442\u044C, \u0431\u0440\u0430\u0443\u0437\u0435\u0440 \u043D\u0435 \u043C\u043E\u0436\u0435\u0442 \u0434\u043E\u0441\u0442\u0443\u0447\u0430\u0442\u044C\u0441\u044F \u0434\u043E \u0432\u0441\u043F\u044B\u0448\u043A\u0438. \u041D\u0438\u0436\u0435 \u0431\u0443\u0434\u0435\u0442 \u0432\u044B\u0432\u043E\u0434\u0438\u0442\u0441\u044F, \u0447\u0435\u0433\u043E \u043E\u043D \u043D\u0435 \u0441\u043C\u043E\u0433 \u043D\u0430\u0439\u0442\u0438:", _jsx("br", {}), _jsx("br", {}), flashlightProblems] })] }));

@@ -36,6 +36,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useEffect, useState } from 'react';
+import { useSelector } from 'store';
+import { mainSelectors } from 'store/main';
 import { PageWrapper, Action, WelcomeTour } from 'components';
 import { goToPage } from 'utils/control/goToPage';
 import { Flags, modalsWereShowed } from 'utils/localStorage/modalsWereShowed';
@@ -45,6 +47,7 @@ import { Modal } from './components';
 import { useModal } from './hooks';
 export var Page0 = function (_a) {
     var goCallback = _a.goCallback, header = _a.header, subHeader = _a.subHeader, _b = _a.showButton, showButton = _b === void 0 ? true : _b, Footer = _a.Footer;
+    var isFlashlightAvailable = useSelector(mainSelectors.isFlashlightAvailable);
     var _c = useState(0), lastPage = _c[0], setLastPage = _c[1];
     var _d = useState(false), isWelcomeTourActive = _d[0], setIsWelcomeTourActive = _d[1];
     var _e = useState(false), isWelcomeTourModalActive = _e[0], setIsWelcomeTourModalActive = _e[1];
@@ -62,22 +65,25 @@ export var Page0 = function (_a) {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, flashlightInst.init()];
+                    if (!!flashlightInst.isInited) return [3 /*break*/, 4];
+                    _a.label = 1;
                 case 1:
-                    _a.sent();
-                    return [3 /*break*/, 3];
+                    _a.trys.push([1, 3, , 4]);
+                    return [4 /*yield*/, flashlightInst.init()];
                 case 2:
+                    _a.sent();
+                    return [3 /*break*/, 4];
+                case 3:
                     err_1 = _a.sent();
                     console.error(err_1);
-                    return [3 /*break*/, 3];
-                case 3:
-                    if (!goCallback) return [3 /*break*/, 5];
-                    return [4 /*yield*/, goCallback()];
+                    return [3 /*break*/, 4];
                 case 4:
-                    _a.sent();
-                    _a.label = 5;
+                    if (!goCallback) return [3 /*break*/, 6];
+                    return [4 /*yield*/, goCallback()];
                 case 5:
+                    _a.sent();
+                    _a.label = 6;
+                case 6:
                     pageToGo = lastPage > 0 ? lastPage : 1;
                     goToPage(pageToGo);
                     return [2 /*return*/];
@@ -95,7 +101,7 @@ export var Page0 = function (_a) {
             setIsWelcomeTourModalActive(true);
             return;
         }
-        if (!isModalWasShowed) {
+        if (!isModalWasShowed && isFlashlightAvailable) {
             setModalIsActive(true);
             return;
         }

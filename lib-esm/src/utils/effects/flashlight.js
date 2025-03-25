@@ -39,6 +39,7 @@ import { mainActions } from 'store/main';
 var Flashlight = /** @class */ (function () {
     function Flashlight() {
         this.track = null;
+        this.isInited = false;
     }
     Flashlight.getIsFlashlightAvailable = function () {
         return store.getState().main.isFlashlightAvailable;
@@ -89,6 +90,7 @@ var Flashlight = /** @class */ (function () {
                     case 0:
                         if (!navigator.mediaDevices) {
                             console.log('no navigator.mediaDevices');
+                            this.isInited = true;
                             return [2 /*return*/, Promise.resolve()];
                         }
                         return [4 /*yield*/, navigator.mediaDevices.enumerateDevices()];
@@ -99,6 +101,7 @@ var Flashlight = /** @class */ (function () {
                             console.log('no camera found on this device');
                             store.dispatch(mainActions.setIsFlashlightAvailable(false));
                             store.dispatch(mainActions.setFlashlightProblems('Камера не найдена'));
+                            this.isInited = true;
                             return [2 /*return*/, Promise.resolve()];
                         }
                         return [4 /*yield*/, navigator.mediaDevices.getUserMedia({
@@ -110,6 +113,7 @@ var Flashlight = /** @class */ (function () {
                         stream = _a.sent();
                         this.track = stream.getVideoTracks()[0];
                         if (!window.ImageCapture) {
+                            this.isInited = true;
                             return [2 /*return*/, Promise.resolve()];
                         }
                         imageCapture = new ImageCapture(this.track);
@@ -122,8 +126,10 @@ var Flashlight = /** @class */ (function () {
                             store.dispatch(mainActions.setIsFlashlightAvailable(false));
                             store.dispatch(mainActions.setFlashlightProblems('Вспышка не найдена'));
                             this.mediaStreamTrackStop();
+                            this.isInited = true;
                             return [2 /*return*/, Promise.resolve()];
                         }
+                        this.isInited = true;
                         store.dispatch(mainActions.setIsFlashlightAvailable('js'));
                         return [2 /*return*/];
                 }
@@ -135,13 +141,23 @@ var Flashlight = /** @class */ (function () {
         if (flashLightAvailableState === false) {
             return;
         }
+        if (this.isInited) {
+            return;
+        }
         var cordovaFlashlight = Flashlight.getIsCordovaFlashlight();
         if (cordovaFlashlight) {
             Flashlight.initCordovaFlashlight(cordovaFlashlight);
+            this.isInited = true;
             return Promise.resolve();
         }
         else {
-            return this.torchInit();
+            var userAgent = window.navigator.userAgent;
+            if (/android/i.test(userAgent)) {
+                return this.torchInit();
+            }
+            store.dispatch(mainActions.setIsFlashlightAvailable(false));
+            this.isInited = true;
+            return Promise.resolve();
         }
     };
     Flashlight.prototype.on = function () {
