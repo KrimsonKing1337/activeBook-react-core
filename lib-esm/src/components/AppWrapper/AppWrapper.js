@@ -25,7 +25,7 @@ import 'styles/common.scss';
 import styles from './AppWrapper.scss';
 export var AppWrapper = function (_a) {
     var _b;
-    var children = _a.children, config = _a.config, rangeEffects = _a.rangeEffects;
+    var children = _a.children, config = _a.config, tableOfContents = _a.tableOfContents, rangeEffects = _a.rangeEffects;
     var dispatch = useDispatch();
     var navigate = useNavigate();
     var isLoading = useSelector(mainSelectors.isLoading);
@@ -42,6 +42,10 @@ export var AppWrapper = function (_a) {
         if (!configAsJson) {
             dispatch(configActions.setTheme(defaultTheme));
         }
+    }, []);
+    // применяю оглавление
+    useEffect(function () {
+        dispatch(mainActions.setTableOfContents(tableOfContents));
     }, []);
     // приглушаю звук, отключаю вибрацию и вспышку, если приложение скрыто
     useEffect(function () {

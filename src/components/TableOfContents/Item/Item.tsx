@@ -7,11 +7,11 @@ import styles from './Item.scss';
 
 export type ItemProps = {
   title: string;
-  subtitle: string;
+  subtitle?: string;
   pageNumber: number;
 };
 
-export const Item = ({ title, subtitle, pageNumber }: ItemProps) => {
+export const Item = ({ title, subtitle = '', pageNumber }: ItemProps) => {
   const pages = useSelector(mainSelectors.pages);
 
   const clickHandler = () => {

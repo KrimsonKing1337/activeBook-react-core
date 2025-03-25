@@ -6,6 +6,7 @@ export declare const reducer: import("redux").Reducer<State>, actions: import("@
     setEasterEggs(state: import("immer/dist/internal").WritableDraft<State>, action: PayloadAction<State['easterEggs']>): void;
     setAuthorComments(state: import("immer/dist/internal").WritableDraft<State>, action: PayloadAction<State['authorComments']>): void;
     setPages(state: import("immer/dist/internal").WritableDraft<State>, action: PayloadAction<State['pages']>): void;
+    setTableOfContents(state: import("immer/dist/internal").WritableDraft<State>, action: PayloadAction<State['tableOfContents']>): void;
     setPage(state: import("immer/dist/internal").WritableDraft<State>, action: PayloadAction<State['page']>): void;
     prevPage(_state: import("immer/dist/internal").WritableDraft<State>): void;
     nextPage(_state: import("immer/dist/internal").WritableDraft<State>): void;

@@ -1,4 +1,5 @@
 import { Howl } from 'howler';
+import type { ItemProps as TableOfContentsItem } from 'components/TableOfContents/Item';
 import { HowlWrapper } from 'utils/effects/audio/HowlWrapper';
 import type { BackgroundEffect } from 'hooks/effects/background/@types';
 export type Timer = ReturnType<typeof setTimeout> | null;
@@ -48,3 +49,4 @@ export type Config = {
     pages: number;
     defaultTheme: Theme;
 };
+export type TableOfContents = TableOfContentsItem[];

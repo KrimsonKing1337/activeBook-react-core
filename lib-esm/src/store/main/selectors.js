@@ -3,6 +3,7 @@ export var selectors = {
     location: function (state) { return state.router.location; },
     page: function (state) { return state.main.page; },
     pages: function (state) { return state.main.pages; },
+    tableOfContents: function (state) { return state.main.tableOfContents; },
     easterEggs: function (state) { return state.main.easterEggs; },
     authorComments: function (state) { return state.main.authorComments; },
     route: function (state) { return state.main.route; },

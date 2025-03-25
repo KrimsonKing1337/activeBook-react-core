@@ -2,7 +2,7 @@ import { PropsWithChildren, useEffect } from 'react';
 
 import { HistoryRouter } from 'redux-first-history/rr6';
 
-import type { RangeEffects, Config } from '@types';
+import type { RangeEffects, Config, TableOfContents } from '@types';
 
 import { AppWrapper } from 'components/AppWrapper';
 
@@ -15,10 +15,11 @@ import { Routes } from './Routes';
 
 export type AppProps = {
   config: Config;
+  tableOfContents: TableOfContents;
   rangeEffects: RangeEffects;
 };
 
-export const App = ({ children, config, rangeEffects }: PropsWithChildren<AppProps>) => {
+export const App = ({ children, config, tableOfContents, rangeEffects }: PropsWithChildren<AppProps>) => {
   useEffect(() => {
     // addTouchSupportForCssHover(); // вместо этого просто "удаляю" :hover везде, возможно так и оставлю
     addKeyboardControl();
@@ -28,7 +29,7 @@ export const App = ({ children, config, rangeEffects }: PropsWithChildren<AppPro
   return (
     <StoreProvider>
       <HistoryRouter history={history}>
-        <AppWrapper config={config} rangeEffects={rangeEffects}>
+        <AppWrapper config={config} tableOfContents={tableOfContents} rangeEffects={rangeEffects}>
           <Routes>
             {children}
           </Routes>

@@ -3,6 +3,7 @@ export var initialState = {
     route: '/',
     page: 0,
     pages: 0,
+    tableOfContents: [],
     easterEggs: 0,
     authorComments: 0,
     menuActiveState: null,
@@ -26,6 +27,9 @@ var slice = createSlice({
         },
         setPages: function (state, action) {
             state.pages = action.payload;
+        },
+        setTableOfContents: function (state, action) {
+            state.tableOfContents = action.payload;
         },
         setPage: function (state, action) {
             state.page = action.payload;

@@ -1,18 +1,19 @@
-import { Header } from 'components/Header';
-import { Overflow } from 'components/Overflow';
+import { nanoid } from 'nanoid';
 
 import { useDispatch, useSelector } from 'store';
 import { mainActions, mainSelectors } from 'store/main';
 
+import { Overflow, Header } from 'components';
 
 import { Item } from './Item';
-import { items } from './utils';
+
 import styles from './TableOfContents.scss';
 
 export const TableOfContents = () => {
   const dispatch = useDispatch();
 
   const menuActiveState = useSelector(mainSelectors.menuActiveState);
+  const tableOfContents = useSelector(mainSelectors.tableOfContents);
 
   const isOpen = menuActiveState === 'tableOfContents';
 
@@ -25,7 +26,13 @@ export const TableOfContents = () => {
       <Header label="Оглавление" />
 
       <div className={styles.itemsWrapper}>
-        {items.map((itemCur, index) => <Item key={index} {...itemCur} />)}
+        {tableOfContents.map((itemCur) => {
+          const uuid = nanoid();
+
+          return (
+            <Item key={uuid} {...itemCur} />
+          );
+        })}
       </div>
 
       <button className={styles.button} onClick={closeButtonClickHandler}>

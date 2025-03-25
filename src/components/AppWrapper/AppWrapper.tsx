@@ -7,7 +7,7 @@ import { setWasmUrl } from '@lottiefiles/dotlottie-react';
 
 import classNames from 'classnames';
 
-import type { Config, HowlInstances, RangeEffects } from '@types';
+import type { Config, HowlInstances, RangeEffects, TableOfContents } from '@types';
 
 import { store, useDispatch, useSelector } from 'store';
 
@@ -38,10 +38,11 @@ import styles from './AppWrapper.scss';
 
 export type AppWrapperProps = {
   config: Config;
+  tableOfContents: TableOfContents;
   rangeEffects: RangeEffects;
 };
 
-export const AppWrapper = ({ children, config, rangeEffects }: PropsWithChildren<AppWrapperProps>) => {
+export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: PropsWithChildren<AppWrapperProps>) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -65,6 +66,11 @@ export const AppWrapper = ({ children, config, rangeEffects }: PropsWithChildren
     if (!configAsJson) {
       dispatch(configActions.setTheme(defaultTheme));
     }
+  }, []);
+
+  // применяю оглавление
+  useEffect(() => {
+    dispatch(mainActions.setTableOfContents(tableOfContents));
   }, []);
 
   // приглушаю звук, отключаю вибрацию и вспышку, если приложение скрыто

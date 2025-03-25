@@ -5,6 +5,7 @@ export const selectors = {
   location: (state: RootState) => state.router.location,
   page: (state: RootState) => state.main.page,
   pages: (state: RootState) => state.main.pages,
+  tableOfContents: (state: RootState) => state.main.tableOfContents,
   easterEggs: (state: RootState) => state.main.easterEggs,
   authorComments: (state: RootState) => state.main.authorComments,
   route: (state: RootState) => state.main.route,

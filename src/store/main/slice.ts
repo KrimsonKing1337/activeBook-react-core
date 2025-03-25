@@ -6,6 +6,7 @@ export const initialState: State = {
   route: '/',
   page: 0,
   pages: 0,
+  tableOfContents: [],
   easterEggs: 0,
   authorComments: 0,
   menuActiveState: null,
@@ -32,6 +33,10 @@ const slice = createSlice({
     setPages(state, action: PayloadAction<State['pages']>) {
       state.pages = action.payload;
     },
+    setTableOfContents(state, action: PayloadAction<State['tableOfContents']>) {
+      state.tableOfContents = action.payload;
+    },
+
     setPage(state, action: PayloadAction<State['page']>) {
       state.page = action.payload;
     },
@@ -39,6 +44,7 @@ const slice = createSlice({
     prevPage(_state) {},
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     nextPage(_state) {},
+
     setMenuActiveState(state, action: PayloadAction<State['menuActiveState']>) {
       state.menuActiveState = action.payload;
     },

@@ -5,7 +5,7 @@ import { goToPage } from 'utils/control/goToPage';
 import { playAchievement } from './utils';
 import styles from './Item.scss';
 export var Item = function (_a) {
-    var title = _a.title, subtitle = _a.subtitle, pageNumber = _a.pageNumber;
+    var title = _a.title, _b = _a.subtitle, subtitle = _b === void 0 ? '' : _b, pageNumber = _a.pageNumber;
     var pages = useSelector(mainSelectors.pages);
     var clickHandler = function () {
         var n = pageNumber > pages ? pages : pageNumber;
