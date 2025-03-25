@@ -9,6 +9,7 @@ import { nanoid } from 'nanoid';
 
 import { useDispatch, useSelector } from 'store';
 
+import { mainSelectors } from 'store/main';
 import { segmentsActions, segmentsSelectors } from 'store/segments';
 
 import styles from './Segment.scss';
@@ -31,6 +32,8 @@ export const Segment = ({
 
   const [id, setId] = useState('');
 
+  const isLoading = useSelector(mainSelectors.isLoading);
+
   const segments = useSelector(segmentsSelectors.segments);
   const activeId = useSelector(segmentsSelectors.activeId);
   const lastActiveId = useSelector(segmentsSelectors.lastActiveId);
@@ -38,6 +41,10 @@ export const Segment = ({
   const segmentsLength = Object.keys(segments).length;
 
   useEffect(() => {
+    if (isLoading) {
+      return;
+    }
+
     if (activeId === id) {
       onEnter();
     }
@@ -45,7 +52,7 @@ export const Segment = ({
     if (lastActiveId && lastActiveId === id) {
       onExit();
     }
-  }, [id, activeId, lastActiveId]);
+  }, [isLoading, id, activeId, lastActiveId]);
 
   useEffect(() => {
     const uuid = defaultId ? defaultId : nanoid();

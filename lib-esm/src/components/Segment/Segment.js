@@ -5,6 +5,7 @@ import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
 import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'store';
+import { mainSelectors } from 'store/main';
 import { segmentsActions, segmentsSelectors } from 'store/segments';
 import styles from './Segment.scss';
 export var Segment = function (_a) {
@@ -12,18 +13,22 @@ export var Segment = function (_a) {
     var children = _a.children, defaultId = _a.id, _c = _a.isActive, isActiveDefault = _c === void 0 ? false : _c, _d = _a.onEnter, onEnter = _d === void 0 ? function () { } : _d, _e = _a.onExit, onExit = _e === void 0 ? function () { } : _e;
     var dispatch = useDispatch();
     var _f = useState(''), id = _f[0], setId = _f[1];
+    var isLoading = useSelector(mainSelectors.isLoading);
     var segments = useSelector(segmentsSelectors.segments);
     var activeId = useSelector(segmentsSelectors.activeId);
     var lastActiveId = useSelector(segmentsSelectors.lastActiveId);
     var segmentsLength = Object.keys(segments).length;
     useEffect(function () {
+        if (isLoading) {
+            return;
+        }
         if (activeId === id) {
             onEnter();
         }
         if (lastActiveId && lastActiveId === id) {
             onExit();
         }
-    }, [id, activeId, lastActiveId]);
+    }, [isLoading, id, activeId, lastActiveId]);
     useEffect(function () {
         var uuid = defaultId ? defaultId : nanoid();
         setId(uuid);
