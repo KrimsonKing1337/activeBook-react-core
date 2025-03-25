@@ -17,7 +17,7 @@ import { configActions } from 'store/config';
 import { initialState as configInitialState } from 'store/config/slice';
 import { mainActions, mainSelectors } from 'store/main';
 import { achievementsActions } from 'store/achievements';
-import { effectsActions, effectsSelectors } from 'store/effects/common';
+import { effectsActions } from 'store/effects/common';
 
 import { useEffectsInRange } from 'hooks/effects/range';
 import { useVibration } from 'hooks/effects/vibration';
@@ -47,7 +47,6 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
   const navigate = useNavigate();
 
   const isLoading = useSelector(mainSelectors.isLoading);
-  const isDotLottieLoading = useSelector(effectsSelectors.isDotLottieLoading);
 
   const page = useSelector(mainSelectors.page);
 
@@ -141,7 +140,7 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
 
   // после полной загрузки страницы воспроизвожу все аудио, у которых playOnLoad = true
   useEffect(() => {
-    if (isLoading || isDotLottieLoading) {
+    if (isLoading) {
       return;
     }
 
@@ -150,7 +149,7 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
 
     startToPlayAllAudiosWithPlayOnLoad(audioInstances);
     startToPlayAllAudiosWithPlayOnLoad(audioInstancesBg);
-  }, [page, isLoading, isDotLottieLoading]);
+  }, [page, isLoading]);
 
   // удаляю id видео из списка currentTime, если видео с data-id на странице нет
   useEffect(() => {
@@ -175,7 +174,7 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
     делаю это здесь, чтобы воспроизведение начиналось только после полной загрузки страницы
   */
   useEffect(() => {
-    if (isLoading || isDotLottieLoading) {
+    if (isLoading) {
       return;
     }
 
@@ -188,7 +187,7 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
         videoCur.play();
       }
     });
-  }, [page, isLoading, isDotLottieLoading]);
+  }, [page, isLoading]);
 
   useEffect(() => {
     seenPages.set(page);
@@ -226,7 +225,7 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
 
   const appWrapperClassNames = classNames({
     [styles.appWrapper]: true,
-    [styles.isLoading]: isLoading || isDotLottieLoading,
+    [styles.isLoading]: isLoading,
   });
 
   return (

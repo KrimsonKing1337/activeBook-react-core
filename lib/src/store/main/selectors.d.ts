@@ -1,4 +1,4 @@
-import { RootState } from '..';
+import type { RootState } from '..';
 export declare const selectors: {
     location: (state: RootState) => import("history").Location | null | undefined;
     page: (state: RootState) => number;

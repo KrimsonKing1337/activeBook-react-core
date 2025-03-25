@@ -17,14 +17,13 @@ export var PageWrapper = function (_a) {
     var children = _a.children, withoutToolbar = _a.withoutToolbar, sbMode = _a.sbMode;
     var inverseColorIsActive = useSelector(effectsSelectors.inverseColorIsActive);
     var isLoading = useSelector(mainSelectors.isLoading);
-    var isDotLottieLoading = useSelector(effectsSelectors.isDotLottieLoading);
     var pageWrapperClassNames = classNames((_b = {},
         _b[styles.pageWrapper] = true,
         _b[styles.inverseColorIsActive] = inverseColorIsActive,
         _b));
     var mainContendClassNames = classNames((_c = {},
         _c[styles.mainContent] = true,
-        _c[styles.isLoading] = isLoading || isDotLottieLoading,
+        _c[styles.isLoading] = isLoading,
         _c));
     return (_jsx("div", { id: "page-wrapper", className: pageWrapperClassNames, children: _jsxs("div", { id: "main-content-wrapper", className: mainContendClassNames, children: [_jsx(Narrative, { children: children }), _jsx(SideEffects, {}), _jsx(BackgroundEffects, {}), !withoutToolbar && (_jsx(Toolbar, { sbMode: sbMode })), _jsx(Menu, {}), _jsx(TableOfContents, {}), _jsx(Bookmarks, {}), _jsx(AchievementsProgress, {})] }) }));
 };

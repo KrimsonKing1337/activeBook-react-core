@@ -11,7 +11,7 @@ import { configActions } from 'store/config';
 import { initialState as configInitialState } from 'store/config/slice';
 import { mainActions, mainSelectors } from 'store/main';
 import { achievementsActions } from 'store/achievements';
-import { effectsActions, effectsSelectors } from 'store/effects/common';
+import { effectsActions } from 'store/effects/common';
 import { useEffectsInRange } from 'hooks/effects/range';
 import { useVibration } from 'hooks/effects/vibration';
 import { seenPages } from 'utils/localStorage/seenPages';
@@ -29,7 +29,6 @@ export var AppWrapper = function (_a) {
     var dispatch = useDispatch();
     var navigate = useNavigate();
     var isLoading = useSelector(mainSelectors.isLoading);
-    var isDotLottieLoading = useSelector(effectsSelectors.isDotLottieLoading);
     var page = useSelector(mainSelectors.page);
     var vibrationOff = useVibration().vibrationOff;
     // применяю конфиг
@@ -100,14 +99,14 @@ export var AppWrapper = function (_a) {
     }, []);
     // после полной загрузки страницы воспроизвожу все аудио, у которых playOnLoad = true
     useEffect(function () {
-        if (isLoading || isDotLottieLoading) {
+        if (isLoading) {
             return;
         }
         var audioInstances = store.getState().audioEffects.audioInstances;
         var audioInstancesBg = store.getState().audioBgEffects.audioInstances;
         startToPlayAllAudiosWithPlayOnLoad(audioInstances);
         startToPlayAllAudiosWithPlayOnLoad(audioInstancesBg);
-    }, [page, isLoading, isDotLottieLoading]);
+    }, [page, isLoading]);
     // удаляю id видео из списка currentTime, если видео с data-id на странице нет
     useEffect(function () {
         var videosCurrentTime = store.getState().effects.videosCurrentTime;
@@ -126,7 +125,7 @@ export var AppWrapper = function (_a) {
       делаю это здесь, чтобы воспроизведение начиналось только после полной загрузки страницы
     */
     useEffect(function () {
-        if (isLoading || isDotLottieLoading) {
+        if (isLoading) {
             return;
         }
         var videos = Array.from(document.querySelectorAll('video'));
@@ -136,7 +135,7 @@ export var AppWrapper = function (_a) {
                 videoCur.play();
             }
         });
-    }, [page, isLoading, isDotLottieLoading]);
+    }, [page, isLoading]);
     useEffect(function () {
         seenPages.set(page);
         // пока отключаю ачивки
@@ -166,7 +165,7 @@ export var AppWrapper = function (_a) {
     useEffectsInRange(rangeEffects);
     var appWrapperClassNames = classNames((_b = {},
         _b[styles.appWrapper] = true,
-        _b[styles.isLoading] = isLoading || isDotLottieLoading,
+        _b[styles.isLoading] = isLoading,
         _b));
     return (_jsxs(_Fragment, { children: [_jsx("div", { className: appWrapperClassNames, children: children }), _jsx(Achievement, {})] }));
 };
