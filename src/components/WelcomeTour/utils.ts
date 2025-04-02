@@ -3,8 +3,6 @@ export type WelcomeTourTextItem = {
   desc: string;
 };
 
-export const localStorageId = 'welcomeTourHasBeenSeen';
-
 export const getWelcomeTourTextById = (id: string): WelcomeTourTextItem => {
   if (id === 'action') {
     return {

@@ -1,6 +1,7 @@
 export var selectors = {
     all: function (state) { return state.config; },
     theme: function (state) { return state.config.theme; },
+    welcomeTour: function (state) { return state.config.welcomeTour; },
     vibration: function (state) { return state.config.vibration; },
     flashlight: function (state) { return state.config.flashlight; },
     authorComments: function (state) { return state.config.authorComments; },

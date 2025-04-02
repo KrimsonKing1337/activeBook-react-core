@@ -18,7 +18,7 @@ export var Segments = function () {
         setIsSegment1Active(false);
     };
     var segment2EnterHandler = function () {
-        vibrationOn(1000);
+        vibrationOn(500);
         setIsSegment2Active(true);
     };
     var segment2ExitHandler = function () {

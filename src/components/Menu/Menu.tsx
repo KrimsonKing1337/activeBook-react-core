@@ -11,13 +11,16 @@ import { mainActions, mainSelectors } from 'store/main';
 import { achievementsSelectors } from 'store/achievements';
 import { bookmarksActions, bookmarksSelectors } from 'store/bookmarks';
 
-import { Volume } from './components/Volume';
-import { Themes } from './components/Themes';
-import { Vibration } from './components/Vibration';
-import { Flashlight } from './components/FlashLight';
-import { AuthorComments } from './components/AuthorComments';
-import { LineHeight } from './components/LineHeight';
-import { Footer } from './components/Footer';
+import {
+  Volume,
+  Themes,
+  Vibration,
+  Flashlight,
+  AuthorComments,
+  LineHeight,
+  Footer,
+  WelcomeTour,
+} from './components';
 
 export const Menu = () => {
   const dispatch = useDispatch();
@@ -53,6 +56,7 @@ export const Menu = () => {
       <Header label="Настройки" />
       <Volume />
       <Themes />
+      <WelcomeTour />
       <Vibration />
       <Flashlight />
 

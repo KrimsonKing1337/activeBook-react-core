@@ -56,4 +56,5 @@ export function* watchActions() {
   yield takeLatest(actions.setFontSize, watchSetEtc);
   yield takeLatest(actions.setLineHeight, watchSetEtc);
   yield takeLatest(actions.setVibration, watchSetEtc);
+  yield takeLatest(actions.setWelcomeTour, watchSetEtc);
 }

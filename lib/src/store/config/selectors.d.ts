@@ -2,6 +2,7 @@ import { RootState } from '..';
 export declare const selectors: {
     all: (state: RootState) => import("./@types").State;
     theme: (state: RootState) => import("../../@types").Theme;
+    welcomeTour: (state: RootState) => boolean;
     vibration: (state: RootState) => boolean;
     flashlight: (state: RootState) => boolean;
     authorComments: (state: RootState) => boolean;

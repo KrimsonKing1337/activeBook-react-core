@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react';
 
 import { PageWrapper, Action, WelcomeTour } from 'components';
 
+import { useSelector } from 'store';
+import { configSelectors } from 'store/config';
+
 import { goToPage } from 'utils/control/goToPage';
 import { Flags, modalsWereShowed } from 'utils/localStorage/modalsWereShowed';
 import { flashlightInst } from 'utils/effects/flashlight';
-
-import { localStorageId as welcomeTourLocalStorageId } from 'components/WelcomeTour/utils';
 
 import { Modal } from './components';
 
@@ -21,6 +22,8 @@ export type Page0Props = {
 };
 
 export const Page0 = ({ goCallback, header, subHeader, showButton = true, Footer }: Page0Props) => {
+  const isWelcomeTourActiveFromConfig = useSelector(configSelectors.welcomeTour);
+
   const [lastPage, setLastPage] = useState(0);
 
   const [isWelcomeTourActive, setIsWelcomeTourActive] = useState(false);
@@ -66,9 +69,8 @@ export const Page0 = ({ goCallback, header, subHeader, showButton = true, Footer
 
   const actionClickHandler = () => {
     const isModalWasShowed = modalsWereShowed.get(Flags.usingCamera);
-    const welcomeTourHasBeenSeen = localStorage.getItem(welcomeTourLocalStorageId);
 
-    if (!welcomeTourHasBeenSeen) {
+    if (isWelcomeTourActiveFromConfig) {
       setIsWelcomeTourModalActive(true);
 
       return;

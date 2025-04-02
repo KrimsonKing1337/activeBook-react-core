@@ -27,7 +27,7 @@ export const Segments = () => {
   };
 
   const segment2EnterHandler = () => {
-    vibrationOn(1000);
+    vibrationOn(500);
 
     setIsSegment2Active(true);
   };

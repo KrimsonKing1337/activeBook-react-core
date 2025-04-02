@@ -121,6 +121,9 @@ export function watchActions() {
                 return [4 /*yield*/, takeLatest(actions.setVibration, watchSetEtc)];
             case 7:
                 _a.sent();
+                return [4 /*yield*/, takeLatest(actions.setWelcomeTour, watchSetEtc)];
+            case 8:
+                _a.sent();
                 return [2 /*return*/];
         }
     });

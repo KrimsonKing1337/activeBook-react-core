@@ -2,13 +2,16 @@ import { useEffect, useState } from 'react';
 
 import { toast } from 'react-toastify';
 
-import { Action, Button } from 'components';
+import { useDispatch } from 'store';
+import { configActions } from 'store/config';
 
 import { useVibration } from 'hooks/effects/vibration';
 
+import { Action, Button } from 'components';
+
 import { Modal, Segments } from './components';
 
-import { localStorageId, getWelcomeTourTextById, removeHighLight, setHighLight } from './utils';
+import { getWelcomeTourTextById, removeHighLight, setHighLight } from './utils';
 
 import styles from './WelcomeTour.scss';
 
@@ -29,6 +32,8 @@ const elementsIdsArray = [
 ];
 
 export const WelcomeTour = ({ isActive, setIsActive, isModalActive, setIsModalActive }: WelcomeTourProps) => {
+  const dispatch = useDispatch();
+
   const { vibrationOn } = useVibration();
 
   const [idIndex, setIdIndex] = useState(0);
@@ -45,7 +50,7 @@ export const WelcomeTour = ({ isActive, setIsActive, isModalActive, setIsModalAc
   }, [isActive]);
 
   const actionClickHandler = () => {
-    vibrationOn(1000);
+    vibrationOn(500);
 
     toast.success('Отлично!');
   };
@@ -60,7 +65,7 @@ export const WelcomeTour = ({ isActive, setIsActive, isModalActive, setIsModalAc
     if (idIndex === elementsIdsArray.length - 1) {
       setIsActive(false);
 
-      localStorage.setItem(localStorageId, 'true');
+      dispatch(configActions.setWelcomeTour(false));
 
       return;
     }

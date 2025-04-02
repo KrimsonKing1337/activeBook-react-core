@@ -5,4 +5,5 @@ export * from './LineHeight';
 export * from './Themes';
 export * from './Vibration';
 export * from './Volume';
+export * from './WelcomeTour';
 //# sourceMappingURL=index.js.map

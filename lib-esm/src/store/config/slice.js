@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 export var initialState = {
     theme: 'dark',
+    welcomeTour: true,
     vibration: true,
     flashlight: true,
     authorComments: false,
@@ -16,6 +17,9 @@ var slice = createSlice({
         },
         setTheme: function (state, action) {
             state.theme = action.payload;
+        },
+        setWelcomeTour: function (state, action) {
+            state.welcomeTour = action.payload;
         },
         setVibration: function (state, action) {
             state.vibration = action.payload;

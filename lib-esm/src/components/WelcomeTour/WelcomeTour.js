@@ -1,10 +1,12 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { Action, Button } from 'components';
+import { useDispatch } from 'store';
+import { configActions } from 'store/config';
 import { useVibration } from 'hooks/effects/vibration';
+import { Action, Button } from 'components';
 import { Modal, Segments } from './components';
-import { localStorageId, getWelcomeTourTextById, removeHighLight, setHighLight } from './utils';
+import { getWelcomeTourTextById, removeHighLight, setHighLight } from './utils';
 import styles from './WelcomeTour.scss';
 var elementsIdsArray = [
     'action',
@@ -16,6 +18,7 @@ var elementsIdsArray = [
 ];
 export var WelcomeTour = function (_a) {
     var isActive = _a.isActive, setIsActive = _a.setIsActive, isModalActive = _a.isModalActive, setIsModalActive = _a.setIsModalActive;
+    var dispatch = useDispatch();
     var vibrationOn = useVibration().vibrationOn;
     var _b = useState(0), idIndex = _b[0], setIdIndex = _b[1];
     var _c = useState('Далее'), nextButtonLabel = _c[0], setNextButtonLabel = _c[1];
@@ -27,7 +30,7 @@ export var WelcomeTour = function (_a) {
         setHighLight('action');
     }, [isActive]);
     var actionClickHandler = function () {
-        vibrationOn(1000);
+        vibrationOn(500);
         toast.success('Отлично!');
     };
     var nextButtonClickHandler = function () {
@@ -37,7 +40,7 @@ export var WelcomeTour = function (_a) {
         }
         if (idIndex === elementsIdsArray.length - 1) {
             setIsActive(false);
-            localStorage.setItem(localStorageId, 'true');
+            dispatch(configActions.setWelcomeTour(false));
             return;
         }
         var newIndex = idIndex + 1;

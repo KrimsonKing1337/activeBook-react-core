@@ -1,4 +1,3 @@
-export var localStorageId = 'welcomeTourHasBeenSeen';
 export var getWelcomeTourTextById = function (id) {
     if (id === 'action') {
         return {
