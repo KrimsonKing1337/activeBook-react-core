@@ -29,6 +29,8 @@ export function* watchSetIsOpen(action: PayloadAction<boolean>) {
   const path = payload ? '#bookmarks' : window.location.pathname;
 
   yield put(push(path));
+
+  window.history.pushState(null, '', window.location.href);
 }
 
 export function* watchSetBookmarks() {

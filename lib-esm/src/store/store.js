@@ -3,7 +3,7 @@ import { createStoreHook, createDispatchHook, createSelectorHook, } from 'react-
 import { configureStore } from '@reduxjs/toolkit';
 import { createReduxHistoryContext } from 'redux-first-history';
 import createSagaMiddleware from 'redux-saga';
-import { createBrowserHistory } from 'history';
+import { createMemoryHistory } from 'history';
 import { mainReducer, watchMainActions } from './main';
 import { configReducer, watchConfigActions } from './config';
 import { volumeReducer, watchVolumeActions } from './volume';
@@ -20,7 +20,7 @@ import { segmentsReducer, watchSegmentsActions } from './segments';
 import { counterReducer, watchCounterActions } from './counter';
 var sagaMiddleware = createSagaMiddleware();
 var reduxHistoryContextMiddleware = createReduxHistoryContext({
-    history: createBrowserHistory(),
+    history: createMemoryHistory(),
 });
 var createReduxHistory = reduxHistoryContextMiddleware.createReduxHistory, routerMiddleware = reduxHistoryContextMiddleware.routerMiddleware, routerReducer = reduxHistoryContextMiddleware.routerReducer;
 var reducer = {

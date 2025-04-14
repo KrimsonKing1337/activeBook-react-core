@@ -31,6 +31,8 @@ export function* watchSetMenuActiveState(action: PayloadAction<State['menuActive
   }
 
   yield put(push(path as string));
+
+  window.history.pushState(null, '', window.location.href);
 }
 
 export function* watchSetRoute(action: PayloadAction<State['route']>) {

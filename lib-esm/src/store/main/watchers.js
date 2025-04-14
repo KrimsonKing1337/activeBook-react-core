@@ -64,6 +64,7 @@ export function watchSetMenuActiveState(action) {
                 return [4 /*yield*/, put(push(path))];
             case 2:
                 _a.sent();
+                window.history.pushState(null, '', window.location.href);
                 return [2 /*return*/];
         }
     });

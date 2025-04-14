@@ -8,6 +8,7 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     return to.concat(ar || Array.prototype.slice.call(from));
 };
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { useEffect } from 'react';
 import classNames from 'classnames';
 import { Header } from 'components/Header';
 import { Overflow } from 'components/Overflow';
@@ -24,6 +25,17 @@ export var Bookmarks = function () {
     var isOpen = useSelector(bookmarksSelectors.isOpen);
     var page = useSelector(mainSelectors.page);
     var _a = useBookmarks(), bookmarks = _a.bookmarks, setBookmarks = _a.setBookmarks;
+    // закрываю менюшки, если пользователь сделал navigator.goBack
+    useEffect(function () {
+        var listener = function () {
+            dispatch(bookmarksActions.setIsOpen(false));
+            window.history.pushState(null, '', window.location.href);
+        };
+        window.addEventListener('popstate', listener);
+        return function () {
+            window.removeEventListener('popstate', listener);
+        };
+    }, []);
     var closeButtonClickHandler = function () {
         dispatch(bookmarksActions.setIsOpen(false));
     };
@@ -37,6 +49,8 @@ export var Bookmarks = function () {
         newBookmarks.splice(index, 1);
         setBookmarks(newBookmarks);
     };
-    return (_jsxs(Overflow, { id: "bookmarks", isOpen: isOpen, children: [_jsx(Header, { label: "\u0417\u0430\u043A\u043B\u0430\u0434\u043A\u0438" }), _jsx("div", { className: styles.itemsWrapper, children: bookmarks.map(function (itemCur, index) { return _jsx(Item, { pageNumber: itemCur, onDelete: deleteHandler }, index); }) }), _jsxs("div", { className: styles.footer, children: [_jsx("button", { className: buttonAddClassNames, onClick: addButtonClickHandler, children: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C" }), _jsx("button", { className: styles.button, onClick: closeButtonClickHandler, children: "\u0417\u0430\u043A\u0440\u044B\u0442\u044C" })] })] }));
+    return (_jsxs(Overflow, { id: "bookmarks", isOpen: isOpen, children: [_jsx(Header, { label: "\u0417\u0430\u043A\u043B\u0430\u0434\u043A\u0438" }), _jsx("div", { className: styles.itemsWrapper, children: bookmarks.map(function (itemCur, index) {
+                    return (_jsx(Item, { pageNumber: itemCur, onDelete: deleteHandler }, index));
+                }) }), _jsxs("div", { className: styles.footer, children: [_jsx("button", { className: buttonAddClassNames, onClick: addButtonClickHandler, children: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C" }), _jsx("button", { className: styles.button, onClick: closeButtonClickHandler, children: "\u0417\u0430\u043A\u0440\u044B\u0442\u044C" })] })] }));
 };
 //# sourceMappingURL=Bookmarks.js.map

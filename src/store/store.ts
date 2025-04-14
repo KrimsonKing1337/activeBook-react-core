@@ -11,7 +11,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { createReduxHistoryContext } from 'redux-first-history';
 import createSagaMiddleware from 'redux-saga';
 
-import { createBrowserHistory } from 'history';
+import { createMemoryHistory } from 'history';
 
 import { mainReducer, watchMainActions } from './main';
 import { configReducer, watchConfigActions } from './config';
@@ -32,7 +32,7 @@ import { counterReducer, watchCounterActions } from './counter';
 const sagaMiddleware = createSagaMiddleware();
 
 const reduxHistoryContextMiddleware = createReduxHistoryContext({
-  history: createBrowserHistory(),
+  history: createMemoryHistory(),
 });
 
 const { createReduxHistory, routerMiddleware, routerReducer } = reduxHistoryContextMiddleware;

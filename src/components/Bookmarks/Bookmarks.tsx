@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import classNames from 'classnames';
 
 import { Header } from 'components/Header';
@@ -6,7 +8,6 @@ import { Overflow } from 'components/Overflow';
 import { useDispatch, useSelector } from 'store';
 import { mainSelectors } from 'store/main';
 import { bookmarksActions, bookmarksSelectors } from 'store/bookmarks';
-
 
 import { Item } from './Item';
 import { useBookmarks } from './hooks';
@@ -22,6 +23,21 @@ export const Bookmarks = () => {
   const page = useSelector(mainSelectors.page);
 
   const { bookmarks, setBookmarks } = useBookmarks();
+
+  // закрываю менюшки, если пользователь сделал navigator.goBack
+  useEffect(() => {
+    const listener = () => {
+      dispatch(bookmarksActions.setIsOpen(false));
+
+      window.history.pushState(null, '', window.location.href);
+    };
+
+    window.addEventListener('popstate', listener);
+
+    return () => {
+      window.removeEventListener('popstate', listener);
+    };
+  }, []);
 
   const closeButtonClickHandler = () => {
     dispatch(bookmarksActions.setIsOpen(false));
@@ -48,7 +64,11 @@ export const Bookmarks = () => {
       <Header label="Закладки" />
 
       <div className={styles.itemsWrapper}>
-        {bookmarks.map((itemCur, index) => <Item key={index} pageNumber={itemCur} onDelete={deleteHandler} />)}
+        {bookmarks.map((itemCur, index) => {
+          return (
+            <Item key={index} pageNumber={itemCur} onDelete={deleteHandler} />
+          );
+        })}
       </div>
 
       <div className={styles.footer}>

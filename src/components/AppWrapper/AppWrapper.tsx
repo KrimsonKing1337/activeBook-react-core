@@ -1,7 +1,5 @@
 import { type PropsWithChildren, useEffect } from 'react';
 
-import { useNavigate } from 'react-router-dom';
-
 import { Howler } from 'howler';
 import { setWasmUrl } from '@lottiefiles/dotlottie-react';
 
@@ -44,7 +42,6 @@ export type AppWrapperProps = {
 
 export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: PropsWithChildren<AppWrapperProps>) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const isLoading = useSelector(mainSelectors.isLoading);
 
@@ -91,9 +88,9 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
     });
   }, []);
 
-  // сбрасываю адресную строку
+  // сбрасывать адресную строку теперь не нужно, т.к. мы используем memoryRouter. вместо этого очищаем историю
   useEffect(() => {
-    navigate('/');
+    window.history.pushState(null, '', window.location.href);
   }, []);
 
   // если тач-устройство - убираю :hover

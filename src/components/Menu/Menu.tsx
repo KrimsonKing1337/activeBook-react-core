@@ -1,7 +1,5 @@
 import { useEffect } from 'react';
 
-import { useLocation } from 'react-router-dom';
-
 import { Overflow } from 'components/Overflow';
 import { Header } from 'components/Header';
 
@@ -9,7 +7,6 @@ import { useDispatch, useSelector } from 'store';
 
 import { mainActions, mainSelectors } from 'store/main';
 import { achievementsSelectors } from 'store/achievements';
-import { bookmarksActions, bookmarksSelectors } from 'store/bookmarks';
 
 import {
   Volume,
@@ -24,11 +21,9 @@ import {
 
 export const Menu = () => {
   const dispatch = useDispatch();
-  const location = useLocation();
 
   const menuActiveState = useSelector(mainSelectors.menuActiveState);
   const achievements = useSelector(achievementsSelectors.achievements);
-  const bookmarksIsOpen = useSelector(bookmarksSelectors.isOpen);
 
   const allPagesSeen = achievements?.allPagesSeen;
 
@@ -36,20 +31,18 @@ export const Menu = () => {
 
   // закрываю менюшки, если пользователь сделал navigator.goBack
   useEffect(() => {
-    if (!location.hash) {
-      if (menuActiveState !== null) {
-        dispatch(mainActions.setMenuActiveState(null));
-      }
+    const listener = () => {
+      dispatch(mainActions.setMenuActiveState(null));
 
-      if (bookmarksIsOpen) {
-        dispatch(bookmarksActions.setIsOpen(false));
-      }
-    } else if (location.hash === '#menu') {
-      if (menuActiveState === 'tableOfContents' || menuActiveState === 'achievementsProgress') {
-        dispatch(mainActions.setMenuActiveState(null));
-      }
-    }
-  }, [location, menuActiveState, bookmarksIsOpen]);
+      window.history.pushState(null, '', window.location.href);
+    };
+
+    window.addEventListener('popstate', listener);
+
+    return () => {
+      window.removeEventListener('popstate', listener);
+    };
+  }, []);
 
   return (
     <Overflow isOpen={isOpen}>

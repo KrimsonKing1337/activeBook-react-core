@@ -1,6 +1,5 @@
 import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Howler } from 'howler';
 import { setWasmUrl } from '@lottiefiles/dotlottie-react';
 import classNames from 'classnames';
@@ -27,7 +26,6 @@ export var AppWrapper = function (_a) {
     var _b;
     var children = _a.children, config = _a.config, tableOfContents = _a.tableOfContents, rangeEffects = _a.rangeEffects;
     var dispatch = useDispatch();
-    var navigate = useNavigate();
     var isLoading = useSelector(mainSelectors.isLoading);
     var page = useSelector(mainSelectors.page);
     var vibrationOff = useVibration().vibrationOff;
@@ -62,9 +60,9 @@ export var AppWrapper = function (_a) {
             }
         });
     }, []);
-    // сбрасываю адресную строку
+    // сбрасывать адресную строку теперь не нужно, т.к. мы используем memoryRouter. вместо этого очищаем историю
     useEffect(function () {
-        navigate('/');
+        window.history.pushState(null, '', window.location.href);
     }, []);
     // если тач-устройство - убираю :hover
     useEffect(function () {
