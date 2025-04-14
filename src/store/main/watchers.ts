@@ -2,8 +2,6 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { push } from 'redux-first-history';
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 
-import { Location } from 'history';
-
 import type { State } from './@types';
 
 import { actions } from './slice';
@@ -11,28 +9,10 @@ import { selectors } from './selectors';
 
 import { waitForHowlerLoad, waitForMediaLoad } from './utils';
 
-export function* watchSetMenuActiveState(action: PayloadAction<State['menuActiveState']>) {
-  const { payload } = action;
-
-  const location: Location = yield select(selectors.location);
-
-  if (!location.hash && payload === null) {
-    return;
-  }
-
-  let path = window.location.pathname;
-
-  if (payload === 'tableOfContents') {
-    path = '#table-of-contents';
-  } else if (payload === 'menu') {
-    path = '#menu';
-  } else if (payload === 'achievementsProgress') {
-    path = '#achievements-progress';
-  }
-
-  yield put(push(path as string));
-
-  window.history.pushState(null, '', window.location.href);
+export function* watchSetMenuActiveState() {
+  yield call(() => {
+    window.history.pushState(null, '', window.location.href);
+  });
 }
 
 export function* watchSetRoute(action: PayloadAction<State['route']>) {

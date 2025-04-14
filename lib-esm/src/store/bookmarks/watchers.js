@@ -25,9 +25,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import { push } from 'redux-first-history';
-import { call, put, select, takeLatest } from 'redux-saga/effects';
-import { mainSelectors } from 'store/main';
+import { call, select, takeLatest } from 'redux-saga/effects';
 import { actions } from './slice';
 import { selectors } from './selectors';
 function saveInLocalStorage() {
@@ -43,23 +41,14 @@ function saveInLocalStorage() {
         }
     });
 }
-export function watchSetIsOpen(action) {
-    var payload, location, path;
+export function watchSetIsOpen() {
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0:
-                payload = action.payload;
-                return [4 /*yield*/, select(mainSelectors.location)];
+            case 0: return [4 /*yield*/, call(function () {
+                    window.history.pushState(null, '', window.location.href);
+                })];
             case 1:
-                location = _a.sent();
-                if (!location.hash && !payload) {
-                    return [2 /*return*/];
-                }
-                path = payload ? '#bookmarks' : window.location.pathname;
-                return [4 /*yield*/, put(push(path))];
-            case 2:
                 _a.sent();
-                window.history.pushState(null, '', window.location.href);
                 return [2 /*return*/];
         }
     });

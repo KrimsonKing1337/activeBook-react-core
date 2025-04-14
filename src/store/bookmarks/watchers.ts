@@ -1,9 +1,4 @@
-import { PayloadAction } from '@reduxjs/toolkit';
-import { push } from 'redux-first-history';
-import { call, put, select, takeLatest } from 'redux-saga/effects';
-import { Location } from 'history';
-
-import { mainSelectors } from 'store/main';
+import { call, select, takeLatest } from 'redux-saga/effects';
 
 import { State } from './@types';
 import { actions } from './slice';
@@ -17,20 +12,10 @@ function* saveInLocalStorage() {
   localStorage.setItem('bookmarks', bookmarksAsJson);
 }
 
-export function* watchSetIsOpen(action: PayloadAction<boolean>) {
-  const { payload } = action;
-
-  const location: Location = yield select(mainSelectors.location);
-
-  if (!location.hash && !payload) {
-    return;
-  }
-
-  const path = payload ? '#bookmarks' : window.location.pathname;
-
-  yield put(push(path));
-
-  window.history.pushState(null, '', window.location.href);
+export function* watchSetIsOpen() {
+  yield call(() => {
+    window.history.pushState(null, '', window.location.href);
+  });
 }
 
 export function* watchSetBookmarks() {

@@ -39,32 +39,14 @@ import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { actions } from './slice';
 import { selectors } from './selectors';
 import { waitForHowlerLoad, waitForMediaLoad } from './utils';
-export function watchSetMenuActiveState(action) {
-    var payload, location, path;
+export function watchSetMenuActiveState() {
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0:
-                payload = action.payload;
-                return [4 /*yield*/, select(selectors.location)];
+            case 0: return [4 /*yield*/, call(function () {
+                    window.history.pushState(null, '', window.location.href);
+                })];
             case 1:
-                location = _a.sent();
-                if (!location.hash && payload === null) {
-                    return [2 /*return*/];
-                }
-                path = window.location.pathname;
-                if (payload === 'tableOfContents') {
-                    path = '#table-of-contents';
-                }
-                else if (payload === 'menu') {
-                    path = '#menu';
-                }
-                else if (payload === 'achievementsProgress') {
-                    path = '#achievements-progress';
-                }
-                return [4 /*yield*/, put(push(path))];
-            case 2:
                 _a.sent();
-                window.history.pushState(null, '', window.location.href);
                 return [2 /*return*/];
         }
     });

@@ -16,7 +16,7 @@ export declare function watchSetAll(action: PayloadAction<State>): Generator<imp
     payload: number;
     type: "@volume/setGlobal";
 }>, void, unknown>;
-export declare function watchSetGlobal(action: PayloadAction<State['global']>): Generator<import("redux-saga/effects").SelectEffect | import("redux-saga/effects").CallEffect<void>, void, State>;
+export declare function watchSetGlobal(action: PayloadAction<State['global']>): Generator<import("redux-saga/effects").CallEffect<void> | import("redux-saga/effects").SelectEffect, void, State>;
 export declare function watchSetBg(action: PayloadAction<State['bg']>): Generator<import("redux-saga/effects").CallEffect<void>, void, unknown>;
 export declare function watchSetSfx(action: PayloadAction<State['sfx']>): Generator<import("redux-saga/effects").CallEffect<void>, void, unknown>;
 export declare function watchSetMusic(action: PayloadAction<State['music']>): Generator<import("redux-saga/effects").CallEffect<void>, void, unknown>;
