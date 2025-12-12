@@ -28,6 +28,7 @@ export default {
     'scss/double-slash-comment-empty-line-before': null,
     'scss/at-import-no-partial-leading-underscore': null,
     'scss/at-rule-no-unknown': true,
+    'scss/load-no-partial-leading-underscore': null,
 
     'at-rule-empty-line-before': null,
     'at-rule-no-unknown': null,
