@@ -1,4 +1,4 @@
-@import "./__variables.scss";
+@use "./__variables.scss" as __variables;
 
 @mixin scrollbar($transitionAdd: '') {
   $transition: border-color 0.75s linear;
@@ -35,15 +35,15 @@
 }
 
 @mixin transition-default($value: 'all') {
-  transition: #{$value} #{$transitionDefault};
+  transition: #{$value} #{__variables.$transitionDefault};
 }
 
 @mixin transition-fade-default() {
-  transition: opacity #{$transitionDefault};
+  transition: opacity #{__variables.$transitionDefault};
 }
 
 @mixin hover-default($transitionAdd: '') {
-  $transition: opacity #{$transitionDefault};
+  $transition: opacity #{__variables.$transitionDefault};
 
   @if $transitionAdd != '' {
     $transition: #{$transitionAdd}, $transition;
@@ -62,7 +62,7 @@
 
   opacity: 0.5;
 
-  transition: opacity #{$transitionDefault};
+  transition: opacity #{__variables.$transitionDefault};
 
   &:hover {
     cursor: pointer;
