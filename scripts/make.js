@@ -1,13 +1,13 @@
-const { execSync } = require('child_process');
+import { execSync } from 'child_process';
 
 try {
-  execSync('npm run clean');
-  execSync('node ./scripts/copyLottieWasm.js');
-  execSync('npm run copy-files');
-  execSync('npm run ts');
-  execSync('tsc-alias');
-  execSync('npm run up');
-  execSync('npm run packaging');
+  execSync('npm run clean', { stdio: 'inherit' });
+  execSync('node ./scripts/copyLottieWasm.js', { stdio: 'inherit' });
+  execSync('npm run copy-files', { stdio: 'inherit' });
+  execSync('npm run ts', { stdio: 'inherit' });
+  execSync('tsc-alias', { stdio: 'inherit' });
+  execSync('npm run up', { stdio: 'inherit' });
+  execSync('npm run packaging', { stdio: 'inherit' });
 } catch (e) {
   console.error(e.stdout.toString());
 }

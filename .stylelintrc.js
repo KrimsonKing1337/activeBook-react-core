@@ -1,6 +1,8 @@
-const configOrder = require('./config/styles/config-order/configCreator.js')();
+import createConfigOrder from './config/styles/config-order/configCreator.js';
 
-module.exports = {
+const configOrder = createConfigOrder();
+
+export default {
   extends: ['stylelint-config-standard-scss'],
   plugins: [
     'stylelint-scss',

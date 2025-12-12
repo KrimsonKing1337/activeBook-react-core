@@ -100,7 +100,7 @@ export var Modal = function (_a) {
         if (!canClose) {
             return;
         }
-        window.history.pushState(null, '', '/');
+        window.history.pushState(null, '', window.location.pathname);
         if (onClose) {
             onClose();
         }

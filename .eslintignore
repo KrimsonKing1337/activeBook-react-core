@@ -1,7 +1,0 @@
-.storybook
-cypress
-lib
-lib-esm
-scripts
-d.ts
-*.js

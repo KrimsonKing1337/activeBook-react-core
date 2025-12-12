@@ -154,7 +154,7 @@ export const Modal = ({
       return;
     }
 
-    window.history.pushState(null, '', '/');
+    window.history.pushState(null, '', window.location.pathname);
 
     if (onClose) {
       onClose();

@@ -1,4 +1,4 @@
-const { copyFileSync } = require('fs');
+import { copyFileSync } from 'fs';
 
 copyFileSync(
   './node_modules/@lottiefiles/dotlottie-web/dist/dotlottie-player.wasm',
