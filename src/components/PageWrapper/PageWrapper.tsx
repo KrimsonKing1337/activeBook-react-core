@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from 'react';
+import { PropsWithChildren, useEffect } from 'react';
 
 import classNames from 'classnames';
 
@@ -10,10 +10,12 @@ import { Bookmarks } from 'components/Bookmarks';
 import { SideEffects } from 'components/SideEffects';
 import { BackgroundEffects } from 'components/BackgroundEffects';
 
-import { useSelector } from 'store';
-
 import { mainSelectors } from 'store/main';
 import { effectsSelectors } from 'store/effects/common';
+
+import { segmentsActions } from 'store/segments';
+
+import { useDispatch, useSelector } from 'store';
 
 import { Narrative } from './components/Narrative';
 
@@ -29,9 +31,16 @@ export const PageWrapper = ({
   withoutToolbar,
   sbMode,
 }: PropsWithChildren<PageWrapperProps>) => {
-  const inverseColorIsActive = useSelector(effectsSelectors.inverseColorIsActive);
+  const dispatch = useDispatch();
 
+  const inverseColorIsActive = useSelector(effectsSelectors.inverseColorIsActive);
   const isLoading = useSelector(mainSelectors.isLoading);
+
+  useEffect(() => {
+    return () => {
+      dispatch(segmentsActions.reset());
+    };
+  }, []);
 
   const pageWrapperClassNames = classNames({
     [styles.pageWrapper]: true,
