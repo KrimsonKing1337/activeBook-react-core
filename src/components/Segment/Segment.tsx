@@ -1,4 +1,4 @@
-import { type PropsWithChildren, useEffect, useState } from 'react';
+import { type PropsWithChildren, useEffect, useRef, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
@@ -7,10 +7,10 @@ import classNames from 'classnames';
 
 import { nanoid } from 'nanoid';
 
-import { useDispatch, useSelector } from 'store';
-
 import { mainSelectors } from 'store/main';
 import { segmentsActions, segmentsSelectors } from 'store/segments';
+
+import { useDispatch, useSelector } from 'store';
 
 import styles from './Segment.scss';
 
@@ -30,13 +30,14 @@ export const Segment = ({
 }: SegmentProps) => {
   const dispatch = useDispatch();
 
+  const wasActiveRef = useRef(false);
+
   const [id, setId] = useState('');
 
   const isLoading = useSelector(mainSelectors.isLoading);
 
   const segments = useSelector(segmentsSelectors.segments);
   const activeId = useSelector(segmentsSelectors.activeId);
-  const lastActiveId = useSelector(segmentsSelectors.lastActiveId);
 
   const segmentsLength = Object.keys(segments).length;
 
@@ -45,14 +46,20 @@ export const Segment = ({
       return;
     }
 
-    if (activeId === id) {
+    const isNowActive = activeId === id;
+
+    if (isNowActive && !wasActiveRef.current) {
+      wasActiveRef.current = true;
+
       onEnter();
     }
 
-    if (lastActiveId && lastActiveId === id) {
+    if (!isNowActive && wasActiveRef.current) {
+      wasActiveRef.current = false;
+
       onExit();
     }
-  }, [isLoading, id, activeId, lastActiveId]);
+  }, [isLoading, id, activeId, onEnter, onExit]);
 
   useEffect(() => {
     const uuid = defaultId ? defaultId : nanoid();
@@ -75,6 +82,8 @@ export const Segment = ({
 
   useEffect(() => {
     return () => {
+      setId('');
+
       dispatch(segmentsActions.reset());
     };
   }, []);

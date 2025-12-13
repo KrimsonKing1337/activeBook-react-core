@@ -148,6 +148,10 @@ export class HowlWrapper {
   }
 
   async play(withFadeIn = false) {
+    if (this.isUnloading) {
+      return;
+    }
+
     if (withFadeIn) {
       if (!this.isFading) {
         await this.fadeIn();
