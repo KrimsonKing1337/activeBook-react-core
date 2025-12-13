@@ -14,7 +14,13 @@ const getPageComponents = (pages: number) => {
   const arr = [];
 
   for (let i = 0; i <= pages; i++) {
-    const PageComponent = lazy(() => import(`pages/Page${i}`));
+    const PageComponent = lazy(() =>
+      import(`pages/Page${i}`).then((m) => {
+        window.dispatchEvent(new CustomEvent('pageChunkLoaded', { detail: { i } }));
+
+        return m;
+      }),
+    );
 
     arr.push(PageComponent);
   }

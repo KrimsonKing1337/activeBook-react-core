@@ -1,11 +1,6 @@
-import type { PayloadAction } from '@reduxjs/toolkit';
-import { push } from 'redux-first-history';
-import { call, put, select, takeLatest } from 'redux-saga/effects';
-
-import type { State } from './@types';
+import { call, put, takeLatest } from 'redux-saga/effects';
 
 import { actions } from './slice';
-import { selectors } from './selectors';
 
 import { waitForHowlerLoad, waitForMediaLoad } from './utils';
 
@@ -15,20 +10,8 @@ export function* watchSetMenuActiveState() {
   });
 }
 
-export function* watchSetRoute(action: PayloadAction<State['route']>) {
-  const { payload } = action;
-
-  yield put(push(payload));
-}
-
-export function* watchSetPage(action: PayloadAction<State['page']>) {
-  const { payload } = action;
-
-  const path = `/page-${payload}`;
-
+export function* watchSetPage() {
   yield put(actions.setIsLoading(true));
-
-  yield put(push(path));
 
   yield call(() => {
     return new Promise<void>(resolve => {
@@ -44,39 +27,7 @@ export function* watchSetPage(action: PayloadAction<State['page']>) {
   yield put(actions.setIsLoading(false));
 }
 
-export function* watchPrevPage() {
-  const page: State['page'] = yield select(selectors.page);
-
-  if (page === 0) {
-    return;
-  }
-
-  const newPageNumber = page - 1;
-
-  if (newPageNumber < 1) {
-    return;
-  }
-
-  yield put(actions.setPage(newPageNumber));
-}
-
-export function* watchNextPage() {
-  const page: State['page'] = yield select(selectors.page);
-  const pages: State['pages'] = yield select(selectors.pages);
-
-  const newPageNumber = page + 1;
-
-  if (newPageNumber > pages) {
-    return;
-  }
-
-  yield put(actions.setPage(newPageNumber));
-}
-
 export function* watchActions() {
   yield takeLatest(actions.setMenuActiveState, watchSetMenuActiveState);
-  yield takeLatest(actions.setRoute, watchSetRoute);
   yield takeLatest(actions.setPage, watchSetPage);
-  yield takeLatest(actions.prevPage, watchPrevPage);
-  yield takeLatest(actions.nextPage, watchNextPage);
 }

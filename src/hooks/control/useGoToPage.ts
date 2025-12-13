@@ -2,12 +2,25 @@ import { startTransition } from 'react';
 
 import { useNavigate, useLocation } from 'react-router-dom';
 
+import { mainActions } from 'store/main';
+
+import { useDispatch } from 'store';
+
 export function useGoToPage() {
+  const dispatch = useDispatch();
+
   const location = useLocation();
   const navigate = useNavigate();
 
   const goToPage = (page: number) => {
+    if (page === 0) {
+      navigate(`/page-${page}`);
+
+      return;
+    }
+
     startTransition(() => {
+      dispatch(mainActions.setPage(page));
       navigate(`/page-${page}`);
     });
   };

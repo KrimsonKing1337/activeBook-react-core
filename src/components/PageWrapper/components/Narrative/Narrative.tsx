@@ -2,15 +2,18 @@ import { PropsWithChildren, useEffect, useRef } from 'react';
 
 import Hammer from 'hammerjs';
 
-import { useSelector } from 'store';
 import { configSelectors } from 'store/config';
 import { fontEffectsSelectors } from 'store/effects/font';
 
-import { goNextPage, goPrevPage } from 'utils/control/goToPage';
+import { useGoToPage } from 'hooks/control/useGoToPage';
+
+import { useSelector } from 'store';
 
 import styles from './Narrative.scss';
 
 export const Narrative = ({ children }: PropsWithChildren) => {
+  const { goNextPage, goPrevPage } = useGoToPage();
+
   const fontSize = useSelector(configSelectors.fontSize);
   const lineHeight = useSelector(configSelectors.lineHeight);
 
@@ -51,7 +54,11 @@ export const Narrative = ({ children }: PropsWithChildren) => {
 
       const isNext = direction === Hammer.DIRECTION_LEFT;
 
-      isNext ? goNextPage() : goPrevPage();
+      if (isNext) {
+        goNextPage();
+      } else {
+        goPrevPage();
+      }
     });
 
     return () => {

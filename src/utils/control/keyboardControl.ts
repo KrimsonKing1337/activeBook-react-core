@@ -1,7 +1,8 @@
-import { goNextPage, goPrevPage } from 'utils/control/goToPage';
 import { scrollDown, scrollUp } from 'utils/control/scroll';
 
-export function addKeyboardControl() {
+type Fn = () => void;
+
+export function addKeyboardControl(goPrevPage: Fn, goNextPage: Fn) {
   document.addEventListener('keydown', (e) => {
     const { code, repeat } = e;
 

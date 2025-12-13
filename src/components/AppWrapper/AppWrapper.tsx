@@ -7,8 +7,6 @@ import classNames from 'classnames';
 
 import type { Config, HowlInstances, RangeEffects, TableOfContents } from '@types';
 
-import { store, useDispatch, useSelector } from 'store';
-
 import { volumeActions } from 'store/volume';
 import { initialState as volumeInitialState } from 'store/volume/slice';
 import { configActions } from 'store/config';
@@ -16,6 +14,8 @@ import { initialState as configInitialState } from 'store/config/slice';
 import { mainActions, mainSelectors } from 'store/main';
 import { achievementsActions } from 'store/achievements';
 import { effectsActions } from 'store/effects/common';
+import { audioEffectsSelectors } from 'store/effects/audio/audio';
+import { audioBgEffectsSelectors } from 'store/effects/audio/audioBg';
 
 import { useEffectsInRange } from 'hooks/effects/range';
 import { useVibration } from 'hooks/effects/vibration';
@@ -27,6 +27,12 @@ import { removeCssHover } from 'utils/touch/removeCssHover';
 import { flashlightInst } from 'utils/effects/flashlight';
 
 import { Achievement } from 'components/Achievement';
+
+import { useGoToPage } from 'hooks/control/useGoToPage';
+import { addKeyboardControl } from 'utils/control/keyboardControl';
+import { hideAddressBarInMobileDevices } from 'utils/mobile/hideAddressBarInMobileDevices';
+
+import { store, useDispatch, useSelector } from 'store';
 
 import { setMuteToAllVideos, startToPlayAllAudiosWithPlayOnLoad } from './utils';
 
@@ -42,10 +48,12 @@ export type AppWrapperProps = {
 
 export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: PropsWithChildren<AppWrapperProps>) => {
   const dispatch = useDispatch();
+  const { goPrevPage, goNextPage } = useGoToPage();
 
   const isLoading = useSelector(mainSelectors.isLoading);
-
   const page = useSelector(mainSelectors.page);
+  const audioInstances = useSelector(audioEffectsSelectors.audioInstances);
+  const audioInstancesBg = useSelector(audioBgEffectsSelectors.audioInstances);
 
   const { vibrationOff } = useVibration();
 
@@ -146,7 +154,7 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
 
     startToPlayAllAudiosWithPlayOnLoad(audioInstances);
     startToPlayAllAudiosWithPlayOnLoad(audioInstancesBg);
-  }, [page, isLoading]);
+  }, [page, isLoading, audioInstances, audioInstancesBg]);
 
   // удаляю id видео из списка currentTime, если видео с data-id на странице нет
   useEffect(() => {
@@ -165,6 +173,12 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
 
     dispatch(effectsActions.setVideosCurrentTime(videosCurrentTimeNewValue));
   }, [page]);
+
+  useEffect(() => {
+    // addTouchSupportForCssHover(); // вместо этого просто "удаляю" :hover везде, возможно так и оставлю
+    addKeyboardControl(goPrevPage, goNextPage);
+    hideAddressBarInMobileDevices();
+  }, []);
 
   /*
     начинаю воспроизведение video, у которых autoPlay.

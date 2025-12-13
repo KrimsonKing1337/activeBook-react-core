@@ -20,9 +20,6 @@ const slice = createSlice({
   name: '@main',
   initialState,
   reducers: {
-    setRoute(state, action: PayloadAction<State['route']>) {
-      state.route = action.payload;
-    },
     setEasterEggs(state, action: PayloadAction<State['easterEggs']>) {
       state.easterEggs = action.payload;
     },
@@ -40,10 +37,6 @@ const slice = createSlice({
     setPage(state, action: PayloadAction<State['page']>) {
       state.page = action.payload;
     },
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    prevPage(_state) {},
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    nextPage(_state) {},
 
     setMenuActiveState(state, action: PayloadAction<State['menuActiveState']>) {
       state.menuActiveState = action.payload;

@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { type PropsWithChildren } from 'react';
 import type { RangeEffects, Config, TableOfContents } from '../../@types.js';
 export type AppProps = {
     config: Config;
