@@ -16,14 +16,14 @@ export function setMuteToAllVideos(muted: boolean) {
   });
 }
 
-export function startToPlayAllAudiosWithPlayOnLoad(audioInstances: HowlInstances) {
-  Object.values(audioInstances).forEach((audioInstanceCur) => {
-    if (!audioInstanceCur) {
-      return;
-    }
+export function startToPlayAllAudiosWithPlayOnLoad(audioInstances: HowlInstances, page: number) {
+  Object.entries(audioInstances).forEach(([, audio]) => {
+    if (!audio) return;
+    if (audio.page !== page) return;
+    if (audio.isUnloading) return;
+    if (audio.playing()) return;
+    if (!audio.playOnLoad) return;
 
-    if (audioInstanceCur.playOnLoad && !audioInstanceCur.playing()) {
-      audioInstanceCur.play();
-    }
+    audio.play();
   });
 }

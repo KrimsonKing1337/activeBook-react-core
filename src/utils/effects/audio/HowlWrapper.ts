@@ -6,6 +6,7 @@ import { store } from 'store';
 
 export type HowlWrapperOptions = {
   id: string;
+  page?: number;
   src: HowlOptions['src'];
   loop?: HowlOptions['loop'];
   type?: AudioType;
@@ -33,6 +34,7 @@ export class HowlWrapper {
 
   public readonly howlInst: Howl;
   public id: HowlWrapperOptions['id'];
+  public page: HowlWrapperOptions['page'];
   public src: HowlOptions['src'] = '';
   public type: AudioType = 'sfx';
   public playOnLoad = false;
@@ -54,6 +56,7 @@ export class HowlWrapper {
 
   constructor({
     id,
+    page,
     src,
     loop,
     type = 'sfx',
@@ -100,6 +103,7 @@ export class HowlWrapper {
     this.howlInst = new Howl(options);
 
     this.id = id;
+    this.page = page;
     this.src = src;
     this.type = type;
     this.relativeVolume = relativeVolume;

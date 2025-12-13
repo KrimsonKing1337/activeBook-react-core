@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from 'store';
 
 export function useAudio({
   id,
+  page,
   src,
   type = 'sfx',
   loop = false,
@@ -43,6 +44,7 @@ export function useAudio({
 
     const opt: HowlWrapperOptions = {
       id,
+      page,
       src: [src],
       type,
       loop,

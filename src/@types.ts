@@ -16,6 +16,7 @@ export type AudioType = 'bg' | 'music' | 'sfx';
 
 export type AudioEffectOptions = {
   id: string;
+  page: number;
   inRange?: boolean;
   src: string;
   fadeOutWhenUnload?: boolean;
@@ -39,7 +40,7 @@ export type Range = {
 
 export type RangeType = 'audio' | 'dots' | 'background';
 
-export type AudioEffectOptionsRange = Omit<AudioEffectOptions, 'id'>;
+export type AudioEffectOptionsRange = Omit<AudioEffectOptions, 'id' | 'page'>;
 export type BackgroundEffectOptionsRange = Omit<BackgroundEffect, 'id'>;
 
 export type RangeEffect = {

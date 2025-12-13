@@ -152,8 +152,8 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
     const audioInstances: HowlInstances = store.getState().audioEffects.audioInstances;
     const audioInstancesBg: HowlInstances = store.getState().audioBgEffects.audioInstances;
 
-    startToPlayAllAudiosWithPlayOnLoad(audioInstances);
-    startToPlayAllAudiosWithPlayOnLoad(audioInstancesBg);
+    startToPlayAllAudiosWithPlayOnLoad(audioInstances, page);
+    startToPlayAllAudiosWithPlayOnLoad(audioInstancesBg, page);
   }, [page, isLoading, audioInstances, audioInstancesBg]);
 
   // удаляю id видео из списка currentTime, если видео с data-id на странице нет

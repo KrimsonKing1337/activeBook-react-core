@@ -2,6 +2,7 @@ import { Howl, type HowlOptions } from 'howler';
 import type { AudioType, Timer } from '../../../@types.js';
 export type HowlWrapperOptions = {
     id: string;
+    page?: number;
     src: HowlOptions['src'];
     loop?: HowlOptions['loop'];
     type?: AudioType;
@@ -20,6 +21,7 @@ export declare class HowlWrapper {
     private static fadeDurationDefault;
     readonly howlInst: Howl;
     id: HowlWrapperOptions['id'];
+    page: HowlWrapperOptions['page'];
     src: HowlOptions['src'];
     type: AudioType;
     playOnLoad: boolean;
@@ -34,7 +36,7 @@ export declare class HowlWrapper {
     onPause: () => void;
     onStop: () => void;
     onUnload: () => void;
-    constructor({ id, src, loop, type, playOnLoad, relativeVolume, screamer, fadeOutWhenUnload, delay, stopBy, onPlay, onUnload, onPause, onStop, }: HowlWrapperOptions);
+    constructor({ id, page, src, loop, type, playOnLoad, relativeVolume, screamer, fadeOutWhenUnload, delay, stopBy, onPlay, onUnload, onPause, onStop, }: HowlWrapperOptions);
     volume(n: number): void;
     getVolume(): import("../../../store/volume/@types").State;
     getVolumeByType(): number;
