@@ -1,4 +1,4 @@
-@import '~styles/__mixins';
+@use "styles/__mixins" as mixins;
 
 .toggle {
   margin-top: 20px;
@@ -54,5 +54,5 @@
     background-color: var(--main);
   }
 
-  @include hover-default;
+  @include mixins.hover-default;
 }

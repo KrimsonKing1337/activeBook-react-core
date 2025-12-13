@@ -1,5 +1,4 @@
-@import "~styles/__mixins";
-@import "~styles/__variables";
+@use "styles/__variables" as variables;
 
 .pageWrapper {
   position: relative;
@@ -20,7 +19,7 @@
     filter: invert(1);
   }
 
-  @media screen and (max-width: $appWidth) {
+  @media screen and (max-width: variables.$appWidth) {
     padding-top: 0;
     padding-bottom: 0;
   }
@@ -35,7 +34,7 @@
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  max-width: $appWidth;
+  max-width: variables.$appWidth;
   height: 100%;
   min-height: 100%;
   overflow: hidden;
@@ -51,7 +50,7 @@
     }
   }
 
-  @media screen and (max-width: $appWidth) {
+  @media screen and (max-width: variables.$appWidth) {
     box-shadow: none;
   }
 }

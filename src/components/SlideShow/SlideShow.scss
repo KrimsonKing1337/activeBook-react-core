@@ -1,5 +1,5 @@
-@import "~styles/__mixins";
-@import "~styles/__variables";
+@use "styles/__mixins" as mixins;
+@use "styles/__variables" as variables;
 
 .wrapper {
   padding: 10px;
@@ -53,7 +53,7 @@
 
   &.isModalMode {
     align-items: center;
-    height: $modalHeight;
+    height: variables.$modalHeight;
     max-height: 100%;
   }
 
@@ -65,7 +65,7 @@
     align-items: flex-start;
   }
 
-  @include scrollbar;
+  @include mixins.scrollbar;
 }
 
 .itemsWrapper {
@@ -145,7 +145,7 @@
 
   will-change: opacity, margin;
 
-  @include hover-default($transition);
+  @include mixins.hover-default($transition);
 }
 
 .left {

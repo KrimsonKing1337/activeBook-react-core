@@ -1,5 +1,4 @@
-@import "~styles/__mixins";
-@import "~styles/__variables";
+@use "styles/__mixins" as mixins;
 
 .Button {
   padding: 9px;
@@ -26,8 +25,8 @@
 
     background-color: #9a9a9a;
 
-    @include hover-disable;
+    @include mixins.hover-disable;
   }
 
-  @include hover-default;
+  @include mixins.hover-default;
 }

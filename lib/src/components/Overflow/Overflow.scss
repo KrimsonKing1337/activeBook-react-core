@@ -1,5 +1,5 @@
-@import "~styles/__mixins";
-@import "~styles/__variables";
+@use "styles/__mixins" as mixins;
+@use "styles/__variables" as variables;
 
 .overflow {
   $transition: top ease 0.15s 0s;
@@ -10,7 +10,7 @@
   z-index: 15;
 
   width: 100%;
-  max-width: $appWidth;
+  max-width: variables.$appWidth;
   height: 100%;
   padding: 40px 20px;
   overflow: auto;
@@ -30,9 +30,9 @@
     background: transparent;
   }
 
-  @include scrollbar($transition);
+  @include mixins.scrollbar($transition);
 
-  @media screen and (max-width: $appWidth) {
+  @media screen and (max-width: variables.$appWidth) {
     height: 100%;
     margin-top: 0;
     margin-bottom: 0;

@@ -1,4 +1,4 @@
-@import 'styles/__mixins';
+@use "styles/__mixins" as mixins;
 
 .goToWithArrows {
   display: flex;
@@ -67,5 +67,5 @@
 
   background-color: inherit;
 
-  @include hover-default;
+  @include mixins.hover-default;
 }

@@ -1,4 +1,4 @@
-@import "~styles/__variables";
+@use "styles/__variables" as variables;
 
 .wrapper {
   width: 100%;
@@ -14,7 +14,7 @@
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  max-width: $appWidth;
+  max-width: variables.$appWidth;
   height: 48px;
   margin-top: 20px;
 

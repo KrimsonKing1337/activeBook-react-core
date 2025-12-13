@@ -1,5 +1,5 @@
-@import "~styles/__variables";
-@import "~styles/__mixins";
+@use "styles/__mixins" as mixins;
+@use "styles/__variables" as variables;
 
 .action {
   display: inline;
@@ -10,12 +10,12 @@
 
   opacity: 0.85;
 
-  transition: text-shadow $transitionDefault;
+  transition: text-shadow variables.$transitionDefault;
 
   &:hover {
     cursor: pointer;
 
-    @include text-shadow-default;
+    @include mixins.text-shadow-default;
   }
 
   &.isFullWidth {

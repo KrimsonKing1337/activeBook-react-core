@@ -1,4 +1,4 @@
-@import 'styles/__mixins';
+@use "styles/__mixins" as mixins;
 
 .item {
   position: relative;
@@ -19,7 +19,7 @@
     will-change: fill;
     fill: currentColor;
 
-    @include transition-default(fill);
+    @include mixins.transition-default(fill);
   }
 
   &:hover {

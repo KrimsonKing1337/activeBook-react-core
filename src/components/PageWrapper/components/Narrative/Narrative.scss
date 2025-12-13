@@ -1,4 +1,4 @@
-@import "~styles/__mixins";
+@use "styles/__mixins" as mixins;
 
 .narrative {
   position: relative;
@@ -19,7 +19,7 @@
   */
   touch-action: pan-y !important;
 
-  @include scrollbar;
+  @include mixins.scrollbar;
 }
 
 .text {

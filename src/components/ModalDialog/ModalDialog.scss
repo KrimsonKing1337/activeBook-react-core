@@ -1,12 +1,11 @@
-@import "~styles/__mixins";
-@import "~styles/__variables";
+@use "styles/__variables" as variables;
 
 .wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: $modalHeight;
+  height: variables.$modalHeight;
 }
 
 .actions {

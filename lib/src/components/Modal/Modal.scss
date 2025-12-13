@@ -1,5 +1,5 @@
-@import "~styles/__mixins";
-@import "~styles/__variables";
+@use "styles/__mixins" as mixins;
+@use "styles/__variables" as variables;
 
 .overflow {
   position: fixed;
@@ -22,7 +22,7 @@
 }
 
 .modal {
-  $transition: width #{$transitionDefault}, height #{$transitionDefault};
+  $transition: width #{variables.$transitionDefault}, height #{variables.$transitionDefault};
 
   position: fixed;
   top: 0;
@@ -34,9 +34,9 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  width: $modalWidth;
-  max-width: $appWidth;
-  height: $modalHeight;
+  width: variables.$modalWidth;
+  max-width: variables.$appWidth;
+  height: variables.$modalHeight;
   margin: auto;
   overflow: auto;
 
@@ -55,7 +55,7 @@
     }
   }
 
-  @include scrollbar($transition);
+  @include mixins.scrollbar($transition);
 }
 
 .wrapper {
@@ -101,7 +101,7 @@
     display: flex;
   }
 
-  @include modal-content-icon;
+  @include mixins.modal-content-icon;
 }
 
 .iconExpand,
@@ -140,7 +140,7 @@
     display: none;
   }
 
-  @include modal-content-icon;
+  @include mixins.modal-content-icon;
 }
 
 .iconCompress {
@@ -174,11 +174,11 @@
     }
   }
 
-  @include modal-content-icon;
+  @include mixins.modal-content-icon;
 }
 
 .content {
-  height: $modalHeight;
+  height: variables.$modalHeight;
 
   &.isFullScreen {
     height: 95vh;

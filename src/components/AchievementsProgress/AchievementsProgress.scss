@@ -1,4 +1,4 @@
-@import 'styles/__mixins';
+@use 'styles/__mixins' as mixins;
 
 .itemsWrapper {
   margin-top: 31px;
@@ -20,7 +20,7 @@
   border-radius: 25px;
   cursor: pointer;
 
-  @include hover-default;
+  @include mixins.hover-default;
 }
 
 .textAboutHidden {

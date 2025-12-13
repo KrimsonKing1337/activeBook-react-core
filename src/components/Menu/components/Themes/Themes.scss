@@ -1,4 +1,4 @@
-@import 'styles/__mixins';
+@use 'styles/__mixins' as mixins;
 
 .themes {
   margin-top: 24px;
@@ -50,7 +50,7 @@
     border: 1px #111 solid;
   }
 
-  @include hover-default;
+  @include mixins.hover-default;
 }
 
 .spoiler {

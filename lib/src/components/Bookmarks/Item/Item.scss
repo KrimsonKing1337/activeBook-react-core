@@ -1,4 +1,4 @@
-@import 'styles/__mixins';
+@use "styles/__mixins" as mixins;
 
 .item {
   display: flex;
@@ -12,7 +12,7 @@
     margin-top: 0;
   }
 
-  @include hover-default;
+  @include mixins.hover-default;
 }
 
 .title {
