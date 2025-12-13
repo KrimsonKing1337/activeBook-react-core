@@ -14,6 +14,13 @@ export function useGoToPage() {
 
   const goNextPage = () => {
     const { pathname } = location;
+
+    if (pathname === '/') {
+      goToPage(1);
+
+      return;
+    }
+
     const currentPage = Number(pathname.split('-')[1]);
 
     goToPage(currentPage + 1);
@@ -21,6 +28,11 @@ export function useGoToPage() {
 
   const goPrevPage = () => {
     const { pathname } = location;
+
+    if (pathname === '/') {
+      return;
+    }
+
     const currentPage = Number(pathname.split('-')[1]);
 
     goToPage(currentPage - 1);
