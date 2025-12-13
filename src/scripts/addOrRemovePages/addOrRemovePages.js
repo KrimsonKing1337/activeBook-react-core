@@ -1,5 +1,5 @@
-const path = require('path');
-const fs = require('fs');
+import path from 'path';
+import fs from 'fs';
 
 /** @param folderPath string
  *  @param index number

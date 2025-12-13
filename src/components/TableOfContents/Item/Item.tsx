@@ -1,8 +1,11 @@
-import { useSelector } from 'store';
 import { mainSelectors } from 'store/main';
-import { goToPage } from 'utils/control/goToPage';
+
+import { useGoToPage } from 'hooks/control/useGoToPage';
+
+import { useSelector } from 'store';
 
 import { playAchievement } from './utils';
+
 import styles from './Item.scss';
 
 export type ItemProps = {
@@ -12,6 +15,8 @@ export type ItemProps = {
 };
 
 export const Item = ({ title, subtitle = '', pageNumber }: ItemProps) => {
+  const { goToPage } = useGoToPage();
+
   const pages = useSelector(mainSelectors.pages);
 
   const clickHandler = () => {

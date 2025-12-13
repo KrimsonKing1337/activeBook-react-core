@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 
-import { PageWrapper, Action, WelcomeTour } from 'components';
-
-import { useSelector } from 'store';
 import { configSelectors } from 'store/config';
 
-import { goToPage } from 'utils/control/goToPage';
 import { Flags, modalsWereShowed } from 'utils/localStorage/modalsWereShowed';
 import { flashlightInst } from 'utils/effects/flashlight';
+
+import { useGoToPage } from 'hooks/control/useGoToPage';
+
+import { useSelector } from 'store';
+
+import { PageWrapper, Action, WelcomeTour } from 'components';
 
 import { Modal } from './components';
 
@@ -22,6 +24,8 @@ export type Page0Props = {
 };
 
 export const Page0 = ({ goCallback, header, subHeader, showButton = true, Footer }: Page0Props) => {
+  const { goToPage } = useGoToPage();
+
   const isWelcomeTourActiveFromConfig = useSelector(configSelectors.welcomeTour);
 
   const [lastPage, setLastPage] = useState(0);

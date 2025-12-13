@@ -1,17 +1,22 @@
 import { useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
-import { Item } from 'components/Toolbar/components/Item';
 
-import { useSelector } from 'store';
+import { Item } from 'components/Toolbar/components/Item';
+import { useGoToPage } from 'hooks/control/useGoToPage';
+
 import { mainSelectors } from 'store/main';
+
 import ArrowLeft from 'assets/img/toolbar/i-arrow-left.svg';
 import ArrowRight from 'assets/img/toolbar/i-arrow-right.svg';
-import { goNextPage, goPrevPage, goToPage } from 'utils/control/goToPage';
+
+import { useSelector } from 'store';
 
 import styles from './Nav.scss';
 
 export const Nav = () => {
+  const { goToPage, goPrevPage, goNextPage } = useGoToPage();
+
   const page = useSelector(mainSelectors.page);
   const pages = useSelector(mainSelectors.pages);
 

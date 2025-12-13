@@ -1,9 +1,10 @@
-import type { PropsWithChildren } from 'react';
+import { type PropsWithChildren, lazy } from 'react';
 
 import { Route, Routes as ReactRouterRoutes } from 'react-router-dom';
 
-import { useSelector } from 'store';
 import { mainSelectors } from 'store/main';
+
+import { useSelector } from 'store';
 
 // todo: сделать все страницы либо через ленивую загрузку, либо по-обычному
 // todo: в кордове проблемы с подгрузкой компонента через ленивую загрузку
@@ -13,7 +14,7 @@ const getPageComponents = (pages: number) => {
   const arr = [];
 
   for (let i = 0; i <= pages; i++) {
-    const PageComponent = require(`pages/Page${i}`)[`Page${i}`];
+    const PageComponent = lazy(() => import(`pages/Page${i}`));
 
     arr.push(PageComponent);
   }
