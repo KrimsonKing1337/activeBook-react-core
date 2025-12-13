@@ -1,0 +1,1 @@
+{"version":3,"file":"hideAddressBarInMobileDevices.js","sourceRoot":"","sources":["../../../../src/utils/mobile/hideAddressBarInMobileDevices.ts"],"names":[],"mappings":"AAAA,MAAM,UAAU,6BAA6B;IAC3C,UAAU,CAAC;QACT,MAAM,CAAC,QAAQ,CAAC,CAAC,EAAE,CAAC,CAAC,CAAC;IACxB,CAAC,EAAE,CAAC,CAAC,CAAC;AACR,CAAC"}

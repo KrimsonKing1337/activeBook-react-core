@@ -1,0 +1,17 @@
+@import "~styles/__mixins";
+
+.link {
+  display: inline;
+
+  color: #09f;
+
+  opacity: 0.85;
+
+  transition: text-shadow $transitionDefault;
+
+  &:hover {
+    cursor: pointer;
+
+    @include text-shadow-default;
+  }
+}

@@ -1,0 +1,33 @@
+@import "~styles/__mixins";
+@import "~styles/__variables";
+
+.Button {
+  padding: 9px;
+
+  color: #fff;
+
+  background: var(--main);
+  border-radius: 4px;
+
+  &.secondary {
+    background-color: #9a9a9a;
+  }
+
+  &.success {
+    background-color: #28a745;
+  }
+
+  &.error {
+    background-color: #dc3545;
+  }
+
+  &.disabled {
+    color: #b8b8b8;
+
+    background-color: #9a9a9a;
+
+    @include hover-disable;
+  }
+
+  @include hover-default;
+}
