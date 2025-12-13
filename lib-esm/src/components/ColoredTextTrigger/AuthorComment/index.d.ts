@@ -1,1 +1,0 @@
-export { AuthorComment } from './AuthorComment';

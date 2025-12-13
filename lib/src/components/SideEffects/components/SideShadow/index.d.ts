@@ -1,1 +1,0 @@
-export { SideShadow } from './SideShadow';

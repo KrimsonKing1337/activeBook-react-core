@@ -1,1 +1,0 @@
-export { WithModal } from './WithModal';

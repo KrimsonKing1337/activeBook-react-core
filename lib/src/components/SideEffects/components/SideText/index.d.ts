@@ -1,1 +1,0 @@
-export { SideText } from './SideText';

@@ -9,5 +9,5 @@ try {
   execSync('npm run up', { stdio: 'inherit' });
   execSync('npm run packaging', { stdio: 'inherit' });
 } catch (e) {
-  console.error(e.stdout.toString());
+  console.error(e);
 }

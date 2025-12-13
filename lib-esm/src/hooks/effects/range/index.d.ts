@@ -1,1 +1,0 @@
-export { useEffectsInRange } from './effectsInRange';
