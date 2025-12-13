@@ -5,7 +5,7 @@ import { setWasmUrl } from '@lottiefiles/dotlottie-react';
 
 import classNames from 'classnames';
 
-import type { Config, HowlInstances, RangeEffects, TableOfContents } from '@types';
+import type { Config, RangeEffects, TableOfContents } from '@types';
 
 import { volumeActions } from 'store/volume';
 import { initialState as volumeInitialState } from 'store/volume/slice';
@@ -148,9 +148,6 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
     if (isLoading) {
       return;
     }
-
-    const audioInstances: HowlInstances = store.getState().audioEffects.audioInstances;
-    const audioInstancesBg: HowlInstances = store.getState().audioBgEffects.audioInstances;
 
     startToPlayAllAudiosWithPlayOnLoad(audioInstances, page);
     startToPlayAllAudiosWithPlayOnLoad(audioInstancesBg, page);

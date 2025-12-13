@@ -6,6 +6,8 @@ import { audioEffectsActions, audioEffectsSelectors } from 'store/effects/audio/
 
 import { HowlWrapper, type HowlWrapperOptions } from 'utils/effects/audio/HowlWrapper';
 
+import { mainSelectors } from 'store/main';
+
 import { useSelector, useDispatch } from 'store';
 
 export function useAudio({
@@ -29,6 +31,7 @@ export function useAudio({
 
   const audioInstances = useSelector(audioEffectsSelectors.audioInstances);
   const isDeleting = useSelector(audioEffectsSelectors.isDeleting);
+  const currentPage = useSelector(mainSelectors.page);
 
   const refId = useRef('');
 
@@ -37,6 +40,10 @@ export function useAudio({
       если удаляется какой-либо audioInstance,
       или id у этого экземпляра уже есть - значит эффект не нужно инициализировать заново
     */
+
+    if (currentPage !== page) {
+      return;
+    }
 
     if (isDeleting || refId.current) {
       return;
@@ -65,7 +72,7 @@ export function useAudio({
     refId.current = id;
 
     dispatch(audioEffectsActions.setAudioInstance(howlInst));
-  }, [isDeleting]);
+  }, [isDeleting, currentPage]);
 
   useEffect(() => {
     return () => {

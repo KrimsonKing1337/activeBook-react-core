@@ -10,6 +10,7 @@ export type HowlWrapperOptions = {
   src: HowlOptions['src'];
   loop?: HowlOptions['loop'];
   type?: AudioType;
+  isRange?: boolean;
   playOnLoad?: boolean;
   relativeVolume?: number;
   screamer?: boolean;
@@ -37,6 +38,7 @@ export class HowlWrapper {
   public page: HowlWrapperOptions['page'];
   public src: HowlOptions['src'] = '';
   public type: AudioType = 'sfx';
+  public isRange = false;
   public playOnLoad = false;
   public relativeVolume: number;
   public fadeOutWhenUnload = true;
@@ -60,6 +62,7 @@ export class HowlWrapper {
     src,
     loop,
     type = 'sfx',
+    isRange = false,
     playOnLoad = false,
     relativeVolume = 100,
     screamer = false,
@@ -67,8 +70,7 @@ export class HowlWrapper {
     delay = 0,
     stopBy = 0,
 
-    onPlay = () => {
-    },
+    onPlay = () => {},
     onUnload = () => {},
     onPause = () => {},
     onStop = () => {},
@@ -106,6 +108,7 @@ export class HowlWrapper {
     this.page = page;
     this.src = src;
     this.type = type;
+    this.isRange = isRange;
     this.relativeVolume = relativeVolume;
     this.fadeOutWhenUnload = fadeOutWhenUnload;
     this.delay = delay;
