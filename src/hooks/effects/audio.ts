@@ -30,22 +30,23 @@ export function useAudio({
   const dispatch = useDispatch();
 
   const audioInstances = useSelector(audioEffectsSelectors.audioInstances);
-  const isDeleting = useSelector(audioEffectsSelectors.isDeleting);
   const currentPage = useSelector(mainSelectors.page);
 
   const refId = useRef('');
 
   useEffect(() => {
     /*
-      если удаляется какой-либо audioInstance,
-      или id у этого экземпляра уже есть - значит эффект не нужно инициализировать заново
+      Если есть или id у этого экземпляра уже есть - значит эффект не нужно инициализировать заново.
+      Или если страница эффекта не соответствует текущей странице
+
+      todo: Здесь была ещё завязка на isDeleting. Но я не смог вспомнить зачем это было нужно
     */
 
     if (currentPage !== page) {
       return;
     }
 
-    if (isDeleting || refId.current) {
+    if (refId.current) {
       return;
     }
 
@@ -72,7 +73,7 @@ export function useAudio({
     refId.current = id;
 
     dispatch(audioEffectsActions.setAudioInstance(howlInst));
-  }, [isDeleting, currentPage]);
+  }, [currentPage]);
 
   useEffect(() => {
     return () => {
