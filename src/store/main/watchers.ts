@@ -1,4 +1,4 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest, race, delay } from 'redux-saga/effects';
 
 import { actions } from './slice';
 
@@ -10,21 +10,22 @@ export function* watchSetMenuActiveState() {
   });
 }
 
+function* doLoad() {
+  yield call(waitForHowlerLoad);
+  yield call(waitForMediaLoad);
+}
+
 export function* watchSetPage() {
-  yield put(actions.setIsLoading(true));
-
-  yield call(() => {
-    return new Promise<void>(resolve => {
-      setTimeout(async () => {
-        await waitForHowlerLoad();
-        await waitForMediaLoad();
-
-        resolve();
-      }, 0);
-    });
+  const { timeout } = yield race({
+    load: call(doLoad),
+    timeout: delay(500),
   });
 
-  yield put(actions.setIsLoading(false));
+  if (timeout) {
+    yield put(actions.setIsLoading(true));
+    yield call(doLoad);
+    yield put(actions.setIsLoading(false));
+  }
 }
 
 export function* watchActions() {
