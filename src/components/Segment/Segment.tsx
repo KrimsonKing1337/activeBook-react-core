@@ -80,12 +80,6 @@ export const Segment = ({
     }));
   }, [id, segmentsLength]);
 
-  useEffect(() => {
-    return () => {
-      dispatch(segmentsActions.reset());
-    };
-  }, []);
-
   if (segmentsLength === 0) {
     return null;
   }
