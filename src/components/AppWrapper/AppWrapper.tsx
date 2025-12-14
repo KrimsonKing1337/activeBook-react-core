@@ -172,10 +172,15 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
   }, [page]);
 
   useEffect(() => {
+    // фокус для скролла
+    const narrativeElement = document.querySelector('#narrative') as HTMLElement;
+
+    narrativeElement.click();
+
     // addTouchSupportForCssHover(); // вместо этого просто "удаляю" :hover везде, возможно так и оставлю
     addKeyboardControl(goPrevPage, goNextPage);
     hideAddressBarInMobileDevices();
-  }, []);
+  }, [goPrevPage, goNextPage]);
 
   /*
     начинаю воспроизведение video, у которых autoPlay.

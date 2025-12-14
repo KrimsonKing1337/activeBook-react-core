@@ -3,6 +3,8 @@ import { scrollDown, scrollUp } from 'utils/control/scroll';
 type Fn = () => void;
 
 export function addKeyboardControl(goPrevPage: Fn, goNextPage: Fn) {
+  const narrativeElement = document.querySelector('#narrative');
+
   document.addEventListener('keydown', (e) => {
     const { code, repeat } = e;
 
@@ -26,18 +28,25 @@ export function addKeyboardControl(goPrevPage: Fn, goNextPage: Fn) {
       return;
     }
 
-    // todo: при такой реализации, скролл неплавный. нужно сделать как при нажатии на стрелочки
-    //  https://stackoverflow.com/questions/62600489/scroll-event-on-keydown-like-down-arrow-and-up-arrow
-    if (/*code === 'ArrowUp' || */code === 'KeyW') {
-      scrollUp(document.activeElement as HTMLElement);
+    const behavior = repeat ? 'auto' : 'smooth';
+    const scrollSpeed = repeat ? 20 : 75;
+
+    if (code === 'KeyW') {
+      scrollUp({
+        elem: narrativeElement as HTMLElement,
+        behavior,
+        scrollValue: scrollSpeed,
+      });
 
       return;
     }
 
-    // todo: при такой реализации, скролл неплавный. нужно сделать как при нажатии на стрелочки
-    //  https://stackoverflow.com/questions/62600489/scroll-event-on-keydown-like-down-arrow-and-up-arrow
-    if (/*code === 'ArrowDown' || */code === 'KeyS') {
-      scrollDown(document.activeElement as HTMLElement);
+    if (code === 'KeyS') {
+      scrollDown({
+        elem: narrativeElement as HTMLElement,
+        behavior,
+        scrollValue: scrollSpeed,
+      });
 
       return;
     }

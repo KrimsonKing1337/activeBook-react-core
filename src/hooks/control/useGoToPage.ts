@@ -14,7 +14,8 @@ export function useGoToPage() {
 
   const goToPage = (page: number) => {
     if (page === 0) {
-      navigate(`/page-${page}`);
+      dispatch(mainActions.setPage(0));
+      navigate('/');
 
       return;
     }
