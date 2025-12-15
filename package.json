@@ -1,6 +1,6 @@
 {
   "name": "activebook-react-core",
-  "version": "0.0.466",
+  "version": "0.0.470",
   "description": "",
   "main": "./lib/src/index.js",
   "type": "module",
@@ -47,6 +47,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-fast-compare": "^3.2.2",
+    "react-range": "^1.10.0",
     "react-redux": "^7.2.9",
     "react-router": "^6.15.0",
     "react-router-dom": "^6.15.0",

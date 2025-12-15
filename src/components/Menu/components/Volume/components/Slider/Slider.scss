@@ -1,27 +1,24 @@
-.slider {
+.TrackWrapper {
+  display: flex;
   width: 150px;
-  height: 12px;
-  margin-top: 5px;
+  height: 18px;
 }
 
-.thumb {
+.Track {
+  align-self: center;
+  width: 100%;
+  height: 5px;
+
+  border-radius: 4px;
+}
+
+.Thumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 18px;
   height: 18px;
 
-  background: var(--main);
+  background-color: var(--main);
   border-radius: 50%;
-  transform: translateY(-6px);
-  cursor: pointer;
-}
-
-.track {
-  height: 6px;
-
-  &[class$="-0"] {
-    background: var(--main);
-  }
-
-  &[class$="-1"] {
-    background: #ccc;
-  }
 }

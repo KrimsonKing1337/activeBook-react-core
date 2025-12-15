@@ -1,7 +1,8 @@
-import { Label } from 'components/Label';
 
 import { useDispatch, useSelector } from 'store';
 import { volumeActions, volumeSelectors } from 'store/volume';
+
+import { Label } from 'components/Label';
 
 import { Slider } from './components/Slider';
 
@@ -56,31 +57,26 @@ export const Volume = () => {
     <div className={styles.volume}>
       <div className={styles.item}>
         <Label label="Общая громкость" />
-
         <Slider value={globalVolume} onChange={globalChangeHandler} onAfterChange={afterChangeHandler} />
       </div>
 
       <div className={styles.item}>
         <Label label="Громкость музыки" />
-
         <Slider value={musicVolume} onChange={musicChangeHandler} onAfterChange={afterChangeHandler} />
       </div>
 
       <div className={styles.item}>
         <Label label="SFX" />
-
         <Slider value={sfxVolume} onChange={sfxChangeHandler} onAfterChange={afterChangeHandler} />
       </div>
 
       <div className={styles.item}>
         <Label label="Фоновые звуки" />
-
         <Slider value={bgVolume} onChange={bgChangeHandler} onAfterChange={afterChangeHandler} />
       </div>
 
       <div className={styles.item}>
         <Label label="Громкость видео" />
-
         <Slider value={videosVolume} onChange={videosChangeHandler} onAfterChange={afterChangeHandler} />
       </div>
     </div>

@@ -1,4 +1,11 @@
-import ReactSlider from 'react-slider';
+import { useEffect, useState } from 'react';
+
+import type { IRenderThumbParams, IRenderTrackParams } from 'react-range/lib/types';
+import { Range, getTrackBackground } from 'react-range';
+
+const STEP = 1;
+const MIN = 0;
+const MAX = 100;
 
 import styles from './Slider.scss';
 
@@ -9,26 +16,73 @@ type SliderProps = {
 };
 
 export const Slider = ({ value, onChange, onAfterChange }: SliderProps) => {
-  const changeHandler = (value: number) => {
+  const [values, setValues] = useState([value]);
+
+  useEffect(() => {
+    setValues([value]);
+  }, [value]);
+
+  const changeHandler = (values: number[]) => {
+    setValues(values);
+
     if (onChange) {
-      onChange(value);
+      onChange(values[0]);
     }
   };
 
-  const afterChangeHandler = () => {
+  const afterChangeHandler = (values: number[]) => {
     if (onAfterChange) {
-      onAfterChange(value);
+      onAfterChange(values[0]);
     }
+  };
+
+  const Track = ({ props, children }: IRenderTrackParams) => {
+    return (
+      <div
+        onMouseDown={props.onMouseDown}
+        onTouchStart={props.onTouchStart}
+        style={props.style}
+        className={styles.TrackWrapper}
+      >
+        <div
+          ref={props.ref}
+          style={{
+            background: getTrackBackground({
+              values,
+              colors: ['var(--main)', '#ccc'],
+              min: MIN,
+              max: MAX,
+            }),
+          }}
+          className={styles.Track}
+        >
+          {children}
+        </div>
+      </div>
+    );
+  };
+
+  const Thumb = ({ props }: IRenderThumbParams) => {
+    return (
+      <div
+        {...props}
+        key={props.key}
+        style={props.style}
+        className={styles.Thumb}
+      />
+    );
   };
 
   return (
-    <ReactSlider
-      value={value}
-      className={styles.slider}
-      thumbClassName={styles.thumb}
-      trackClassName={styles.track}
+    <Range
+      values={values}
+      step={STEP}
+      min={MIN}
+      max={MAX}
       onChange={changeHandler}
-      onAfterChange={afterChangeHandler}
+      onFinalChange={afterChangeHandler}
+      renderTrack={Track}
+      renderThumb={Thumb}
     />
   );
 };
