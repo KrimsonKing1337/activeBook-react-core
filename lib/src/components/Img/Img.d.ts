@@ -1,4 +1,3 @@
-/// <reference types="react" />
 type ImgProps = React.HTMLAttributes<HTMLImageElement> & {
     passedRef?: React.RefObject<HTMLImageElement>;
     className?: string;

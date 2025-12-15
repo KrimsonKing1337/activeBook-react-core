@@ -1,4 +1,3 @@
-/// <reference types="react" />
 export declare function useModal(): {
     modalIsActive: boolean;
     modalOnClose: () => void;

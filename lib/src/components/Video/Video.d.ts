@@ -1,4 +1,3 @@
-/// <reference types="react" />
 type VideoProps = React.MediaHTMLAttributes<HTMLVideoElement> & {
     id: string;
     className?: string;

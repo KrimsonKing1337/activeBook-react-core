@@ -1,4 +1,3 @@
-/// <reference types="react" />
 export type Page0Props = {
     header?: string;
     subHeader?: string;

@@ -74,7 +74,7 @@ export default defineConfig([globIgnores, {
 
       pathGroups: [
         { pattern: 'react', group: 'external', position: 'before' },
-        { pattern: 'react-redux', group: 'external', position: 'after' },
+        { pattern: 'react-redux', group: 'external', position: 'before' },
 
         { pattern: 'assets{,/**}', group: 'internal', position: 'before' },
         { pattern: 'api{,/**}', group: 'internal', position: 'after' },

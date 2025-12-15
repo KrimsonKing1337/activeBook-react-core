@@ -63,7 +63,8 @@ const middleware = [
 
 export const store = configureStore({
   reducer,
-  middleware,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(middleware),
 });
 
 export const history = createReduxHistory(store);
@@ -82,13 +83,10 @@ sagaMiddleware.run(watchSegmentsActions);
 
 sagaMiddleware.run(watchCounterActions);
 
-
 export type RootState = ReturnType<typeof store.getState>;
+export type StoreContext = ReactReduxContextValue<RootState> | null;
 
-export const storeContext = createContext<ReactReduxContextValue>({
-  store,
-  storeState: reducer,
-});
+export const storeContext = createContext<StoreContext>(null);
 
 export const useStore = createStoreHook(storeContext);
 export const useDispatch = createDispatchHook(storeContext);

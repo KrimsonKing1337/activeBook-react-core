@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { RootState } from '../../../index';
 export declare const selectors: {
     isActive: (state: RootState) => boolean;
