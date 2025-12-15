@@ -1,12 +1,12 @@
 import { type PropsWithChildren } from 'react';
 
-import { HistoryRouter } from 'redux-first-history/rr6';
+import { MemoryRouter } from 'react-router-dom';
 
 import type { RangeEffects, Config, TableOfContents } from '@types';
 
-import { AppWrapper } from 'components/AppWrapper';
+import { StoreProvider } from 'store';
 
-import { history, StoreProvider } from 'store';
+import { AppWrapper } from 'components/AppWrapper';
 
 import { Routes } from './Routes';
 
@@ -19,13 +19,13 @@ export type AppProps = {
 export const App = ({ children, config, tableOfContents, rangeEffects }: PropsWithChildren<AppProps>) => {
   return (
     <StoreProvider>
-      <HistoryRouter history={history}>
+      <MemoryRouter>
         <AppWrapper config={config} tableOfContents={tableOfContents} rangeEffects={rangeEffects}>
           <Routes>
             {children}
           </Routes>
         </AppWrapper>
-      </HistoryRouter>
+      </MemoryRouter>
     </StoreProvider>
   );
 };

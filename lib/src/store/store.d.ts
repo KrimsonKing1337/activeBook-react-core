@@ -1,6 +1,5 @@
 import { type ReactReduxContextValue } from 'react-redux';
 export declare const store: import("@reduxjs/toolkit").EnhancedStore<{
-    router: import("redux-first-history").RouterState;
     main: import("./main/@types").State;
     config: import("./config/@types").State;
     volume: import("./volume/@types").State;
@@ -17,7 +16,6 @@ export declare const store: import("@reduxjs/toolkit").EnhancedStore<{
     counter: import("./counter/@types").State;
 }, import("redux").UnknownAction, import("@reduxjs/toolkit").Tuple<[import("redux").StoreEnhancer<{
     dispatch: import("redux-thunk").ThunkDispatch<{
-        router: import("redux-first-history").RouterState;
         main: import("./main/@types").State;
         config: import("./config/@types").State;
         volume: import("./volume/@types").State;
@@ -34,14 +32,10 @@ export declare const store: import("@reduxjs/toolkit").EnhancedStore<{
         counter: import("./counter/@types").State;
     }, undefined, import("redux").UnknownAction>;
 }>, import("redux").StoreEnhancer]>>;
-export declare const history: import("history").History & {
-    listenObject: boolean;
-};
 export type RootState = ReturnType<typeof store.getState>;
 export type StoreContext = ReactReduxContextValue<RootState> | null;
 export declare const storeContext: import("react").Context<StoreContext>;
 export declare const useStore: import("react-redux").UseStore<import("redux").Store<{
-    router: import("redux-first-history").RouterState;
     main: import("./main/@types").State;
     config: import("./config/@types").State;
     volume: import("./volume/@types").State;

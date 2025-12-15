@@ -8,10 +8,8 @@ import {
 } from 'react-redux';
 
 import { configureStore } from '@reduxjs/toolkit';
-import { createReduxHistoryContext } from 'redux-first-history';
-import createSagaMiddleware from 'redux-saga';
 
-import { createMemoryHistory } from 'history';
+import createSagaMiddleware from 'redux-saga';
 
 import { mainReducer, watchMainActions } from './main';
 import { configReducer, watchConfigActions } from './config';
@@ -31,14 +29,7 @@ import { counterReducer, watchCounterActions } from './counter';
 
 const sagaMiddleware = createSagaMiddleware();
 
-const reduxHistoryContextMiddleware = createReduxHistoryContext({
-  history: createMemoryHistory(),
-});
-
-const { createReduxHistory, routerMiddleware, routerReducer } = reduxHistoryContextMiddleware;
-
 const reducer = {
-  router: routerReducer,
   main: mainReducer,
   config: configReducer,
   volume: volumeReducer,
@@ -58,7 +49,6 @@ const reducer = {
 
 const middleware = [
   sagaMiddleware,
-  routerMiddleware,
 ];
 
 export const store = configureStore({
@@ -66,8 +56,6 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(middleware),
 });
-
-export const history = createReduxHistory(store);
 
 sagaMiddleware.run(watchConfigActions);
 sagaMiddleware.run(watchMainActions);

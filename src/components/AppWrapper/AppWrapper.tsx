@@ -2,10 +2,11 @@ import { type PropsWithChildren, useEffect } from 'react';
 
 import { Howler } from 'howler';
 import { setWasmUrl } from '@lottiefiles/dotlottie-react';
-
 import classNames from 'classnames';
 
 import type { Config, RangeEffects, TableOfContents } from '@types';
+
+import { store, useDispatch, useSelector } from 'store';
 
 import { volumeActions } from 'store/volume';
 import { initialState as volumeInitialState } from 'store/volume/slice';
@@ -19,20 +20,17 @@ import { audioBgEffectsSelectors } from 'store/effects/audio/audioBg';
 
 import { useEffectsInRange } from 'hooks/effects/range';
 import { useVibration } from 'hooks/effects/vibration';
+import { useGoToPage } from 'hooks/control/useGoToPage';
+
+import { Achievement } from 'components/Achievement';
 
 import { seenPages } from 'utils/localStorage/seenPages';
 import { achievements as achievementsUtils } from 'utils/localStorage/achievements';
 import { getInitValues } from 'utils/effects/achievements/utils';
 import { removeCssHover } from 'utils/touch/removeCssHover';
 import { flashlightInst } from 'utils/effects/flashlight';
-
-import { Achievement } from 'components/Achievement';
-
-import { useGoToPage } from 'hooks/control/useGoToPage';
 import { addKeyboardControl } from 'utils/control/keyboardControl';
 import { hideAddressBarInMobileDevices } from 'utils/mobile/hideAddressBarInMobileDevices';
-
-import { store, useDispatch, useSelector } from 'store';
 
 import { setMuteToAllVideos, startToPlayAllAudiosWithPlayOnLoad } from './utils';
 
