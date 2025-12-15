@@ -26,7 +26,8 @@ const compat = new FlatCompat({
 const ignores = [
   '**/*.js',
   'eslint.config.js',
-  'lib'
+  'lib',
+  'd.ts',
 ];
 
 const globIgnores = globalIgnores(ignores);

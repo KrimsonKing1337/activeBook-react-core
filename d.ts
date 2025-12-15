@@ -13,13 +13,14 @@ declare module '*.scss' {
 declare module '*.jpg';
 declare module '*.png';
 
-declare var process: {
-  env: {
+declare namespace NodeJS {
+  interface ProcessEnv {
     ENCRYPT_STORAGE_SECRET_KEY: string;
     PAGES: string;
     EASTER_EGGS: string;
     AUTHOR_COMMENTS: string;
+    mode: string;
   }
 }
 
-declare var isDemoMode: boolean;
+declare let isDemoMode: boolean;
