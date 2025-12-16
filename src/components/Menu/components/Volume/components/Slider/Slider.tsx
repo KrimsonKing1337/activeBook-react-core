@@ -7,7 +7,7 @@ const STEP = 1;
 const MIN = 0;
 const MAX = 100;
 
-import styles from './Slider.scss';
+import * as styles from './Slider.scss';
 
 type SliderProps = {
   value: number;

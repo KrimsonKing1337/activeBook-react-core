@@ -2,11 +2,12 @@ import { useState } from 'react';
 
 import classNames from 'classnames';
 
-import { Segment } from 'components';
-
 import { useVibration } from 'hooks/effects/vibration';
 
-import styles from './Segments.scss';
+import { Segment } from 'components';
+
+
+import * as styles from './Segments.scss';
 
 export const Segments = () => {
   const { vibrationOn, vibrationOff } = useVibration();

@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 
-import styles from './SideText.scss';
+import * as styles from './SideText.scss';
 
 export const SideText = ({ children }: PropsWithChildren<unknown>) => {
   const childrenAsArray = React.Children.toArray(children);

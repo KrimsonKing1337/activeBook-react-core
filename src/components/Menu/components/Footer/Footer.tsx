@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { useDispatch } from 'store';
 import { mainActions } from 'store/main';
 
-import styles from './Footer.scss';
+import * as styles from './Footer.scss';
 
 function getClassNames(className: string) {
   return classNames([

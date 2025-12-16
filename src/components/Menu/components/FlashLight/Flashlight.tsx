@@ -1,8 +1,5 @@
 import { useEffect } from 'react';
 
-import { Toggle } from 'components/Toggle';
-import { playAchievement } from 'components/Menu/utils';
-import { Spoiler } from 'components/Spoiler';
 
 import { useDispatch, useSelector } from 'store';
 import { configActions } from 'store/config';
@@ -10,9 +7,13 @@ import { mainSelectors } from 'store/main';
 
 import { useFlashlight } from 'hooks/effects/flashlight';
 
+import { Spoiler } from 'components/Spoiler';
+import { playAchievement } from 'components/Menu/utils';
+import { Toggle } from 'components/Toggle';
+
 import { flashlightInst } from 'utils/effects/flashlight';
 
-import styles from './Flashlight.scss';
+import * as styles from './Flashlight.scss';
 
 export const Flashlight = () => {
   const dispatch = useDispatch();

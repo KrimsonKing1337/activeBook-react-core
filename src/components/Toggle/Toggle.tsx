@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 
 import classNames from 'classnames';
+
 import { Label } from 'components/Label';
 
-import styles from './Toggle.scss';
+import * as styles from './Toggle.scss';
 
 type Func = () => void;
 

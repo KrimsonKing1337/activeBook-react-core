@@ -4,7 +4,7 @@ import { ThemeName } from '@types';
 import { play } from 'utils/effects/achievements';
 import { Flags } from 'utils/effects/achievements/utils';
 
-import styles from './Themes.scss';
+import * as styles from './Themes.scss';
 
 export function getThemeItemClassName(theme: ThemeName) {
   switch (theme) {

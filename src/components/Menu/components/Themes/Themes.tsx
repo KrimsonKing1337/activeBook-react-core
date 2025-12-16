@@ -14,7 +14,7 @@ import { getIsMobile } from 'utils/mobile/getIsMobile';
 
 import { getClassNames, playAchievement, themes } from './utils';
 
-import styles from './Themes.scss';
+import * as styles from './Themes.scss';
 
 const isMobile = getIsMobile();
 

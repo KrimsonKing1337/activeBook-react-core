@@ -2,17 +2,18 @@ import { useEffect } from 'react';
 
 import classNames from 'classnames';
 
-import { Header } from 'components/Header';
-import { Overflow } from 'components/Overflow';
 
 import { useDispatch, useSelector } from 'store';
 import { mainSelectors } from 'store/main';
 import { bookmarksActions, bookmarksSelectors } from 'store/bookmarks';
 
+import { Overflow } from 'components/Overflow';
+import { Header } from 'components/Header';
+
 import { Item } from './Item';
 import { useBookmarks } from './hooks';
 import { playAchievement } from './utils';
-import styles from './Bookmarks.scss';
+import * as styles from './Bookmarks.scss';
 
 const buttonAddClassNames = classNames([styles.button, styles.isAdd]);
 

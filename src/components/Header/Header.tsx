@@ -1,4 +1,4 @@
-import styles from './Header.scss';
+import * as styles from './Header.scss';
 
 export type HeaderProps = {
   label: string;

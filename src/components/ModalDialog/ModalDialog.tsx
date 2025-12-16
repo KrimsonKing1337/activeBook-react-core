@@ -5,7 +5,7 @@ import type { Interval, Timer } from '@types';
 import { type ModalProps, Modal } from 'components/Modal';
 import { Button } from 'components/Button';
 
-import styles from './ModalDialog.scss';
+import * as styles from './ModalDialog.scss';
 
 type Func = () => void;
 

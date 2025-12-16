@@ -4,11 +4,12 @@ import classNames from 'classnames';
 
 import { useSelector } from 'store';
 import { mainSelectors } from 'store/main';
+
 import { foundEasterEggs } from 'utils/localStorage/foundEasterEggs';
 import { Flags } from 'utils/effects/achievements/utils';
 import { play } from 'utils/effects/achievements';
 
-import styles from './EasterEgg.scss';
+import * as styles from './EasterEgg.scss';
 
 export type EasterEggProps = React.HTMLAttributes<HTMLSpanElement> & {
   id: string;

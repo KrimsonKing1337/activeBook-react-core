@@ -1,10 +1,11 @@
 import { nanoid } from 'nanoid';
 
-import { Img } from 'components/Img';
-
 import { UseBackgroundEffectImageOptions } from 'hooks/effects/background/@types';
 
-import styles from './Images.scss';
+import { Img } from 'components/Img';
+
+
+import * as styles from './Images.scss';
 
 export type ImagesProps = {
   images: UseBackgroundEffectImageOptions[]

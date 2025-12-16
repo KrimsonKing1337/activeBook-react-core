@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCompress, faCrop, faExpand, faTimes } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
 
-import styles from './Modal.scss';
+import * as styles from './Modal.scss';
 
 type Func = () => void;
 

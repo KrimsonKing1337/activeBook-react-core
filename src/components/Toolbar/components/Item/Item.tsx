@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react';
 
 import classNames from 'classnames';
 
-import styles from './Item.scss';
+import * as styles from './Item.scss';
 
 export type ItemProps = React.HTMLAttributes<HTMLImageElement> & {
   className?: string;

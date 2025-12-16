@@ -8,7 +8,7 @@ import { Slider } from './components/Slider';
 
 import { playAchievement } from './utils';
 
-import styles from './Volume.scss';
+import * as styles from './Volume.scss';
 
 export const Volume = () => {
   const dispatch = useDispatch();

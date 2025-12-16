@@ -1,15 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
 
-import { Header } from 'components/Header';
-import { Overflow } from 'components/Overflow';
 
 import { useDispatch, useSelector } from 'store';
 import { achievementsSelectors } from 'store/achievements';
 import { mainActions, mainSelectors } from 'store/main';
+
+import { Overflow } from 'components/Overflow';
+import { Header } from 'components/Header';
+
 import { FlagsWithoutHidden, hiddenAchievements, voc } from 'utils/effects/achievements/utils';
 
 import { Item, ItemProps } from './Item';
-import styles from './AchievementsProgress.scss';
+import * as styles from './AchievementsProgress.scss';
 
 type Items = ItemProps & {
   key: string;

@@ -1,4 +1,4 @@
-import styles from './Label.scss';
+import * as styles from './Label.scss';
 
 export type LabelProps = {
   label: string;

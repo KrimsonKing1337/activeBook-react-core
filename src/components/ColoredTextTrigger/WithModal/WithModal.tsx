@@ -5,7 +5,7 @@ import { Action } from 'components/ColoredTextTrigger/Action';
 import { AuthorComment } from 'components/ColoredTextTrigger/AuthorComment';
 import { EasterEgg } from 'components/ColoredTextTrigger/EasterEgg';
 
-import styles from './WithModal.scss';
+import * as styles from './WithModal.scss';
 
 export type TriggerType = 'action' | 'author' | 'egg';
 

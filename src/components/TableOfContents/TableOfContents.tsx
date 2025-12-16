@@ -7,7 +7,7 @@ import { Overflow, Header } from 'components';
 
 import { Item } from './Item';
 
-import styles from './TableOfContents.scss';
+import * as styles from './TableOfContents.scss';
 
 export const TableOfContents = () => {
   const dispatch = useDispatch();

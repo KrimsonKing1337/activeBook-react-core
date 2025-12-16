@@ -37,7 +37,7 @@ import { setMuteToAllVideos, startToPlayAllAudiosWithPlayOnLoad } from './utils'
 
 import 'styles/common.scss';
 
-import styles from './AppWrapper.scss';
+import * as styles from './AppWrapper.scss';
 
 export type AppWrapperProps = {
   config: Config;

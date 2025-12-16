@@ -1,6 +1,6 @@
 import { PropsWithChildren, useEffect, useRef, useState } from 'react';
 
-import styles from './Spoiler.scss';
+import * as styles from './Spoiler.scss';
 
 export type SpoilerProps = React.HTMLAttributes<HTMLDivElement> & {
   label?: string;

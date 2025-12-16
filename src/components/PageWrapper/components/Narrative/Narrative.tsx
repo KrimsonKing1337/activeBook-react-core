@@ -5,11 +5,12 @@ import Hammer from 'hammerjs';
 import { configSelectors } from 'store/config';
 import { fontEffectsSelectors } from 'store/effects/font';
 
-import { useGoToPage } from 'hooks/control/useGoToPage';
-
 import { useSelector } from 'store';
 
-import styles from './Narrative.scss';
+import { useGoToPage } from 'hooks/control/useGoToPage';
+
+
+import * as styles from './Narrative.scss';
 
 export const Narrative = ({ children }: PropsWithChildren) => {
   const { goNextPage, goPrevPage } = useGoToPage();

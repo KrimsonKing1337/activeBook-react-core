@@ -2,12 +2,13 @@ import { PropsWithChildren, useEffect, useRef } from 'react';
 
 import classNames from 'classnames';
 
-import { getNarrativeElement } from 'components/PageWrapper/components/Narrative/utils';
 
 import { useDispatch } from 'store';
 import { mainActions } from 'store/main';
 
-import styles from './Overflow.scss';
+import { getNarrativeElement } from 'components/PageWrapper/components/Narrative/utils';
+
+import * as styles from './Overflow.scss';
 
 export type OverflowProps = React.HTMLAttributes<HTMLDivElement> & PropsWithChildren & {
   isOpen: boolean;

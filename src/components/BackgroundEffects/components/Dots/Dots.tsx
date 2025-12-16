@@ -1,16 +1,18 @@
 import { useEffect, useState } from 'react';
 
-import { Flags } from 'utils/effects/achievements/utils';
-import { play } from 'utils/effects/achievements';
-import { achievements } from 'utils/localStorage/achievements';
-
 import { useSelector } from 'store';
 
 import { effectsSelectors } from 'store/effects/common';
 
+import { Flags } from 'utils/effects/achievements/utils';
+import { play } from 'utils/effects/achievements';
+import { achievements } from 'utils/localStorage/achievements';
+
+
+
 import { createDotsAsArray, getPlaceInLineByLocationStyles, orderDefaultState } from './utils';
 
-import styles from './Dots.scss';
+import * as styles from './Dots.scss';
 
 export const Dots = () => {
   const dotsIsActive = useSelector(effectsSelectors.dotsIsActive);

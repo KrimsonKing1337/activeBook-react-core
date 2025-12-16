@@ -2,6 +2,14 @@ import { PropsWithChildren, useEffect } from 'react';
 
 import classNames from 'classnames';
 
+import { mainSelectors } from 'store/main';
+
+import { effectsSelectors } from 'store/effects/common';
+
+import { segmentsActions } from 'store/segments';
+
+import { useDispatch, useSelector } from 'store';
+
 import { Toolbar } from 'components/Toolbar';
 import { Menu } from 'components/Menu';
 import { AchievementsProgress } from 'components/AchievementsProgress';
@@ -10,16 +18,12 @@ import { Bookmarks } from 'components/Bookmarks';
 import { SideEffects } from 'components/SideEffects';
 import { BackgroundEffects } from 'components/BackgroundEffects';
 
-import { mainSelectors } from 'store/main';
-import { effectsSelectors } from 'store/effects/common';
 
-import { segmentsActions } from 'store/segments';
 
-import { useDispatch, useSelector } from 'store';
 
 import { Narrative } from './components/Narrative';
 
-import styles from './PageWrapper.scss';
+import * as styles from './PageWrapper.scss';
 
 export type PageWrapperProps = {
   withoutToolbar?: boolean;

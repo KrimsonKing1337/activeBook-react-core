@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
-import styles from './SlideShow.scss';
+import * as styles from './SlideShow.scss';
 
 type SlideShowMode = 'modal' | null;
 

@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 
-import styles from './ExternalLink.scss';
+import * as styles from './ExternalLink.scss';
 
 export type ExternalLinkProps = {
   href: string;

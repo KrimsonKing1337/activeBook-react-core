@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react';
 
 import classNames from 'classnames';
 
-import styles from './Button.scss';
+import * as styles from './Button.scss';
 
 export type ButtonProps = React.HTMLAttributes<HTMLButtonElement> & {
   className?: string;

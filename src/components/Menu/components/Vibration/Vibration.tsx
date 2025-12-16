@@ -1,12 +1,14 @@
-import { Toggle } from 'components/Toggle';
-import { Spoiler } from 'components/Spoiler';
 
 import { useDispatch, useSelector } from 'store';
 import { configActions } from 'store/config';
 import { mainSelectors } from 'store/main';
+
+import { Spoiler } from 'components/Spoiler';
+import { Toggle } from 'components/Toggle';
+
 import { on as vibrationOn } from 'utils/effects/vibration';
 
-import styles from './Vibration.scss';
+import * as styles from './Vibration.scss';
 
 export const Vibration = () => {
   const dispatch = useDispatch();

@@ -2,7 +2,7 @@ import classNames from 'classnames';
 
 import { Color } from 'utils/effects/achievements/utils';
 
-import styles from './Item.scss';
+import * as styles from './Item.scss';
 
 export type ItemProps = {
   title: string;
