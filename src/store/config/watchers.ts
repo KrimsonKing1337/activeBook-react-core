@@ -33,13 +33,19 @@ export function* watchSetAll(action: PayloadAction<State>) {
   yield put(actions.setVibration(vibration));
   yield put(actions.setLineHeight(lineHeight));
 
-  yield call(() => setThemeCss(theme));
+  const themes: State['themes'] = yield select(selectors.themes);
+
+  console.log(themes);
+
+  yield call(() => setThemeCss(theme, themes));
 }
 
 export function* watchSetTheme(action: PayloadAction<State['theme']>) {
   const { payload } = action;
 
-  yield call(() => setThemeCss(payload));
+  const themes: State['themes'] = yield select(selectors.themes);
+
+  yield call(() => setThemeCss(payload, themes));
 
   yield call(saveInLocalStorage);
 }

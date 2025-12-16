@@ -1,21 +1,7 @@
-import { Theme } from '@types';
+import { ThemeName, ThemeOption } from '@types';
 
-import { setCssVariable } from './setCssVariable';
-
-type Option = {
-  main: string;
-  secondary: string;
-  hover: string;
-  bg: string;
-  'text-shadow-for-hover': string;
-  overflow: string;
-  [key: string]: any;
-};
-
-type Config = Record<Theme, Option>;
-
-export function setThemeCss(theme: Theme) {
-  const voc: Config = {
+export function getThemes(customThemes?: Record<string, ThemeOption>) {
+  const themes: Record<ThemeName | string, ThemeOption> = {
     dark: {
       main: '#a3a3a3',
       secondary: '#828282',
@@ -50,11 +36,13 @@ export function setThemeCss(theme: Theme) {
     },
   };
 
-  const colors = voc[theme];
+  if (customThemes) {
+    Object.entries(customThemes).forEach((themeCur) => {
+      const [name, theme] = themeCur;
 
-  Object.keys(colors).forEach((keyCur) => {
-    const valueCur = colors[keyCur];
+      themes[name] = theme;
+    });
+  }
 
-    setCssVariable(`--${keyCur}`, valueCur);
-  });
+  return themes;
 }

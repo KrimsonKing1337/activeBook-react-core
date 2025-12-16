@@ -40,7 +40,15 @@ export type RangeEffect = {
 };
 export type DotsRangeEffect = RangeEffect;
 export type RangeEffects = RangeEffect[];
-export type Theme = 'dark' | 'darkBlue' | 'orange' | 'black';
+export type ThemeName = 'dark' | 'darkBlue' | 'orange' | 'black';
+export type ThemeOption = {
+    main: string;
+    secondary: string;
+    hover: string;
+    bg: string;
+    'text-shadow-for-hover': string;
+    overflow: string;
+};
 export type HowlExtended = Howl & {
     _howls: Howl[];
 };
@@ -48,6 +56,7 @@ export type Config = {
     authorComments?: number;
     easterEggs?: number;
     pages: number;
-    defaultTheme: Theme;
+    defaultTheme: ThemeName;
+    customThemes?: Record<string, ThemeOption>;
 };
 export type TableOfContents = TableOfContentsItem[];

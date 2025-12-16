@@ -33,9 +33,9 @@ export class SlideShow extends React.Component<PropsWithChildren<SlideShowProp>,
   };
 
   private hammertime: HammerManager | null;
-  private readonly itemsWrapperRef: React.RefObject<HTMLDivElement>;
-  private readonly wrapperRef: React.RefObject<HTMLDivElement>;
-  private readonly slideShowRef: React.RefObject<HTMLDivElement>;
+  private readonly itemsWrapperRef: React.RefObject<HTMLDivElement | null>;
+  private readonly wrapperRef: React.RefObject<HTMLDivElement | null>;
+  private readonly slideShowRef: React.RefObject<HTMLDivElement | null>;
 
   childrenAsArray = React.Children.toArray(this.props.children);
 

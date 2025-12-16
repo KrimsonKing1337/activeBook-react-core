@@ -4,6 +4,7 @@ export declare const initialState: State;
 export declare const actions: import("@reduxjs/toolkit").CaseReducerActions<{
     setAll(_state: import("immer").WritableDraft<State>, action: PayloadAction<State>): State;
     setTheme(state: import("immer").WritableDraft<State>, action: PayloadAction<State["theme"]>): void;
+    setThemes(state: import("immer").WritableDraft<State>, action: PayloadAction<State["themes"]>): void;
     setWelcomeTour(state: import("immer").WritableDraft<State>, action: PayloadAction<State["welcomeTour"]>): void;
     setVibration(state: import("immer").WritableDraft<State>, action: PayloadAction<State["vibration"]>): void;
     setFlashlight(state: import("immer").WritableDraft<State>, action: PayloadAction<State["flashlight"]>): void;

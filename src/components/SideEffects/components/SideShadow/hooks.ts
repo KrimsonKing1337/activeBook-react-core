@@ -2,9 +2,10 @@ import { RefObject, useEffect } from 'react';
 
 import { useSelector } from 'store';
 import { sideShadowEffectSelectors } from 'store/effects/side/shadow';
+
 import { setCssVariable } from 'utils/styles/setCssVariable';
 
-export function useColorPolice(sideShadowRef: RefObject<HTMLDivElement>) {
+export function useColorPolice(sideShadowRef: RefObject<HTMLDivElement | null>) {
   const color = useSelector(sideShadowEffectSelectors.color);
 
   useEffect(() => {
@@ -28,7 +29,7 @@ export function useColorPolice(sideShadowRef: RefObject<HTMLDivElement>) {
   }, [color]);
 }
 
-export function useColorCarameldansen(sideShadowRef: RefObject<HTMLDivElement>) {
+export function useColorCarameldansen(sideShadowRef: RefObject<HTMLDivElement | null>) {
   const color = useSelector(sideShadowEffectSelectors.color);
 
   const colors = [

@@ -1,6 +1,7 @@
-import { Theme } from '../../@types.js';
+import type { ThemeName, ThemeOption } from '../../@types.js';
 export interface State {
-    theme: Theme;
+    theme: ThemeName | string;
+    themes: Record<ThemeName | string, ThemeOption>;
     welcomeTour: boolean;
     vibration: boolean;
     flashlight: boolean;

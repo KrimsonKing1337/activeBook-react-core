@@ -1,13 +1,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
-import type { Theme } from '@types';
+import type { ThemeName } from '@types';
+
+import { useDispatch, useSelector } from 'store';
+
+import { configActions, configSelectors } from 'store/config';
 
 import { Label } from 'components/Label';
 import { Spoiler } from 'components/Spoiler';
-
-import { useDispatch, useSelector } from 'store';
-import { configActions, configSelectors } from 'store/config';
 
 import { getIsMobile } from 'utils/mobile/getIsMobile';
 
@@ -21,7 +22,7 @@ export const Themes = () => {
   const dispatch = useDispatch();
   const activeTheme = useSelector(configSelectors.theme);
 
-  const clickHandler = (theme: Theme) => {
+  const clickHandler = (theme: ThemeName) => {
     dispatch(configActions.setTheme(theme));
 
     playAchievement();

@@ -1,7 +1,8 @@
-import { Theme } from '@types';
+import type { ThemeName, ThemeOption } from '@types';
 
 export interface State {
-  theme: Theme;
+  theme: ThemeName | string;
+  themes: Record<ThemeName | string, ThemeOption>;
   welcomeTour: boolean;
   vibration: boolean;
   flashlight: boolean;

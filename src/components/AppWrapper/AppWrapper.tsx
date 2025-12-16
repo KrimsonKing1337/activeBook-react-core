@@ -31,6 +31,7 @@ import { removeCssHover } from 'utils/touch/removeCssHover';
 import { flashlightInst } from 'utils/effects/flashlight';
 import { addKeyboardControl } from 'utils/control/keyboardControl';
 import { hideAddressBarInMobileDevices } from 'utils/mobile/hideAddressBarInMobileDevices';
+import { getThemes } from 'utils/styles/getThemes';
 
 import { setMuteToAllVideos, startToPlayAllAudiosWithPlayOnLoad } from './utils';
 
@@ -57,7 +58,9 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
 
   // применяю конфиг
   useEffect(() => {
-    const { pages, defaultTheme, easterEggs = 0, authorComments = 0 } = config;
+    const { pages, defaultTheme, customThemes, easterEggs = 0, authorComments = 0 } = config;
+
+    const themes = getThemes(customThemes);
 
     const configAsJson = localStorage.getItem('config');
 
@@ -66,6 +69,7 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
     dispatch(mainActions.setAuthorComments(authorComments));
 
     if (!configAsJson) {
+      dispatch(configActions.setThemes(themes));
       dispatch(configActions.setTheme(defaultTheme));
     }
   }, []);

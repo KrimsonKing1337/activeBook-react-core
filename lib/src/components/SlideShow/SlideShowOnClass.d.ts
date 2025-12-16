@@ -22,7 +22,7 @@ export declare class SlideShow extends React.Component<PropsWithChildren<SlideSh
     private readonly itemsWrapperRef;
     private readonly wrapperRef;
     private readonly slideShowRef;
-    childrenAsArray: (string | number | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal)[];
+    childrenAsArray: (string | number | bigint | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | Promise<string | number | bigint | boolean | React.ReactPortal | React.ReactElement<unknown, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | null | undefined>)[];
     constructor(props: SlideShowProp);
     componentDidMount(): void;
     componentWillUnmount(): void;

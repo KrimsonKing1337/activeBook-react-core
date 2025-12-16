@@ -4,6 +4,7 @@ import { State } from './@types';
 
 export const initialState: State = {
   theme: 'dark',
+  themes: {},
   welcomeTour: true,
   vibration: true,
   flashlight: true,
@@ -21,6 +22,9 @@ const slice = createSlice({
     },
     setTheme(state, action: PayloadAction<State['theme']>) {
       state.theme = action.payload;
+    },
+    setThemes(state, action: PayloadAction<State['themes']>) {
+      state.themes = action.payload;
     },
     setWelcomeTour(state, action: PayloadAction<State['welcomeTour']>) {
       state.welcomeTour = action.payload;
