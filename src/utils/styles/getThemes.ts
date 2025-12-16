@@ -1,7 +1,7 @@
-import { ThemeName, ThemeOption } from '@types';
+import { ThemeOptions } from '@types';
 
-export function getThemes(customThemes?: Record<string, ThemeOption>) {
-  const themes: Record<ThemeName | string, ThemeOption> = {
+export function getThemes(customThemes?: Record<string, ThemeOptions>) {
+  const defaultThemes: Record<string, ThemeOptions> = {
     dark: {
       main: '#a3a3a3',
       secondary: '#828282',
@@ -36,13 +36,8 @@ export function getThemes(customThemes?: Record<string, ThemeOption>) {
     },
   };
 
-  if (customThemes) {
-    Object.entries(customThemes).forEach((themeCur) => {
-      const [name, theme] = themeCur;
-
-      themes[name] = theme;
-    });
-  }
-
-  return themes;
+  return {
+    ...customThemes,
+    ...defaultThemes,
+  };
 }

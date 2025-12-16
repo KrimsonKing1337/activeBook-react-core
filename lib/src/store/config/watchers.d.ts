@@ -15,7 +15,7 @@ export declare function watchSetAll(action: PayloadAction<State>): Generator<imp
 }> | import("redux-saga/effects").PutEffect<{
     payload: number;
     type: "@config/setLineHeight";
-}>, void, Record<string, import("../../@types").ThemeOption>>;
-export declare function watchSetTheme(action: PayloadAction<State['theme']>): Generator<import("redux-saga/effects").CallEffect<void> | import("redux-saga/effects").SelectEffect, void, Record<string, import("../../@types").ThemeOption>>;
+}>, void, Record<string, import("../../@types").ThemeOptions>>;
+export declare function watchSetTheme(action: PayloadAction<State['theme']>): Generator<import("redux-saga/effects").CallEffect<void> | import("redux-saga/effects").SelectEffect, void, Record<string, import("../../@types").ThemeOptions>>;
 export declare function watchSetEtc(): Generator<import("redux-saga/effects").CallEffect<void>, void, unknown>;
 export declare function watchActions(): Generator<import("redux-saga/effects").ForkEffect<never>, void, unknown>;

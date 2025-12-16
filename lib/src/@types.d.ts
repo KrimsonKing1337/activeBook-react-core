@@ -40,8 +40,7 @@ export type RangeEffect = {
 };
 export type DotsRangeEffect = RangeEffect;
 export type RangeEffects = RangeEffect[];
-export type ThemeName = 'dark' | 'darkBlue' | 'orange' | 'black';
-export type ThemeOption = {
+export type ThemeOptions = {
     main: string;
     secondary: string;
     hover: string;
@@ -56,7 +55,7 @@ export type Config = {
     authorComments?: number;
     easterEggs?: number;
     pages: number;
-    defaultTheme: ThemeName;
-    customThemes?: Record<string, ThemeOption>;
+    defaultTheme: string;
+    customThemes?: Record<string, ThemeOptions>;
 };
 export type TableOfContents = TableOfContentsItem[];

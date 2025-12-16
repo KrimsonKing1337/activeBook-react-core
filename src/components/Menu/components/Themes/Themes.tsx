@@ -1,8 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
-import type { ThemeName } from '@types';
-
 import { useDispatch, useSelector } from 'store';
 
 import { configActions, configSelectors } from 'store/config';
@@ -12,7 +10,7 @@ import { Spoiler } from 'components/Spoiler';
 
 import { getIsMobile } from 'utils/mobile/getIsMobile';
 
-import { getClassNames, playAchievement, themes } from './utils';
+import { playAchievement } from './utils';
 
 import * as styles from './Themes.scss';
 
@@ -20,9 +18,11 @@ const isMobile = getIsMobile();
 
 export const Themes = () => {
   const dispatch = useDispatch();
-  const activeTheme = useSelector(configSelectors.theme);
 
-  const clickHandler = (theme: ThemeName) => {
+  const activeTheme = useSelector(configSelectors.theme);
+  const themes = useSelector(configSelectors.themes);
+
+  const clickHandler = (theme: string) => {
     dispatch(configActions.setTheme(theme));
 
     playAchievement();
@@ -33,11 +33,26 @@ export const Themes = () => {
       <Label label="Оформление" />
 
       <div className={styles.themesItemsWrapper}>
-        {themes.map((themeCur) => (
-          <div key={themeCur} className={getClassNames(themeCur)} onClick={() => clickHandler(themeCur)}>
-            {activeTheme === themeCur && <FontAwesomeIcon icon={faCheck} />}
-          </div>
-        ))}
+        {Object.entries(themes).map(([themeName, themeOptions]) => {
+          const { main, bg } = themeOptions;
+
+          const style = {
+            backgroundColor: bg,
+            color: main,
+            borderColor: main,
+          };
+
+          return (
+            <div
+              key={themeName}
+              style={style}
+              className={styles.themesItem}
+              onClick={() => clickHandler(themeName)}
+            >
+              {activeTheme === themeName && <FontAwesomeIcon icon={faCheck} />}
+            </div>
+          );
+        })}
       </div>
 
       {isMobile && (

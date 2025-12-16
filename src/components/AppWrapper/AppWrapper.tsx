@@ -10,7 +10,7 @@ import { store, useDispatch, useSelector } from 'store';
 
 import { volumeActions } from 'store/volume';
 import { initialState as volumeInitialState } from 'store/volume/slice';
-import { configActions } from 'store/config';
+import { configActions, configSelectors } from 'store/config';
 import { initialState as configInitialState } from 'store/config/slice';
 import { mainActions, mainSelectors } from 'store/main';
 import { achievementsActions } from 'store/achievements';
@@ -53,6 +53,7 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
   const page = useSelector(mainSelectors.page);
   const audioInstances = useSelector(audioEffectsSelectors.audioInstances);
   const audioInstancesBg = useSelector(audioBgEffectsSelectors.audioInstances);
+  const themes = useSelector(configSelectors.themes);
 
   const { vibrationOff } = useVibration();
 
@@ -60,16 +61,17 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
   useEffect(() => {
     const { pages, defaultTheme, customThemes, easterEggs = 0, authorComments = 0 } = config;
 
+    const configAsJson = localStorage.getItem('config');
+
     const themes = getThemes(customThemes);
 
-    const configAsJson = localStorage.getItem('config');
+    dispatch(configActions.setThemes(themes));
 
     dispatch(mainActions.setPages(pages));
     dispatch(mainActions.setEasterEggs(easterEggs));
     dispatch(mainActions.setAuthorComments(authorComments));
 
     if (!configAsJson) {
-      dispatch(configActions.setThemes(themes));
       dispatch(configActions.setTheme(defaultTheme));
     }
   }, []);
@@ -115,15 +117,24 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
   }, []);
 
   useEffect(() => {
+    if (!Object.keys(themes).length) {
+      return;
+    }
+
     const configAsJson = localStorage.getItem('config');
     const volumeAsJson = localStorage.getItem('volume');
 
     const config = configAsJson ? JSON.parse(configAsJson) : configInitialState;
     const volume = volumeAsJson ? JSON.parse(volumeAsJson) : volumeInitialState;
 
-    dispatch(configActions.setAll(config));
+    const configForSetting = {
+      ...config,
+      themes,
+    };
+
+    dispatch(configActions.setAll(configForSetting));
     dispatch(volumeActions.setAll(volume));
-  }, []);
+  }, [themes]);
 
   useEffect(() => {
     let achievements = achievementsUtils.getAll();

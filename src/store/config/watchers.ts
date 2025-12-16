@@ -10,7 +10,16 @@ import { selectors } from './selectors';
 function* saveInLocalStorage() {
   const config: State = yield select(selectors.all);
 
-  const configAsJson = JSON.stringify(config);
+  // themes в localstorage не сохраняем
+  const configToSave = {
+    ...config,
+    themes: undefined,
+  };
+
+  delete configToSave.themes;
+
+
+  const configAsJson = JSON.stringify(configToSave);
 
   localStorage.setItem('config', configAsJson);
 }
@@ -34,8 +43,6 @@ export function* watchSetAll(action: PayloadAction<State>) {
   yield put(actions.setLineHeight(lineHeight));
 
   const themes: State['themes'] = yield select(selectors.themes);
-
-  console.log(themes);
 
   yield call(() => setThemeCss(theme, themes));
 }
