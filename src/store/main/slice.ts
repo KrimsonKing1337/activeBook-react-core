@@ -6,9 +6,8 @@ export const initialState: State = {
   route: '/',
   page: 0,
   pages: 0,
+  allPagesSeen: false,
   tableOfContents: [],
-  easterEggs: 0,
-  authorComments: 0,
   menuActiveState: null,
   isLoading: false,
   isVibrationAvailable: null,
@@ -20,18 +19,14 @@ const slice = createSlice({
   name: '@main',
   initialState,
   reducers: {
-    setEasterEggs(state, action: PayloadAction<State['easterEggs']>) {
-      state.easterEggs = action.payload;
-    },
-    setAuthorComments(state, action: PayloadAction<State['authorComments']>) {
-      state.authorComments = action.payload;
-    },
-
     setPages(state, action: PayloadAction<State['pages']>) {
       state.pages = action.payload;
     },
     setTableOfContents(state, action: PayloadAction<State['tableOfContents']>) {
       state.tableOfContents = action.payload;
+    },
+    setAllPagesSeen(state, action: PayloadAction<State['allPagesSeen']>) {
+      state.allPagesSeen = action.payload;
     },
 
     setPage(state, action: PayloadAction<State['page']>) {

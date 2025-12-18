@@ -8,9 +8,8 @@ export interface State {
   route: string;
   page: number;
   pages: number;
+  allPagesSeen: boolean;
   tableOfContents: TableOfContents;
-  easterEggs: number;
-  authorComments: number;
   menuActiveState: MenuActiveState;
   isLoading: boolean;
   isVibrationAvailable: boolean | null;

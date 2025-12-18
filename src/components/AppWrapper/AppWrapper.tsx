@@ -14,7 +14,6 @@ import { initialState as volumeInitialState } from 'store/volume/slice';
 import { configActions, configSelectors } from 'store/config';
 import { initialState as configInitialState } from 'store/config/slice';
 import { mainActions, mainSelectors } from 'store/main';
-import { achievementsActions, achievementsSelectors } from 'store/achievements';
 import { effectsActions } from 'store/effects/common';
 import { audioEffectsSelectors } from 'store/effects/audio/audio';
 import { audioBgEffectsSelectors } from 'store/effects/audio/audioBg';
@@ -26,8 +25,6 @@ import { useGoToPage } from 'hooks/control/useGoToPage';
 import { Achievement } from 'components/Achievement';
 
 import { seenPages } from 'utils/localStorage/seenPages';
-import { achievements as achievementsUtils } from 'utils/localStorage/achievements';
-import { Flags, getInitValues } from 'utils/effects/achievements/utils';
 import { removeCssHover } from 'utils/touch/removeCssHover';
 import { flashlightInst } from 'utils/effects/flashlight';
 import { addKeyboardControl } from 'utils/control/keyboardControl';
@@ -48,7 +45,9 @@ export type AppWrapperProps = {
 
 export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: PropsWithChildren<AppWrapperProps>) => {
   const dispatch = useDispatch();
+
   const { goPrevPage, goNextPage } = useGoToPage();
+  const { vibrationOff } = useVibration();
 
   const isLoading = useSelector(mainSelectors.isLoading);
   const page = useSelector(mainSelectors.page);
@@ -56,13 +55,10 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
   const audioInstances = useSelector(audioEffectsSelectors.audioInstances);
   const audioInstancesBg = useSelector(audioBgEffectsSelectors.audioInstances);
   const themes = useSelector(configSelectors.themes);
-  const achievements = useSelector(achievementsSelectors.achievements);
-
-  const { vibrationOff } = useVibration();
 
   // применяю конфиг
   useEffect(() => {
-    const { pages, defaultTheme, customThemes, easterEggs = 0, authorComments = 0 } = config;
+    const { pages, defaultTheme, customThemes } = config;
 
     const configAsJson = localStorage.getItem('config');
 
@@ -71,8 +67,6 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
     dispatch(configActions.setThemes(themes));
 
     dispatch(mainActions.setPages(pages));
-    dispatch(mainActions.setEasterEggs(easterEggs));
-    dispatch(mainActions.setAuthorComments(authorComments));
 
     if (!configAsJson) {
       dispatch(configActions.setTheme(defaultTheme));
@@ -138,18 +132,6 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
     dispatch(configActions.setAll(configForSetting));
     dispatch(volumeActions.setAll(volume));
   }, [themes]);
-
-  useEffect(() => {
-    let achievements = achievementsUtils.getAll();
-
-    if (!achievements) {
-      achievementsUtils.init();
-
-      achievements = getInitValues();
-    }
-
-    dispatch(achievementsActions.setAll(achievements));
-  }, []);
 
   useEffect(() => {
     /*
@@ -221,14 +203,10 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
   useEffect(() => {
     seenPages.set(page);
 
-    if (page === pages && !achievements?.allPagesSeen) {
+    if (page === pages && !mainSelectors.allPagesSeen) {
       toast.success('Все страницы прочитаны! Теперь вам доступны комментарии автора', {
         onOpen: () => {
-          dispatch(achievementsActions.setAchievement({
-            name: Flags.allPagesSeen,
-            value: true,
-          }));
-
+          dispatch(mainActions.setAllPagesSeen(true));
           dispatch(configActions.setAuthorComments(true));
         },
       });

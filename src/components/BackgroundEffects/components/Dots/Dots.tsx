@@ -4,12 +4,6 @@ import { useSelector } from 'store';
 
 import { effectsSelectors } from 'store/effects/common';
 
-import { Flags } from 'utils/effects/achievements/utils';
-import { play } from 'utils/effects/achievements';
-import { achievements } from 'utils/localStorage/achievements';
-
-
-
 import { createDotsAsArray, getPlaceInLineByLocationStyles, orderDefaultState } from './utils';
 
 import * as styles from './Dots.scss';
@@ -20,12 +14,6 @@ export const Dots = () => {
   const [order, setOrder] = useState<Record<number, number>>(orderDefaultState);
 
   useEffect(() => {
-    const wasFound = achievements.get(Flags.superEasterEggFound);
-
-    if (wasFound) {
-      return;
-    }
-
     const setValue = (index: number) => {
       const firstUnclicked = Object.values(order).indexOf(0);
 
@@ -105,12 +93,6 @@ export const Dots = () => {
         return;
       }
     }
-
-    play({
-      id: Flags.superEasterEggFound,
-      text: 'Суперсекрет! Не могу поверить, что ты это нашёл/нашла!',
-      type: 'platinum',
-    });
 
     return () => {
       setOrder(orderDefaultState);
