@@ -3,6 +3,7 @@ import { type PropsWithChildren, useEffect } from 'react';
 import { Howler } from 'howler';
 import { setWasmUrl } from '@lottiefiles/dotlottie-react';
 import classNames from 'classnames';
+import { toast } from 'react-toastify';
 
 import type { Config, RangeEffects, TableOfContents } from '@types';
 
@@ -13,7 +14,7 @@ import { initialState as volumeInitialState } from 'store/volume/slice';
 import { configActions, configSelectors } from 'store/config';
 import { initialState as configInitialState } from 'store/config/slice';
 import { mainActions, mainSelectors } from 'store/main';
-import { achievementsActions } from 'store/achievements';
+import { achievementsActions, achievementsSelectors } from 'store/achievements';
 import { effectsActions } from 'store/effects/common';
 import { audioEffectsSelectors } from 'store/effects/audio/audio';
 import { audioBgEffectsSelectors } from 'store/effects/audio/audioBg';
@@ -26,7 +27,7 @@ import { Achievement } from 'components/Achievement';
 
 import { seenPages } from 'utils/localStorage/seenPages';
 import { achievements as achievementsUtils } from 'utils/localStorage/achievements';
-import { getInitValues } from 'utils/effects/achievements/utils';
+import { Flags, getInitValues } from 'utils/effects/achievements/utils';
 import { removeCssHover } from 'utils/touch/removeCssHover';
 import { flashlightInst } from 'utils/effects/flashlight';
 import { addKeyboardControl } from 'utils/control/keyboardControl';
@@ -51,9 +52,11 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
 
   const isLoading = useSelector(mainSelectors.isLoading);
   const page = useSelector(mainSelectors.page);
+  const pages = useSelector(mainSelectors.pages);
   const audioInstances = useSelector(audioEffectsSelectors.audioInstances);
   const audioInstancesBg = useSelector(audioBgEffectsSelectors.audioInstances);
   const themes = useSelector(configSelectors.themes);
+  const achievements = useSelector(achievementsSelectors.achievements);
 
   const { vibrationOff } = useVibration();
 
@@ -218,17 +221,18 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
   useEffect(() => {
     seenPages.set(page);
 
-    // пока отключаю ачивки
-    /*const seenPagesFromLocalStorage = seenPages.get();
-    const seenPagesLength = Object.keys(seenPagesFromLocalStorage).length;
+    if (page === pages && !achievements?.allPagesSeen) {
+      toast.success('Все страницы прочитаны! Теперь вам доступны комментарии автора', {
+        onOpen: () => {
+          dispatch(achievementsActions.setAchievement({
+            name: Flags.allPagesSeen,
+            value: true,
+          }));
 
-    if (seenPagesLength === pages) {
-      achievementPlay({
-        id: AchievementsFlags.allPagesSeen,
-        text: 'Все страницы прочитаны! Теперь можно включить авторские комментарии в настройках!',
-        type: 'gold',
+          dispatch(configActions.setAuthorComments(true));
+        },
       });
-    }*/
+    }
   }, [page]);
 
   useEffect(() => {
