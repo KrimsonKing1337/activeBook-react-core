@@ -31,7 +31,7 @@ import { addKeyboardControl } from 'utils/control/keyboardControl';
 import { hideAddressBarInMobileDevices } from 'utils/mobile/hideAddressBarInMobileDevices';
 import { getThemes } from 'utils/styles/getThemes';
 
-import { setMuteToAllVideos, startToPlayAllAudiosWithPlayOnLoad } from './utils';
+import { setMuteToAllVideos, startToPlayAllAudiosWithPlayOnLoad, startToPlayAllVideosWithPlayOnLoad } from './utils';
 
 import 'styles/common.scss';
 
@@ -189,15 +189,7 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
       return;
     }
 
-    const videos = Array.from(document.querySelectorAll('video'));
-
-    videos.forEach((videoCur) => {
-      const autoPlay = videoCur.getAttribute('data-autoPlay');
-
-      if (autoPlay === 'true') {
-        videoCur.play();
-      }
-    });
+    startToPlayAllVideosWithPlayOnLoad();
   }, [page, isLoading]);
 
   useEffect(() => {

@@ -27,3 +27,15 @@ export function startToPlayAllAudiosWithPlayOnLoad(audioInstances: HowlInstances
     audio.play();
   });
 }
+
+export function startToPlayAllVideosWithPlayOnLoad() {
+  const videos = Array.from(document.querySelectorAll('video'));
+
+  videos.forEach((videoCur) => {
+    const autoPlay = videoCur.getAttribute('data-autoPlay');
+
+    if (autoPlay === 'true') {
+      videoCur.play();
+    }
+  });
+}
