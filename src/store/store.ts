@@ -22,7 +22,6 @@ import { audioBgEffectsReducer, watchAudioBgEffectsActions } from './effects/aud
 import { sideShadowReducer, watchSideShadowActions } from './effects/side/shadow';
 import { sideTextReducer, watchSideTextActions } from './effects/side/text';
 import { bookmarksReducer, watchBookmarksActions } from './bookmarks';
-import { achievementsReducer } from './achievements';
 import { segmentsReducer, watchSegmentsActions } from './segments';
 
 import { counterReducer, watchCounterActions } from './counter';
@@ -41,7 +40,6 @@ const reducer = {
   backgroundEffects: backgroundEffectsReducer,
   fontEffects: fontEffectsReducer,
   bookmarks: bookmarksReducer,
-  achievements: achievementsReducer,
   segments: segmentsReducer,
 
   counter: counterReducer,

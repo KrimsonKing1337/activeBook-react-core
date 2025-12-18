@@ -1,12 +1,10 @@
 import { useEffect } from 'react';
 
+import { useDispatch, useSelector } from 'store';
+import { mainActions, mainSelectors } from 'store/main';
+
 import { Overflow } from 'components/Overflow';
 import { Header } from 'components/Header';
-
-import { useDispatch, useSelector } from 'store';
-
-import { mainActions, mainSelectors } from 'store/main';
-import { achievementsSelectors } from 'store/achievements';
 
 import {
   Volume,
@@ -23,9 +21,7 @@ export const Menu = () => {
   const dispatch = useDispatch();
 
   const menuActiveState = useSelector(mainSelectors.menuActiveState);
-  const achievements = useSelector(achievementsSelectors.achievements);
-
-  const allPagesSeen = achievements?.allPagesSeen;
+  const allPagesSeen = useSelector(mainSelectors.allPagesSeen);
 
   const isOpen = menuActiveState === 'menu';
 

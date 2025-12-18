@@ -22,8 +22,6 @@ import { useEffectsInRange } from 'hooks/effects/range';
 import { useVibration } from 'hooks/effects/vibration';
 import { useGoToPage } from 'hooks/control/useGoToPage';
 
-import { Achievement } from 'components/Achievement';
-
 import { seenPages } from 'utils/localStorage/seenPages';
 import { removeCssHover } from 'utils/touch/removeCssHover';
 import { flashlightInst } from 'utils/effects/flashlight';
@@ -233,8 +231,6 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
       <div className={appWrapperClassNames}>
         {children}
       </div>
-
-      <Achievement />
     </>
   );
 };

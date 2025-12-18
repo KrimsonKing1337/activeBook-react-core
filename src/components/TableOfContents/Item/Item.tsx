@@ -1,11 +1,7 @@
+import { useSelector } from 'store';
 import { mainSelectors } from 'store/main';
 
-import { useSelector } from 'store';
-
 import { useGoToPage } from 'hooks/control/useGoToPage';
-
-
-import { playAchievement } from './utils';
 
 import * as styles from './Item.scss';
 
@@ -24,8 +20,6 @@ export const Item = ({ title, subtitle = '', pageNumber }: ItemProps) => {
     const n = pageNumber > pages ? pages : pageNumber;
 
     goToPage(n);
-
-    playAchievement();
   };
 
   return (

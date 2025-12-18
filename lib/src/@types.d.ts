@@ -1,7 +1,7 @@
 import { Howl } from 'howler';
-import type { BackgroundEffect } from './hooks/effects/background/@types';
-import type { ItemProps as TableOfContentsItem } from './components/TableOfContents/Item';
-import { HowlWrapper } from './utils/effects/audio/HowlWrapper';
+import type { BackgroundEffect } from 'hooks/effects/background/@types';
+import type { ItemProps as TableOfContentsItem } from 'components/TableOfContents/Item';
+import { HowlWrapper } from 'utils/effects/audio/HowlWrapper';
 export type Timer = ReturnType<typeof setTimeout> | null;
 export type Interval = ReturnType<typeof setInterval> | null;
 export type HowlInst = HowlWrapper | null;

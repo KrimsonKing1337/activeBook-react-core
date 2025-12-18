@@ -11,7 +11,7 @@ export declare const store: import("@reduxjs/toolkit").EnhancedStore<{
     backgroundEffects: import("./effects/background/@types").State;
     fontEffects: import("./effects/font/@types").State;
     bookmarks: import("./bookmarks/@types").State;
-    achievements: import("./achievements/@types").State;
+    achievements: unknown;
     segments: import("./segments/@types").State;
     counter: import("./counter/@types").State;
 }, import("redux").UnknownAction, import("@reduxjs/toolkit").Tuple<[import("redux").StoreEnhancer<{
@@ -27,7 +27,7 @@ export declare const store: import("@reduxjs/toolkit").EnhancedStore<{
         backgroundEffects: import("./effects/background/@types").State;
         fontEffects: import("./effects/font/@types").State;
         bookmarks: import("./bookmarks/@types").State;
-        achievements: import("./achievements/@types").State;
+        achievements: unknown;
         segments: import("./segments/@types").State;
         counter: import("./counter/@types").State;
     }, undefined, import("redux").UnknownAction>;
@@ -47,7 +47,7 @@ export declare const useStore: import("react-redux").UseStore<import("redux").St
     backgroundEffects: import("./effects/background/@types").State;
     fontEffects: import("./effects/font/@types").State;
     bookmarks: import("./bookmarks/@types").State;
-    achievements: import("./achievements/@types").State;
+    achievements: unknown;
     segments: import("./segments/@types").State;
     counter: import("./counter/@types").State;
 }, import("redux").UnknownAction, unknown>>;

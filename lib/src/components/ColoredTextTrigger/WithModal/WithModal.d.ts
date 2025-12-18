@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react';
-import { ModalProps } from '../../Modal';
+import { ModalProps } from 'components/Modal';
 export type TriggerType = 'action' | 'author' | 'egg';
 export type ModalWithVideoEasterEggProps = {
     mode?: ModalProps['mode'];

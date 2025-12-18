@@ -1,6 +1,6 @@
 import { type PropsWithChildren } from 'react';
-import type { Config, RangeEffects, TableOfContents } from '../../@types.js';
-import '../../styles/common.scss';
+import type { Config, RangeEffects, TableOfContents } from '@types';
+import 'styles/common.scss';
 export type AppWrapperProps = {
     config: Config;
     tableOfContents: TableOfContents;

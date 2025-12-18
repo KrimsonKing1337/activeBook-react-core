@@ -1,5 +1,5 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import type { HowlInst, HowlInstances } from '../../../../@types.js';
+import type { HowlInst, HowlInstances } from '@types';
 import type { State } from './@types';
 export declare const initialState: State;
 export declare const actions: import("@reduxjs/toolkit").CaseReducerActions<{

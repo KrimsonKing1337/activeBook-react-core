@@ -1,4 +1,4 @@
-import { Color } from '../../../utils/effects/achievements/utils';
+import { Color } from 'utils/effects/achievements/utils';
 export type ItemProps = {
     title: string;
     status: boolean;

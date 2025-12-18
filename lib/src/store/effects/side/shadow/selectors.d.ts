@@ -1,4 +1,4 @@
-import { RootState } from '../../../index';
+import { RootState } from 'store/index';
 export declare const selectors: {
     isActive: (state: RootState) => boolean;
     color: (state: RootState) => string;

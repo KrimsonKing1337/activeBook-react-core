@@ -12,7 +12,6 @@ import { Header } from 'components/Header';
 
 import { Item } from './Item';
 import { useBookmarks } from './hooks';
-import { playAchievement } from './utils';
 import * as styles from './Bookmarks.scss';
 
 const buttonAddClassNames = classNames([styles.button, styles.isAdd]);
@@ -46,8 +45,6 @@ export const Bookmarks = () => {
 
   const addButtonClickHandler = () => {
     setBookmarks([...bookmarks, page]);
-
-    playAchievement();
   };
 
   const deleteHandler = (bookmark: number) => {

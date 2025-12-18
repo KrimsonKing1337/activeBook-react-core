@@ -1,2 +1,2 @@
-import type { RangeEffects } from '../../../@types.js';
+import type { RangeEffects } from '@types';
 export declare function useEffectsInRange(effects: RangeEffects): void;

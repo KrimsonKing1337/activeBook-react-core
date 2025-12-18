@@ -1,5 +1,5 @@
 import { type PayloadAction } from '@reduxjs/toolkit';
-import type { BackgroundEffect } from '../../../hooks/effects/background/@types';
+import type { BackgroundEffect } from 'hooks/effects/background/@types';
 import type { BackgroundEffects, State } from './@types';
 export declare const initialState: State;
 export declare const actions: import("@reduxjs/toolkit").CaseReducerActions<{

@@ -1,4 +1,4 @@
-import type { BackgroundEffectVideoOptions } from '../../../../hooks/effects/background/@types';
+import type { BackgroundEffectVideoOptions } from 'hooks/effects/background/@types';
 export type VideosProps = {
     videos: BackgroundEffectVideoOptions[];
 };

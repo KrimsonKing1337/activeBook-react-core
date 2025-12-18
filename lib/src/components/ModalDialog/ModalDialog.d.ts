@@ -1,5 +1,5 @@
 import { type PropsWithChildren } from 'react';
-import { type ModalProps } from '../Modal';
+import { type ModalProps } from 'components/Modal';
 type Func = () => void;
 export type ModalDialogProps = ModalProps & {
     cantCloseIn?: number;

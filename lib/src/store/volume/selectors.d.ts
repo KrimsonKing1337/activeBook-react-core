@@ -1,4 +1,4 @@
-import { RootState } from '..';
+import { RootState } from 'store';
 export declare const selectors: {
     all: (state: RootState) => import("./@types").State;
     global: (state: RootState) => number;

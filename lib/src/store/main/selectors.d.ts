@@ -1,10 +1,9 @@
-import type { RootState } from '..';
+import type { RootState } from 'store';
 export declare const selectors: {
     page: (state: RootState) => number;
     pages: (state: RootState) => number;
+    allPagesSeen: (state: RootState) => boolean;
     tableOfContents: (state: RootState) => import("../../@types").TableOfContents;
-    easterEggs: (state: RootState) => number;
-    authorComments: (state: RootState) => number;
     route: (state: RootState) => string;
     menuActiveState: (state: RootState) => import("./@types").MenuActiveState;
     isLoading: (state: RootState) => boolean;

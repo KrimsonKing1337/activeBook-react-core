@@ -1,5 +1,5 @@
 import { Howl, type HowlOptions } from 'howler';
-import type { AudioType, Timer } from '../../../@types.js';
+import type { AudioType, Timer } from '@types';
 export type HowlWrapperOptions = {
     id: string;
     page?: number;

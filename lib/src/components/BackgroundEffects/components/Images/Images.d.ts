@@ -1,4 +1,4 @@
-import { UseBackgroundEffectImageOptions } from '../../../../hooks/effects/background/@types';
+import { UseBackgroundEffectImageOptions } from 'hooks/effects/background/@types';
 export type ImagesProps = {
     images: UseBackgroundEffectImageOptions[];
 };

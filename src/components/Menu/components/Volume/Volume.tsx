@@ -1,12 +1,9 @@
-
 import { useDispatch, useSelector } from 'store';
 import { volumeActions, volumeSelectors } from 'store/volume';
 
 import { Label } from 'components/Label';
 
 import { Slider } from './components/Slider';
-
-import { playAchievement } from './utils';
 
 import * as styles from './Volume.scss';
 
@@ -21,8 +18,6 @@ export const Volume = () => {
   const videosVolume = useSelector(volumeSelectors.videos);
 
   const afterChangeHandler = () => {
-    playAchievement();
-
     // сохраняем значения в localstorage
     const volumeAsJson = JSON.stringify(allVolume);
 

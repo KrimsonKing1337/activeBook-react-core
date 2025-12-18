@@ -10,8 +10,6 @@ import { Spoiler } from 'components/Spoiler';
 
 import { getIsMobile } from 'utils/mobile/getIsMobile';
 
-import { playAchievement } from './utils';
-
 import * as styles from './Themes.scss';
 
 const isMobile = getIsMobile();
@@ -24,8 +22,6 @@ export const Themes = () => {
 
   const clickHandler = (theme: string) => {
     dispatch(configActions.setTheme(theme));
-
-    playAchievement();
   };
 
   return (
