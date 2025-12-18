@@ -1,8 +1,6 @@
 export * from './Checking';
 export * from './Counter';
 
-export * from './Achievement';
-export * from './AchievementsProgress';
 export * from './App';
 export * from './AppWrapper';
 export * from './BackgroundEffects';

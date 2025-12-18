@@ -1,1 +1,0 @@
-export declare const WelcomeTour: () => import("react/jsx-runtime").JSX.Element;

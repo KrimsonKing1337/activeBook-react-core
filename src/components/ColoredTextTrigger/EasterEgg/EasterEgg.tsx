@@ -2,12 +2,7 @@ import { PropsWithChildren } from 'react';
 
 import classNames from 'classnames';
 
-import { useSelector } from 'store';
-import { mainSelectors } from 'store/main';
-
 import { foundEasterEggs } from 'utils/localStorage/foundEasterEggs';
-import { Flags } from 'utils/effects/achievements/utils';
-import { play } from 'utils/effects/achievements';
 
 import * as styles from './EasterEgg.scss';
 
@@ -25,21 +20,8 @@ export const EasterEgg = ({
 
   ...etc
 }: PropsWithChildren<EasterEggProps>) => {
-  const easterEggsLength = useSelector(mainSelectors.easterEggs);
-
   const clickHandler = () => {
     foundEasterEggs.set(id);
-
-    const foundEasterEggsFromLocalStorage = foundEasterEggs.get();
-    const foundEasterEggsLength = Object.keys(foundEasterEggsFromLocalStorage).length;
-
-    if (foundEasterEggsLength === easterEggsLength) {
-      play({
-        id: Flags.allEasterEggsFound,
-        text: 'Все пасхалки найдены! Невероятно!',
-        type: 'gold',
-      });
-    }
 
     onClick();
   };

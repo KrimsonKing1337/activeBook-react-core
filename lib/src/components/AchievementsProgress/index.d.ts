@@ -1,1 +1,0 @@
-export { AchievementsProgress } from './AchievementsProgress';

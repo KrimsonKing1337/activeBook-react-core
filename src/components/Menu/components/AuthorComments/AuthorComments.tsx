@@ -1,9 +1,7 @@
-import { Toggle } from 'components/Toggle';
-import { playAchievement } from 'components/Menu/utils';
-
 import { useDispatch, useSelector } from 'store';
 import { configActions, configSelectors } from 'store/config';
 
+import { Toggle } from 'components/Toggle';
 
 export const AuthorComments = () => {
   const dispatch = useDispatch();
@@ -12,8 +10,6 @@ export const AuthorComments = () => {
 
   const toggleClickHandler = (value: boolean) => {
     dispatch(configActions.setAuthorComments(value));
-
-    playAchievement();
   };
 
   return (

@@ -2,24 +2,18 @@ import { PropsWithChildren, useEffect } from 'react';
 
 import classNames from 'classnames';
 
-import { mainSelectors } from 'store/main';
-
-import { effectsSelectors } from 'store/effects/common';
-
-import { segmentsActions } from 'store/segments';
-
 import { useDispatch, useSelector } from 'store';
+
+import { mainSelectors } from 'store/main';
+import { effectsSelectors } from 'store/effects/common';
+import { segmentsActions } from 'store/segments';
 
 import { Toolbar } from 'components/Toolbar';
 import { Menu } from 'components/Menu';
-import { AchievementsProgress } from 'components/AchievementsProgress';
 import { TableOfContents } from 'components/TableOfContents';
 import { Bookmarks } from 'components/Bookmarks';
 import { SideEffects } from 'components/SideEffects';
 import { BackgroundEffects } from 'components/BackgroundEffects';
-
-
-
 
 import { Narrative } from './components/Narrative';
 
@@ -73,7 +67,6 @@ export const PageWrapper = ({
         <Menu />
         <TableOfContents />
         <Bookmarks />
-        <AchievementsProgress />
       </div>
     </div>
   );
