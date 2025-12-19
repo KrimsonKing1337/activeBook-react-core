@@ -3,7 +3,7 @@ import { type PropsWithChildren, useEffect } from 'react';
 import { Howler } from 'howler';
 import { setWasmUrl } from '@lottiefiles/dotlottie-react';
 import classNames from 'classnames';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 
 import type { Config, RangeEffects, TableOfContents } from '@types';
 
@@ -50,6 +50,7 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
   const isLoading = useSelector(mainSelectors.isLoading);
   const page = useSelector(mainSelectors.page);
   const pages = useSelector(mainSelectors.pages);
+  const allPagesSeen = useSelector(mainSelectors.allPagesSeen);
   const audioInstances = useSelector(audioEffectsSelectors.audioInstances);
   const audioInstancesBg = useSelector(audioBgEffectsSelectors.audioInstances);
   const themes = useSelector(configSelectors.themes);
@@ -191,17 +192,34 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
   }, [page, isLoading]);
 
   useEffect(() => {
+    const allPagesSeen = localStorage.getItem('allPagesSeen');
+
+    if (allPagesSeen) {
+      dispatch(mainActions.setAllPagesSeen(true));
+    }
+  }, []);
+
+  useEffect(() => {
     seenPages.set(page);
 
-    if (page === pages && !mainSelectors.allPagesSeen) {
-      toast.success('Все страницы прочитаны! Теперь вам доступны комментарии автора', {
-        onOpen: () => {
-          dispatch(mainActions.setAllPagesSeen(true));
-          dispatch(configActions.setAuthorComments(true));
-        },
-      });
+    const allPagesSeenLocalStorage = localStorage.getItem('allPagesSeen');
+
+    if (allPagesSeenLocalStorage) {
+      return;
     }
-  }, [page]);
+
+    if (pages === 0) {
+      return;
+    }
+
+    if (page === pages && !allPagesSeen) {
+      toast.success('Все страницы прочитаны! Теперь вам доступны комментарии автора');
+      localStorage.setItem('allPagesSeen', 'true');
+
+      dispatch(mainActions.setAllPagesSeen(true));
+      dispatch(configActions.setAuthorComments(true));
+    }
+  }, [page, pages, allPagesSeen]);
 
   useEffect(() => {
     const listener = () => {
@@ -231,6 +249,8 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
       <div className={appWrapperClassNames}>
         {children}
       </div>
+
+      <ToastContainer />
     </>
   );
 };
