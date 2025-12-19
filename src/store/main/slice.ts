@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { State } from './@types';
 
 export const initialState: State = {
-  route: '/',
+  id: '',
   page: 0,
   pages: 0,
   allPagesSeen: false,
@@ -19,6 +19,9 @@ const slice = createSlice({
   name: '@main',
   initialState,
   reducers: {
+    setId(state, action: PayloadAction<State['id']>) {
+      state.id = action.payload;
+    },
     setPages(state, action: PayloadAction<State['pages']>) {
       state.pages = action.payload;
     },

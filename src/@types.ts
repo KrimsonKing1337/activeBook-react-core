@@ -68,6 +68,7 @@ export type HowlExtended = Howl & {
 };
 
 export type Config = {
+  id: string;
   authorComments?: number;
   easterEggs?: number;
   pages: number;

@@ -1,7 +1,11 @@
 import { useDispatch, useSelector } from 'store';
+
 import { volumeActions, volumeSelectors } from 'store/volume';
+import { mainSelectors } from 'store/main';
 
 import { Label } from 'components/Label';
+
+import { set as localStorageSet } from 'utils/localStorage/localStorage';
 
 import { Slider } from './components/Slider';
 
@@ -9,6 +13,8 @@ import * as styles from './Volume.scss';
 
 export const Volume = () => {
   const dispatch = useDispatch();
+
+  const id = useSelector(mainSelectors.id);
 
   const allVolume = useSelector(volumeSelectors.all);
   const globalVolume = useSelector(volumeSelectors.global);
@@ -19,9 +25,7 @@ export const Volume = () => {
 
   const afterChangeHandler = () => {
     // сохраняем значения в localstorage
-    const volumeAsJson = JSON.stringify(allVolume);
-
-    localStorage.setItem('volume', volumeAsJson);
+    localStorageSet(id, { volume: allVolume });
   };
 
   const globalChangeHandler = (value: number) => {

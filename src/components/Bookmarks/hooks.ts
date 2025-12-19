@@ -1,13 +1,17 @@
 import { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'store';
-import { selectors } from 'store/bookmarks/selectors';
-import { bookmarksActions } from 'store/bookmarks';
+import { bookmarksActions, bookmarksSelectors } from 'store/bookmarks';
+
+import { mainSelectors } from 'store/main';
+
+import { get as localStorageGet } from 'utils/localStorage/localStorage';
 
 export function useBookmarks() {
   const dispatch = useDispatch();
 
-  const bookmarks = useSelector(selectors.bookmarks);
+  const id = useSelector(mainSelectors.id);
+  const bookmarks = useSelector(bookmarksSelectors.bookmarks);
 
   const setBookmarks = (bookmarks: number[]) => {
     dispatch(bookmarksActions.setBookmarks(bookmarks));
@@ -18,11 +22,9 @@ export function useBookmarks() {
       return;
     }
 
-    const bookmarksAsJSON = localStorage.getItem('bookmarks');
+    const bookmarksAsArray = localStorageGet(id, 'bookmarks');
 
-    if (bookmarksAsJSON) {
-      const bookmarksAsArray: number[] = JSON.parse(bookmarksAsJSON);
-
+    if (bookmarksAsArray) {
       dispatch(bookmarksActions.setBookmarks(bookmarksAsArray));
     }
   }, []);

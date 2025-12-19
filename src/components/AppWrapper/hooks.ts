@@ -22,6 +22,7 @@ import { setMuteToAllVideos } from 'components/AppWrapper/utils';
 import { flashlightInst } from 'utils/effects/flashlight';
 import { seenPages } from 'utils/localStorage/seenPages';
 import { getThemes } from 'utils/styles/getThemes';
+import { set as localStorageSet, get as localStorageGet } from 'utils/localStorage/localStorage';
 
 export function useVisibilityChangeHandler() {
   const { vibrationOff } = useVibration();
@@ -84,22 +85,24 @@ export function useDeleteAllVideosWithoutDataIdOnThePage() {
 export function useAllPagesSeen() {
   const dispatch = useDispatch();
 
+  const id = useSelector(mainSelectors.id);
   const page = useSelector(mainSelectors.page);
   const pages = useSelector(mainSelectors.pages);
   const allPagesSeen = useSelector(mainSelectors.allPagesSeen);
 
   useEffect(() => {
-    const allPagesSeen = localStorage.getItem('allPagesSeen');
+    const allPagesSeen = localStorageGet(id, 'allPagesSeen');
 
     if (allPagesSeen) {
       dispatch(mainActions.setAllPagesSeen(true));
     }
   }, []);
 
+  // todo: нужно посмотреть каждую страницу, а не только последнюю, как сейчас
   useEffect(() => {
     seenPages.set(page);
 
-    const allPagesSeenLocalStorage = localStorage.getItem('allPagesSeen');
+    const allPagesSeenLocalStorage = localStorageGet(id, 'allPagesSeen');
 
     if (allPagesSeenLocalStorage) {
       return;
@@ -110,8 +113,9 @@ export function useAllPagesSeen() {
     }
 
     if (page === pages && !allPagesSeen) {
-      toast.success('Вам доступны комментарии автора!');
-      localStorage.setItem('allPagesSeen', 'true');
+      toast.success('Теперь доступны комментарии автора!');
+
+      localStorageSet(id, { allPagesSeen: true });
 
       dispatch(mainActions.setAllPagesSeen(true));
       dispatch(configActions.setAuthorComments(true));
@@ -120,14 +124,13 @@ export function useAllPagesSeen() {
 }
 
 export function useBeforeUnloadHandler() {
+  const id = useSelector(mainSelectors.id);
   const page = useSelector(mainSelectors.page);
 
   useEffect(() => {
     const listener = () => {
       if (page !== 0) {
-        const pageAsJson = JSON.stringify(page);
-
-        localStorage.setItem('lastPage', pageAsJson);
+        localStorageSet(id, { lastPage: page });
       }
     };
 
@@ -143,30 +146,29 @@ export function useSetUpConfig(passedConfig: Config) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const { pages, defaultTheme, customThemes } = passedConfig;
+    const { id, pages, defaultTheme, customThemes } = passedConfig;
 
-    const configAsJson = localStorage.getItem('config');
-    const volumeAsJson = localStorage.getItem('volume');
+    const config = localStorageGet(id, 'config');
+    const volume = localStorageGet(id, 'volume');
 
     const themes = getThemes(customThemes);
 
     dispatch(configActions.setThemes(themes));
     dispatch(mainActions.setPages(pages));
 
-    if (!configAsJson) {
+    if (!config) {
       dispatch(configActions.setTheme(defaultTheme));
     }
 
-
-    const config = configAsJson ? JSON.parse(configAsJson) : configInitialState;
-    const volume = volumeAsJson ? JSON.parse(volumeAsJson) : volumeInitialState;
+    const configForSet = config ?? configInitialState;
+    const volumeForSet = volume ?? volumeInitialState;
 
     const configForSetting = {
-      ...config,
+      ...configForSet,
       themes,
     };
 
     dispatch(configActions.setAll(configForSetting));
-    dispatch(volumeActions.setAll(volume));
+    dispatch(volumeActions.setAll(volumeForSet));
   }, []);
 }

@@ -1,13 +1,17 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 
+import { mainSelectors } from 'store/main';
+
 import { setThemeCss } from 'utils/styles/setThemeCss';
+import { set as localStorageSet } from 'utils/localStorage/localStorage';
 
 import { State } from './@types';
 import { actions } from './slice';
 import { selectors } from './selectors';
 
 function* saveInLocalStorage() {
+  const id: string = yield select(mainSelectors.id);
   const config: State = yield select(selectors.all);
 
   // themes в localstorage не сохраняем
@@ -18,10 +22,7 @@ function* saveInLocalStorage() {
 
   delete configToSave.themes;
 
-
-  const configAsJson = JSON.stringify(configToSave);
-
-  localStorage.setItem('config', configAsJson);
+  localStorageSet(id, { config: configToSave });
 }
 
 export function* watchSetAll(action: PayloadAction<State>) {

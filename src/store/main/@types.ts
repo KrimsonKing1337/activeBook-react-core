@@ -5,7 +5,7 @@ export type MenuActiveState = null | 'menu' | 'tableOfContents' | 'achievementsP
 export type FlashlightState = false | 'js' | 'cordova';
 
 export interface State {
-  route: string;
+  id: string;
   page: number;
   pages: number;
   allPagesSeen: boolean;

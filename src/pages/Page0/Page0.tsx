@@ -2,14 +2,17 @@ import { useEffect, useState } from 'react';
 
 import { configSelectors } from 'store/config';
 
-import { Flags, modalsWereShowed } from 'utils/localStorage/modalsWereShowed';
-import { flashlightInst } from 'utils/effects/flashlight';
+import { useSelector } from 'store';
+
+import { mainSelectors } from 'store/main';
 
 import { useGoToPage } from 'hooks/control/useGoToPage';
 
-import { useSelector } from 'store';
-
 import { PageWrapper, Action, WelcomeTour } from 'components';
+
+import { Flags, modalsWereShowed } from 'utils/localStorage/modalsWereShowed';
+import { flashlightInst } from 'utils/effects/flashlight';
+import { get as localStorageGet } from 'utils/localStorage/localStorage';
 
 import { Modal } from './components';
 
@@ -26,6 +29,7 @@ export type Page0Props = {
 export const Page0 = ({ goCallback, header, subHeader, showButton = true, Footer }: Page0Props) => {
   const { goToPage } = useGoToPage();
 
+  const id = useSelector(mainSelectors.id);
   const isWelcomeTourActiveFromConfig = useSelector(configSelectors.welcomeTour);
 
   const [lastPage, setLastPage] = useState(0);
@@ -36,15 +40,13 @@ export const Page0 = ({ goCallback, header, subHeader, showButton = true, Footer
   const { modalIsActive, modalOnClose, setModalIsActive } = useModal();
 
   useEffect(() => {
-    const lastPageAsJson = localStorage.getItem('lastPage');
+    const lastPage = localStorageGet(id, 'lastPage');
 
-    if (!lastPageAsJson) {
+    if (!lastPage) {
       return;
     }
 
-    const page = JSON.parse(lastPageAsJson);
-
-    setLastPage(page);
+    setLastPage(lastPage);
   }, []);
 
   const go = async () => {
