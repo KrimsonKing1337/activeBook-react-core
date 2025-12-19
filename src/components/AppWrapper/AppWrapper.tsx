@@ -1,11 +1,11 @@
-import { type PropsWithChildren, useEffect } from 'react';
+import { type PropsWithChildren, useEffect, useRef } from 'react';
 
 import { Howler } from 'howler';
 import { setWasmUrl } from '@lottiefiles/dotlottie-react';
 import classNames from 'classnames';
 import { toast, ToastContainer } from 'react-toastify';
 
-import type { Config, RangeEffects, TableOfContents } from '@types';
+import type { Config, HowlInstances, RangeEffects, TableOfContents } from '@types';
 
 import { store, useDispatch, useSelector } from 'store';
 
@@ -47,6 +47,9 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
   const { goPrevPage, goNextPage } = useGoToPage();
   const { vibrationOff } = useVibration();
 
+  const audioInstancesRef = useRef<HowlInstances>({});
+  const audioInstancesBgRef = useRef<HowlInstances>({});
+
   const isLoading = useSelector(mainSelectors.isLoading);
   const page = useSelector(mainSelectors.page);
   const pages = useSelector(mainSelectors.pages);
@@ -54,6 +57,14 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
   const audioInstances = useSelector(audioEffectsSelectors.audioInstances);
   const audioInstancesBg = useSelector(audioBgEffectsSelectors.audioInstances);
   const themes = useSelector(configSelectors.themes);
+
+  useEffect(() => {
+    audioInstancesRef.current = audioInstances;
+  }, [audioInstances]);
+
+  useEffect(() => {
+    audioInstancesBgRef.current = audioInstancesBg;
+  }, [audioInstancesBg]);
 
   // применяю конфиг
   useEffect(() => {
@@ -64,7 +75,6 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
     const themes = getThemes(customThemes);
 
     dispatch(configActions.setThemes(themes));
-
     dispatch(mainActions.setPages(pages));
 
     if (!configAsJson) {
@@ -79,7 +89,7 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
 
   // приглушаю звук, отключаю вибрацию и вспышку, если приложение скрыто
   useEffect(() => {
-    document.addEventListener('visibilitychange', () => {
+    const handler = () => {
       if (document.hidden) {
         Howler.mute(true);
         setMuteToAllVideos(true);
@@ -93,7 +103,13 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
 
         flashlightInst.init();
       }
-    });
+    };
+
+    document.addEventListener('visibilitychange', handler);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handler);
+    };
   }, []);
 
   // сбрасывать адресную строку теперь не нужно, т.к. мы используем memoryRouter. вместо этого очищаем историю
@@ -146,9 +162,9 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
       return;
     }
 
-    startToPlayAllAudiosWithPlayOnLoad(audioInstances, page);
-    startToPlayAllAudiosWithPlayOnLoad(audioInstancesBg, page);
-  }, [page, isLoading, audioInstances, audioInstancesBg]);
+    startToPlayAllAudiosWithPlayOnLoad(audioInstancesRef.current, page);
+    startToPlayAllAudiosWithPlayOnLoad(audioInstancesBgRef.current, page);
+  }, [page, isLoading]);
 
   // удаляю id видео из списка currentTime, если видео с data-id на странице нет
   useEffect(() => {
