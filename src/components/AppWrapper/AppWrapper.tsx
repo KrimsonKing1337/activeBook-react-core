@@ -250,7 +250,12 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
         {children}
       </div>
 
-      <ToastContainer />
+      <ToastContainer
+        hideProgressBar
+        pauseOnHover
+        closeOnClick
+        theme="colored"
+      />
     </>
   );
 };
