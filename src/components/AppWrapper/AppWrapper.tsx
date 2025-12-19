@@ -1,11 +1,11 @@
-import { type PropsWithChildren, useEffect, useRef } from 'react';
+import { type PropsWithChildren, useEffect } from 'react';
 
 import { Howler } from 'howler';
 import { setWasmUrl } from '@lottiefiles/dotlottie-react';
 import classNames from 'classnames';
 import { toast, ToastContainer } from 'react-toastify';
 
-import type { Config, HowlInstances, RangeEffects, TableOfContents } from '@types';
+import type { Config, RangeEffects, TableOfContents } from '@types';
 
 import { store, useDispatch, useSelector } from 'store';
 
@@ -47,9 +47,6 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
   const { goPrevPage, goNextPage } = useGoToPage();
   const { vibrationOff } = useVibration();
 
-  const audioInstancesRef = useRef<HowlInstances>({});
-  const audioInstancesBgRef = useRef<HowlInstances>({});
-
   const isLoading = useSelector(mainSelectors.isLoading);
   const page = useSelector(mainSelectors.page);
   const pages = useSelector(mainSelectors.pages);
@@ -57,14 +54,6 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
   const audioInstances = useSelector(audioEffectsSelectors.audioInstances);
   const audioInstancesBg = useSelector(audioBgEffectsSelectors.audioInstances);
   const themes = useSelector(configSelectors.themes);
-
-  useEffect(() => {
-    audioInstancesRef.current = audioInstances;
-  }, [audioInstances]);
-
-  useEffect(() => {
-    audioInstancesBgRef.current = audioInstancesBg;
-  }, [audioInstancesBg]);
 
   // применяю конфиг
   useEffect(() => {
@@ -162,9 +151,9 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
       return;
     }
 
-    startToPlayAllAudiosWithPlayOnLoad(audioInstancesRef.current, page);
-    startToPlayAllAudiosWithPlayOnLoad(audioInstancesBgRef.current, page);
-  }, [page, isLoading]);
+    startToPlayAllAudiosWithPlayOnLoad(audioInstances, page);
+    startToPlayAllAudiosWithPlayOnLoad(audioInstancesBg, page);
+  }, [page, isLoading, audioInstances, audioInstancesBg]);
 
   // удаляю id видео из списка currentTime, если видео с data-id на странице нет
   useEffect(() => {
