@@ -1,35 +1,33 @@
 import { type PropsWithChildren, useEffect } from 'react';
 
-import { Howler } from 'howler';
-import { setWasmUrl } from '@lottiefiles/dotlottie-react';
 import classNames from 'classnames';
-import { toast, ToastContainer } from 'react-toastify';
+import { setWasmUrl } from '@lottiefiles/dotlottie-react';
+import { ToastContainer } from 'react-toastify';
 
 import type { Config, RangeEffects, TableOfContents } from '@types';
 
-import { store, useDispatch, useSelector } from 'store';
+import { useDispatch, useSelector } from 'store';
 
-import { volumeActions } from 'store/volume';
-import { initialState as volumeInitialState } from 'store/volume/slice';
-import { configActions, configSelectors } from 'store/config';
-import { initialState as configInitialState } from 'store/config/slice';
 import { mainActions, mainSelectors } from 'store/main';
-import { effectsActions } from 'store/effects/common';
 import { audioEffectsSelectors } from 'store/effects/audio/audio';
 import { audioBgEffectsSelectors } from 'store/effects/audio/audioBg';
 
 import { useEffectsInRange } from 'hooks/effects/range';
-import { useVibration } from 'hooks/effects/vibration';
 import { useGoToPage } from 'hooks/control/useGoToPage';
 
-import { seenPages } from 'utils/localStorage/seenPages';
 import { removeCssHover } from 'utils/touch/removeCssHover';
-import { flashlightInst } from 'utils/effects/flashlight';
 import { addKeyboardControl } from 'utils/control/keyboardControl';
 import { hideAddressBarInMobileDevices } from 'utils/mobile/hideAddressBarInMobileDevices';
-import { getThemes } from 'utils/styles/getThemes';
 
-import { setMuteToAllVideos, startToPlayAllAudiosWithPlayOnLoad, startToPlayAllVideosWithPlayOnLoad } from './utils';
+import {
+  useAllPagesSeen,
+  useBeforeUnloadHandler,
+  useDeleteAllVideosWithoutDataIdOnThePage,
+  useSetUpConfig,
+  useVisibilityChangeHandler,
+} from './hooks';
+
+import { startToPlayAllAudiosWithPlayOnLoad, startToPlayAllVideosWithPlayOnLoad } from './utils';
 
 import 'styles/common.scss';
 
@@ -45,31 +43,14 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
   const dispatch = useDispatch();
 
   const { goPrevPage, goNextPage } = useGoToPage();
-  const { vibrationOff } = useVibration();
 
   const isLoading = useSelector(mainSelectors.isLoading);
   const page = useSelector(mainSelectors.page);
-  const pages = useSelector(mainSelectors.pages);
-  const allPagesSeen = useSelector(mainSelectors.allPagesSeen);
   const audioInstances = useSelector(audioEffectsSelectors.audioInstances);
   const audioInstancesBg = useSelector(audioBgEffectsSelectors.audioInstances);
-  const themes = useSelector(configSelectors.themes);
 
   // применяю конфиг
-  useEffect(() => {
-    const { pages, defaultTheme, customThemes } = config;
-
-    const configAsJson = localStorage.getItem('config');
-
-    const themes = getThemes(customThemes);
-
-    dispatch(configActions.setThemes(themes));
-    dispatch(mainActions.setPages(pages));
-
-    if (!configAsJson) {
-      dispatch(configActions.setTheme(defaultTheme));
-    }
-  }, []);
+  useSetUpConfig(config);
 
   // применяю оглавление
   useEffect(() => {
@@ -77,31 +58,9 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
   }, []);
 
   // приглушаю звук, отключаю вибрацию и вспышку, если приложение скрыто
-  useEffect(() => {
-    const handler = () => {
-      if (document.hidden) {
-        Howler.mute(true);
-        setMuteToAllVideos(true);
+  useVisibilityChangeHandler();
 
-        vibrationOff();
-
-        flashlightInst.mediaStreamTrackStop();
-      } else {
-        Howler.mute(false);
-        setMuteToAllVideos(false);
-
-        flashlightInst.init();
-      }
-    };
-
-    document.addEventListener('visibilitychange', handler);
-
-    return () => {
-      document.removeEventListener('visibilitychange', handler);
-    };
-  }, []);
-
-  // сбрасывать адресную строку теперь не нужно, т.к. мы используем memoryRouter. вместо этого очищаем историю
+  // Сбрасывать адресную строку теперь не нужно, т.к. мы используем memoryRouter. вместо этого очищаем историю
   useEffect(() => {
     window.history.pushState(null, '', window.location.href);
   }, []);
@@ -116,26 +75,6 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
 
     dispatch(mainActions.setIsVibrationAvailable(canVibrate));
   }, []);
-
-  useEffect(() => {
-    if (!Object.keys(themes).length) {
-      return;
-    }
-
-    const configAsJson = localStorage.getItem('config');
-    const volumeAsJson = localStorage.getItem('volume');
-
-    const config = configAsJson ? JSON.parse(configAsJson) : configInitialState;
-    const volume = volumeAsJson ? JSON.parse(volumeAsJson) : volumeInitialState;
-
-    const configForSetting = {
-      ...config,
-      themes,
-    };
-
-    dispatch(configActions.setAll(configForSetting));
-    dispatch(volumeActions.setAll(volume));
-  }, [themes]);
 
   useEffect(() => {
     /*
@@ -155,23 +94,9 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
     startToPlayAllAudiosWithPlayOnLoad(audioInstancesBg, page);
   }, [page, isLoading, audioInstances, audioInstancesBg]);
 
-  // удаляю id видео из списка currentTime, если видео с data-id на странице нет
-  useEffect(() => {
-    const videosCurrentTime = store.getState().effects.videosCurrentTime;
-    const videos = Array.from(document.querySelectorAll('video'));
-
-    const videosCurrentTimeNewValue: typeof videosCurrentTime = {};
-
-    videos.forEach((videoCur) => {
-      const id = videoCur.getAttribute('data-id');
-
-      if (id && videosCurrentTime[id]) {
-        videosCurrentTimeNewValue[id] = videosCurrentTime[id];
-      }
-    });
-
-    dispatch(effectsActions.setVideosCurrentTime(videosCurrentTimeNewValue));
-  }, [page]);
+  // Удаляю id видео из списка currentTime, если видео с data-id на странице нет
+  // todo: вспомнить зачем это вообще нужно
+  useDeleteAllVideosWithoutDataIdOnThePage();
 
   useEffect(() => {
     // фокус для скролла
@@ -196,52 +121,8 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
     startToPlayAllVideosWithPlayOnLoad();
   }, [page, isLoading]);
 
-  useEffect(() => {
-    const allPagesSeen = localStorage.getItem('allPagesSeen');
-
-    if (allPagesSeen) {
-      dispatch(mainActions.setAllPagesSeen(true));
-    }
-  }, []);
-
-  useEffect(() => {
-    seenPages.set(page);
-
-    const allPagesSeenLocalStorage = localStorage.getItem('allPagesSeen');
-
-    if (allPagesSeenLocalStorage) {
-      return;
-    }
-
-    if (pages === 0) {
-      return;
-    }
-
-    if (page === pages && !allPagesSeen) {
-      toast.success('Все страницы прочитаны! Теперь вам доступны комментарии автора');
-      localStorage.setItem('allPagesSeen', 'true');
-
-      dispatch(mainActions.setAllPagesSeen(true));
-      dispatch(configActions.setAuthorComments(true));
-    }
-  }, [page, pages, allPagesSeen]);
-
-  useEffect(() => {
-    const listener = () => {
-      if (page !== 0) {
-        const pageAsJson = JSON.stringify(page);
-
-        localStorage.setItem('lastPage', pageAsJson);
-      }
-    };
-
-    window.addEventListener('beforeunload', listener);
-
-    return () => {
-      window.removeEventListener('beforeunload', listener);
-    };
-  }, [page]);
-
+  useAllPagesSeen();
+  useBeforeUnloadHandler();
   useEffectsInRange(rangeEffects);
 
   const appWrapperClassNames = classNames({
