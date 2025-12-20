@@ -74,7 +74,7 @@ export const Page0 = ({ goCallback, header, subHeader, showButton = true, Footer
   };
 
   const actionClickHandler = () => {
-    const isModalWasShowed = modalsWereShowed.get(Flags.usingCamera);
+    const isModalWasShowed = modalsWereShowed.get(id, Flags.usingCamera);
 
     if (isWelcomeTourActiveFromConfig) {
       setIsWelcomeTourModalActive(true);
