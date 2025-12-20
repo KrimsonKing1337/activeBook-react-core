@@ -100,7 +100,7 @@ export function useAllPagesSeen() {
 
   // todo: нужно посмотреть каждую страницу, а не только последнюю, как сейчас
   useEffect(() => {
-    seenPages.set(page);
+    seenPages.set(id, page);
 
     const allPagesSeenLocalStorage = localStorageGet(id, 'allPagesSeen');
 
