@@ -163,11 +163,8 @@ export function useSetUpConfig(passedConfig: Config) {
     const themes = getThemes(customThemes);
 
     dispatch(configActions.setThemes(themes));
+    dispatch(mainActions.setId(id));
     dispatch(mainActions.setPages(pages));
-
-    if (!config) {
-      dispatch(configActions.setTheme(defaultTheme));
-    }
 
     const configForSet = config ?? configInitialState;
     const volumeForSet = volume ?? volumeInitialState;
@@ -175,6 +172,7 @@ export function useSetUpConfig(passedConfig: Config) {
     const configForSetting = {
       ...configForSet,
       themes,
+      theme: defaultTheme,
     };
 
     dispatch(configActions.setAll(configForSetting));
