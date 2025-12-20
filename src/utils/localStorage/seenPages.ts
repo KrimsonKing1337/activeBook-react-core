@@ -7,13 +7,13 @@ const key = 'seenPages';
 function get(id: string) {
   const seenPagesEncrypt = localStorageGet(id, key);
   const seenPagesEncryptAsJson = JSON.stringify(seenPagesEncrypt);
+  const seenPagesDecryptAsJson = cryptr.decrypt(seenPagesEncryptAsJson);
 
-  return cryptr.decrypt(seenPagesEncryptAsJson);
+  return JSON.parse(seenPagesDecryptAsJson);
 }
 
 function set(id: string, value: number) {
-  const seenPagesDecryptAsJson = get(id);
-  const seenPagesDecrypt = JSON.parse(seenPagesDecryptAsJson);
+  const seenPagesDecrypt = get(id);
 
   const newSeenPages = {
     ...seenPagesDecrypt,

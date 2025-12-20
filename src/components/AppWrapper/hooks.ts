@@ -98,13 +98,16 @@ export function useAllPagesSeen() {
     }
   }, []);
 
-  // todo: нужно посмотреть каждую страницу, а не только последнюю, как сейчас
   useEffect(() => {
     seenPages.set(id, page);
 
+    const seenPagesDecrypt = seenPages.get(id);
     const allPagesSeenLocalStorage = localStorageGet(id, 'allPagesSeen');
 
     if (allPagesSeenLocalStorage) {
+      dispatch(mainActions.setAllPagesSeen(true));
+      dispatch(configActions.setAuthorComments(true));
+
       return;
     }
 
@@ -112,7 +115,7 @@ export function useAllPagesSeen() {
       return;
     }
 
-    if (page === pages && !allPagesSeen) {
+    if (Object.keys(seenPagesDecrypt).length === pages && !allPagesSeen) {
       toast.success('Теперь доступны комментарии автора!');
 
       localStorageSet(id, { allPagesSeen: true });
