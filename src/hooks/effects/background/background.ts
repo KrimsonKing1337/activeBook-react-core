@@ -1,7 +1,5 @@
 import { useEffect, useRef } from 'react';
 
-import isEqual from 'react-fast-compare';
-
 import { useDispatch } from 'store';
 import { backgroundEffectsActions } from 'store/effects/background';
 
@@ -14,7 +12,7 @@ export const useBackground = (effect: BackgroundEffect) => {
 
   useEffect(() => {
     // если эффект уже есть, и он точно такой же, как тот, что приходит - значит эффект не нужно инициализировать заново
-    if (refEffect.current && isEqual(refEffect.current, effect)) {
+    if (refEffect.current?.id === effect.id) {
       return;
     }
 
