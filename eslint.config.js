@@ -27,6 +27,7 @@ const ignores = [
   '**/*.js',
   'eslint.config.js',
   'lib',
+  'scripts',
   'd.ts',
 ];
 
