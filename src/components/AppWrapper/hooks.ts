@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'store';
 
 import { mainActions, mainSelectors } from 'store/main';
 import { effectsActions, effectsSelectors } from 'store/effects/common';
-import { configActions } from 'store/config';
+import { configActions, configSelectors } from 'store/config';
 import { initialState as configInitialState } from 'store/config/slice';
 import { initialState as volumeInitialState } from 'store/volume/slice';
 import { volumeActions } from 'store/volume';
@@ -89,6 +89,7 @@ export function useAllPagesSeen() {
   const page = useSelector(mainSelectors.page);
   const pages = useSelector(mainSelectors.pages);
   const allPagesSeen = useSelector(mainSelectors.allPagesSeen);
+  const authorComments = useSelector(configSelectors.authorComments);
 
   useEffect(() => {
     const allPagesSeen = localStorageGet(id, 'allPagesSeen');
@@ -98,7 +99,12 @@ export function useAllPagesSeen() {
     }
   }, []);
 
+  // если не передано или ноль - значит комментариев автора нет, ничего не делаем
   useEffect(() => {
+    if (!authorComments) {
+      return;
+    }
+
     seenPages.set(id, page);
 
     const seenPagesDecrypt = seenPages.get(id);
