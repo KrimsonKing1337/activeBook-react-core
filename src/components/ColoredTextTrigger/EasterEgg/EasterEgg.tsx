@@ -2,8 +2,6 @@ import { PropsWithChildren } from 'react';
 
 import classNames from 'classnames';
 
-import { foundEasterEggs } from 'utils/localStorage/foundEasterEggs';
-
 import * as styles from './EasterEgg.scss';
 
 export type EasterEggProps = React.HTMLAttributes<HTMLSpanElement> & {
@@ -14,15 +12,12 @@ export type EasterEggProps = React.HTMLAttributes<HTMLSpanElement> & {
 
 export const EasterEgg = ({
   children,
-  id,
   className = '',
   onClick = () => {},
 
   ...etc
 }: PropsWithChildren<EasterEggProps>) => {
   const clickHandler = () => {
-    foundEasterEggs.set(id);
-
     onClick();
   };
 

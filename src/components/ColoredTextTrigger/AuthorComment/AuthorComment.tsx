@@ -6,8 +6,6 @@ import { useSelector } from 'store';
 import { configSelectors } from 'store/config';
 import { mainSelectors } from 'store/main';
 
-import { seenAuthorComments } from 'utils/localStorage/seenAuthorComments';
-
 import * as styles from './AuthorComment.scss';
 
 export type ActionProps = React.HTMLAttributes<HTMLSpanElement> & {
@@ -25,8 +23,6 @@ export const AuthorComment = ({
   const authorCommentsIsOn = useSelector(configSelectors.authorComments);
 
   const clickHandler = () => {
-    seenAuthorComments.add();
-
     onClick();
   };
 
