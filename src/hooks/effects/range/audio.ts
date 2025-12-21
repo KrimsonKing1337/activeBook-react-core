@@ -7,20 +7,20 @@ import type {
 } from '@types';
 
 import { mainSelectors } from 'store/main';
-import { audioBgEffectsActions } from 'store/effects/audio/audioBg';
+import { audioBgEffectsActions, audioBgEffectsSelectors } from 'store/effects/audio/audioBg';
+
+import { useDispatch, useSelector } from 'store';
 
 import { HowlWrapper } from 'utils/effects/audio/HowlWrapper';
 import { getEffectsInRange } from 'utils/effects/rangeEffects';
-
-import { store, useDispatch, useSelector } from 'store';
 
 export function useAudioInRange(effects: RangeEffects) {
   const dispatch = useDispatch();
 
   const page = useSelector(mainSelectors.page);
+  const audioInstances = useSelector(audioBgEffectsSelectors.audioInstances);
 
   useEffect(() => {
-    const audioInstances = store.getState().audioBgEffects.audioInstances;
     const audiosForPage = getEffectsInRange(effects, page, 'audio');
 
     Object.keys(audioInstances).forEach((keyCur) => {
@@ -42,10 +42,9 @@ export function useAudioInRange(effects: RangeEffects) {
 
       dispatch(audioBgEffectsActions.deleteAudioInstance(id as string));
     });
-  }, [page]);
+  }, [page, audioInstances]);
 
   useEffect(() => {
-    const audioInstancesInStore = store.getState().audioBgEffects.audioInstances;
     const audiosForPage = getEffectsInRange(effects, page, 'audio') as RangeEffect[];
 
     audiosForPage.forEach((audioOnPageCur) => {
@@ -66,7 +65,7 @@ export function useAudioInRange(effects: RangeEffects) {
         onUnload,
       } = audioOnPageCur.options as AudioEffectOptionsRange;
 
-      const audioInstanceInStore = audioInstancesInStore[id];
+      const audioInstanceInStore = audioInstances[id];
 
       if (audioInstanceInStore) {
         return;
@@ -90,5 +89,5 @@ export function useAudioInRange(effects: RangeEffects) {
 
       dispatch(audioBgEffectsActions.setAudioInstance(howlInst));
     });
-  }, [page]);
+  }, [page, audioInstances]);
 }
