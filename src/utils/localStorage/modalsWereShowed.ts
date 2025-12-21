@@ -10,6 +10,10 @@ export enum Flags {
 function get(id: string, name: Flags) {
   const modals = localStorageGet(id, key);
 
+  if (!modals) {
+    return;
+  }
+
   return modals[name];
 }
 
