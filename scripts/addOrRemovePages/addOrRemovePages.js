@@ -220,8 +220,7 @@ function addPages(root, indexStart, amount) {
  * удаляем [indexStart..indexStart+amount-1], потом сдвигаем хвост влево.
  */
 function removePages(root, indexStart, amount) {
-  const pagesPath = resolvePagesPath(root);
-  if (!exists(pagesPath)) throw new Error(`Pages path not found: ${pagesPath}`);
+  const pagesPath = path.join(process.cwd(), root);
 
   const indexes = getExistingPageIndexes(pagesPath);
   if (indexes.length === 0) {
@@ -232,29 +231,31 @@ function removePages(root, indexStart, amount) {
 
   if (amount <= 0) throw new Error(`amount must be > 0. Got ${amount}`);
   if (indexStart < 0) throw new Error(`indexStart must be >= 0. Got ${indexStart}`);
+  if (indexStart > maxIndex) throw new Error(`indexStart out of range. Max is ${maxIndex}`);
 
-  if (indexStart > maxIndex) {
-    throw new Error(`indexStart=${indexStart} out of range. Max is ${maxIndex}`);
-  }
-  if (indexStart + amount - 1 > maxIndex) {
+  const lastToRemove = indexStart + amount - 1;
+  if (lastToRemove > maxIndex) {
     throw new Error(
-      `Cannot remove pages ${indexStart}..${indexStart + amount - 1}. Max is ${maxIndex}`
+      `Cannot remove pages ${indexStart}..${lastToRemove}. Max is ${maxIndex}`
     );
   }
 
-  // 1) удалить блок
-  for (let i = indexStart; i < indexStart + amount; i++) {
-    rmSyncWithRetry(path.join(pagesPath, `Page${i}`));
+  // 1) удалить ровно нужный диапазон
+  for (let i = indexStart; i <= lastToRemove; i++) {
+    const dirPath = path.join(pagesPath, `Page${i}`);
+    fs.rmSync(dirPath, { recursive: true, force: true });
   }
 
-  // 2) сдвинуть хвост влево
-  for (let i = indexStart + amount; i <= maxIndex; i++) {
+  // 2) сдвинуть хвост влево на amount
+  for (let i = lastToRemove + 1; i <= maxIndex; i++) {
     const oldDir = path.join(pagesPath, `Page${i}`);
     const newDir = path.join(pagesPath, `Page${i - amount}`);
-    renameSyncWithRetry(oldDir, newDir);
+
+    fs.renameSync(oldDir, newDir);
     changeIndexOfPage(newDir, i - amount);
   }
 }
+
 
 function usageAndExit() {
   console.error(`Usage:
@@ -297,26 +298,69 @@ function resolvePagesPath(rootArg) {
   );
 }
 
+function hasAnyFlag(...flags) {
+  return flags.some(flag => process.argv.includes(flag));
+}
 
 function main() {
-  if (process.argv.length < 6) usageAndExit();
+  if (process.argv.length < 6) {
+    console.error('Wrong amount of arguments');
+    process.exit(-1);
+    return;
+  }
 
   const root = process.argv[2];
   const action = process.argv[3];
-  const indexStart = Number(process.argv[4]);
+  let indexStart = Number(process.argv[4]);
   const amount = Number(process.argv[5]);
 
-  ensureInt('indexStart', indexStart);
-  ensureInt('amount', amount);
+  const after = hasAnyFlag('--after', '-a');
+  const before = hasAnyFlag('--before', '-b');
 
   if (action !== 'add' && action !== 'remove') {
-    throw new Error(`Action must be 'add' or 'remove'. Got: ${action}`);
+    console.error("Action argument must be 'add' or 'remove'");
+    process.exit(-1);
+    return;
   }
 
-  if (action === 'add') addPages(root, indexStart, amount);
-  else removePages(root, indexStart, amount);
+  if (!Number.isInteger(indexStart) || Number.isNaN(indexStart)) {
+    console.error('indexStart must be an integer');
+    process.exit(-1);
+    return;
+  }
 
-  console.log(`Done: ${action} ${amount} page(s) at index ${indexStart}`);
+  if (!Number.isInteger(amount) || Number.isNaN(amount) || amount <= 0) {
+    console.error('amount must be a positive integer');
+    process.exit(-1);
+    return;
+  }
+
+  if (indexStart < 0) {
+    console.error("IndexStart argument can't be lower than zero");
+    process.exit(-1);
+    return;
+  }
+
+  if (action === 'add') {
+    if (after && before) {
+      console.error("Use only one of --after/-a or --before/-b");
+      process.exit(-1);
+      return;
+    }
+
+    // default: BEFORE (старое поведение)
+    if (after) {
+      indexStart += 1;
+    }
+
+    addPages(root, indexStart, amount);
+  } else {
+    if (after || before) {
+      console.warn('Flags --after/-a and --before/-b are ignored for remove');
+    }
+
+    removePages(root, indexStart, amount);
+  }
 }
 
 try {
@@ -325,3 +369,16 @@ try {
   console.error(e?.stack || e);
   process.exit(1);
 }
+
+/*
+  add <index> <amount> [--after|-a] [--before|-b]
+
+  --after (-a) вставить после Page<index>
+  --before (-b) вставить перед Page<index> (по умолчанию)
+
+  remove <index> <amount>
+
+  вставить после первой страницы одну страницу:
+  add 1 1 --after
+  add 2 1 --before
+*/
