@@ -1,8 +1,9 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { put, select, takeLatest } from 'redux-saga/effects';
 
-import type { BackgroundEffect } from 'hooks/effects/background/@types';
 import type { BackgroundEffects } from 'store/effects/background/@types';
+
+import type { BackgroundEffect } from 'hooks/effects/background/@types';
 
 import { actions } from './slice';
 import { selectors } from './selectors';

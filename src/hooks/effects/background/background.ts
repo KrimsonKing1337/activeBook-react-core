@@ -21,13 +21,19 @@ export const useBackground = (effect: BackgroundEffect) => {
     dispatch(backgroundEffectsActions.setEffect(effect));
   }, [effect]);
 
-  useEffect(() => {
-    return () => {
-      if (!refEffect.current) {
-        return;
-      }
+  const destroy = () => {
+    if (!refEffect.current) {
+      return;
+    }
 
-      dispatch(backgroundEffectsActions.deleteEffect(refEffect.current.id));
-    };
+    dispatch(backgroundEffectsActions.deleteEffect(refEffect.current.id));
+
+    refEffect.current = null;
+  };
+
+  useEffect(() => {
+    return destroy;
   }, []);
+
+  return destroy;
 };

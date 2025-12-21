@@ -2,13 +2,12 @@ import { useEffect, useRef } from 'react';
 
 import type { AudioEffectOptions } from '@types';
 
+import { useSelector, useDispatch } from 'store';
+
+import { mainSelectors } from 'store/main';
 import { audioEffectsActions, audioEffectsSelectors } from 'store/effects/audio/audio';
 
 import { HowlWrapper, type HowlWrapperOptions } from 'utils/effects/audio/HowlWrapper';
-
-import { mainSelectors } from 'store/main';
-
-import { useSelector, useDispatch } from 'store';
 
 export function useAudio({
   id,
