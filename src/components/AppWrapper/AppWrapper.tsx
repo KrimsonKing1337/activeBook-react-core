@@ -104,10 +104,17 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
 
     narrativeElement.click();
 
-    // addTouchSupportForCssHover(); // вместо этого просто "удаляю" :hover везде, возможно так и оставлю
-    addKeyboardControl(goPrevPage, goNextPage);
-    hideAddressBarInMobileDevices();
+    const removeKeyboardControl = addKeyboardControl(goPrevPage, goNextPage);
+
+    return () => {
+      removeKeyboardControl();
+    };
   }, [goPrevPage, goNextPage]);
+
+  useEffect(() => {
+    // addTouchSupportForCssHover(); // вместо этого просто "удаляю" :hover везде, возможно так и оставлю
+    hideAddressBarInMobileDevices();
+  }, []);
 
   /*
     начинаю воспроизведение video, у которых autoPlay.

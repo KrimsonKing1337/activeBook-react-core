@@ -5,7 +5,7 @@ type Fn = () => void;
 export function addKeyboardControl(goPrevPage: Fn, goNextPage: Fn) {
   const narrativeElement = document.querySelector('#narrative');
 
-  document.addEventListener('keydown', (e) => {
+  const listener = (e: KeyboardEvent) => {
     const { code, repeat } = e;
 
     if (code === 'ArrowLeft' || code === 'KeyA') {
@@ -50,5 +50,11 @@ export function addKeyboardControl(goPrevPage: Fn, goNextPage: Fn) {
 
       return;
     }
-  });
+  };
+
+  document.addEventListener('keydown', listener);
+
+  return () => {
+    document.removeEventListener('keydown', listener);
+  };
 }

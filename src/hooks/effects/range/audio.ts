@@ -23,6 +23,9 @@ export function useAudioInRange(effects: RangeEffects) {
   useEffect(() => {
     const audiosForPage = getEffectsInRange(effects, page, 'audio');
 
+    console.log(effects.length, page);
+    console.log('___ audiosForPage', audiosForPage);
+
     Object.keys(audioInstances).forEach((keyCur) => {
       const audioInstanceCur = audioInstances[keyCur];
 

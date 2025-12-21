@@ -2,12 +2,14 @@ import { startTransition } from 'react';
 
 import { useNavigate, useLocation } from 'react-router-dom';
 
-import { mainActions } from 'store/main';
+import { mainActions, mainSelectors } from 'store/main';
 
-import { useDispatch } from 'store';
+import { useDispatch, useSelector } from 'store';
 
 export function useGoToPage() {
   const dispatch = useDispatch();
+
+  const currentPage = useSelector(mainSelectors.page);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -35,8 +37,6 @@ export function useGoToPage() {
       return;
     }
 
-    const currentPage = Number(pathname.split('-')[1]);
-
     goToPage(currentPage + 1);
   };
 
@@ -46,8 +46,6 @@ export function useGoToPage() {
     if (pathname === '/') {
       return;
     }
-
-    const currentPage = Number(pathname.split('-')[1]);
 
     goToPage(currentPage - 1);
   };
