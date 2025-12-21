@@ -1,6 +1,6 @@
 {
   "name": "activebook-react-core",
-  "version": "0.0.526",
+  "version": "0.0.527",
   "description": "",
   "main": "./lib/src/index.js",
   "type": "module",

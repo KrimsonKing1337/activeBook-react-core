@@ -1,7 +1,6 @@
 import { PropsWithChildren, useEffect, useRef, useState } from 'react';
 
 import Hammer from 'hammerjs';
-import { nanoid } from 'nanoid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCompress, faCrop, faExpand, faTimes } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
@@ -48,7 +47,6 @@ export const Modal = ({
 
   const [isFullScreen, setIsFullScreen] = useState(fullScreenDefault);
   const [isCrop, setIsCrop] = useState(cropDefault);
-  const [componentUuid, setComponentUuid] = useState('');
 
   const overflowRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -57,12 +55,6 @@ export const Modal = ({
   const iconCompressRef = useRef<HTMLDivElement>(null);
   const iconCropRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const uuidValue = nanoid();
-
-    setComponentUuid(uuidValue);
-  }, []);
-
   const escPressHandler = (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
       close();
@@ -70,11 +62,15 @@ export const Modal = ({
   };
 
   useEffect(() => {
-    window.addEventListener('popstate', () => {
-      if (!window.location.hash) {
-        close();
-      }
-    });
+    const listener = () => {
+      close();
+    };
+
+    window.addEventListener('popstate', listener);
+
+    return () => {
+      window.removeEventListener('popstate', listener);
+    };
   }, []);
 
   useEffect(() => {
@@ -83,10 +79,6 @@ export const Modal = ({
 
       return;
     }
-
-    const path = `#/modal/${componentUuid}`;
-
-    window.history.pushState('', '', path);
 
     document.addEventListener('keydown', escPressHandler);
   }, [isOpen]);
@@ -154,7 +146,7 @@ export const Modal = ({
       return;
     }
 
-    window.history.pushState(null, '', window.location.pathname);
+    window.history.pushState(null, '', window.location.href);
 
     if (onClose) {
       onClose();
