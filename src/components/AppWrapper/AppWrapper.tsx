@@ -135,8 +135,6 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
 
   const ref = useRef<HTMLDivElement>(null);
 
-  console.log('shouldShowLoader', shouldShowLoader);
-
   const appWrapperClassNames = classNames({
     [styles.appWrapper]: true,
     [styles.isLoading]: shouldShowLoader,

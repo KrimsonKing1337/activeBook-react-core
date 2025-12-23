@@ -20,38 +20,50 @@ function* showAfterDelay(ms: number) {
   }
 }
 
+function* hideAfterDelay(ms: number) {
+  yield delay(ms);
+  const pending: boolean = yield select(selectors.isLoading);
+  if (!pending) yield put(actions.setShowLoader(false));
+}
+
 export function* watchLoaderGate() {
-  let timerTask: any = null;
+  let showTask: any = null;
+  let hideTask: any = null;
 
   while (true) {
     yield take([
+      // список actions, влияющих на pending
       effectsActions.setImagesAmount.type,
       effectsActions.setImagesReadyAmount.type,
       effectsActions.setImageReady.type,
       effectsActions.setVideosAmount.type,
-      effectsActions.setVideoReady.type,
       effectsActions.setVideosReadyAmount.type,
+      effectsActions.setVideoReady.type,
       effectsActions.setDotLottieAmount.type,
-      effectsActions.setDotLottieReady.type,
       effectsActions.setDotLottieReadyAmount.type,
-      // effectsActions.setHowlerLoading.type,
+      effectsActions.setDotLottieReady.type,
     ]);
 
     const pending: boolean = yield select(selectors.isLoading);
     const show: boolean = yield select(selectors.showLoader);
 
     if (pending) {
-      if (!timerTask && !show) {
+      // если pending снова true — отменяем скрытие
+      if (hideTask) { yield cancel(hideTask); hideTask = null; }
+
+      // если ещё не показали — планируем показ
+      if (!show && !showTask) {
         // @ts-expect-error asd
-        timerTask = yield fork(showAfterDelay, 250);
+        showTask = yield fork(showAfterDelay, 250);
       }
     } else {
-      if (timerTask) {
-        yield cancel(timerTask);
-        timerTask = null;
-      }
-      if (show) {
-        yield put(actions.setShowLoader(false));
+      // pending false — отменяем показ, если он ещё не случился
+      if (showTask) { yield cancel(showTask); showTask = null; }
+
+      // если лоадер уже показан — скрываем с задержкой (антифликер)
+      if (show && !hideTask) {
+        // @ts-expect-error asd
+        hideTask = yield fork(hideAfterDelay, 200);
       }
     }
   }
