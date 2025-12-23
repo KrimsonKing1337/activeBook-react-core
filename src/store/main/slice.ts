@@ -4,14 +4,12 @@ import { State } from './@types';
 
 export const initialState: State = {
   showLoader: false,
-  isPending: false,
   id: '',
   page: 0,
   pages: 0,
   allPagesSeen: false,
   tableOfContents: [],
   menuActiveState: null,
-  isLoading: false,
   isVibrationAvailable: null,
   isFlashlightAvailable: null,
   flashlightProblems: '',
@@ -24,12 +22,11 @@ const slice = createSlice({
     setShowLoader(state, action: PayloadAction<State['showLoader']>) {
       state.showLoader = action.payload;
     },
-    setIsPending(state, action: PayloadAction<State['isPending']>) {
-      state.isPending = action.payload;
-    },
-
     setId(state, action: PayloadAction<State['id']>) {
       state.id = action.payload;
+    },
+    setPage(state, action: PayloadAction<State['page']>) {
+      state.page = action.payload;
     },
     setPages(state, action: PayloadAction<State['pages']>) {
       state.pages = action.payload;
@@ -40,16 +37,8 @@ const slice = createSlice({
     setAllPagesSeen(state, action: PayloadAction<State['allPagesSeen']>) {
       state.allPagesSeen = action.payload;
     },
-
-    setPage(state, action: PayloadAction<State['page']>) {
-      state.page = action.payload;
-    },
-
     setMenuActiveState(state, action: PayloadAction<State['menuActiveState']>) {
       state.menuActiveState = action.payload;
-    },
-    setIsLoading(state, action: PayloadAction<State['isLoading']>) {
-      state.isLoading = action.payload;
     },
     setIsVibrationAvailable(state, action: PayloadAction<State['isVibrationAvailable']>) {
       state.isVibrationAvailable = action.payload;

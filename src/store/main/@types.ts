@@ -6,14 +6,12 @@ export type FlashlightState = false | 'js' | 'cordova';
 
 export interface State {
   showLoader: boolean;
-  isPending: boolean;
   id: string;
   page: number;
   pages: number;
   allPagesSeen: boolean;
   tableOfContents: TableOfContents;
   menuActiveState: MenuActiveState;
-  isLoading: boolean;
   isVibrationAvailable: boolean | null;
   isFlashlightAvailable: FlashlightState | null;
   flashlightProblems: string;

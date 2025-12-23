@@ -2,18 +2,16 @@ import type { RootState } from 'store';
 
 import { effectsSelectors } from 'store/effects/common';
 
-const isLoading = (state: RootState) => {
-  return state.main.isLoading
-    || effectsSelectors.isDotLottieLoading(state)
+const isPending = (state: RootState) => {
+  return effectsSelectors.isDotLottieLoading(state)
     || effectsSelectors.isImagesLoading(state)
     || effectsSelectors.isVideosLoading(state);
 };
 
 export const selectors = {
-  isLoading,
+  isPending,
   showLoader: (state: RootState) => state.main.showLoader,
-  isPending: (state: RootState) => state.main.isPending,
-  shouldShowLoader: (state: RootState) => state.main.showLoader && isLoading(state),
+  shouldShowLoader: (state: RootState) => state.main.showLoader && isPending(state),
 
   id: (state: RootState) => state.main.id,
   page: (state: RootState) => state.main.page,

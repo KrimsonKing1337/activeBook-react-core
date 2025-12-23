@@ -1,3 +1,4 @@
+import type { Task } from 'redux-saga';
 import { call, put, takeLatest, delay, fork, select, take, cancel } from 'redux-saga/effects';
 
 import { effectsActions } from 'store/effects/common';
@@ -10,25 +11,30 @@ export function* watchSetMenuActiveState() {
     window.history.pushState(null, '', window.location.href);
   });
 }
+
 function* showAfterDelay(ms: number) {
   yield delay(ms);
 
-  const pending: boolean = yield select(selectors.isLoading);
+  const isPending: boolean = yield select(selectors.isPending);
 
-  if (pending) {
+  if (isPending) {
     yield put(actions.setShowLoader(true));
   }
 }
 
 function* hideAfterDelay(ms: number) {
   yield delay(ms);
-  const pending: boolean = yield select(selectors.isLoading);
-  if (!pending) yield put(actions.setShowLoader(false));
+
+  const isPending: boolean = yield select(selectors.isPending);
+
+  if (!isPending) {
+    yield put(actions.setShowLoader(false));
+  }
 }
 
 export function* watchLoaderGate() {
-  let showTask: any = null;
-  let hideTask: any = null;
+  let showTask: Task | null = null;
+  let hideTask: Task | null = null;
 
   while (true) {
     yield take([
@@ -44,25 +50,29 @@ export function* watchLoaderGate() {
       effectsActions.setDotLottieReady.type,
     ]);
 
-    const pending: boolean = yield select(selectors.isLoading);
-    const show: boolean = yield select(selectors.showLoader);
+    const isPending: boolean = yield select(selectors.isPending);
+    const showLoader: boolean = yield select(selectors.showLoader);
 
-    if (pending) {
+    if (isPending) {
       // если pending снова true — отменяем скрытие
-      if (hideTask) { yield cancel(hideTask); hideTask = null; }
+      if (hideTask) {
+        yield cancel(hideTask);
+        hideTask = null;
+      }
 
       // если ещё не показали — планируем показ
-      if (!show && !showTask) {
-        // @ts-expect-error asd
+      if (!showLoader && !showTask) {
         showTask = yield fork(showAfterDelay, 250);
       }
     } else {
       // pending false — отменяем показ, если он ещё не случился
-      if (showTask) { yield cancel(showTask); showTask = null; }
+      if (showTask) {
+        yield cancel(showTask);
+        showTask = null;
+      }
 
       // если лоадер уже показан — скрываем с задержкой (антифликер)
-      if (show && !hideTask) {
-        // @ts-expect-error asd
+      if (showLoader && !hideTask) {
         hideTask = yield fork(hideAfterDelay, 200);
       }
     }
@@ -71,5 +81,6 @@ export function* watchLoaderGate() {
 
 export function* watchActions() {
   yield takeLatest(actions.setMenuActiveState, watchSetMenuActiveState);
+
   yield fork(watchLoaderGate);
 }
