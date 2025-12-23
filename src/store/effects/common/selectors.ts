@@ -16,5 +16,9 @@ export const selectors = {
   videosReadyAmount: (state: RootState) => state.effects.videosReadyAmount,
   isVideosLoading: (state: RootState) => state.effects.videosAmount !== state.effects.videosReadyAmount,
 
+  audiosAmount: (state: RootState) => state.effects.audiosAmount,
+  audiosReadyAmount: (state: RootState) => state.effects.audiosReadyAmount,
+  isAudiosLoading: (state: RootState) => state.effects.audiosAmount !== state.effects.audiosReadyAmount,
+
   videosCurrentTime: (state: RootState) => state.effects.videosCurrentTime,
 };

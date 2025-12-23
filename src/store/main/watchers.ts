@@ -48,6 +48,9 @@ export function* watchLoaderGate() {
       effectsActions.setDotLottieAmount.type,
       effectsActions.setDotLottieReadyAmount.type,
       effectsActions.setDotLottieReady.type,
+      effectsActions.setAudiosAmount.type,
+      effectsActions.setAudiosReadyAmount.type,
+      effectsActions.setAudioReady.type,
     ]);
 
     const isPending: boolean = yield select(selectors.isPending);
@@ -79,8 +82,14 @@ export function* watchLoaderGate() {
   }
 }
 
+function* watchSetPage() {
+  yield put(effectsActions.setAudiosAmount(0));
+  yield put(effectsActions.setAudiosReadyAmount(0));
+}
+
 export function* watchActions() {
   yield takeLatest(actions.setMenuActiveState, watchSetMenuActiveState);
+  yield takeLatest(actions.setPage, watchSetPage);
 
   yield fork(watchLoaderGate);
 }

@@ -7,6 +7,8 @@ import { useSelector, useDispatch } from 'store';
 import { mainSelectors } from 'store/main';
 import { audioEffectsActions, audioEffectsSelectors } from 'store/effects/audio/audio';
 
+import { effectsActions } from 'store/effects/common';
+
 import { HowlWrapper, type HowlWrapperOptions } from 'utils/effects/audio/HowlWrapper';
 
 export function useAudio({
@@ -28,8 +30,8 @@ export function useAudio({
 }: AudioEffectOptions) {
   const dispatch = useDispatch();
 
-  const audioInstances = useSelector(audioEffectsSelectors.audioInstances);
   const currentPage = useSelector(mainSelectors.page);
+  const audioInstances = useSelector(audioEffectsSelectors.audioInstances);
 
   const refId = useRef('');
 
@@ -67,11 +69,20 @@ export function useAudio({
       onUnload,
     };
 
-    const howlInst = new HowlWrapper(opt);
+    const howlWrapperInst = new HowlWrapper(opt);
+
+    dispatch(effectsActions.setAudiosAmountInc());
+
+    const handler = () => {
+      dispatch(effectsActions.setAudioReady());
+    };
+
+    howlWrapperInst.howlInst.once('load', handler);
+    howlWrapperInst.howlInst.once('loaderror', handler);
 
     refId.current = id;
 
-    dispatch(audioEffectsActions.setAudioInstance(howlInst));
+    dispatch(audioEffectsActions.setAudioInstance(howlWrapperInst));
   }, [currentPage]);
 
   useEffect(() => {

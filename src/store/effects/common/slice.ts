@@ -15,6 +15,9 @@ export const initialState: State = {
   videosAmount: 0,
   videosReadyAmount: 0,
   videosCurrentTime: {},
+
+  audiosAmount: 0,
+  audiosReadyAmount: 0,
 };
 
 const slice = createSlice({
@@ -51,6 +54,19 @@ const slice = createSlice({
       state.imagesReadyAmount = action.payload;
     },
     setImageReady() {},
+
+    setAudiosAmount(state, action: PayloadAction<State['audiosAmount']>) {
+      console.log('setAudiosAmount', action.payload);
+
+      state.audiosAmount = action.payload;
+    },
+    setAudiosReadyAmount(state, action: PayloadAction<State['audiosReadyAmount']>) {
+      state.audiosReadyAmount = action.payload;
+    },
+    setAudioReady() {},
+    setAudiosAmountInc(state) {
+      state.audiosAmount += 1;
+    },
 
     setVideoCurrentTime(state, action: PayloadAction<VideoCurrentTime>) {
       const { id, currentTime } = action.payload;

@@ -5,7 +5,8 @@ import { effectsSelectors } from 'store/effects/common';
 const isPending = (state: RootState) => {
   return effectsSelectors.isDotLottieLoading(state)
     || effectsSelectors.isImagesLoading(state)
-    || effectsSelectors.isVideosLoading(state);
+    || effectsSelectors.isVideosLoading(state)
+    || effectsSelectors.isAudiosLoading(state);
 };
 
 export const selectors = {

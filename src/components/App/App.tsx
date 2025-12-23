@@ -1,4 +1,4 @@
-import { type PropsWithChildren } from 'react';
+import { type PropsWithChildren, Suspense } from 'react';
 
 import { MemoryRouter } from 'react-router-dom';
 
@@ -21,9 +21,11 @@ export const App = ({ children, config, tableOfContents, rangeEffects }: PropsWi
     <StoreProvider>
       <MemoryRouter>
         <AppWrapper config={config} tableOfContents={tableOfContents} rangeEffects={rangeEffects}>
-          <Routes>
-            {children}
-          </Routes>
+          <Suspense fallback={null}>
+            <Routes>
+              {children}
+            </Routes>
+          </Suspense>
         </AppWrapper>
       </MemoryRouter>
     </StoreProvider>

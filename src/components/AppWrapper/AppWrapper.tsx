@@ -44,7 +44,7 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
 
   const { goPrevPage, goNextPage } = useGoToPage();
 
-  const isLoading = useSelector(mainSelectors.isLoading);
+  const isLoading = useSelector(mainSelectors.isPending);
   const shouldShowLoader = useSelector(mainSelectors.shouldShowLoader);
   const page = useSelector(mainSelectors.page);
   const audioInstances = useSelector(audioEffectsSelectors.audioInstances);

@@ -11,6 +11,8 @@ import { audioBgEffectsActions, audioBgEffectsSelectors } from 'store/effects/au
 
 import { useDispatch, useSelector } from 'store';
 
+import { effectsActions } from 'store/effects/common';
+
 import { HowlWrapper } from 'utils/effects/audio/HowlWrapper';
 import { getEffectsInRange } from 'utils/effects/rangeEffects';
 
@@ -71,7 +73,7 @@ export function useAudioInRange(effects: RangeEffects) {
         return;
       }
 
-      const howlInst = new HowlWrapper({
+      const howlWrapperInst = new HowlWrapper({
         id,
         src: [src],
         type,
@@ -87,7 +89,16 @@ export function useAudioInRange(effects: RangeEffects) {
         onUnload,
       });
 
-      dispatch(audioBgEffectsActions.setAudioInstance(howlInst));
+      dispatch(effectsActions.setAudiosAmountInc());
+
+      const handler = () => {
+        dispatch(effectsActions.setAudioReady());
+      };
+
+      howlWrapperInst.howlInst.once('load', handler);
+      howlWrapperInst.howlInst.once('loaderror', handler);
+
+      dispatch(audioBgEffectsActions.setAudioInstance(howlWrapperInst));
     });
   }, [page, audioInstances]);
 }

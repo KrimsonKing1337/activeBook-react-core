@@ -34,7 +34,7 @@ export const Segment = ({
 
   const [id, setId] = useState('');
 
-  const isLoading = useSelector(mainSelectors.isLoading);
+  const isLoading = useSelector(mainSelectors.isPending);
 
   const segments = useSelector(segmentsSelectors.segments);
   const activeId = useSelector(segmentsSelectors.activeId);

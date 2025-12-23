@@ -43,7 +43,11 @@ export function waitForHowlerLoad() {
     }
 
     const promise = new Promise<void>((resolve) => {
-      howlCur.on('load', () => {
+      howlCur.once('load', () => {
+        resolve();
+      });
+
+      howlCur.once('loaderror', () => {
         resolve();
       });
     });

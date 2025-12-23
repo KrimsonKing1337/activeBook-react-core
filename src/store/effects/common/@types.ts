@@ -11,6 +11,9 @@ export interface State {
   videosAmount: number;
   videosReadyAmount: number;
   videosCurrentTime: Record<string, number>;
+
+  audiosAmount: number;
+  audiosReadyAmount: number;
 }
 
 export type VideoCurrentTime = {

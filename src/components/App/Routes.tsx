@@ -1,4 +1,4 @@
-import { type PropsWithChildren, lazy } from 'react';
+import { type PropsWithChildren, lazy, useMemo } from 'react';
 
 import { Route, Routes as ReactRouterRoutes } from 'react-router-dom';
 
@@ -31,7 +31,7 @@ const getPageComponents = (pages: number) => {
 export const Routes = ({ children }: PropsWithChildren<unknown>) => {
   const pages = useSelector(mainSelectors.pages);
 
-  const pageComponents = getPageComponents(pages);
+  const pageComponents = useMemo(() => getPageComponents(pages), [pages]);
 
   return (
     <ReactRouterRoutes>
