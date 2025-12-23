@@ -9,6 +9,8 @@ type VideoProps = React.MediaHTMLAttributes<HTMLVideoElement> & {
   className?: string;
   src: string;
   relativeVolume?: number;
+  onCanPlay?: () => void;
+  onError?: () => void;
 };
 
 export const Video = ({
@@ -18,6 +20,8 @@ export const Video = ({
   relativeVolume = 100,
   muted = true,
   autoPlay = true,
+  onCanPlay,
+  onError,
   ...etc
 }: VideoProps) => {
   const dispatch = useDispatch();
@@ -64,8 +68,10 @@ export const Video = ({
       className={className}
       src={src}
       preload="auto"
-      poster="/assets/img/poster-default.png"
+      poster="./assets/img/poster-default.png"
       muted={muted}
+      onCanPlay={onCanPlay}
+      onError={onError}
       {...etc}
     />
   );

@@ -9,6 +9,11 @@ export const initialState: State = {
   dotLottieAmount: 0,
   dotLottieReadyAmount: 0,
 
+  imagesAmount: 0,
+  imagesReadyAmount: 0,
+
+  videosAmount: 0,
+  videosReadyAmount: 0,
   videosCurrentTime: {},
 };
 
@@ -30,6 +35,22 @@ const slice = createSlice({
       state.dotLottieReadyAmount = action.payload;
     },
     setDotLottieReady() {},
+
+    setVideosAmount(state, action: PayloadAction<State['videosAmount']>) {
+      state.videosAmount = action.payload;
+    },
+    setVideosReadyAmount(state, action: PayloadAction<State['videosReadyAmount']>) {
+      state.dotLottieReadyAmount = action.payload;
+    },
+    setVideoReady() {},
+
+    setImagesAmount(state, action: PayloadAction<State['imagesAmount']>) {
+      state.imagesAmount = action.payload;
+    },
+    setImagesReadyAmount(state, action: PayloadAction<State['imagesReadyAmount']>) {
+      state.imagesReadyAmount = action.payload;
+    },
+    setImageReady() {},
 
     setVideoCurrentTime(state, action: PayloadAction<VideoCurrentTime>) {
       const { id, currentTime } = action.payload;

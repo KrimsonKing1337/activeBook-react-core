@@ -1,10 +1,9 @@
-import { startTransition } from 'react';
-
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import { mainActions, mainSelectors } from 'store/main';
 
 import { useDispatch, useSelector } from 'store';
+import { backgroundEffectsActions } from 'store/effects/background';
 
 export function useGoToPage() {
   const dispatch = useDispatch();
@@ -17,15 +16,17 @@ export function useGoToPage() {
   const goToPage = (page: number) => {
     if (page === 0) {
       dispatch(mainActions.setPage(0));
+      dispatch(backgroundEffectsActions.setEffects({}));
+
       navigate('/');
 
       return;
     }
 
-    startTransition(() => {
-      dispatch(mainActions.setPage(page));
-      navigate(`/page-${page}`);
-    });
+    dispatch(mainActions.setPage(page));
+    dispatch(backgroundEffectsActions.setEffects({}));
+
+    navigate(`/page-${page}`);
   };
 
   const goNextPage = () => {

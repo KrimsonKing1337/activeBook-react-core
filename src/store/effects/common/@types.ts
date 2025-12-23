@@ -5,6 +5,11 @@ export interface State {
   dotLottieAmount: number;
   dotLottieReadyAmount: number;
 
+  imagesAmount: number;
+  imagesReadyAmount: number;
+
+  videosAmount: number;
+  videosReadyAmount: number;
   videosCurrentTime: Record<string, number>;
 }
 

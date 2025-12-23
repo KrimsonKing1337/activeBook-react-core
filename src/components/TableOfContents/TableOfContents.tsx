@@ -1,5 +1,3 @@
-import { nanoid } from 'nanoid';
-
 import { useDispatch, useSelector } from 'store';
 import { mainActions, mainSelectors } from 'store/main';
 
@@ -27,7 +25,9 @@ export const TableOfContents = () => {
 
       <div className={styles.itemsWrapper}>
         {tableOfContents.map((itemCur) => {
-          const uuid = nanoid();
+          const { title, pageNumber } = itemCur;
+
+          const uuid = `${pageNumber}___${title}`;
 
           return (
             <Item key={uuid} {...itemCur} />

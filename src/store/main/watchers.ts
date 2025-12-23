@@ -1,29 +1,41 @@
-import { call, put, takeLatest, race, delay } from 'redux-saga/effects';
+import type { Task } from 'redux-saga';
+import { call, put, takeLatest, race, delay, fork, join } from 'redux-saga/effects';
 
 import { actions } from './slice';
 
-import { waitForHowlerLoad, waitForMediaLoad } from './utils';
+// import { waitForHowlerLoad, waitForMediaLoad } from './utils';
+import { waitForMediaLoad } from './utils';
 
 export function* watchSetMenuActiveState() {
   yield call(() => {
     window.history.pushState(null, '', window.location.href);
   });
 }
+const nextFrame = () => {
+  return new Promise<void>((resolve) => {
+    return requestAnimationFrame(() => resolve());
+  });
+};
 
 function* doLoad() {
-  yield call(waitForHowlerLoad);
+  yield call(nextFrame);
+  yield call(nextFrame);
+
+  // yield call(waitForHowlerLoad);
   yield call(waitForMediaLoad);
 }
 
 export function* watchSetPage() {
+  const task: Task = yield fork(doLoad);
+
   const { timeout } = yield race({
-    load: call(doLoad),
+    load: join(task),
     timeout: delay(500),
   });
 
   if (timeout) {
     yield put(actions.setIsLoading(true));
-    yield call(doLoad);
+    yield join(task);
     yield put(actions.setIsLoading(false));
   }
 }

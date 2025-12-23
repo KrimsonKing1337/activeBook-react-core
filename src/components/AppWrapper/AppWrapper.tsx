@@ -1,4 +1,4 @@
-import { type PropsWithChildren, useEffect } from 'react';
+import { type PropsWithChildren, useEffect, useRef } from 'react';
 
 import classNames from 'classnames';
 import { setWasmUrl } from '@lottiefiles/dotlottie-react';
@@ -132,6 +132,8 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
   useBeforeUnloadHandler();
   useEffectsInRange(rangeEffects);
 
+  const ref = useRef<HTMLDivElement>(null);
+
   const appWrapperClassNames = classNames({
     [styles.appWrapper]: true,
     [styles.isLoading]: isLoading,
@@ -139,7 +141,7 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
 
   return (
     <>
-      <div className={appWrapperClassNames}>
+      <div ref={ref} className={appWrapperClassNames}>
         {children}
       </div>
 
