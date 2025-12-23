@@ -3,8 +3,7 @@ import { call, put, takeLatest, race, delay, fork, join } from 'redux-saga/effec
 
 import { actions } from './slice';
 
-// import { waitForHowlerLoad, waitForMediaLoad } from './utils';
-import { waitForMediaLoad } from './utils';
+import { waitForHowlerLoad } from './utils';
 
 export function* watchSetMenuActiveState() {
   yield call(() => {
@@ -21,8 +20,7 @@ function* doLoad() {
   yield call(nextFrame);
   yield call(nextFrame);
 
-  // yield call(waitForHowlerLoad);
-  yield call(waitForMediaLoad);
+  yield call(waitForHowlerLoad);
 }
 
 export function* watchSetPage() {

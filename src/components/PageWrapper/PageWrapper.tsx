@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'store';
 import { mainSelectors } from 'store/main';
 import { effectsSelectors } from 'store/effects/common';
 import { segmentsActions } from 'store/segments';
+import { backgroundEffectsActions } from 'store/effects/background';
 
 import { Toolbar } from 'components/Toolbar';
 import { Menu } from 'components/Menu';
@@ -37,6 +38,7 @@ export const PageWrapper = ({
   useEffect(() => {
     return () => {
       dispatch(segmentsActions.reset());
+      dispatch(backgroundEffectsActions.setEffects({}));
     };
   }, []);
 
