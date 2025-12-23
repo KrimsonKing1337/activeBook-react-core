@@ -56,8 +56,6 @@ const slice = createSlice({
     setImageReady() {},
 
     setAudiosAmount(state, action: PayloadAction<State['audiosAmount']>) {
-      console.log('setAudiosAmount', action.payload);
-
       state.audiosAmount = action.payload;
     },
     setAudiosReadyAmount(state, action: PayloadAction<State['audiosReadyAmount']>) {
