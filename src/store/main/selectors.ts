@@ -11,6 +11,10 @@ const isLoading = (state: RootState) => {
 
 export const selectors = {
   isLoading,
+  showLoader: (state: RootState) => state.main.showLoader,
+  isPending: (state: RootState) => state.main.isPending,
+  shouldShowLoader: (state: RootState) => state.main.showLoader && isLoading(state),
+
   id: (state: RootState) => state.main.id,
   page: (state: RootState) => state.main.page,
   pages: (state: RootState) => state.main.pages,

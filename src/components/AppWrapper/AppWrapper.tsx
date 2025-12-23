@@ -45,6 +45,7 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
   const { goPrevPage, goNextPage } = useGoToPage();
 
   const isLoading = useSelector(mainSelectors.isLoading);
+  const shouldShowLoader = useSelector(mainSelectors.shouldShowLoader);
   const page = useSelector(mainSelectors.page);
   const audioInstances = useSelector(audioEffectsSelectors.audioInstances);
   const audioInstancesBg = useSelector(audioBgEffectsSelectors.audioInstances);
@@ -134,9 +135,11 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
 
   const ref = useRef<HTMLDivElement>(null);
 
+  console.log('shouldShowLoader', shouldShowLoader);
+
   const appWrapperClassNames = classNames({
     [styles.appWrapper]: true,
-    [styles.isLoading]: isLoading,
+    [styles.isLoading]: shouldShowLoader,
   });
 
   return (

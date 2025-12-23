@@ -1,44 +1,63 @@
-import type { Task } from 'redux-saga';
-import { call, put, takeLatest, race, delay, fork, join } from 'redux-saga/effects';
+import { call, put, takeLatest, delay, fork, select, take, cancel } from 'redux-saga/effects';
+
+import { effectsActions } from 'store/effects/common';
 
 import { actions } from './slice';
-
-import { waitForHowlerLoad } from './utils';
+import { selectors } from './selectors';
 
 export function* watchSetMenuActiveState() {
   yield call(() => {
     window.history.pushState(null, '', window.location.href);
   });
 }
-const nextFrame = () => {
-  return new Promise<void>((resolve) => {
-    return requestAnimationFrame(() => resolve());
-  });
-};
+function* showAfterDelay(ms: number) {
+  yield delay(ms);
 
-function* doLoad() {
-  yield call(nextFrame);
-  yield call(nextFrame);
+  const pending: boolean = yield select(selectors.isLoading);
 
-  yield call(waitForHowlerLoad);
+  if (pending) {
+    yield put(actions.setShowLoader(true));
+  }
 }
 
-export function* watchSetPage() {
-  const task: Task = yield fork(doLoad);
+export function* watchLoaderGate() {
+  let timerTask: any = null;
 
-  const { timeout } = yield race({
-    load: join(task),
-    timeout: delay(500),
-  });
+  while (true) {
+    yield take([
+      effectsActions.setImagesAmount.type,
+      effectsActions.setImagesReadyAmount.type,
+      effectsActions.setImageReady.type,
+      effectsActions.setVideosAmount.type,
+      effectsActions.setVideoReady.type,
+      effectsActions.setVideosReadyAmount.type,
+      effectsActions.setDotLottieAmount.type,
+      effectsActions.setDotLottieReady.type,
+      effectsActions.setDotLottieReadyAmount.type,
+      // effectsActions.setHowlerLoading.type,
+    ]);
 
-  if (timeout) {
-    yield put(actions.setIsLoading(true));
-    yield join(task);
-    yield put(actions.setIsLoading(false));
+    const pending: boolean = yield select(selectors.isLoading);
+    const show: boolean = yield select(selectors.showLoader);
+
+    if (pending) {
+      if (!timerTask && !show) {
+        // @ts-expect-error asd
+        timerTask = yield fork(showAfterDelay, 250);
+      }
+    } else {
+      if (timerTask) {
+        yield cancel(timerTask);
+        timerTask = null;
+      }
+      if (show) {
+        yield put(actions.setShowLoader(false));
+      }
+    }
   }
 }
 
 export function* watchActions() {
   yield takeLatest(actions.setMenuActiveState, watchSetMenuActiveState);
-  yield takeLatest(actions.setPage, watchSetPage);
+  yield fork(watchLoaderGate);
 }

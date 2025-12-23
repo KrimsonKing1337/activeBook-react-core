@@ -3,6 +3,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { State } from './@types';
 
 export const initialState: State = {
+  showLoader: false,
+  isPending: false,
   id: '',
   page: 0,
   pages: 0,
@@ -19,6 +21,13 @@ const slice = createSlice({
   name: '@main',
   initialState,
   reducers: {
+    setShowLoader(state, action: PayloadAction<State['showLoader']>) {
+      state.showLoader = action.payload;
+    },
+    setIsPending(state, action: PayloadAction<State['isPending']>) {
+      state.isPending = action.payload;
+    },
+
     setId(state, action: PayloadAction<State['id']>) {
       state.id = action.payload;
     },
