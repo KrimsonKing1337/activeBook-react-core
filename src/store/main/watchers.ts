@@ -37,6 +37,9 @@ export function* watchLoaderGate() {
   let hideTask: Task | null = null;
 
   while (true) {
+    if (showTask && !showTask.isRunning()) showTask = null;
+    if (hideTask && !hideTask.isRunning()) hideTask = null;
+
     yield take([
       // список actions, влияющих на pending
       effectsActions.setImagesAmount.type,

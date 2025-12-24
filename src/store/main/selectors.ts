@@ -12,7 +12,6 @@ const isPending = (state: RootState) => {
 export const selectors = {
   isPending,
   showLoader: (state: RootState) => state.main.showLoader,
-  shouldShowLoader: (state: RootState) => state.main.showLoader && isPending(state),
 
   id: (state: RootState) => state.main.id,
   page: (state: RootState) => state.main.page,

@@ -33,7 +33,7 @@ export const PageWrapper = ({
   const dispatch = useDispatch();
 
   const inverseColorIsActive = useSelector(effectsSelectors.inverseColorIsActive);
-  const isLoading = useSelector(mainSelectors.shouldShowLoader);
+  const showLoader = useSelector(mainSelectors.showLoader);
 
   useEffect(() => {
     return () => {
@@ -49,7 +49,7 @@ export const PageWrapper = ({
 
   const mainContendClassNames = classNames({
     [styles.mainContent]: true,
-    [styles.isLoading]: isLoading,
+    [styles.isLoading]: showLoader,
   });
 
   return (
