@@ -1,10 +1,12 @@
-import type { PropsWithChildren } from 'react';
+import type { HTMLAttributes, PropsWithChildren } from 'react';
 
 import * as styles from './Header.scss';
 
-export const Header = ({ children }: PropsWithChildren) => {
+export type HeaderProps = HTMLAttributes<HTMLDivElement> & PropsWithChildren;
+
+export const Header = ({ children, ...etc }: HeaderProps) => {
   return (
-    <div className={styles.Header}>
+    <div className={styles.Header} {...etc}>
       {children}
     </div>
   );
