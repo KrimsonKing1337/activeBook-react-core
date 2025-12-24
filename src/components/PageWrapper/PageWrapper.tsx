@@ -33,7 +33,7 @@ export const PageWrapper = ({
   const dispatch = useDispatch();
 
   const inverseColorIsActive = useSelector(effectsSelectors.inverseColorIsActive);
-  const isLoading = useSelector(mainSelectors.isPending);
+  const isLoading = useSelector(mainSelectors.shouldShowLoader);
 
   useEffect(() => {
     return () => {
