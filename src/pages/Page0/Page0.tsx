@@ -110,7 +110,7 @@ export const Page0 = ({ goCallback, header, subHeader, showButton = true, Footer
       )}
 
       {showButton && !isWelcomeTourActive && (
-        <Action fullWidth onClick={actionClickHandler}>
+        <Action style={{ fontSize: '1.375em' /* 22px */ }} fullWidth onClick={actionClickHandler}>
           {actionLabel}
         </Action>
       )}
