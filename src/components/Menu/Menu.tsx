@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'store';
 import { mainActions, mainSelectors } from 'store/main';
 
 import { Overflow } from 'components/Overflow';
-import { Header } from 'components/Header';
+import { MenuHeader } from 'components/MenuHeader';
 
 import {
   Volume,
@@ -42,7 +42,7 @@ export const Menu = () => {
 
   return (
     <Overflow isOpen={isOpen}>
-      <Header label="Настройки" />
+      <MenuHeader label="Настройки" />
       <Volume />
       <Themes />
       <WelcomeTour />

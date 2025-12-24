@@ -8,7 +8,7 @@ import { mainSelectors } from 'store/main';
 
 import { useGoToPage } from 'hooks/control/useGoToPage';
 
-import { PageWrapper, Action, WelcomeTour } from 'components';
+import { PageWrapper, Action, WelcomeTour, Header, Article } from 'components';
 
 import { Flags, modalsWereShowed } from 'utils/localStorage/modalsWereShowed';
 import { flashlightInst } from 'utils/effects/flashlight';
@@ -98,15 +98,15 @@ export const Page0 = ({ goCallback, header, subHeader, showButton = true, Footer
       <Modal isActive={modalIsActive} onConfirm={modalConfirmHandler} />
 
       {header && (
-        <header>
+        <Header>
           {header}
-        </header>
+        </Header>
       )}
 
       {subHeader && (
-        <article>
+        <Article>
           {subHeader}
-        </article>
+        </Article>
       )}
 
       {showButton && !isWelcomeTourActive && (

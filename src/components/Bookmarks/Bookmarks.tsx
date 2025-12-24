@@ -8,7 +8,7 @@ import { mainSelectors } from 'store/main';
 import { bookmarksActions, bookmarksSelectors } from 'store/bookmarks';
 
 import { Overflow } from 'components/Overflow';
-import { Header } from 'components/Header';
+import { MenuHeader } from 'components/MenuHeader';
 
 import { Item } from './Item';
 import { useBookmarks } from './hooks';
@@ -59,7 +59,7 @@ export const Bookmarks = () => {
 
   return (
     <Overflow id="bookmarks" isOpen={isOpen}>
-      <Header label="Закладки" />
+      <MenuHeader label="Закладки" />
 
       <div className={styles.itemsWrapper}>
         {bookmarks.map((itemCur, index) => {

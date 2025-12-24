@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'store';
 import { mainActions, mainSelectors } from 'store/main';
 
-import { Overflow, Header } from 'components';
+import { Overflow, MenuHeader } from 'components';
 
 import { Item } from './Item';
 
@@ -21,7 +21,7 @@ export const TableOfContents = () => {
 
   return (
     <Overflow id="table-of-contents" isOpen={isOpen}>
-      <Header label="Оглавление" />
+      <MenuHeader label="Оглавление" />
 
       <div className={styles.itemsWrapper}>
         {tableOfContents.map((itemCur) => {
