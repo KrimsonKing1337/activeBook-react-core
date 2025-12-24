@@ -15,14 +15,14 @@ import * as styles from './Narrative.scss';
 export const Narrative = ({ children }: PropsWithChildren) => {
   const { goNextPage, goPrevPage } = useGoToPage();
 
-  const fontSize = useSelector(configSelectors.fontSize);
+  // const fontSize = useSelector(configSelectors.fontSize);
   const lineHeight = useSelector(configSelectors.lineHeight);
 
   const fontColor = useSelector(fontEffectsSelectors.color);
   const fontStyle = useSelector(fontEffectsSelectors.style);
 
   const narrativeStyle = {
-    fontSize: `${fontSize}%`,
+    // fontSize: `${fontSize}%`,
     color: fontColor,
   };
 

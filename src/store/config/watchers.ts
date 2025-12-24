@@ -6,6 +6,8 @@ import { mainSelectors } from 'store/main';
 import { setThemeCss } from 'utils/styles/setThemeCss';
 import { set as localStorageSet } from 'utils/localStorage/localStorage';
 
+import { setCssVariable } from 'utils/styles/setCssVariable';
+
 import { State } from './@types';
 import { actions } from './slice';
 import { selectors } from './selectors';
@@ -58,6 +60,14 @@ export function* watchSetTheme(action: PayloadAction<State['theme']>) {
   yield call(saveInLocalStorage);
 }
 
+export function* watchSetFont(action: PayloadAction<State['fontSize']>) {
+  yield call(() => {
+    setCssVariable('--font-scale', action.payload.toString());
+  });
+
+  yield call(saveInLocalStorage);
+}
+
 export function* watchSetEtc() {
   yield call(saveInLocalStorage);
 }
@@ -65,9 +75,9 @@ export function* watchSetEtc() {
 export function* watchActions() {
   yield takeLatest(actions.setAll, watchSetAll);
   yield takeLatest(actions.setTheme, watchSetTheme);
+  yield takeLatest(actions.setFontSize, watchSetFont);
   yield takeLatest(actions.setAuthorComments, watchSetEtc);
   yield takeLatest(actions.setFlashlight, watchSetEtc);
-  yield takeLatest(actions.setFontSize, watchSetEtc);
   yield takeLatest(actions.setLineHeight, watchSetEtc);
   yield takeLatest(actions.setVibration, watchSetEtc);
   yield takeLatest(actions.setWelcomeTour, watchSetEtc);

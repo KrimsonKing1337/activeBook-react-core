@@ -1,7 +1,7 @@
 .Header {
   padding-bottom: 16px;
 
-  font-size: 2em; // 32px;
+  font-size: calc(var(--font-base) * 2 * var(--font-scale) / 100); // 32px;
   font-weight: bold;
   line-height: 1.2;
   text-transform: uppercase;

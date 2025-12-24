@@ -77,6 +77,8 @@
 }
 
 :root {
+  --font-base: 16px;
+  --font-scale: 100; // %
   --scrollbar-width: 0;
   --text-shadow-color: red;
   --text-shadow-animation: blink;
