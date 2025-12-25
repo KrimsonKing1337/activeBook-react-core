@@ -1,6 +1,6 @@
 @use 'styles/__mixins' as mixins;
 
-.themes {
+.Themes {
   margin-top: 24px;
   padding: 20px 0;
 
@@ -8,14 +8,14 @@
   border-bottom: 1px #eaeaea solid;
 }
 
-.themesItemsWrapper {
+.ThemesItemsWrapper {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   margin-top: 7px;
 }
 
-.themesItem {
+.ThemesItem {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -54,6 +54,6 @@
   @include mixins.hover-default;
 }
 
-.spoiler {
+.Spoiler {
   margin-top: 20px;
 }

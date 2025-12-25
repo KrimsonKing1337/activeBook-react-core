@@ -72,11 +72,11 @@ export const Narrative = ({ children }: PropsWithChildren) => {
     <div
       ref={ref}
       id="narrative"
-      className={styles.narrative}
+      className={styles.Narrative}
       style={narrativeStyle}
       tabIndex={0}
     >
-      <div className={styles.text} style={textStyle}>
+      <div className={styles.Text} style={textStyle}>
         {children}
       </div>
     </div>

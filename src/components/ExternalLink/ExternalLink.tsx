@@ -12,7 +12,7 @@ export const ExternalLink = ({ href, children }: PropsWithChildren<ExternalLinkP
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={styles.link}
+      className={styles.Link}
     >
       {' '}
       {children}

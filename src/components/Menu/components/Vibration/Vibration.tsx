@@ -24,7 +24,7 @@ export const Vibration = () => {
   };
 
   return (
-    <div className={styles.vibration}>
+    <div className={styles.Vibration}>
       <Toggle
         label="Вибрация (там, где доступно)"
         isActiveDefault={true}

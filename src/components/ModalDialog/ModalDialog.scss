@@ -1,6 +1,6 @@
 @use "styles/__variables" as variables;
 
-.wrapper {
+.Wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,7 +8,7 @@
   height: variables.$modalHeight;
 }
 
-.actions {
+.Actions {
   display: flex;
   align-items: center;
   justify-content: flex-start;

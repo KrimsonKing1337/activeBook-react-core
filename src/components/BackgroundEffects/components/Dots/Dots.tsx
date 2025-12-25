@@ -39,7 +39,7 @@ export const Dots = () => {
         if (elementCur.parentElement) {
           const str = elementCur.parentElement.classList.value;
 
-          if (str.includes('dotsWrapper')) {
+          if (str.includes('DotsWrapper')) {
             return elementCur;
           }
         }
@@ -106,9 +106,9 @@ export const Dots = () => {
   const dots = createDotsAsArray();
 
   return (
-    <div className={styles.dotsWrapper}>
+    <div className={styles.DotsWrapper}>
       {dots.map((key) => (
-        <div key={key} className={styles.dot} />
+        <div key={key} className={styles.Dot} />
       ))}
     </div>
   );

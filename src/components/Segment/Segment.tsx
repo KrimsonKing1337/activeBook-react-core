@@ -109,7 +109,7 @@ export const Segment = ({
   const withButton = false;
 
   const segmentClassNames = classNames({
-    [styles.segment]: true,
+    [styles.Segment]: true,
     [styles.isActive]: isActive,
     [styles.withButton]: withButton,
   });
@@ -119,8 +119,8 @@ export const Segment = ({
       {children}
 
       {withButton && (
-        <div className={styles.segmentButton} onClick={buttonClickHandler}>
-          <div className={styles.segmentButtonIconWrapper}>
+        <div className={styles.SegmentButton} onClick={buttonClickHandler}>
+          <div className={styles.SegmentButtonIconWrapper}>
             <FontAwesomeIcon icon={faArrowDown} />
           </div>
         </div>

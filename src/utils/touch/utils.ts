@@ -1,1 +1,1 @@
-export const selectorInsteadOfHover = 'hover';
+export const selectorInsteadOfHover = 'Hover';

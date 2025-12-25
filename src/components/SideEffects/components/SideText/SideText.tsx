@@ -10,18 +10,18 @@ export const SideText = ({ children }: PropsWithChildren<unknown>) => {
   }
 
   return (
-    <div className={styles.sideTextScrollWrapper}>
-      <div className={styles.sideTextScrollLeftWrapper}>
-        <div className={styles.sideTextScrollLeft}>
-          <div className={styles.sideTextScrollContent}>
+    <div className={styles.SideTextScrollWrapper}>
+      <div className={styles.SideTextScrollLeftWrapper}>
+        <div className={styles.SideTextScrollLeft}>
+          <div className={styles.SideTextScrollContent}>
             {childrenAsArray[0]}
           </div>
         </div>
       </div>
 
-      <div className={styles.sideTextScrollRightWrapper}>
-        <div className={styles.sideTextScrollRight}>
-          <div className={styles.sideTextScrollContent}>
+      <div className={styles.SideTextScrollRightWrapper}>
+        <div className={styles.SideTextScrollRight}>
+          <div className={styles.SideTextScrollContent}>
             {childrenAsArray[1]}
           </div>
         </div>

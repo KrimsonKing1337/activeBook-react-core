@@ -21,7 +21,7 @@ export const Action = ({
   ...etc
 }: PropsWithChildren<ActionProps>) => {
   const actionClassNames = classNames({
-    [styles.action]: true,
+    [styles.Action]: true,
     [styles.isFullWidth]: fullWidth,
     [className]: !!className,
   });

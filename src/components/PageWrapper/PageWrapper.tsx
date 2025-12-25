@@ -43,12 +43,12 @@ export const PageWrapper = ({
   }, []);
 
   const pageWrapperClassNames = classNames({
-    [styles.pageWrapper]: true,
+    [styles.PageWrapper]: true,
     [styles.inverseColorIsActive]: inverseColorIsActive,
   });
 
   const mainContendClassNames = classNames({
-    [styles.mainContent]: true,
+    [styles.MainContent]: true,
     [styles.isLoading]: showLoader,
   });
 

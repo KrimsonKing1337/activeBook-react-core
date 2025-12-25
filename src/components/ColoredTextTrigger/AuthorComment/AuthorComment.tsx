@@ -29,7 +29,7 @@ export const AuthorComment = ({
   const showComment = (allPagesSeen && authorCommentsIsOn) || isDemoMode;
 
   const authorCommentClassNames = classNames({
-    [styles.authorComment]: true,
+    [styles.AuthorComment]: true,
     [className]: !!className,
   });
 

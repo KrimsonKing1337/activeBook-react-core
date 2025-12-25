@@ -44,19 +44,19 @@ export const Toggle = ({
   };
 
   const toggleClassNames = classNames({
-    [styles.toggle]: true,
+    [styles.Toggle]: true,
     [styles.isWithoutBorder]: withoutBorder,
   });
 
   const trueIsActive = isActive === undefined ? uncontrolledIsActive : isActive;
 
   const itemOnClassNames = classNames({
-    [styles.item]: true,
+    [styles.Item]: true,
     [styles.isActive]: trueIsActive,
   });
 
   const itemOffClassNames = classNames({
-    [styles.item]: true,
+    [styles.Item]: true,
     [styles.isActive]: !trueIsActive,
   });
 
@@ -64,7 +64,7 @@ export const Toggle = ({
     <div className={toggleClassNames} {...rest}>
       <Label label={label} />
 
-      <div className={styles.itemsWrapper}>
+      <div className={styles.ItemsWrapper}>
         <div className={itemOnClassNames} onClick={() => buttonClickHandler(true, onClickOn)}>
           Вкл
         </div>

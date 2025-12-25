@@ -36,7 +36,7 @@ export const BackgroundEffects = memo(() => {
 
       return oneOfBgIsActive && (
         <Child key={id}>
-          <div style={style} className={styles.backgroundObjectsWrapper}>
+          <div style={style} className={styles.BackgroundObjectsWrapper}>
             <Shadow options={shadow} />
 
             {Component}

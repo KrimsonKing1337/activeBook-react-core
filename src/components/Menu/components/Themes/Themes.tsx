@@ -25,10 +25,10 @@ export const Themes = () => {
   };
 
   return (
-    <div className={styles.themes}>
+    <div className={styles.Themes}>
       <Label label="Оформление" />
 
-      <div className={styles.themesItemsWrapper}>
+      <div className={styles.ThemesItemsWrapper}>
         {Object.entries(themes).map(([themeName, themeOptions]) => {
           const { main, bg } = themeOptions;
 
@@ -42,7 +42,7 @@ export const Themes = () => {
             <div
               key={themeName}
               style={style}
-              className={styles.themesItem}
+              className={styles.ThemesItem}
               onClick={() => clickHandler(themeName)}
             >
               {activeTheme === themeName && <FontAwesomeIcon icon={faCheck} />}
@@ -52,7 +52,7 @@ export const Themes = () => {
       </div>
 
       {isMobile && (
-        <Spoiler label="Внимание" className={styles.spoiler}>
+        <Spoiler label="Внимание" className={styles.Spoiler}>
           Если цвета меняются некорректно - проверьте настройки тёмного режима вашего телефона.
           Например, у Xiaomi это Настройки {'->'} Экран {'->'} Параметры тёмного режима.
           Там найти activeBook и убедиться, что туда-сюдашечка не находится в положении "вкл"

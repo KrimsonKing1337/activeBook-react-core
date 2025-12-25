@@ -23,16 +23,16 @@ export const Item = ({ title, subtitle = '', pageNumber }: ItemProps) => {
   };
 
   return (
-    <div className={styles.item} onClick={clickHandler}>
-      <div className={styles.title}>
+    <div className={styles.Item} onClick={clickHandler}>
+      <div className={styles.Title}>
         {title}
       </div>
 
-      <div className={styles.subtitle}>
+      <div className={styles.Subtitle}>
         {subtitle}
       </div>
 
-      <div className={styles.pageNumber}>
+      <div className={styles.PageNumber}>
         {pageNumber}
       </div>
     </div>

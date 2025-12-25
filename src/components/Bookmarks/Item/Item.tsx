@@ -7,7 +7,7 @@ import * as styles from './Item.scss';
 
 export type ItemProps = {
   pageNumber: number;
-  onDelete: (bookmark: number) => any;
+  onDelete: (bookmark: number) => void;
 };
 
 export const Item = ({ pageNumber, onDelete }: ItemProps) => {
@@ -24,12 +24,12 @@ export const Item = ({ pageNumber, onDelete }: ItemProps) => {
   };
 
   return (
-    <div className={styles.item} onClick={clickHandler}>
-      <div className={styles.pageNumber}>
+    <div className={styles.Item} onClick={clickHandler}>
+      <div className={styles.PageNumber}>
         Страница {pageNumber}
       </div>
 
-      <div className={styles.deleteIcon} onClick={deleteIconClickHandler}>
+      <div className={styles.DeleteIcon} onClick={deleteIconClickHandler}>
         <FontAwesomeIcon icon={faTimes} />
       </div>
     </div>

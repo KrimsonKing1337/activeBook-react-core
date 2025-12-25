@@ -14,7 +14,7 @@ import { Item } from './Item';
 import { useBookmarks } from './hooks';
 import * as styles from './Bookmarks.scss';
 
-const buttonAddClassNames = classNames([styles.button, styles.isAdd]);
+const buttonAddClassNames = classNames([styles.Button, styles.isAdd]);
 
 export const Bookmarks = () => {
   const dispatch = useDispatch();
@@ -61,7 +61,7 @@ export const Bookmarks = () => {
     <Overflow id="bookmarks" isOpen={isOpen}>
       <MenuHeader label="Закладки" />
 
-      <div className={styles.itemsWrapper}>
+      <div className={styles.ItemsWrapper}>
         {bookmarks.map((itemCur, index) => {
           return (
             <Item key={index} pageNumber={itemCur} onDelete={deleteHandler} />
@@ -69,12 +69,12 @@ export const Bookmarks = () => {
         })}
       </div>
 
-      <div className={styles.footer}>
+      <div className={styles.Footer}>
         <button className={buttonAddClassNames} onClick={addButtonClickHandler}>
           Добавить
         </button>
 
-        <button className={styles.button} onClick={closeButtonClickHandler}>
+        <button className={styles.Button} onClick={closeButtonClickHandler}>
           Закрыть
         </button>
       </div>

@@ -1,6 +1,6 @@
 @use "styles/__mixins" as mixins;
 
-.toggle {
+.Toggle {
   margin-top: 20px;
   padding: 20px 0;
 
@@ -11,7 +11,7 @@
   }
 }
 
-.itemsWrapper {
+.ItemsWrapper {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,7 +22,7 @@
   border-radius: 16px;
 }
 
-.item {
+.Item {
   display: flex;
   flex-shrink: 0;
   align-items: center;

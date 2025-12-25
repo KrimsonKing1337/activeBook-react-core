@@ -46,7 +46,7 @@ export const Images = ({ images }: ImagesProps) => {
       <Img
         key={uuid}
         style={style}
-        className={styles.img}
+        className={styles.Img}
         src={src}
         onLoad={loadHandler}
         onError={loadHandler}

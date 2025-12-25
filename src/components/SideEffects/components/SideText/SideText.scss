@@ -1,13 +1,13 @@
-.sideTextScrollWrapper {
+.SideTextScrollWrapper {
   display: block;
 }
 
-.sideTextScrollLeftWrapper {
+.SideTextScrollLeftWrapper {
   transform: rotate(-90deg) translateX(-2px);
   transform-origin: left;
 }
 
-.sideTextScrollLeft {
+.SideTextScrollLeft {
   $defaultState: translateX(0);
 
   position: absolute;
@@ -31,12 +31,12 @@
   }
 }
 
-.sideTextScrollRightWrapper {
+.SideTextScrollRightWrapper {
   transform: rotate(90deg) translateY(-2px);
   transform-origin: right;
 }
 
-.sideTextScrollRight {
+.SideTextScrollRight {
   $defaultState: translateX(calc(100% + 100vh));
 
   position: absolute;
@@ -60,7 +60,7 @@
   }
 }
 
-.sideTextScrollContent {
+.SideTextScrollContent {
   display: flex;
   align-items: center;
   justify-content: flex-start;

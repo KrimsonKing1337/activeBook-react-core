@@ -7,7 +7,7 @@ import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 import * as styles from './SlideShow.scss';
 
-type SlideShowMode = 'modal' | null;
+type SlideShowMode = 'Modal' | null;
 
 export type SlideShowProp = {
   isVisible?: boolean;
@@ -154,7 +154,7 @@ export class SlideShow extends React.Component<PropsWithChildren<SlideShowProp>,
   };
 
   setIsOverflow = () => {
-    if (this.props.mode !== 'modal') {
+    if (this.props.mode !== 'Modal') {
       return;
     }
 
@@ -202,23 +202,23 @@ export class SlideShow extends React.Component<PropsWithChildren<SlideShowProp>,
     const { isWithoutBorders, mode } = this.props;
     const { slideIndex, isOverflow, arrowsAreVisible } = this.state;
 
-    const isModalMode = mode === 'modal';
+    const isModalMode = mode === 'Modal';
 
     const wrapperClassNames = classNames({
-      [styles.wrapper]: true,
-      [styles.arrowsAreVisible]: arrowsAreVisible,
+      [styles.Wrapper]: true,
+      [styles.ArrowsAreVisible]: arrowsAreVisible,
       [styles.isWithoutBorders]: isWithoutBorders || isModalMode,
       [styles.isModalMode]: isModalMode,
     });
 
     const slideShowClassNames = classNames({
-      [styles.slideShow]: true,
+      [styles.SlideShow]: true,
       [styles.isOverflow]: isOverflow,
       [styles.isModalMode]: isModalMode,
     });
 
     const itemsWrapperClassNames = classNames({
-      [styles.itemsWrapper]: true,
+      [styles.ItemsWrapper]: true,
       [styles.isModalMode]: isModalMode,
       [styles.isOverflow]: isOverflow,
     });
@@ -226,11 +226,11 @@ export class SlideShow extends React.Component<PropsWithChildren<SlideShowProp>,
     return (
       <div ref={this.wrapperRef} className={wrapperClassNames}>
         <div className="SlideShowToolbar">
-          <div className={styles.left} onClick={(e) => this.arrowClickHandler(e, false)}>
+          <div className={styles.Left} onClick={(e) => this.arrowClickHandler(e, false)}>
             <FontAwesomeIcon icon={faArrowLeft} />
           </div>
 
-          <div className={styles.right} onClick={(e) => this.arrowClickHandler(e, true)}>
+          <div className={styles.Right} onClick={(e) => this.arrowClickHandler(e, true)}>
             <FontAwesomeIcon icon={faArrowRight} />
           </div>
         </div>
@@ -239,7 +239,7 @@ export class SlideShow extends React.Component<PropsWithChildren<SlideShowProp>,
           <div ref={this.itemsWrapperRef} className={itemsWrapperClassNames}>
             {this.childrenAsArray.map((childCur, index) => {
               const itemClassNames = classNames({
-                [styles.item]: true,
+                [styles.Item]: true,
                 [styles.isActive]: index === slideIndex,
               });
 

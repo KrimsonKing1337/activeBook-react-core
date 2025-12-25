@@ -90,12 +90,12 @@ export const Nav = () => {
   };
 
   const goToWithArrowsClassNames = classNames({
-    [styles.goToWithArrows]: true,
+    [styles.GoToWithArrows]: true,
     [styles.isHide]: !goToWithInputIsHide,
   });
 
   const goToWithInputClassNames = classNames({
-    [styles.goToWithInput]: true,
+    [styles.GoToWithInput]: true,
     [styles.isHide]: goToWithInputIsHide,
   });
 
@@ -116,7 +116,7 @@ export const Nav = () => {
           <ArrowLeft />
         </Item>
 
-        <div className={styles.pageNumber} onClick={pageNumberClickHandler}>
+        <div className={styles.PageNumber} onClick={pageNumberClickHandler}>
           {page} из {pages}
         </div>
 
@@ -126,12 +126,12 @@ export const Nav = () => {
       </div>
 
       <div className={goToWithInputClassNames}>
-        <div className={styles.wrapperInput}>
+        <div className={styles.WrapperInput}>
           <input
             ref={inputRef}
             onChange={inputChangeHandler}
             onBlur={inputBlurHandler}
-            className={styles.input}
+            className={styles.Input}
             type="number"
             min="0"
             inputMode="numeric"
@@ -142,7 +142,7 @@ export const Nav = () => {
         </div>
 
         {/* onClick отрабатывает позже onBlur у input-а выше, поэтому используется onMouseDown */}
-        <button className={styles.button} onMouseDown={buttonClickHandler}>
+        <button className={styles.Button} onMouseDown={buttonClickHandler}>
           Перейти
         </button>
       </div>

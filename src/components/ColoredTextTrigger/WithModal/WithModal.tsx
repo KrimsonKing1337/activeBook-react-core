@@ -7,7 +7,7 @@ import { EasterEgg } from 'components/ColoredTextTrigger/EasterEgg';
 
 import * as styles from './WithModal.scss';
 
-export type TriggerType = 'action' | 'author' | 'egg';
+export type TriggerType = 'Action' | 'author' | 'egg';
 
 export type ModalWithVideoEasterEggProps = {
   mode?: ModalProps['mode'];
@@ -62,7 +62,7 @@ export const WithModal = ({
       return;
     }
 
-    const video = wrapperRef.current.querySelector('video');
+    const video = wrapperRef.current.querySelector('Video');
 
     if (!video) {
       return;
@@ -79,7 +79,7 @@ export const WithModal = ({
   const trigger = getTrigger();
 
   return (
-    <span className={styles.wrapper} ref={wrapperRef}>
+    <span className={styles.Wrapper} ref={wrapperRef}>
       <ModalComponent
         isOpen={isActive}
         onClose={() => setIsActive(false)}

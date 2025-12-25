@@ -21,7 +21,7 @@ export const WelcomeTour = () => {
   };
 
   return (
-    <div className={styles.welcomeTour}>
+    <div className={styles.WelcomeTour}>
       <Toggle
         label="Показать обучение"
         isActiveDefault={isActive}

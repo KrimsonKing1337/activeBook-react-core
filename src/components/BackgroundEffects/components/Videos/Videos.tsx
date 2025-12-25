@@ -53,7 +53,7 @@ export const Videos = ({ videos }: VideosProps) => {
         key={id}
         id={id}
         style={style}
-        className={styles.video}
+        className={styles.Video}
         src={src}
         autoPlay={autoPlay}
         loop={loop}

@@ -9,7 +9,7 @@ import * as styles from './Modal.scss';
 
 type Func = () => void;
 
-type ModalMode = 'media' | 'text';
+type ModalMode = 'media' | 'Text';
 
 export type ModalProps = {
   isOpen: boolean;
@@ -33,7 +33,7 @@ export const Modal = ({
   children,
   onClose,
   isOpen,
-  mode = 'text',
+  mode = 'Text',
   canClose = true,
   canFullScreen = false,
   fullScreenDefault = false,
@@ -223,45 +223,45 @@ export const Modal = ({
   const isMediaMode = mode === 'media';
 
   const overflowClassNames = classNames({
-    [styles.overflow]: true,
+    [styles.Overflow]: true,
     [styles.isOpen]: isOpen,
   });
 
   const modalClassNames = classNames({
-    [styles.modal]: true,
+    [styles.Modal]: true,
     [styles.isFullScreen]: isFullScreen,
     [styles.isMediaMode]: isMediaMode,
   });
 
   const iconExpandClassNames = classNames({
-    [styles.iconExpand]: true,
+    [styles.IconExpand]: true,
     [styles.isFullScreen]: isFullScreen,
     [styles.isMediaMode]: isMediaMode,
     [styles.isHidden]: !canFullScreen,
   });
 
   const iconCloseClassNames = classNames({
-    [styles.iconClose]: true,
+    [styles.IconClose]: true,
     [styles.canClose]: canClose,
     [styles.isMediaMode]: isMediaMode,
     [styles.isFullScreen]: isFullScreen,
   });
 
   const iconCompressClassNames = classNames({
-    [styles.iconCompress]: true,
+    [styles.IconCompress]: true,
     [styles.isFullScreen]: isFullScreen,
     [styles.isMediaMode]: isMediaMode,
   });
 
   const iconCropClassNames = classNames({
-    [styles.iconCrop]: true,
+    [styles.IconCrop]: true,
     [styles.isFullScreen]: isFullScreen,
     [styles.isMediaMode]: isMediaMode,
     [styles.isHidden]: !canCrop,
   });
 
   const contentClassNames = classNames({
-    [styles.content]: true,
+    [styles.Content]: true,
     [styles.isFullScreen]: isFullScreen,
     [styles.isMediaMode]: isMediaMode,
     [styles.isCrop]: isCrop,
@@ -270,7 +270,7 @@ export const Modal = ({
   return (
     <div ref={overflowRef} className={overflowClassNames} onClick={overflowClickHandler}>
       <div ref={wrapperRef} className={modalClassNames}>
-        <div className={styles.wrapper} onClick={(e) => e.stopPropagation()}>
+        <div className={styles.Wrapper} onClick={(e) => e.stopPropagation()}>
           <div className="modalToolbar">
             <div ref={iconCloseRef} className={iconCloseClassNames} onClick={closeIconClickHandler}>
               <FontAwesomeIcon icon={faTimes} />

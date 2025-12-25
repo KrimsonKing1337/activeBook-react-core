@@ -7,7 +7,7 @@ export type MenuHeaderProps = {
 export const MenuHeader = ({ label }: MenuHeaderProps) => {
   return (
     <>
-      <div className={styles.header}>
+      <div className={styles.Header}>
         {label}
       </div>
     </>

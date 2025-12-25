@@ -22,7 +22,7 @@ export const EasterEgg = ({
   };
 
   const easterEggClassNames = classNames({
-    [styles.easterEgg]: true,
+    [styles.EasterEgg]: true,
     [className]: !!className,
   });
 

@@ -1,6 +1,6 @@
 @use "styles/__mixins" as mixins;
 
-.item {
+.Item {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -15,11 +15,11 @@
   @include mixins.hover-default;
 }
 
-.title {
+.Title {
   flex-shrink: 0;
 }
 
-.subtitle {
+.Subtitle {
   margin-left: 9px;
   overflow: hidden;
 
@@ -30,12 +30,12 @@
   text-overflow: ellipsis;
 }
 
-.pageNumber {
+.PageNumber {
   flex-shrink: 0;
   margin-left: 15px;
 }
 
-.deleteIcon {
+.DeleteIcon {
   flex-shrink: 0;
   margin-left: auto;
 }

@@ -1,7 +1,7 @@
 @use "styles/__mixins" as mixins;
 @use "styles/__variables" as variables;
 
-.wrapper {
+.Wrapper {
   padding: 10px;
   overflow-x: hidden;
 
@@ -9,12 +9,12 @@
   // todo: проверить, что в других целевых браузерах стрелочки тоже скрываются
   transform: translateZ(0);
 
-  &.arrowsAreVisible {
-    .left {
+  &.ArrowsAreVisible {
+    .Left {
       margin-left: 5%;
     }
 
-    .right {
+    .Right {
       margin-right: 5%;
     }
   }
@@ -33,7 +33,7 @@
   }
 }
 
-.slideShow {
+.SlideShow {
   position: relative;
 
   display: flex;
@@ -46,8 +46,8 @@
   overflow-y: auto;
 
   /*
-  * иначе событие swipe у Hammer.js не срабатывает,
-  * см.: https://stackoverflow.com/questions/60198150/hammerjs-swipe-not-working-on-elements-with-overflow-css-property
+  * иначе событие swipe у Hammer.Js не срабатывает,
+  * см.: https://stackoverflow.Com/questions/60198150/hammerjs-swipe-not-working-on-elements-with-overflow-css-property
   */
   touch-action: pan-y !important;
 
@@ -65,10 +65,10 @@
     align-items: flex-start;
   }
 
-  @include mixins.scrollbar;
+  @include mixins.Scrollbar;
 }
 
-.itemsWrapper {
+.ItemsWrapper {
   display: flex;
   align-items: center;
 
@@ -93,7 +93,7 @@
   }
 }
 
-.item {
+.Item {
   flex-shrink: 0;
   width: 100%;
   height: 0;
@@ -117,8 +117,8 @@
 }
 
 // позиционируем элементы ровно посередине
-.left,
-.right {
+.Left,
+.Right {
   $transition: margin ease 0.15s 0s;
 
   position: fixed;
@@ -148,10 +148,10 @@
   @include mixins.hover-default($transition);
 }
 
-.left {
+.Left {
   margin-left: -25%;
 }
 
-.right {
+.Right {
   margin-right: -25%;
 }

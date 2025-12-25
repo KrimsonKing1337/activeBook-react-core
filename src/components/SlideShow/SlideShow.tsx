@@ -7,7 +7,7 @@ import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 import * as styles from './SlideShow.scss';
 
-type SlideShowMode = 'modal' | null;
+type SlideShowMode = 'Modal' | null;
 
 export type SlideShowProps = {
   isVisible?: boolean;
@@ -146,23 +146,23 @@ export const SlideShow = ({
     changeSlide(isNext);
   };
 
-  const isModalMode = mode === 'modal';
+  const isModalMode = mode === 'Modal';
 
   const wrapperClassNames = classNames({
-    [styles.wrapper]: true,
-    [styles.arrowsAreVisible]: arrowsAreVisible,
+    [styles.Wrapper]: true,
+    [styles.ArrowsAreVisible]: arrowsAreVisible,
     [styles.isWithoutBorders]: isWithoutBorders || isModalMode,
     [styles.isModalMode]: isModalMode,
   });
 
   const slideShowClassNames = classNames({
-    [styles.slideShow]: true,
+    [styles.SlideShow]: true,
     [styles.isOverflow]: isOverflow,
     [styles.isModalMode]: isModalMode,
   });
 
   const itemsWrapperClassNames = classNames({
-    [styles.itemsWrapper]: true,
+    [styles.ItemsWrapper]: true,
     [styles.isModalMode]: isModalMode,
     [styles.isOverflow]: isOverflow,
   });
@@ -170,11 +170,11 @@ export const SlideShow = ({
   return (
     <div ref={wrapperRef} className={wrapperClassNames} onClick={wrapperClickHandler}>
       <div className="SlideShowToolbar">
-        <div className={styles.left} onClick={(e) => arrowClickHandler(e, false)}>
+        <div className={styles.Left} onClick={(e) => arrowClickHandler(e, false)}>
           <FontAwesomeIcon icon={faArrowLeft} />
         </div>
 
-        <div className={styles.right} onClick={(e) => arrowClickHandler(e, true)}>
+        <div className={styles.Right} onClick={(e) => arrowClickHandler(e, true)}>
           <FontAwesomeIcon icon={faArrowRight} />
         </div>
       </div>
@@ -183,7 +183,7 @@ export const SlideShow = ({
         <div ref={itemsWrapperRef} className={itemsWrapperClassNames}>
           {childrenAsArray.map((childCur, index) => {
             const itemClassNames = classNames({
-              [styles.item]: true,
+              [styles.Item]: true,
               [styles.isActive]: index === slideIndex,
             });
 

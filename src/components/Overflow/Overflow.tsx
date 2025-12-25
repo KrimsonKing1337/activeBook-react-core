@@ -52,7 +52,7 @@ export const Overflow = ({ children, isOpen, className = '', ...etc }: OverflowP
   }, [isOpen]);
 
   const overflowClassNames = classNames({
-    [styles.overflow]: true,
+    [styles.Overflow]: true,
     [styles.isOpen]: isOpen,
     [className]: !!className,
   });

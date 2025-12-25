@@ -1,7 +1,7 @@
 @use "styles/__mixins" as mixins;
 @use "styles/__variables" as variables;
 
-.overflow {
+.Overflow {
   position: fixed;
   top: 0;
   right: 0;
@@ -21,7 +21,7 @@
   }
 }
 
-.modal {
+.Modal {
   $transition: width #{variables.$transitionDefault}, height #{variables.$transitionDefault};
 
   position: fixed;
@@ -55,10 +55,10 @@
     }
   }
 
-  @include mixins.scrollbar($transition);
+  @include mixins.Scrollbar($transition);
 }
 
-.wrapper {
+.Wrapper {
   position: relative;
 
   display: flex;
@@ -68,11 +68,11 @@
   width: 100%;
 }
 
-.toolbar {
+.Toolbar {
   display: block;
 }
 
-.iconClose {
+.IconClose {
   position: fixed;
   top: 0;
   right: 0;
@@ -104,8 +104,8 @@
   @include mixins.modal-content-icon;
 }
 
-.iconExpand,
-.iconCompress {
+.IconExpand,
+.IconCompress {
   position: fixed;
   right: 0;
   bottom: 0;
@@ -143,7 +143,7 @@
   @include mixins.modal-content-icon;
 }
 
-.iconCompress {
+.IconCompress {
   display: none;
 
   &.isFullScreen {
@@ -151,7 +151,7 @@
   }
 }
 
-.iconCrop {
+.IconCrop {
   position: absolute;
   bottom: 5px;
   left: 8px !important;
@@ -177,7 +177,7 @@
   @include mixins.modal-content-icon;
 }
 
-.content {
+.Content {
   height: variables.$modalHeight;
 
   &.isFullScreen {
@@ -209,7 +209,7 @@
   }
 }
 
-.confirm {
+.Confirm {
   display: flex;
   align-items: center;
   justify-content: flex-start;

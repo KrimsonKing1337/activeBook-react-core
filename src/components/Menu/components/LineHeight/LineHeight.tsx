@@ -12,7 +12,7 @@ import * as styles from './LineHeight.scss';
 
 function getClassNames(className: string) {
   return classNames([
-    styles.item,
+    styles.Item,
     className,
   ]);
 }
@@ -42,19 +42,19 @@ export const LineHeight = () => {
   const currentValueLabel = `${lineHeight}%`;
 
   return (
-    <div className={styles.lineHeight}>
+    <div className={styles.LineHeight}>
       <Label label="Межстрочный интервал" />
 
-      <div className={styles.itemsWrapper}>
-        <div className={getClassNames(styles.isMinus)} onClick={minusClickHandler}>
+      <div className={styles.ItemsWrapper}>
+        <div className={getClassNames(styles.IsMinus)} onClick={minusClickHandler}>
           -
         </div>
 
-        <div className={getClassNames(styles.isValue)}>
+        <div className={getClassNames(styles.IsValue)}>
           {currentValueLabel}
         </div>
 
-        <div className={getClassNames(styles.isPlus)} onClick={plusClickHandler}>
+        <div className={getClassNames(styles.IsPlus)} onClick={plusClickHandler}>
           +
         </div>
       </div>

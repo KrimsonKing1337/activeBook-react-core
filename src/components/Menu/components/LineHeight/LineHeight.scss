@@ -1,28 +1,28 @@
 @use "styles/__mixins" as mixins;
 
-.lineHeight {
+.LineHeight {
   margin-top: 20px;
   padding: 20px 0;
 
   border-bottom: 1px #eaeaea solid;
 }
 
-.itemsWrapper {
+.ItemsWrapper {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   margin-top: 11px;
 }
 
-.item {
+.Item {
   margin-left: 8px;
 
   &:nth-child(1) {
     margin-left: 0;
   }
 
-  &.isMinus,
-  &.isPlus {
+  &.IsMinus,
+  &.IsPlus {
     font-size: 22px;
     font-weight: bold;
 
@@ -31,7 +31,7 @@
     @include mixins.hover-default;
   }
 
-  &.isValue {
+  &.IsValue {
     color: var(--main);
     font-size: 14px;
     font-weight: 100;

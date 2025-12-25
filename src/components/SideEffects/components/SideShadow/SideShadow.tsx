@@ -11,6 +11,6 @@ export const SideShadow = () => {
   useColorCarameldansen(sideShadowRef);
 
   return (
-    <div ref={sideShadowRef} className={styles.sideShadow} />
+    <div ref={sideShadowRef} className={styles.SideShadow} />
   );
 };

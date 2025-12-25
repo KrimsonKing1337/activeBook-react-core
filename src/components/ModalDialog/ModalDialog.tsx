@@ -122,20 +122,20 @@ export const ModalDialog = ({
       onClose={closeHandler}
       {...etc}
     >
-      <div className={styles.wrapper}>
+      <div className={styles.Wrapper}>
         <div className="ModalDialogDesc">
           {children}
         </div>
 
-        <div className={styles.actions}>
+        <div className={styles.Actions}>
           {showConfirmButton && (
-            <Button type="success" disabled={!canClose} onClick={confirmButtonClickHandler}>
+            <Button type="Success" disabled={!canClose} onClick={confirmButtonClickHandler}>
               {confirmBtnLabel}
             </Button>
           )}
 
           {showCancelButton && (
-            <Button type="secondary" disabled={!canClose} onClick={cancelButtonClickHandler}>
+            <Button type="Secondary" disabled={!canClose} onClick={cancelButtonClickHandler}>
               {cancelBtnLabel}
             </Button>
           )}

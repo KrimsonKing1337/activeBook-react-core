@@ -53,28 +53,28 @@ export const Volume = () => {
   * но получаю ошибку: Can't perform a React state update on an unmounted component
   */
   return (
-    <div className={styles.volume}>
-      <div className={styles.item}>
+    <div className={styles.Volume}>
+      <div className={styles.Item}>
         <Label label="Общая громкость" />
         <Slider value={globalVolume} onChange={globalChangeHandler} onAfterChange={afterChangeHandler} />
       </div>
 
-      <div className={styles.item}>
+      <div className={styles.Item}>
         <Label label="Громкость музыки" />
         <Slider value={musicVolume} onChange={musicChangeHandler} onAfterChange={afterChangeHandler} />
       </div>
 
-      <div className={styles.item}>
+      <div className={styles.Item}>
         <Label label="SFX" />
         <Slider value={sfxVolume} onChange={sfxChangeHandler} onAfterChange={afterChangeHandler} />
       </div>
 
-      <div className={styles.item}>
+      <div className={styles.Item}>
         <Label label="Фоновые звуки" />
         <Slider value={bgVolume} onChange={bgChangeHandler} onAfterChange={afterChangeHandler} />
       </div>
 
-      <div className={styles.item}>
+      <div className={styles.Item}>
         <Label label="Громкость видео" />
         <Slider value={videosVolume} onChange={videosChangeHandler} onAfterChange={afterChangeHandler} />
       </div>

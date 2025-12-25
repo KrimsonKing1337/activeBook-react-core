@@ -1,6 +1,6 @@
 @use "styles/__variables" as variables;
 
-.pageWrapper {
+.PageWrapper {
   position: relative;
 
   display: flex;
@@ -25,7 +25,7 @@
   }
 }
 
-.mainContent {
+.MainContent {
   position: relative;
   z-index: 2;
 
@@ -43,7 +43,7 @@
   box-shadow: 1px 1px 5px 0 rgb(0 0 0 / 75%);
 
   &.isLoading {
-    height: calc(100vh - 5px - 10px); // padding-top + padding-bottom from .pageWrapper
+    height: calc(100vh - 5px - 10px); // padding-top + padding-bottom from .PageWrapper
 
     > * {
       display: none;

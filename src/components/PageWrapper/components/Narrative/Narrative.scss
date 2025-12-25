@@ -1,6 +1,6 @@
 @use "styles/__mixins" as mixins;
 
-.narrative {
+.Narrative {
   position: relative;
 
   width: 100%;
@@ -14,15 +14,15 @@
   hyphens: auto;
 
   /*
-  * иначе событие swipe у Hammer.js не срабатывает,
-  * см.: https://stackoverflow.com/questions/60198150/hammerjs-swipe-not-working-on-elements-with-overflow-css-property
+  * иначе событие swipe у Hammer.Js не срабатывает,
+  * см.: https://stackoverflow.Com/questions/60198150/hammerjs-swipe-not-working-on-elements-with-overflow-css-property
   */
   touch-action: pan-y !important;
 
-  @include mixins.scrollbar;
+  @include mixins.Scrollbar;
 }
 
-.text {
+.Text {
   header {
     padding-bottom: 16px;
 

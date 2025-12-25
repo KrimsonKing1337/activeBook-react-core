@@ -72,12 +72,12 @@ export const Spoiler = ({
   };
 
   return (
-    <div className={styles.spoiler} {...rest}>
-      <div className={styles.button} onClick={buttonClickHandler}>
+    <div className={styles.Spoiler} {...rest}>
+      <div className={styles.Button} onClick={buttonClickHandler}>
         {buttonLabel}
       </div>
 
-      <div className={styles.content} ref={contentRef}>
+      <div className={styles.Content} ref={contentRef}>
         <div>{children}</div>
       </div>
     </div>

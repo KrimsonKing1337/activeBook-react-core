@@ -1,7 +1,7 @@
 @use "styles/__mixins" as mixins;
 @use "styles/__variables" as variables;
 
-.overflow {
+.Overflow {
   $transition: top ease 0.15s 0s;
 
   position: absolute;
@@ -30,7 +30,7 @@
     background: transparent;
   }
 
-  @include mixins.scrollbar($transition);
+  @include mixins.Scrollbar($transition);
 
   @media screen and (max-width: variables.$appWidth) {
     height: 100%;

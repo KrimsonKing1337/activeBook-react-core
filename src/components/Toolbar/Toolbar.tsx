@@ -50,8 +50,8 @@ export const Toolbar = ({ sbMode }: ToolbarProps) => {
   };
 
   return (
-    <div id="toolbar" className={styles.wrapper}>
-      <div className={styles.toolbar}>
+    <div id="Toolbar" className={styles.Wrapper}>
+      <div className={styles.Toolbar}>
         {!sbMode && (
           <>
             <Item data-welcome-tour-id="bookmarks" onClick={bookmarkClickHandler}>
@@ -64,7 +64,7 @@ export const Toolbar = ({ sbMode }: ToolbarProps) => {
           </>
         )}
 
-        <div data-welcome-tour-id="font" className={styles.fontSizeControlWrapper}>
+        <div data-welcome-tour-id="font" className={styles.FontSizeControlWrapper}>
           <Item onClick={fontSmallClickHandler}>
             <FontSmallIcon />
           </Item>

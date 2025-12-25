@@ -10,7 +10,7 @@ export type ItemProps = React.HTMLAttributes<HTMLImageElement> & {
 
 export const Item = ({ children, className, ...etc }: PropsWithChildren<ItemProps>) => {
   const itemClassNames = classNames([
-    styles.item,
+    styles.Item,
     className,
   ]);
 

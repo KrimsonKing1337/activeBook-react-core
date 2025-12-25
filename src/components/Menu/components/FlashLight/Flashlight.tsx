@@ -54,7 +54,7 @@ export const Flashlight = () => {
   };
 
   return (
-    <div className={styles.flashlight}>
+    <div className={styles.Flashlight}>
       <Toggle
         label="Вспышка (там, где доступно)"
         isActiveDefault={true}

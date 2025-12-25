@@ -23,7 +23,7 @@ export const TableOfContents = () => {
     <Overflow id="table-of-contents" isOpen={isOpen}>
       <MenuHeader label="Оглавление" />
 
-      <div className={styles.itemsWrapper}>
+      <div className={styles.ItemsWrapper}>
         {tableOfContents.map((itemCur) => {
           const { title, pageNumber } = itemCur;
 
@@ -35,7 +35,7 @@ export const TableOfContents = () => {
         })}
       </div>
 
-      <button className={styles.button} onClick={closeButtonClickHandler}>
+      <button className={styles.Button} onClick={closeButtonClickHandler}>
         Закрыть
       </button>
     </Overflow>

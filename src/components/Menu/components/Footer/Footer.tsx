@@ -7,7 +7,7 @@ import * as styles from './Footer.scss';
 
 function getClassNames(className: string) {
   return classNames([
-    styles.button,
+    styles.Button,
     className,
   ]);
 }
@@ -28,7 +28,7 @@ export const Footer = () => {
   };
 
   return (
-    <div className={styles.footer}>
+    <div className={styles.Footer}>
       <button className={getClassNames(styles.isTableOfContents)} onClick={tableOfContentsButtonClickHandler}>
         Оглавление
       </button>

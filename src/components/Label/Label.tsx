@@ -6,7 +6,7 @@ export type LabelProps = {
 
 export const Label = ({ label }: LabelProps) => {
   return (
-    <div className={styles.label}>
+    <div className={styles.Label}>
       {label}
     </div>
   );

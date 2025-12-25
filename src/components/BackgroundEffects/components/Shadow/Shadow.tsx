@@ -14,6 +14,6 @@ export const Shadow = ({ options }: ShadowProps) => {
   }
 
   return (
-    <div style={style} className={styles.shadow} />
+    <div style={style} className={styles.Shadow} />
   );
 };
