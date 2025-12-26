@@ -1,4 +1,4 @@
-import { Article, Header, ModalDialog, P } from 'components';
+import { ModalDialog, Article, Header, P } from 'components';
 
 export type ModalProps = {
   isActive: boolean;
@@ -17,12 +17,12 @@ export const Modal = ({ isActive, onConfirm }: ModalProps) => {
     >
       <div>
         <Header>
-          Перед тем как начнём...
+          Вы можете использовать свайпы
         </Header>
 
         <Article>
           <P>
-            Познакомьтесь с возможностями книги
+            А так же стрелки клавиатуры и клавиши A, D
           </P>
         </Article>
       </div>

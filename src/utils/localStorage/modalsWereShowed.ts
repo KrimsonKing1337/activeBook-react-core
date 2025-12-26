@@ -4,6 +4,7 @@ const key = 'modalsWereShowed';
 
 export enum Flags {
   usingCamera = 'usingCamera',
+  swipes = 'swipes',
   inverseColor = 'inverseColor', // todo: сделать это непосредственно в книге
 }
 
@@ -23,6 +24,7 @@ function set(id: string, name: Flags, value: boolean) {
   let newValues = {
     [Flags.usingCamera]: false,
     [Flags.inverseColor]: false,
+    [Flags.swipes]: false,
   };
 
   if (values) {

@@ -2,8 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
-
-
 import ArrowLeft from 'assets/img/toolbar/i-arrow-left.svg';
 import ArrowRight from 'assets/img/toolbar/i-arrow-right.svg';
 
@@ -15,17 +13,24 @@ import { useGoToPage } from 'hooks/control/useGoToPage';
 
 import { Item } from 'components/Toolbar/components/Item';
 
+import { Flags, modalsWereShowed } from 'utils/localStorage/modalsWereShowed';
+
+import { Modal } from './components';
+
 import * as styles from './Nav.scss';
 
 export const Nav = () => {
   const { goToPage, goPrevPage, goNextPage } = useGoToPage();
 
+  const id = useSelector(mainSelectors.id);
   const page = useSelector(mainSelectors.page);
   const pages = useSelector(mainSelectors.pages);
 
   const inputRef = useRef<HTMLInputElement>(null);
+
   const [goToWithInputIsHide, setGoToWithInputIsHide] = useState(true);
   const [inputValue, setInputValue] = useState('');
+  const [isModalActive, setIsModalActive] = useState(false);
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -49,12 +54,22 @@ export const Nav = () => {
     };
   }, [goToWithInputIsHide, inputValue]);
 
+  const modalConfirmHandler = () => {
+    modalsWereShowed.set(id, Flags.swipes, true);
+
+    setIsModalActive(false);
+  };
+
   const prevClickHandler = () => {
     goPrevPage();
   };
 
   const nextClickHandler = () => {
-    goNextPage();
+    if (modalsWereShowed.get(id, Flags.swipes)) {
+      goNextPage();
+    } else {
+      setIsModalActive(true);
+    }
   };
 
   const pageNumberClickHandler = () => {
@@ -111,6 +126,8 @@ export const Nav = () => {
    * */
   return (
     <>
+      <Modal isActive={isModalActive} onConfirm={modalConfirmHandler} />
+
       <div className={goToWithArrowsClassNames}>
         <Item onClick={prevClickHandler}>
           <ArrowLeft />

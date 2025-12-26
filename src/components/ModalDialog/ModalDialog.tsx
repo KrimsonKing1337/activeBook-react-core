@@ -129,13 +129,13 @@ export const ModalDialog = ({
 
         <div className={styles.Actions}>
           {showConfirmButton && (
-            <Button type="Success" disabled={!canClose} onClick={confirmButtonClickHandler}>
+            <Button type="success" disabled={!canClose} onClick={confirmButtonClickHandler}>
               {confirmBtnLabel}
             </Button>
           )}
 
           {showCancelButton && (
-            <Button type="Secondary" disabled={!canClose} onClick={cancelButtonClickHandler}>
+            <Button type="secondary" disabled={!canClose} onClick={cancelButtonClickHandler}>
               {cancelBtnLabel}
             </Button>
           )}

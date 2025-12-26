@@ -1,4 +1,4 @@
-import { ModalDialog } from 'components';
+import { ModalDialog, Article, Header, P } from 'components';
 
 export type ModalProps = {
   isActive: boolean;
@@ -17,20 +17,20 @@ export const Modal = ({ isActive, onConfirm }: ModalProps) => {
       onConfirm={onConfirm}
     >
       <div>
-        <header>
+        <Header>
           ОБРАТИТЕ ВНИМАНИЕ
-        </header>
+        </Header>
 
-        <article>
-          <p>
+        <Article>
+          <P>
             Для работы эффектов на основе вспышки, приложению необходимо получить разрешение к камере
             (к сожалению, нет возможности запросить разрешение только ко вспышке).
-          </p>
+          </P>
 
-          <p>
+          <P>
             Вы всегда можете запросить разрешение ещё раз, в меню приложения
-          </p>
-        </article>
+          </P>
+        </Article>
       </div>
     </ModalDialog>
   );

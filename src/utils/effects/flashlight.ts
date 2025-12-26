@@ -120,7 +120,7 @@ export class Flashlight {
 
     this.isInited = true;
 
-    store.dispatch(mainActions.setIsFlashlightAvailable('Js'));
+    store.dispatch(mainActions.setIsFlashlightAvailable('js'));
   }
 
   init(force: boolean = false) {
@@ -168,7 +168,7 @@ export class Flashlight {
       return;
     }
 
-    if (flashLightAvailableState === 'Js') {
+    if (flashLightAvailableState === 'js') {
       this.torchControl(true);
     } else if (flashLightAvailableState === 'cordova') {
       (window as any).plugins.flashlight.switchOn();
@@ -182,7 +182,7 @@ export class Flashlight {
       return;
     }
 
-    if (flashLightAvailableState === 'Js') {
+    if (flashLightAvailableState === 'js') {
       this.torchControl(false);
     } else if (flashLightAvailableState === 'cordova') {
       (window as any).plugins.flashlight.switchOff();

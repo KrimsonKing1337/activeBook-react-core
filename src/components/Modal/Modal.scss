@@ -55,7 +55,7 @@
     }
   }
 
-  @include mixins.Scrollbar($transition);
+  @include mixins.scrollbar($transition);
 }
 
 .Wrapper {

@@ -27,7 +27,7 @@ export type HowlWrapperOptions = {
 type HowlerOptions = {
   src: HowlOptions['src'];
   loop?: HowlOptions['loop'];
-  volume?: HowlOptions['Volume'];
+  volume?: HowlOptions['volume'];
 };
 
 export class HowlWrapper {

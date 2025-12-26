@@ -19,7 +19,7 @@
   */
   touch-action: pan-y !important;
 
-  @include mixins.Scrollbar;
+  @include mixins.scrollbar;
 }
 
 .Text {

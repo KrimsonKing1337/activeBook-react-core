@@ -30,7 +30,7 @@
     background: transparent;
   }
 
-  @include mixins.Scrollbar($transition);
+  @include mixins.scrollbar($transition);
 
   @media screen and (max-width: variables.$appWidth) {
     height: 100%;
