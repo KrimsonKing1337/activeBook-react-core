@@ -4,6 +4,10 @@ export function get(id: string, path: string) {
   const dataByIdJson = localStorage.getItem(id) || '{}';
   const dataById = JSON.parse(dataByIdJson);
 
+  if (!path) {
+    return dataById;
+  }
+
   return _get(dataById, path);
 }
 
