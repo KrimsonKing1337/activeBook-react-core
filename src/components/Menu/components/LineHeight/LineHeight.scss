@@ -23,7 +23,7 @@
 
   &.isMinus,
   &.isPlus {
-    font-size: clamp(18px, 1.8vw, 24px); // 22px;
+    font-size: clamp(12px, 1.5vw, 24px); // 20px;
     font-weight: bold;
 
     cursor: pointer;
