@@ -38,7 +38,8 @@
   overflow: hidden;
 
   background: var(--bg);
-  box-shadow: 1px 1px 5px 0 rgb(0 0 0 / 75%);
+  outline: 1px solid rgb(1 1 1 / 33.3%);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 60%), 0 10px 30px rgb(0 0 0 / 18%);
 
   &.isLoading {
     height: calc(100vh - 5px - 10px); // padding-top + padding-bottom from .PageWrapper
