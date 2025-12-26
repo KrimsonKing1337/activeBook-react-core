@@ -1,23 +1,23 @@
 @use "styles/__mixins" as mixins;
 
 .ItemsWrapper {
-  margin-top: 31px;
+  margin-top: clamp(20px, 2.8vh, 40px); // 31px;
 }
 
 .Button {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 240px;
-  height: 45px;
-  margin: 90px auto 24px;
+  width: clamp(180px, 12.5vw, 280px); // 240px;
+  height: clamp(36px, 4.5vh, 52px); // 45px;
+  margin: clamp(48px, 8vh, 120px) auto clamp(16px, 2.2vh, 32px); // 90px auto 24px;
 
   color: #fff;
-  font-size: 14px;
+  font-size: clamp(13px, 1.1vw, 16px); // 14px;
   font-weight: 100;
 
   background: #828282;
-  border-radius: 25px;
+  border-radius: clamp(18px, 2.5vh, 30px); // 25px;
   cursor: pointer;
 
   @include mixins.hover-default;

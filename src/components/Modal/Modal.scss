@@ -116,8 +116,8 @@
   align-items: center;
   justify-content: center;
 
-  width: 40px;
-  height: 40px;
+  width: clamp(32px, 2.8vw, 44px); // 40px;
+  height: clamp(32px, 2.8vw, 44px); // 40px;
 
   margin: auto;
 
@@ -161,8 +161,8 @@
   align-items: center;
   justify-content: center;
 
-  width: 40px;
-  height: 40px;
+  width: clamp(32px, 2.8vw, 44px); // 40px;
+  height: clamp(32px, 2.8vw, 44px); // 40px;
 
   &.isHidden {
     display: none !important;
@@ -215,7 +215,7 @@
   justify-content: flex-start;
 
   button {
-    margin-left: 15px;
+    margin-left: clamp(10px, 0.8vw, 18px); // 15px;
 
     &:nth-child(1) {
       margin-left: 0;

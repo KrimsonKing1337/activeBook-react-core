@@ -2,7 +2,7 @@
 
 .Wrapper {
   width: 100%;
-  padding: 0 20px;
+  padding: 0 clamp(12px, 1.5vw, 24px); // 0 20px;
 }
 
 .Toolbar {
@@ -15,11 +15,11 @@
   justify-content: flex-start;
   width: 100%;
   max-width: variables.$appWidth;
-  height: 48px;
-  margin-top: 20px;
+  height: clamp(44px, 48px, 52px); // 48px;
+  margin-top: clamp(12px, 1.5vw, 24px); // 20px;
 
   color: var(--secondary);
-  font-size: 16px;
+  font-size: clamp(15px, 16px, 17px); // 16px;
 
   background: transparent;
 }

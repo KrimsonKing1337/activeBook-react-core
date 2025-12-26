@@ -1,8 +1,8 @@
 @use "styles/__mixins" as mixins;
 
 .LineHeight {
-  margin-top: 20px;
-  padding: 20px 0;
+  margin-top: clamp(12px, 1.5vw, 24px); // 20px;
+  padding: clamp(12px, 1.5vw, 24px) 0; // 20px 0;
 
   border-bottom: 1px #eaeaea solid;
 }
@@ -21,9 +21,9 @@
     margin-left: 0;
   }
 
-  &.IsMinus,
-  &.IsPlus {
-    font-size: 22px;
+  &.isMinus,
+  &.isPlus {
+    font-size: clamp(18px, 1.8vw, 24px); // 22px;
     font-weight: bold;
 
     cursor: pointer;
@@ -31,9 +31,9 @@
     @include mixins.hover-default;
   }
 
-  &.IsValue {
+  &.isValue {
     color: var(--main);
-    font-size: 14px;
+    font-size: clamp(13px, 1.1vw, 16px); // 14px;
     font-weight: 100;
   }
 }

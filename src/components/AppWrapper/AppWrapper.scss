@@ -14,13 +14,13 @@
     z-index: 999;
 
     display: none;
-    width: 120px;
-    height: 120px;
+    width: clamp(64px, 6vw, 140px); // 120px
+    height: clamp(64px, 6vw, 140px); // 120px
     margin: auto;
 
     background: var(--bg);
-    border: 16px solid var(--main);
-    border-top: 16px solid var(--hover);
+    border: clamp(8px, 0.8vw, 18px) solid var(--main); // 16px
+    border-top: clamp(8px, 0.8vw, 18px) solid var(--hover); // 16px
     border-radius: 50%;
 
     animation: spin 2s linear infinite;

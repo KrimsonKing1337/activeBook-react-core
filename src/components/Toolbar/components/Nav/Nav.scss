@@ -19,13 +19,13 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  width: 140px;
-  height: 23px;
+  width: clamp(120px, 10vw, 160px); // 140px;
+  height: clamp(22px, 23px, 26px); // 23px;
 
-  font-size: 15px;
+  font-size: clamp(14px, 15px, 16px); // 15px;
 
   background: var(--main);
-  border-radius: 20px;
+  border-radius: clamp(12px, 1.5vw, 24px); // 20px;
 
   &.isHide {
     display: none;
@@ -35,14 +35,15 @@
 .WrapperInput {
   align-items: center;
   justify-content: center;
-  width: 52px;
-  height: 21px;
+  width: clamp(44px, 52px, 64px); // 52px;
+  height: clamp(20px, 21px, 24px); // 21px;
+
   margin-left: 1px;
 
   color: var(--secondary);
 
   background: var(--bg);
-  border-radius: 20px;
+  border-radius: clamp(12px, 1.5vw, 24px); // 20px;
 
   &.hasError {
     border: 1px red solid;

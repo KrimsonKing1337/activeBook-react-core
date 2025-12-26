@@ -76,7 +76,7 @@ export const Narrative = ({ children }: PropsWithChildren) => {
       style={narrativeStyle}
       tabIndex={0}
     >
-      <div className={styles.Text} style={textStyle}>
+      <div className="Narrative__Text" style={textStyle}>
         {children}
       </div>
     </div>

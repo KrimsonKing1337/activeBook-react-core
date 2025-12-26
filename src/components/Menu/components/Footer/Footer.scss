@@ -5,23 +5,23 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 77px;
-  margin-bottom: 26px;
+  margin-top: clamp(48px, 7vh, 96px); // 77px;
+  margin-bottom: clamp(16px, 2.5vh, 32px); // 26px;
 }
 
 .Button {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 240px;
-  height: 45px;
+  width: clamp(160px, 12.5vw, 280px); // 240px;
+  height: clamp(36px, 4.5vh, 52px); // 45px;
   margin-top: 13px;
 
   color: #fff;
-  font-size: 14px;
+  font-size: clamp(13px, 1.1vw, 16px); // 14px;
   font-weight: 100;
 
-  border-radius: 25px;
+  border-radius: clamp(18px, 2.5vh, 30px); // 25px;
   cursor: pointer;
 
   &:nth-child(1) {

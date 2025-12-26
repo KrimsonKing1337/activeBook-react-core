@@ -1,8 +1,8 @@
 @use 'styles/__mixins' as mixins;
 
 .Themes {
-  margin-top: 24px;
-  padding: 20px 0;
+  margin-top: clamp(16px, 2.2vh, 28px); // 24px;
+  padding: clamp(12px, 1.5vw, 24px) 0; // 20px 0;
 
   border-top: 1px #eaeaea solid;
   border-bottom: 1px #eaeaea solid;
@@ -19,8 +19,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: clamp(24px, 2.5vw, 40px); // 32px;
+  height: clamp(24px, 2.5vw, 40px); // 32px;
   margin-left: 10px;
 
   border: 1px solid;
@@ -55,5 +55,5 @@
 }
 
 .Spoiler {
-  margin-top: 20px;
+  margin-top: clamp(12px, 1.5vw, 24px); // 20px;
 }

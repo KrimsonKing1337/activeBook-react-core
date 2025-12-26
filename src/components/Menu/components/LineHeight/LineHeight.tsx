@@ -46,15 +46,15 @@ export const LineHeight = () => {
       <Label label="Межстрочный интервал" />
 
       <div className={styles.ItemsWrapper}>
-        <div className={getClassNames(styles.IsMinus)} onClick={minusClickHandler}>
+        <div className={getClassNames(styles.isMinus)} onClick={minusClickHandler}>
           -
         </div>
 
-        <div className={getClassNames(styles.IsValue)}>
+        <div className={getClassNames(styles.isValue)}>
           {currentValueLabel}
         </div>
 
-        <div className={getClassNames(styles.IsPlus)} onClick={plusClickHandler}>
+        <div className={getClassNames(styles.isPlus)} onClick={plusClickHandler}>
           +
         </div>
       </div>

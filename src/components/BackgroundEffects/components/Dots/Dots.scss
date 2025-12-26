@@ -12,8 +12,8 @@
   position: absolute;
   z-index: 1;
 
-  width: 15px;
-  height: 15px;
+  width: clamp(10px, 0.8vw, 18px); // 15px;
+  height: clamp(10px, 0.8vw, 18px); // 15px;
 
   background: #111;
   border-radius: 50%;
