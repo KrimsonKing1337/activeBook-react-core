@@ -1,5 +1,5 @@
 @use "styles/__mixins" as mixins;
-@use "styles/__variables" as variables;
+@use "styles/__variables" as vars;
 
 .Action {
   display: inline;
@@ -9,7 +9,7 @@
 
   opacity: 0.85;
 
-  transition: text-shadow variables.$transitionDefault;
+  transition: text-shadow vars.$transitionDefault;
 
   &:hover {
     cursor: pointer;

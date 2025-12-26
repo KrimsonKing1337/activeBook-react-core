@@ -1,3 +1,4 @@
+@use "styles/__variables" as vars;
 @use "styles/__mixins" as mixins;
 
 .LineHeight {
@@ -23,7 +24,7 @@
 
   &.isMinus,
   &.isPlus {
-    font-size: clamp(12px, 1.5vw, 24px); // 20px;
+    font-size: vars.$fs-20;
     font-weight: bold;
 
     cursor: pointer;
@@ -33,7 +34,7 @@
 
   &.isValue {
     color: var(--main);
-    font-size: clamp(13px, 1.1vw, 16px); // 14px;
+    font-size: vars.$fs-14;
     font-weight: 100;
   }
 }

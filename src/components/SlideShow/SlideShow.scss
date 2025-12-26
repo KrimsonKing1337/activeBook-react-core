@@ -1,5 +1,5 @@
 @use "styles/__mixins" as mixins;
-@use "styles/__variables" as variables;
+@use "styles/__variables" as vars;
 
 .Wrapper {
   padding: 10px;
@@ -53,7 +53,7 @@
 
   &.isModalMode {
     align-items: center;
-    height: variables.$modalHeight;
+    height: vars.$modalHeight;
     max-height: 100%;
   }
 

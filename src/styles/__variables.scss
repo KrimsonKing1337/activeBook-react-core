@@ -2,3 +2,25 @@ $appWidth: 500px;
 $modalHeight: 80vh;
 $modalWidth: 80%;
 $transitionDefault: ease 0.3s 0s;
+
+// ===============================
+// Font size tokens (clamp-based)
+// ===============================
+
+// Micro text — подписи, хинты, вторичный UI
+$fs-12: clamp(12px, 0.75rem, 13px);
+
+// Small text — вторичный текст, labels
+$fs-14: clamp(13px, 0.875rem, 14px);
+
+// Base text — основной UI / текст
+$fs-16: clamp(15px, 1rem, 17px);
+
+// Large UI / subheading
+$fs-20: clamp(18px, 1.25rem, 21px);
+
+// Section heading
+$fs-24: clamp(20px, 1.5rem, 26px);
+
+// Hero / main heading
+$fs-42: clamp(28px, 2.6rem, 48px);

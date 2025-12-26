@@ -1,4 +1,6 @@
+@use "styles/__variables" as vars;
+
 .Header {
-  font-size: clamp(28px, 3.5vw, 48px); // 42px;
+  font-size: vars.$fs-42;
   font-weight: bold;
 }

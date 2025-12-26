@@ -1,4 +1,4 @@
-@use "styles/__variables" as variables;
+@use "styles/__variables" as vars;
 
 .PageWrapper {
   position: relative;
@@ -17,7 +17,7 @@
     filter: invert(1);
   }
 
-  @media screen and (max-width: variables.$appWidth) {
+  @media screen and (max-width: vars.$appWidth) {
     padding-top: 0;
     padding-bottom: 0;
   }
@@ -32,7 +32,7 @@
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  max-width: variables.$appWidth;
+  max-width: vars.$appWidth;
   height: 100%;
   min-height: 100%;
   overflow: hidden;
@@ -51,7 +51,7 @@
     }
   }
 
-  @media screen and (max-width: variables.$appWidth) {
+  @media screen and (max-width: vars.$appWidth) {
     border-radius: 0;
     box-shadow: none;
   }

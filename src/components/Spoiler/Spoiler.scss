@@ -1,3 +1,4 @@
+@use "styles/__variables" as vars;
 @use "styles/__mixins" as mixins;
 
 .Spoiler {
@@ -8,7 +9,7 @@
   width: 100%;
   padding: 2px 2px 2px clamp(10px, 0.8vw, 18px); // 15px;
 
-  font-size: clamp(12px, 1.5vw, 24px); // 20px;
+  font-size: vars.$fs-20;
 
   border: 1px #c3cbd1 solid;
   border-radius: 4px;

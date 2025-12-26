@@ -1,4 +1,5 @@
-@use 'styles/__mixins' as mixins;
+@use "styles/__variables" as vars;
+@use "styles/__mixins" as mixins;
 
 .Footer {
   display: flex;
@@ -18,7 +19,7 @@
   margin-top: 13px;
 
   color: #fff;
-  font-size: clamp(13px, 1.1vw, 16px); // 14px;
+  font-size: vars.$fs-14;
   font-weight: 100;
 
   border-radius: clamp(18px, 2.5vh, 30px); // 25px;

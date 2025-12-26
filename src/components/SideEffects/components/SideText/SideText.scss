@@ -1,3 +1,5 @@
+@use "styles/__variables" as vars;
+
 .SideTextScrollWrapper {
   display: block;
 }
@@ -68,7 +70,7 @@
   padding-left: 5px; //width of &nbsp;
 
   color: #a3a3a3;
-  font-size: 12px;
+  font-size: vars.$fs-12;
   line-height: 1;
   white-space: nowrap;
   text-transform: lowercase;

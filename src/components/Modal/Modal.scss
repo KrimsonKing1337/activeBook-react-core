@@ -1,5 +1,5 @@
 @use "styles/__mixins" as mixins;
-@use "styles/__variables" as variables;
+@use "styles/__variables" as vars;
 
 .Overflow {
   position: fixed;
@@ -22,7 +22,7 @@
 }
 
 .Modal {
-  $transition: width #{variables.$transitionDefault}, height #{variables.$transitionDefault};
+  $transition: width #{vars.$transitionDefault}, height #{vars.$transitionDefault};
 
   position: fixed;
   top: 0;
@@ -34,9 +34,9 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  width: variables.$modalWidth;
-  max-width: variables.$appWidth;
-  height: variables.$modalHeight;
+  width: vars.$modalWidth;
+  max-width: vars.$appWidth;
+  height: vars.$modalHeight;
   margin: auto;
   overflow: auto;
 
@@ -178,7 +178,7 @@
 }
 
 .Content {
-  height: variables.$modalHeight;
+  height: vars.$modalHeight;
 
   &.isFullScreen {
     height: 95vh;
