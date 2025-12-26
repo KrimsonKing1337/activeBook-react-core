@@ -7,7 +7,7 @@ import { configActions } from 'store/config';
 
 import { useVibration } from 'hooks/effects/vibration';
 
-import { Action, Button } from 'components';
+import { Action, Button, P } from 'components';
 
 import { Modal, Segments } from './components';
 
@@ -93,13 +93,13 @@ export const WelcomeTour = ({ isActive, setIsActive, isModalActive, setIsModalAc
       {isActive && (
         <div className={styles.Wrapper}>
           <div className={styles.Card}>
-            <p className={styles.CardHeader}>
+            <P className={styles.CardHeader}>
               {header}
-            </p>
+            </P>
 
-            <p>
+            <P>
               {desc}
-            </p>
+            </P>
 
             <Button type="success" className={styles.CardButton} onClick={nextButtonClickHandler}>
               {nextButtonLabel}

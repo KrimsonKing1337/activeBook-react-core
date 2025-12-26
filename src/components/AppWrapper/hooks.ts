@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 
-import { Howler } from 'howler';
-
 import { toast } from 'react-toastify';
+import { stringifyCSSProperties } from 'react-style-stringify';
+import { Howler } from 'howler';
 
 import type { Config } from '@types';
 
@@ -155,7 +155,7 @@ export function useSetUpConfig(passedConfig: Config) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const { id, pages, defaultTheme, customThemes } = passedConfig;
+    const { id, pages, defaultTheme, customThemes, bodyStyle } = passedConfig;
 
     const config = localStorageGet(id, 'config');
     const volume = localStorageGet(id, 'volume');
@@ -177,5 +177,10 @@ export function useSetUpConfig(passedConfig: Config) {
 
     dispatch(configActions.setAll(configForSetting));
     dispatch(volumeActions.setAll(volumeForSet));
+
+    if (bodyStyle) {
+      const bodyStyleForSet = stringifyCSSProperties(bodyStyle);
+      document.querySelector('body')?.setAttribute('style', bodyStyleForSet);
+    }
   }, []);
 }

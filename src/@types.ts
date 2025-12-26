@@ -74,6 +74,7 @@ export type Config = {
   pages: number;
   defaultTheme: string;
   customThemes?: Record<string, ThemeOptions>;
+  bodyStyle?: React.CSSProperties;
 };
 
 export type TableOfContents = TableOfContentsItem[];

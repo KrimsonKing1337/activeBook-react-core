@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { useVibration } from 'hooks/effects/vibration';
 
-import { Segment } from 'components';
+import { Segment, P } from 'components';
 
 
 import * as styles from './Segments.scss';
@@ -52,23 +52,23 @@ export const Segments = () => {
   return (
     <div data-welcome-tour-id="segments">
       <Segment onEnter={segment1EnterHandler} onExit={segment1ExitHandler}>
-        <p>
+        <P>
           Нажми на меня
-        </p>
+        </P>
 
-        <p className={segment1ContentClassNames}>
+        <P className={segment1ContentClassNames}>
           Меня видно только когда этот сегмент активен
-        </p>
+        </P>
       </Segment>
 
       <Segment onEnter={segment2EnterHandler} onExit={segment2ExitHandler}>
-        <p>
+        <P>
           И на меня нажми!
-        </p>
+        </P>
 
-        <p className={segment2ContentClassNames}>
+        <P className={segment2ContentClassNames}>
           Внутри сегментов прячутся текст, эффекты и многое другое!
-        </p>
+        </P>
       </Segment>
     </div>
   );

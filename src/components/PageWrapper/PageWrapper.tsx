@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect } from 'react';
+import { HTMLAttributes, type PropsWithChildren, useEffect } from 'react';
 
 import classNames from 'classnames';
 
@@ -20,7 +20,7 @@ import { Narrative } from './components/Narrative';
 
 import * as styles from './PageWrapper.scss';
 
-export type PageWrapperProps = {
+export type PageWrapperProps = HTMLAttributes<HTMLDivElement> & {
   withoutToolbar?: boolean;
   sbMode?: boolean;
 };
@@ -29,6 +29,7 @@ export const PageWrapper = ({
   children,
   withoutToolbar,
   sbMode,
+  ...etc
 }: PropsWithChildren<PageWrapperProps>) => {
   const dispatch = useDispatch();
 
@@ -53,7 +54,7 @@ export const PageWrapper = ({
   });
 
   return (
-    <div id="page-wrapper" className={pageWrapperClassNames}>
+    <div id="page-wrapper" className={pageWrapperClassNames} {...etc}>
       <div id="main-content-wrapper" className={mainContendClassNames}>
         <Narrative>
           {children}

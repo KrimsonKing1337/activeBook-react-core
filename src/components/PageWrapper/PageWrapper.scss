@@ -13,8 +13,6 @@
   padding-bottom: 10px;
   overflow: hidden;
 
-  background: var(--bg);
-
   &.inverseColorIsActive {
     filter: invert(1);
   }
