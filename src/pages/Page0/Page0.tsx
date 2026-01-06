@@ -26,7 +26,13 @@ export type Page0Props = {
   goCallback?: () => Promise<void> | void;
 };
 
-export const Page0 = ({ goCallback, header, subHeader, showButton = true, Footer }: Page0Props) => {
+export const Page0 = ({
+  goCallback,
+  header,
+  subHeader,
+  showButton = true,
+  Footer,
+}: Page0Props) => {
   const { goToPage } = useGoToPage();
 
   const id = useSelector(mainSelectors.id);
