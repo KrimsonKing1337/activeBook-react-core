@@ -1,13 +1,14 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 
-import { mainActions, mainSelectors } from 'store/main';
-
 import { useDispatch, useSelector } from 'store';
+
+import { mainActions, mainSelectors } from 'store/main';
 
 export function useGoToPage() {
   const dispatch = useDispatch();
 
   const currentPage = useSelector(mainSelectors.page);
+  const pages = useSelector(mainSelectors.pages);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -33,7 +34,13 @@ export function useGoToPage() {
       return;
     }
 
-    goToPage(currentPage + 1);
+    const nextIndex = currentPage + 1;
+
+    if (nextIndex > pages) {
+      return;
+    }
+
+    goToPage(nextIndex);
   };
 
   const goPrevPage = () => {
