@@ -9,7 +9,7 @@ import * as styles from './Modal.scss';
 
 type Func = () => void;
 
-type ModalMode = 'media' | 'Text';
+type ModalMode = 'media' | 'text';
 
 export type ModalProps = {
   isOpen: boolean;
@@ -33,7 +33,7 @@ export const Modal = ({
   children,
   onClose,
   isOpen,
-  mode = 'Text',
+  mode = 'text',
   canClose = true,
   canFullScreen = false,
   fullScreenDefault = false,
