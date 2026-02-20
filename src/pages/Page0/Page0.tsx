@@ -53,7 +53,7 @@ export const Page0 = ({
     }
 
     setLastPage(lastPage);
-  }, []);
+  }, [id]);
 
   const go = async () => {
     if (!flashlightInst.isInited) {

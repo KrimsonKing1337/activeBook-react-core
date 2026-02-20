@@ -35,14 +35,19 @@ export function useFlashlight(withSideShadow = false, speed = 150) {
       await sleep(duration);
 
       off();
-      sideShadowOff();
+
+      if (withSideShadow) {
+        sideShadowOff();
+      }
     }
   };
 
   const off = () => {
     console.log('___ flashlight off');
 
-    sideShadowOff();
+    if (withSideShadow) {
+      sideShadowOff();
+    }
 
     flashlightInst.off();
   };
