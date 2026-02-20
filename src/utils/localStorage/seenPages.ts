@@ -1,29 +1,20 @@
 import { get as localStorageGet, set as localStorageSet } from 'utils/localStorage/localStorage';
 
-import { cryptr } from 'utils/cryptr';
-
 const key = 'seenPages';
 
 function get(id: string) {
-  const seenPagesEncrypt = localStorageGet(id, key);
-  const seenPagesEncryptAsJson = JSON.stringify(seenPagesEncrypt);
-  const seenPagesDecryptAsJson = cryptr.decrypt(seenPagesEncryptAsJson);
-
-  return JSON.parse(seenPagesDecryptAsJson);
+  return localStorageGet(id, key);
 }
 
 function set(id: string, value: number) {
-  const seenPagesDecrypt = get(id);
+  const seenPages = get(id);
 
   const newSeenPages = {
-    ...seenPagesDecrypt,
+    ...seenPages,
     [value]: true,
   };
 
-  const newSeenPagesAsJson = JSON.stringify(newSeenPages);
-  const newSeenPagesEncrypt = cryptr.encrypt(newSeenPagesAsJson);
-
-  localStorageSet(id, { [key]: newSeenPagesEncrypt });
+  localStorageSet(id, { [key]: newSeenPages });
 }
 
 export const seenPages = {
