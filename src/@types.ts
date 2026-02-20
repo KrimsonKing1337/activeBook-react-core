@@ -74,6 +74,7 @@ export type Config = {
   pages: number;
   defaultTheme: string;
   customThemes?: Record<string, ThemeOptions>;
+  disableThemes?: boolean;
   bodyStyle?: React.CSSProperties;
 };
 

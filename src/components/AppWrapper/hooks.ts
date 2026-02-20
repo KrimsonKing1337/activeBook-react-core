@@ -155,12 +155,25 @@ export function useSetUpConfig(passedConfig: Config) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const { id, pages, defaultTheme, customThemes, bodyStyle } = passedConfig;
+    const {
+      id,
+      pages,
+      defaultTheme,
+      customThemes,
+      bodyStyle,
+      disableThemes = false,
+    } = passedConfig;
 
     const config = localStorageGet(id, 'config');
     const volume = localStorageGet(id, 'volume');
 
-    const themes = getThemes(customThemes);
+    let themes = getThemes(customThemes);
+
+    if (disableThemes) {
+      themes = {
+        [defaultTheme]: themes[defaultTheme],
+      };
+    }
 
     dispatch(configActions.setThemes(themes));
     dispatch(mainActions.setId(id));
