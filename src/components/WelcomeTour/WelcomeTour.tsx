@@ -77,6 +77,12 @@ export const WelcomeTour = ({ isActive, setIsActive, isModalActive, setIsModalAc
     setHighLight(newId);
   };
 
+  const skipButtonClickHandler = () => {
+    setIsActive(false);
+
+    dispatch(configActions.setWelcomeTour(false));
+  };
+
   const modalConfirmHandler = () => {
     setIsModalActive(false);
     setIsActive(true);
@@ -103,6 +109,10 @@ export const WelcomeTour = ({ isActive, setIsActive, isModalActive, setIsModalAc
 
             <Button type="success" className={styles.CardButton} onClick={nextButtonClickHandler}>
               {nextButtonLabel}
+            </Button>
+
+            <Button type="secondary" className={styles.SkipButton} onClick={skipButtonClickHandler}>
+              Пропустить обучение
             </Button>
           </div>
 

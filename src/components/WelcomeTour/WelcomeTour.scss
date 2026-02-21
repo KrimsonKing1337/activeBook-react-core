@@ -21,6 +21,11 @@
   margin-top: clamp(18px, 1.8vw, 24px); // 22px;
 }
 
+.SkipButton {
+  margin-top: clamp(18px, 1.8vw, 24px); // 22px;
+  margin-left: 10px;
+}
+
 .ActionWrapper {
   margin-top: clamp(32px, 4.5vh, 64px); // 50px;
   margin-bottom: clamp(32px, 4.5vh, 64px); // 50px;
