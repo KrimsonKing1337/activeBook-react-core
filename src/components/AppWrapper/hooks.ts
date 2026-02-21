@@ -121,6 +121,7 @@ export function useAllPagesSeen() {
 
     if (Object.keys(seenPagesDecrypt).length === pages && !allPagesSeen) {
       toast.success('Теперь доступны комментарии автора!');
+      toast.success('Перечитайте книгу и найдёте их все!');
 
       localStorageSet(id, { allPagesSeen: true });
 
