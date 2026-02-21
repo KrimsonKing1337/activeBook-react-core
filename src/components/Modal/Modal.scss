@@ -88,6 +88,8 @@
 
   transform: translateY(25%) translateX(75%);
 
+  filter: drop-shadow(1px 1px 1px #111);
+
   &.isMediaMode {
     position: absolute;
     top: 5px;
@@ -122,6 +124,8 @@
   margin: auto;
 
   transform: translateY(-25%) translateX(75%);
+
+  filter: drop-shadow(1px 1px 1px #111);
 
   &.isHidden {
     display: none !important;
@@ -163,6 +167,8 @@
 
   width: clamp(32px, 2.8vw, 44px); // 40px;
   height: clamp(32px, 2.8vw, 44px); // 40px;
+
+  filter: drop-shadow(1px 1px 1px #111);
 
   &.isHidden {
     display: none !important;
