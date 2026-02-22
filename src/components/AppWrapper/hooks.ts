@@ -88,6 +88,7 @@ export function useAllPagesSeen() {
   const id = useSelector(mainSelectors.id);
   const page = useSelector(mainSelectors.page);
   const pages = useSelector(mainSelectors.pages);
+  const authorComments = useSelector(mainSelectors.authorComments);
   const allPagesSeen = useSelector(mainSelectors.allPagesSeen);
 
   useEffect(() => {
@@ -99,7 +100,7 @@ export function useAllPagesSeen() {
   }, []);
 
   useEffect(() => {
-    if (!id) {
+    if (!id || !authorComments) {
       return;
     }
 
@@ -121,7 +122,7 @@ export function useAllPagesSeen() {
 
     if (Object.keys(seenPagesDecrypt).length === pages && !allPagesSeen) {
       toast.success('Теперь доступны комментарии автора!');
-      toast.success('Перечитайте книгу и найдёте их все!');
+      toast.success('Их можно найти по всему произведению');
 
       localStorageSet(id, { allPagesSeen: true });
 
@@ -159,8 +160,9 @@ export function useSetUpConfig(passedConfig: Config) {
       pages,
       defaultTheme,
       customThemes,
-      bodyStyle,
       disableThemes = false,
+      bodyStyle,
+      authorComments = 0,
     } = passedConfig;
 
     const config = localStorageGet(id, 'config');
@@ -177,6 +179,7 @@ export function useSetUpConfig(passedConfig: Config) {
     dispatch(configActions.setThemes(themes));
     dispatch(mainActions.setId(id));
     dispatch(mainActions.setPages(pages));
+    dispatch(mainActions.setAuthorComments(authorComments));
 
     const configForSet = config ?? configInitialState;
     const volumeForSet = volume ?? volumeInitialState;

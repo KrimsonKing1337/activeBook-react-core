@@ -7,6 +7,7 @@ export const initialState: State = {
   id: '',
   page: 0,
   pages: 0,
+  authorComments: 0,
   allPagesSeen: false,
   tableOfContents: [],
   menuActiveState: null,
@@ -30,6 +31,9 @@ const slice = createSlice({
     },
     setPages(state, action: PayloadAction<State['pages']>) {
       state.pages = action.payload;
+    },
+    setAuthorComments(state, action: PayloadAction<State['authorComments']>) {
+      state.authorComments = action.payload;
     },
     setTableOfContents(state, action: PayloadAction<State['tableOfContents']>) {
       state.tableOfContents = action.payload;

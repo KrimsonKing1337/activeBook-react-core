@@ -9,6 +9,7 @@ export interface State {
   id: string;
   page: number;
   pages: number;
+  authorComments: number;
   allPagesSeen: boolean;
   tableOfContents: TableOfContents;
   menuActiveState: MenuActiveState;

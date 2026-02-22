@@ -16,6 +16,7 @@ export const selectors = {
   id: (state: RootState) => state.main.id,
   page: (state: RootState) => state.main.page,
   pages: (state: RootState) => state.main.pages,
+  authorComments: (state: RootState) => state.main.authorComments,
   allPagesSeen: (state: RootState) => state.main.allPagesSeen,
   tableOfContents: (state: RootState) => state.main.tableOfContents,
   menuActiveState: (state: RootState) => state.main.menuActiveState,
