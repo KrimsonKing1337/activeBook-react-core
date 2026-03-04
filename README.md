@@ -13,8 +13,8 @@ ActiveBooks - Живые книги
 
 Этот репозиторий - это движок живых книг, который называется ActiveBook.
 
-На данный момент реализовано две книги в качестве примера:
-https://github.com/KrimsonKing1337/activeBook-over-the-garden-wall
+На данный момент реализовано две книги в качестве примера: \
+https://github.com/KrimsonKing1337/activeBook-over-the-garden-wall \
 https://github.com/KrimsonKing1337/activeBook-fairytale-forest
 
 Почитать можно здесь (не работает во встроенном браузере телеграмма и аналогов):
