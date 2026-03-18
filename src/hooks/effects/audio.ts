@@ -23,7 +23,6 @@ export function useAudio({
   relativeVolume = 100,
   screamer = false,
   fadeOutWhenUnload = true,
-  isInitAudio = false,
   onPlay = () => {},
   onPause = () => {},
   onStop = () => {},
@@ -81,16 +80,6 @@ export function useAudio({
     };
 
     const howlWrapperInst = new HowlWrapper(opt);
-
-    // помогает для инициализации звука на айфонах
-    // нужно использовать для звука по кнопке "начать читать"
-    if (isInitAudio) {
-      howlWrapperInst.howlInst.once('playerror', () => {
-        howlWrapperInst.howlInst.once('unlock', () => {
-          howlWrapperInst.howlInst.play();
-        });
-      });
-    }
 
     dispatch(effectsActions.setAudiosAmountInc());
 
