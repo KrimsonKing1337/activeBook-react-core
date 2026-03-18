@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import type { HowlInst } from '@types';
+
 import { configSelectors } from 'store/config';
 
 import { useDispatch, useSelector } from 'store';
@@ -22,16 +24,18 @@ export type Page0Props = {
   header?: string;
   subHeader?: string;
   showButton?: boolean;
+  audioInstForInit: HowlInst;
   Footer?: React.ElementType;
   goCallback?: () => Promise<void> | void;
 };
 
 export const Page0 = ({
-  goCallback,
   header,
   subHeader,
   showButton = true,
+  audioInstForInit,
   Footer,
+  goCallback,
 }: Page0Props) => {
   const dispatch = useDispatch();
 
@@ -39,6 +43,7 @@ export const Page0 = ({
 
   const id = useSelector(mainSelectors.id);
   const isWelcomeTourActiveFromConfig = useSelector(configSelectors.welcomeTour);
+  const isAudioUnlocked = useSelector(mainSelectors.isAudioUnlocked);
 
   const [lastPage, setLastPage] = useState(0);
 
@@ -46,6 +51,27 @@ export const Page0 = ({
   const [isWelcomeTourModalActive, setIsWelcomeTourModalActive] = useState(false);
 
   const { modalIsActive, modalOnClose, setModalIsActive } = useModal();
+
+  // инициализируем аудио
+  useEffect(() => {
+    if (!audioInstForInit || !isAudioUnlocked) {
+      return;
+    }
+
+    const handler = () => {
+      audioInstForInit.play();
+    };
+
+    document.addEventListener('pointerup', handler, { once: true, capture: true });
+    document.addEventListener('touchend', handler, { once: true, capture: true });
+    document.addEventListener('click', handler, { once: true, capture: true });
+
+    return () => {
+      document.removeEventListener('pointerup', handler, true);
+      document.removeEventListener('touchend', handler, true);
+      document.removeEventListener('click', handler, true);
+    };
+  }, [isAudioUnlocked, audioInstForInit]);
 
   useEffect(() => {
     const lastPage = localStorageGet(id, 'lastPage');
@@ -104,7 +130,7 @@ export const Page0 = ({
   const actionLabel = lastPage > 0 ? 'Продолжить читать' : 'Начать читать';
 
   return (
-    <PageWrapper sbMode={true}>
+    <PageWrapper>
       <Modal isActive={modalIsActive} onConfirm={modalConfirmHandler} />
 
       {header && (
