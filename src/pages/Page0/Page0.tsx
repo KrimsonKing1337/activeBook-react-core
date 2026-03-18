@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import type { HowlInst } from '@types';
-
 import { configSelectors } from 'store/config';
 
 import { useDispatch, useSelector } from 'store';
@@ -16,6 +14,8 @@ import { Flags, modalsWereShowed } from 'utils/localStorage/modalsWereShowed';
 import { flashlightInst } from 'utils/effects/flashlight';
 import { get as localStorageGet } from 'utils/localStorage/localStorage';
 
+import { HowlWrapper } from 'utils/effects/audio/HowlWrapper';
+
 import { Modal } from './components';
 
 import { useModal } from './hooks';
@@ -24,7 +24,7 @@ export type Page0Props = {
   header?: string;
   subHeader?: string;
   showButton?: boolean;
-  audioInstForInit: HowlInst;
+  audioSrcForInit: string;
   Footer?: React.ElementType;
   goCallback?: () => Promise<void> | void;
 };
@@ -33,7 +33,7 @@ export const Page0 = ({
   header,
   subHeader,
   showButton = true,
-  audioInstForInit,
+  audioSrcForInit,
   Footer,
   goCallback,
 }: Page0Props) => {
@@ -43,7 +43,6 @@ export const Page0 = ({
 
   const id = useSelector(mainSelectors.id);
   const isWelcomeTourActiveFromConfig = useSelector(configSelectors.welcomeTour);
-  const isAudioUnlocked = useSelector(mainSelectors.isAudioUnlocked);
 
   const [lastPage, setLastPage] = useState(0);
 
@@ -52,14 +51,29 @@ export const Page0 = ({
 
   const { modalIsActive, modalOnClose, setModalIsActive } = useModal();
 
-  // инициализируем аудио
+  // инициализируем аудио. свайп на айфоне не работает, нужен именно тап
   useEffect(() => {
-    if (!audioInstForInit || !isAudioUnlocked) {
-      return;
-    }
-
     const handler = () => {
-      audioInstForInit.play();
+      const howlWrapperInst = new HowlWrapper({
+        id: 'init',
+        page: 0,
+        src: [audioSrcForInit],
+        relativeVolume: 0,
+      });
+
+      howlWrapperInst.howlInst.once('playerror', () => {
+        howlWrapperInst.howlInst.once('unlock', () => {
+          howlWrapperInst.howlInst.play();
+        });
+      });
+
+      howlWrapperInst.play();
+
+      document.removeEventListener('pointerup', handler, true);
+      document.removeEventListener('touchend', handler, true);
+      document.removeEventListener('click', handler, true);
+
+      dispatch(mainActions.setIsAudioUnlocked(true));
     };
 
     document.addEventListener('pointerup', handler, { once: true, capture: true });
@@ -71,7 +85,7 @@ export const Page0 = ({
       document.removeEventListener('touchend', handler, true);
       document.removeEventListener('click', handler, true);
     };
-  }, [isAudioUnlocked, audioInstForInit]);
+  }, []);
 
   useEffect(() => {
     const lastPage = localStorageGet(id, 'lastPage');
@@ -91,8 +105,6 @@ export const Page0 = ({
         console.error(err);
       }
     }
-
-    dispatch(mainActions.setIsAudioUnlocked(true));
 
     if (goCallback) {
       await goCallback();

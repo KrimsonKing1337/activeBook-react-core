@@ -7,13 +7,16 @@ import { fontEffectsSelectors } from 'store/effects/font';
 
 import { useSelector } from 'store';
 
-import { useGoToPage } from 'hooks/control/useGoToPage';
+import { mainSelectors } from 'store/main';
 
+import { useGoToPage } from 'hooks/control/useGoToPage';
 
 import * as styles from './Narrative.scss';
 
 export const Narrative = ({ children }: PropsWithChildren) => {
   const { goNextPage, goPrevPage } = useGoToPage();
+
+  const currentPage = useSelector(mainSelectors.page);
 
   // const fontSize = useSelector(configSelectors.fontSize);
   const lineHeight = useSelector(configSelectors.lineHeight);
@@ -32,6 +35,11 @@ export const Narrative = ({ children }: PropsWithChildren) => {
   };
 
   const ref = useRef<HTMLDivElement>(null);
+  const currentPageRef = useRef(0);
+
+  useEffect(() => {
+    currentPageRef.current = currentPage;
+  }, [currentPage]);
 
   useEffect(() => {
     // переводим фокус на прокручиваемый элемент для возможности прокрутки с помощью стрелок вверх и вниз
@@ -39,7 +47,7 @@ export const Narrative = ({ children }: PropsWithChildren) => {
   }, []);
 
   useEffect(() => {
-    if (!ref.current) {
+    if (!ref.current || currentPageRef.current === 0) {
       return;
     }
 
