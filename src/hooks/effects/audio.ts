@@ -23,6 +23,7 @@ export function useAudio({
   relativeVolume = 100,
   screamer = false,
   fadeOutWhenUnload = true,
+  isInitAudio = false,
   onPlay = () => {},
   onPause = () => {},
   onStop = () => {},
@@ -31,9 +32,15 @@ export function useAudio({
   const dispatch = useDispatch();
 
   const currentPage = useSelector(mainSelectors.page);
+  const isAudioUnlocked = useSelector(mainSelectors.isAudioUnlocked);
   const audioInstances = useSelector(audioEffectsSelectors.audioInstances);
 
   const refId = useRef('');
+  const currentPageRef = useRef(0);
+
+  useEffect(() => {
+    currentPageRef.current = currentPage;
+  }, [currentPage]);
 
   useEffect(() => {
     /*
@@ -48,6 +55,10 @@ export function useAudio({
     }
 
     if (refId.current) {
+      return;
+    }
+
+    if (!isAudioUnlocked) {
       return;
     }
 
@@ -71,13 +82,33 @@ export function useAudio({
 
     const howlWrapperInst = new HowlWrapper(opt);
 
+    // помогает для инициализации звука на айфонах
+    // нужно использовать для звука по кнопке "начать читать"
+    if (isInitAudio) {
+      howlWrapperInst.howlInst.once('playerror', () => {
+        howlWrapperInst.howlInst.once('unlock', () => {
+          howlWrapperInst.howlInst.play();
+        });
+      });
+    }
+
     dispatch(effectsActions.setAudiosAmountInc());
 
-    if (howlWrapperInst.howlInst.state() === 'loaded') {
+    // иногда событие loaded происходит уже после смены страницы.
+    // чтобы поймать актуальный номер страницы - я использую ref
+    const loadedHandler = () => {
+      if (currentPageRef.current !== howlWrapperInst.page) {
+        return;
+      }
+
       dispatch(effectsActions.setAudioReady());
+    };
+
+    if (howlWrapperInst.howlInst.state() === 'loaded') {
+      loadedHandler();
     } else {
       const handler = () => {
-        dispatch(effectsActions.setAudioReady());
+        loadedHandler();
       };
 
       howlWrapperInst.howlInst.once('load', handler);
@@ -87,7 +118,7 @@ export function useAudio({
     refId.current = id;
 
     dispatch(audioEffectsActions.setAudioInstance(howlWrapperInst));
-  }, [currentPage]);
+  }, [currentPage, isAudioUnlocked]);
 
   useEffect(() => {
     return () => {

@@ -91,11 +91,15 @@ export function useAudioInRange(effects: RangeEffects) {
 
       dispatch(effectsActions.setAudiosAmountInc());
 
-      if (howlWrapperInst.howlInst.state() === 'loaded') {
+      const loadedHandler = () => {
         dispatch(effectsActions.setAudioReady());
+      };
+
+      if (howlWrapperInst.howlInst.state() === 'loaded') {
+        loadedHandler();
       } else {
         const handler = () => {
-          dispatch(effectsActions.setAudioReady());
+          loadedHandler();
         };
 
         howlWrapperInst.howlInst.once('load', handler);

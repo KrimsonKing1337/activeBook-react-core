@@ -14,6 +14,7 @@ export const initialState: State = {
   isVibrationAvailable: null,
   isFlashlightAvailable: null,
   flashlightProblems: '',
+  isAudioUnlocked: false,
 };
 
 const slice = createSlice({
@@ -52,6 +53,9 @@ const slice = createSlice({
     },
     setFlashlightProblems(state, action: PayloadAction<State['flashlightProblems']>) {
       state.flashlightProblems = action.payload;
+    },
+    setIsAudioUnlocked(state, action: PayloadAction<State['isAudioUnlocked']>) {
+      state.isAudioUnlocked = action.payload;
     },
   },
 });

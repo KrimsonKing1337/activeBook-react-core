@@ -16,4 +16,5 @@ export interface State {
   isVibrationAvailable: boolean | null;
   isFlashlightAvailable: FlashlightState | null;
   flashlightProblems: string;
+  isAudioUnlocked: boolean;
 }

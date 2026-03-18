@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 
 import { configSelectors } from 'store/config';
 
-import { useSelector } from 'store';
+import { useDispatch, useSelector } from 'store';
 
-import { mainSelectors } from 'store/main';
+import { mainActions, mainSelectors } from 'store/main';
 
 import { useGoToPage } from 'hooks/control/useGoToPage';
 
@@ -33,6 +33,8 @@ export const Page0 = ({
   showButton = true,
   Footer,
 }: Page0Props) => {
+  const dispatch = useDispatch();
+
   const { goToPage } = useGoToPage();
 
   const id = useSelector(mainSelectors.id);
@@ -63,6 +65,8 @@ export const Page0 = ({
         console.error(err);
       }
     }
+
+    dispatch(mainActions.setIsAudioUnlocked(true));
 
     if (goCallback) {
       await goCallback();
@@ -100,7 +104,7 @@ export const Page0 = ({
   const actionLabel = lastPage > 0 ? 'Продолжить читать' : 'Начать читать';
 
   return (
-    <PageWrapper>
+    <PageWrapper sbMode={true}>
       <Modal isActive={modalIsActive} onConfirm={modalConfirmHandler} />
 
       {header && (
