@@ -11,7 +11,7 @@ import { Toggle } from 'components/Toggle';
 
 import { flashlightInst } from 'utils/effects/flashlight';
 
-import * as styles from './Flashlight.scss';
+import * as styles from './Flashlight.module.scss';
 
 export const Flashlight = () => {
   const dispatch = useDispatch();

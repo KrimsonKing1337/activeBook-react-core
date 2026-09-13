@@ -7,7 +7,7 @@ import { useVibration } from 'hooks/effects/vibration';
 import { Segment, P } from 'components';
 
 
-import * as styles from './Segments.scss';
+import * as styles from './Segments.module.scss';
 
 export const Segments = () => {
   const { vibrationOn, vibrationOff } = useVibration();

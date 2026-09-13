@@ -8,7 +8,7 @@ import { mainActions } from 'store/main';
 
 import { getNarrativeElement } from 'components/PageWrapper/components/Narrative/utils';
 
-import * as styles from './Overflow.scss';
+import * as styles from './Overflow.module.scss';
 
 export type OverflowProps = React.HTMLAttributes<HTMLDivElement> & PropsWithChildren & {
   isOpen: boolean;

@@ -5,7 +5,7 @@ import { Overflow, MenuHeader } from 'components';
 
 import { Item } from './Item';
 
-import * as styles from './TableOfContents.scss';
+import * as styles from './TableOfContents.module.scss';
 
 export const TableOfContents = () => {
   const dispatch = useDispatch();

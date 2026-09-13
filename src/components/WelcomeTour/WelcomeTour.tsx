@@ -13,7 +13,7 @@ import { Modal, Segments } from './components';
 
 import { getWelcomeTourTextById, removeHighLight, setHighLight } from './utils';
 
-import * as styles from './WelcomeTour.scss';
+import * as styles from './WelcomeTour.module.scss';
 
 export type WelcomeTourProps = {
   isActive: boolean;

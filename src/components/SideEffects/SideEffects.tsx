@@ -3,7 +3,7 @@ import { sideShadowEffectSelectors } from 'store/effects/side/shadow';
 import { sideTextEffectSelectors } from 'store/effects/side/text';
 
 import { SideShadow } from './components/SideShadow';
-import * as styles from './SideEffects.scss';
+import * as styles from './SideEffects.module.scss';
 
 export const SideEffects = () => {
   const sideShadowIsActive = useSelector(sideShadowEffectSelectors.isActive);

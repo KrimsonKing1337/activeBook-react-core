@@ -6,7 +6,7 @@ import { backgroundEffectsSelectors } from 'store/effects/background';
 
 import { Videos, Images, Shadow, Dots, Wrapper } from './components';
 
-import * as styles from './BackgroundEffects.scss';
+import * as styles from './BackgroundEffects.module.scss';
 
 const Child = memo(({ children }: PropsWithChildren) => {
   return (

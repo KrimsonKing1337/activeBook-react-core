@@ -2,7 +2,7 @@ import type { PropsWithChildren } from 'react';
 
 import classNames from 'classnames';
 
-import * as styles from './Action.scss';
+import * as styles from './Action.module.scss';
 
 export type ActionProps = React.HTMLAttributes<HTMLSpanElement> & {
   className?: string;

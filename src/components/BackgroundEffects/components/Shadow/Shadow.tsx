@@ -1,6 +1,6 @@
 import type { BackgroundEffectShadowOptions } from 'hooks/effects/background/@types';
 
-import * as styles from './Shadow.scss';
+import * as styles from './Shadow.module.scss';
 
 export type ShadowProps = {
   options: BackgroundEffectShadowOptions;

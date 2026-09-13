@@ -6,7 +6,7 @@ import { effectsSelectors } from 'store/effects/common';
 
 import { createDotsAsArray, getPlaceInLineByLocationStyles, orderDefaultState } from './utils';
 
-import * as styles from './Dots.scss';
+import * as styles from './Dots.module.scss';
 
 export const Dots = () => {
   const dotsIsActive = useSelector(effectsSelectors.dotsIsActive);

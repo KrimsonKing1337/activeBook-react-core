@@ -17,7 +17,7 @@ import { Flags, modalsWereShowed } from 'utils/localStorage/modalsWereShowed';
 
 import { Modal } from './components';
 
-import * as styles from './Nav.scss';
+import * as styles from './Nav.module.scss';
 
 export const Nav = () => {
   const { goToPage, goPrevPage, goNextPage } = useGoToPage();

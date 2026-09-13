@@ -1,6 +1,6 @@
 import type { HTMLAttributes, PropsWithChildren } from 'react';
 
-import * as styles from './H1.scss';
+import * as styles from './H1.module.scss';
 
 export type H1Props = HTMLAttributes<HTMLDivElement> & PropsWithChildren;
 

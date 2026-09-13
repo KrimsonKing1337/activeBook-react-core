@@ -1,6 +1,6 @@
 import type { HTMLAttributes, PropsWithChildren } from 'react';
 
-import * as styles from './Article.scss';
+import * as styles from './Article.module.scss';
 
 export type ArticleProps = HTMLAttributes<HTMLDivElement> & PropsWithChildren;
 

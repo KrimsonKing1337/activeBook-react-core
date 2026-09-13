@@ -2,7 +2,7 @@ import type { PropsWithChildren } from 'react';
 
 import classNames from 'classnames';
 
-import * as styles from './Wrapper.scss';
+import * as styles from './Wrapper.module.scss';
 
 export type WrapperProps = React.HTMLAttributes<HTMLDivElement> & PropsWithChildren & {
   className?: string;

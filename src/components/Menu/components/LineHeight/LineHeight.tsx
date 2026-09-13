@@ -8,7 +8,7 @@ import { Label } from 'components/Label';
 
 import { getNewValueForNarrativeTextStyle } from 'utils/styles/getNewValueForNarrativeTextStyle';
 
-import * as styles from './LineHeight.scss';
+import * as styles from './LineHeight.module.scss';
 
 function getClassNames(className: string) {
   return classNames([

@@ -12,7 +12,7 @@ import { segmentsActions, segmentsSelectors } from 'store/segments';
 
 import { useDispatch, useSelector } from 'store';
 
-import * as styles from './Segment.scss';
+import * as styles from './Segment.module.scss';
 
 export type SegmentProps = PropsWithChildren & {
   isActive?: boolean;

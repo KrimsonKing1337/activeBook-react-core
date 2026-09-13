@@ -9,7 +9,7 @@ import { set as localStorageSet } from 'utils/localStorage/localStorage';
 
 import { Slider } from './components/Slider';
 
-import * as styles from './Volume.scss';
+import * as styles from './Volume.module.scss';
 
 export const Volume = () => {
   const dispatch = useDispatch();

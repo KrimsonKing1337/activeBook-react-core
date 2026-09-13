@@ -10,7 +10,7 @@ import { Spoiler } from 'components/Spoiler';
 
 import { getIsMobile } from 'utils/mobile/getIsMobile';
 
-import * as styles from './Themes.scss';
+import * as styles from './Themes.module.scss';
 
 const isMobile = getIsMobile();
 

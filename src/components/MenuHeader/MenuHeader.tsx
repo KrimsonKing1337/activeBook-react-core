@@ -1,4 +1,4 @@
-import * as styles from './MenuHeader.scss';
+import * as styles from './MenuHeader.module.scss';
 
 export type MenuHeaderProps = {
   label: string;

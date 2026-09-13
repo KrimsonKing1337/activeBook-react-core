@@ -18,7 +18,7 @@ import { BackgroundEffects } from 'components/BackgroundEffects';
 
 import { Narrative } from './components/Narrative';
 
-import * as styles from './PageWrapper.scss';
+import * as styles from './PageWrapper.module.scss';
 
 export type PageWrapperProps = HTMLAttributes<HTMLDivElement> & {
   withoutToolbar?: boolean;

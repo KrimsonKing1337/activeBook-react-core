@@ -13,7 +13,7 @@ import { getNewValueForNarrativeTextStyle } from 'utils/styles/getNewValueForNar
 import { Item } from './components/Item';
 import { Nav } from './components/Nav';
 
-import * as styles from './Toolbar.scss';
+import * as styles from './Toolbar.module.scss';
 
 export type ToolbarProps = {
   sbMode?: boolean;

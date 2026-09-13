@@ -8,7 +8,7 @@ import { Toggle } from 'components/Toggle';
 
 import { on as vibrationOn } from 'utils/effects/vibration';
 
-import * as styles from './Vibration.scss';
+import * as styles from './Vibration.module.scss';
 
 export const Vibration = () => {
   const dispatch = useDispatch();

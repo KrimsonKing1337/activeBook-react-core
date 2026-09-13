@@ -12,7 +12,7 @@ import { MenuHeader } from 'components/MenuHeader';
 
 import { Item } from './Item';
 import { useBookmarks } from './hooks';
-import * as styles from './Bookmarks.scss';
+import * as styles from './Bookmarks.module.scss';
 
 const buttonAddClassNames = classNames([styles.Button, styles.isAdd]);
 

@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react';
 
 import classNames from 'classnames';
 
-import * as styles from './EasterEgg.scss';
+import * as styles from './EasterEgg.module.scss';
 
 export type EasterEggProps = React.HTMLAttributes<HTMLSpanElement> & {
   id: string;

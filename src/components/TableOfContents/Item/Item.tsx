@@ -3,7 +3,7 @@ import { mainSelectors } from 'store/main';
 
 import { useGoToPage } from 'hooks/control/useGoToPage';
 
-import * as styles from './Item.scss';
+import * as styles from './Item.module.scss';
 
 export type ItemProps = {
   title: string;

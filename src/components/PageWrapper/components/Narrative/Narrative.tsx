@@ -11,7 +11,7 @@ import { mainSelectors } from 'store/main';
 
 import { useGoToPage } from 'hooks/control/useGoToPage';
 
-import * as styles from './Narrative.scss';
+import * as styles from './Narrative.module.scss';
 
 export const Narrative = ({ children }: PropsWithChildren) => {
   const { goNextPage, goPrevPage } = useGoToPage();

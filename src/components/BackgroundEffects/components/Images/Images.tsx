@@ -9,7 +9,7 @@ import { UseBackgroundEffectImageOptions } from 'hooks/effects/background/@types
 
 import { Img } from 'components/Img';
 
-import * as styles from './Images.scss';
+import * as styles from './Images.module.scss';
 
 export type ImagesProps = {
   images: UseBackgroundEffectImageOptions[];

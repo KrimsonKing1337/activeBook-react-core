@@ -9,7 +9,7 @@ import type { BackgroundEffectVideoOptions } from 'hooks/effects/background/@typ
 
 import { Video } from 'components/Video';
 
-import * as styles from './Videos.scss';
+import * as styles from './Videos.module.scss';
 
 export type VideosProps = {
   videos: BackgroundEffectVideoOptions[];

@@ -5,7 +5,7 @@ import { configActions, configSelectors } from 'store/config';
 
 import { Toggle } from 'components/Toggle';
 
-import * as styles from './WelcomeTour.scss';
+import * as styles from './WelcomeTour.module.scss';
 
 export const WelcomeTour = () => {
   const dispatch = useDispatch();

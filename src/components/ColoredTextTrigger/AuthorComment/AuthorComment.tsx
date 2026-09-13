@@ -6,7 +6,7 @@ import { useSelector } from 'store';
 import { configSelectors } from 'store/config';
 import { mainSelectors } from 'store/main';
 
-import * as styles from './AuthorComment.scss';
+import * as styles from './AuthorComment.module.scss';
 
 export type ActionProps = React.HTMLAttributes<HTMLSpanElement> & {
   className?: string;

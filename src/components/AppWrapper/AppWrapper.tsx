@@ -31,7 +31,7 @@ import { startToPlayAllAudiosWithPlayOnLoad, startToPlayAllVideosWithPlayOnLoad 
 
 import 'styles/common.scss';
 
-import * as styles from './AppWrapper.scss';
+import * as styles from './AppWrapper.module.scss';
 
 export type AppWrapperProps = {
   config: Config;
@@ -103,7 +103,11 @@ export const AppWrapper = ({ children, config, tableOfContents, rangeEffects }: 
     // фокус для скролла
     const narrativeElement = document.querySelector('#narrative') as HTMLElement;
 
-    narrativeElement.click();
+    if (!narrativeElement) {
+      return;
+    }
+
+    narrativeElement?.focus({ preventScroll: true });
 
     const removeKeyboardControl = addKeyboardControl(goPrevPage, goNextPage);
 

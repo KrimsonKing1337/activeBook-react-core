@@ -1,6 +1,6 @@
 import type { HTMLAttributes, PropsWithChildren } from 'react';
 
-import * as styles from './Header.scss';
+import * as styles from './Header.module.scss';
 
 export type HeaderProps = HTMLAttributes<HTMLDivElement> & PropsWithChildren;
 

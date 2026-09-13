@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { Label } from 'components/Label';
 
-import * as styles from './Toggle.scss';
+import * as styles from './Toggle.module.scss';
 
 type Func = () => void;
 

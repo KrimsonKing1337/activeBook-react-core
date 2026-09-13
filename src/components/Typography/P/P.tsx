@@ -1,6 +1,6 @@
 import type { HTMLAttributes, PropsWithChildren } from 'react';
 
-import * as styles from './P.scss';
+import * as styles from './P.module.scss';
 
 export type PProps = HTMLAttributes<HTMLDivElement> & PropsWithChildren;
 
