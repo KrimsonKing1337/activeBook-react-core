@@ -3,6 +3,7 @@ import createConfigOrder from './config/styles/config-order/configCreator.js';
 const configOrder = createConfigOrder();
 
 export default {
+  allowEmptyInput: true,
   extends: ['stylelint-config-standard-scss'],
   plugins: [
     'stylelint-scss',
